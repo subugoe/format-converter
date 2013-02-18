@@ -11,5 +11,6 @@
 	<modules>
 		<module>converter-cli</module>
 		<module>converter-schema</module>
+		<module>converter-impl</module>
 	</modules>
 </project>
