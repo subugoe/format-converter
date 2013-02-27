@@ -6,4 +6,45 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>converter-schema</artifactId>
+  
+  
+      <dependencies>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.1</version>
+        </dependency>
+       
+    </dependencies>
+  
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <packageName>de.unigoettingen.sub.convert.model</packageName>
+                </configuration>
+            </plugin>
+          
+        </plugins>
+    </build>
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </project>

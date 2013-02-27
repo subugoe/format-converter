@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sub.uni-goettingen.de/ent/OCR"
+	xmlns:tns="http://www.sub.uni-goettingen.de/ent/OCR"
+	elementFormDefault="qualified">
+
+	<element name="document">
+		<complexType>
+			<sequence>
+				<element name="page" type="tns:Page" maxOccurs="unbounded"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<complexType name="Page">
+		<sequence>
+			<element name="pageItem" type="tns:PageItem" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="PageItem" abstract="true">
+		<attributeGroup ref="tns:Coordinates" />
+		<attribute name="number" type="int" />		
+	</complexType>
+
+	<complexType name="TextBlock">
+		<complexContent>
+			<extension base="tns:PageItem">
+				<sequence>
+					<element name="paragraph" type="tns:Paragraph" maxOccurs="unbounded"/>
+				</sequence>
+				<attributeGroup ref="tns:FontInfo" />
+				<attribute name="language" type="string" />
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="Image">
+		<complexContent>
+			<extension base="tns:PageItem">
+				<attribute name="uri" type="anyURI" />
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="Table">
+		<complexContent>
+			<extension base="tns:PageItem">
+				<sequence>
+					<element name="rows" type="tns:Row" maxOccurs="unbounded"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<complexType name="Row">
+		<sequence>
+			<element name="cells" type="tns:Cell" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="Cell">
+		<sequence>
+			<element name="content" type="tns:PageItem"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="Paragraph">
+		<sequence>
+			<element name="lines" type="tns:Line" maxOccurs="unbounded"/>
+		</sequence>
+		<attributeGroup ref="tns:Coordinates" />
+		<attributeGroup ref="tns:FontInfo" />
+		<attribute name="language" type="string" />
+	</complexType>
+
+	<complexType name="Line">
+		<sequence>
+			<element name="lineItems" type="tns:LineItem" maxOccurs="unbounded"/>
+		</sequence>
+		<attributeGroup ref="tns:Coordinates" />
+		<attributeGroup ref="tns:FontInfo" />
+		<attribute name="language" type="string" />
+	</complexType>
+
+	<complexType name="LineItem" abstract="true">
+		<sequence>
+			<element name="characters" type="tns:Character" maxOccurs="unbounded" />
+		</sequence>
+		<attributeGroup ref="tns:Coordinates" />
+		<attributeGroup ref="tns:FontInfo" />
+		<attribute name="confidence" type="float" />
+	</complexType>
+
+	<complexType name="Word">
+		<complexContent>
+			<extension base="tns:LineItem">
+				<attribute name="language" type="string" />
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="NonWord">
+		<complexContent>
+			<extension base="tns:LineItem">
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Character">
+		<simpleContent>
+			<extension base="string">
+				<attributeGroup ref="tns:Coordinates" />
+				<attributeGroup ref="tns:FontInfo" />
+				<attribute name="confidence" type="float" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<attributeGroup name="Coordinates">
+		<attribute name="left" type="int" />
+		<attribute name="right" type="int" />
+		<attribute name="top" type="int" />
+		<attribute name="bottom" type="int" />
+	</attributeGroup>
+	<attributeGroup name="FontInfo">
+		<attribute name="font" type="string" />
+		<attribute name="fontSize" type="int" />
+		<attribute name="fontStyles" type="tns:FontStylesType" />
+		<attribute name="fontColor" type="string" />
+	</attributeGroup>
+
+	<simpleType name="FontStylesType">
+		<list itemType="tns:FontStyleEnum" />
+	</simpleType>
+
+	<simpleType name="FontStyleEnum">
+		<restriction base="string">
+			<enumeration value="bold" />
+			<enumeration value="italic" />
+			<enumeration value="underline" />
+		</restriction>
+	</simpleType>
+
+</schema>
