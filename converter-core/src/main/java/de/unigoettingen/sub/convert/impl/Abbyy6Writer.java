@@ -7,10 +7,12 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import de.unigoettingen.sub.convert.api.ConvertWriter;
+import de.unigoettingen.sub.convert.api.StaxWriter;
 import de.unigoettingen.sub.convert.model.Document;
 import de.unigoettingen.sub.convert.model.Page;
 
-public class Abbyy6Writer {
+public class Abbyy6Writer extends StaxWriter {
 
 	private XMLStreamWriter xwriter;
 	
@@ -37,11 +39,11 @@ public class Abbyy6Writer {
 
 	}
 	
-	public void write(Page page) {
+	public void writePage(Page page) {
 		try {
 			xwriter.writeStartElement("page");
 			
-			xwriter.writeCharacters(page.getTextBlock());
+			//xwriter.writeCharacters(page.getTextBlock());
 			
 			xwriter.writeEndElement();
 			
@@ -63,6 +65,36 @@ public class Abbyy6Writer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+
+	@Override
+	public void writeMetadata() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void writeStartStax() throws XMLStreamException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void writeMetadataStax() throws XMLStreamException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void writePageStax(Page page) throws XMLStreamException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void writeEndStax() throws XMLStreamException {
+		// TODO Auto-generated method stub
 		
 	}
 	

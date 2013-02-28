@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -12,6 +13,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import de.unigoettingen.sub.convert.api.ConvertReader;
+import de.unigoettingen.sub.convert.api.ConvertWriter;
 
 
 public class Abbyy6ConverterTest {
@@ -37,10 +41,13 @@ public class Abbyy6ConverterTest {
 		File abbyy = new File(
 				System.getProperty("user.dir") + "/src/test/resources/abbyy6.xml");
 		InputStream is = new FileInputStream(abbyy);
-		Abbyy6Reader reader = new Abbyy6Reader();
-		reader.setWriter(new Abbyy6Writer());
+		ConvertReader reader = new Abbyy6Reader();
+		ConvertWriter writer = new TeiP5Writer();
+		writer.setTarget(new FileOutputStream("/tmp/bla.xml"));
 		
-		reader.convert(is);
+		reader.setWriter(writer);
+		
+		reader.read(is);
 	}
 
 }
