@@ -3,7 +3,11 @@ package de.unigoettingen.sub.convert.impl;
 import javax.xml.stream.XMLStreamException;
 
 import de.unigoettingen.sub.convert.api.StaxWriter;
+import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.Page;
+import de.unigoettingen.sub.convert.model.PageItem;
+import de.unigoettingen.sub.convert.model.Paragraph;
+import de.unigoettingen.sub.convert.model.TextBlock;
 
 public class TeiP5Writer extends StaxWriter {
 
@@ -33,10 +37,26 @@ public class TeiP5Writer extends StaxWriter {
 
 	@Override
 	protected void writePageStax(Page page) throws XMLStreamException {
+
+		for (PageItem item : page.getPageItems()) {
+			xwriter.writeStartElement("div");
+			if (item instanceof TextBlock) {
+				TextBlock block = (TextBlock) item;
+				for (Paragraph par : block.getParagraphs()) {
+					xwriter.writeStartElement("p");
+					for (Line line : par.getLines()) {
+						
+						xwriter.writeEmptyElement("lb");
+					}
+					xwriter.writeEndElement(); // p
+				}
+			}
+			xwriter.writeEndElement(); // div
+
+		}
+		//xwriter.writeCharacters("" + page.getHeight());
+
 		xwriter.writeEmptyElement("pb");
-
-		// xwriter.writeCharacters(page.getTextBlock());
-
 	}
 
 	@Override

@@ -6,15 +6,19 @@
 	<element name="document">
 		<complexType>
 			<sequence>
-				<element name="page" type="tns:Page" maxOccurs="unbounded"></element>
+				<element name="pages" type="tns:Page" maxOccurs="unbounded"></element>
 			</sequence>
 		</complexType>
 	</element>
 
 	<complexType name="Page">
 		<sequence>
-			<element name="pageItem" type="tns:PageItem" maxOccurs="unbounded"/>
+			<element name="pageItems" type="tns:PageItem" maxOccurs="unbounded"/>
 		</sequence>
+		<attribute name="number" type="int"/>
+		<attribute name="height" type="int"/>
+		<attribute name="width" type="int"/>
+		<attribute name="orientation" type="string"/>
 	</complexType>
 
 	<complexType name="PageItem" abstract="true">
@@ -26,7 +30,7 @@
 		<complexContent>
 			<extension base="tns:PageItem">
 				<sequence>
-					<element name="paragraph" type="tns:Paragraph" maxOccurs="unbounded"/>
+					<element name="paragraphs" type="tns:Paragraph" maxOccurs="unbounded"/>
 				</sequence>
 				<attributeGroup ref="tns:FontInfo" />
 				<attribute name="language" type="string" />

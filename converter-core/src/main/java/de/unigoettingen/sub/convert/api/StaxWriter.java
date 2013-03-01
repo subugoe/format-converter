@@ -14,9 +14,11 @@ abstract public class StaxWriter implements ConvertWriter {
 
 	protected XMLStreamWriter xwriter;
 	
-	private OutputStream output = System.out;
-	
-	public StaxWriter() {
+	private OutputStream output;// = System.out;
+		
+	@Override
+	public void setTarget(OutputStream stream) {
+		output = stream;
 		XMLOutputFactory outfactory = XMLOutputFactory.newInstance();
 		try {
 			xwriter = outfactory
@@ -26,12 +28,6 @@ abstract public class StaxWriter implements ConvertWriter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	}
-	
-	@Override
-	public void setTarget(OutputStream stream) {
-		output = stream;
 	}
 	
 	@Override

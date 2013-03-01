@@ -15,6 +15,7 @@ public abstract class StaxReader implements ConvertReader {
 	protected ConvertWriter writer;
 	protected Page page = new Page();
 
+	@Override
 	public void setWriter(ConvertWriter w) {
 		writer = w;
 	}

@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -43,11 +44,14 @@ public class Abbyy6ConverterTest {
 		InputStream is = new FileInputStream(abbyy);
 		ConvertReader reader = new Abbyy6Reader();
 		ConvertWriter writer = new TeiP5Writer();
-		writer.setTarget(new FileOutputStream("/tmp/bla.xml"));
+		
+		//OutputStream s = new FileOutputStream("/tmp/bla.xml");
+		OutputStream s = System.out;
+		writer.setTarget(s);
 		
 		reader.setWriter(writer);
-		
 		reader.read(is);
+		s.close();
 	}
 
 }
