@@ -10,19 +10,26 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import de.unigoettingen.sub.convert.api.StaxReader;
+import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Image;
 import de.unigoettingen.sub.convert.model.Line;
+import de.unigoettingen.sub.convert.model.LineItem;
+import de.unigoettingen.sub.convert.model.NonWord;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
+import de.unigoettingen.sub.convert.model.Word;
 
 public class Abbyy6Reader extends StaxReader {
 
 	private PageItem currentPageItem;
 	private Paragraph currentParagraph;
 	private Line currentLine;
+	private LineItem currentWord;
+	private LineItem currentNonWord;
+	private LineItem currentLineItem;
 	
 	@Override
 	protected void handleStartDocument() {
@@ -52,6 +59,12 @@ public class Abbyy6Reader extends StaxReader {
 			currentLine = new Line();
 			processLineAttributes(tag, currentLine);
 			currentParagraph.getLines().add(currentLine);
+		} else if (name.equals("formatting")) {
+			XMLEvent nextEvent = eventReader.peek();
+			if(nextEvent.isCharacters()) {
+				processLineWithoutCharParams(nextEvent);
+				eventReader.nextEvent();
+			}
 		} else if (name.equals("charParams")) {
 			XMLEvent nextEvent = eventReader.peek();
 			if(nextEvent.isCharacters()) {
@@ -60,12 +73,53 @@ public class Abbyy6Reader extends StaxReader {
 			}
 		}
 	}
+	
+	private void processLineWithoutCharParams(XMLEvent charEvent) {
+		String chars = charEvent.asCharacters().getData();
+		for(char ch : chars.toCharArray()) {
+			boolean isLetter = Character.isLetter(ch);
+			if (startOfLine() && isLetter) {
+				switchToWord();
+			} else if (startOfLine() && !isLetter) {
+				switchToNonWord();
+			} else if (inWord() && !isLetter) {
+				switchToNonWord();
+			} else if (inNonWord() && isLetter) {
+				switchToWord();
+			}
+			Char modelChar = new Char();
+			modelChar.setValue(""+ch);
+			currentLineItem.getCharacters().add(modelChar);
+		}
+	}
+	private boolean startOfLine() {
+		return currentLineItem == null;
+	}
+	private boolean inWord() {
+		return currentLineItem instanceof Word;
+	}
+	private boolean inNonWord() {
+		return currentLineItem instanceof NonWord;
+	}
+	private void switchToWord() {
+		currentWord = new Word();
+		currentLine.getLineItems().add(currentWord);
+		currentLineItem = currentWord;
+	}
+	private void switchToNonWord() {
+		currentNonWord = new NonWord();
+		currentLine.getLineItems().add(currentNonWord);
+		currentLineItem = currentNonWord;
+	}
+	
 	@Override
 	protected void handleEndElement(XMLEvent event) {
 		String name = event.asEndElement().getName()
 				.getLocalPart();
 		if (name.equals("page")) {
 			writer.writePage(page);
+		} else if (name.equals("formatting")) {
+			currentLineItem = null;
 		}
 	}
 	@Override
@@ -93,7 +147,8 @@ public class Abbyy6Reader extends StaxReader {
 			item = new TextBlock();
 		} else if (blockType.equals("Table")) {
 			item = new Table();
-		} else if (blockType.equals("Picture") || blockType.equals("Barcode")) {
+			// TODO: Separator ist von abbyy10
+		} else if (blockType.equals("Picture") || blockType.equals("Barcode") || blockType.equals("Separator")) {
 			item = new Image();
 		}
 		processBlockAttributes(tag, item);

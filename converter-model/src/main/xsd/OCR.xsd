@@ -88,7 +88,7 @@
 
 	<complexType name="LineItem" abstract="true">
 		<sequence>
-			<element name="characters" type="tns:Character" maxOccurs="unbounded" />
+			<element name="characters" type="tns:Char" maxOccurs="unbounded" />
 		</sequence>
 		<attributeGroup ref="tns:Coordinates" />
 		<attributeGroup ref="tns:FontInfo" />
@@ -110,7 +110,7 @@
 		</complexContent>
 	</complexType>
 
-	<complexType name="Character">
+	<complexType name="Char">
 		<simpleContent>
 			<extension base="string">
 				<attributeGroup ref="tns:Coordinates" />

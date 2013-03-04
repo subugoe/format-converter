@@ -3,7 +3,9 @@ package de.unigoettingen.sub.convert.impl;
 import javax.xml.stream.XMLStreamException;
 
 import de.unigoettingen.sub.convert.api.StaxWriter;
+import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Line;
+import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
@@ -45,7 +47,11 @@ public class TeiP5Writer extends StaxWriter {
 				for (Paragraph par : block.getParagraphs()) {
 					xwriter.writeStartElement("p");
 					for (Line line : par.getLines()) {
-						
+						for (LineItem lineItem : line.getLineItems()) {
+							for (Char ch : lineItem.getCharacters()) {
+								xwriter.writeCharacters(ch.getValue());
+							}
+						}
 						xwriter.writeEmptyElement("lb");
 					}
 					xwriter.writeEndElement(); // p
