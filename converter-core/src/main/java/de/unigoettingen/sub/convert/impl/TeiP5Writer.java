@@ -10,6 +10,7 @@ import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.TextBlock;
+import de.unigoettingen.sub.convert.model.Word;
 
 public class TeiP5Writer extends StaxWriter {
 
@@ -48,9 +49,17 @@ public class TeiP5Writer extends StaxWriter {
 					xwriter.writeStartElement("p");
 					for (Line line : par.getLines()) {
 						for (LineItem lineItem : line.getLineItems()) {
+							if (lineItem instanceof Word) {
+								xwriter.writeStartElement("w");
+								xwriter.writeAttribute("function", wordCoordinates(lineItem));
+							}
 							for (Char ch : lineItem.getCharacters()) {
 								xwriter.writeCharacters(ch.getValue());
 							}
+							if (lineItem instanceof Word) {
+								xwriter.writeEndElement(); // w
+							}
+
 						}
 						xwriter.writeEmptyElement("lb");
 					}
@@ -65,6 +74,10 @@ public class TeiP5Writer extends StaxWriter {
 		xwriter.writeEmptyElement("pb");
 	}
 
+	private String wordCoordinates(LineItem word) {
+		return "" + word.getLeft() + "," + word.getTop() + "," + word.getRight() + "," + word.getBottom();
+	}
+	
 	@Override
 	protected void writeEndStax() throws XMLStreamException {
 		addTeiEndElements();

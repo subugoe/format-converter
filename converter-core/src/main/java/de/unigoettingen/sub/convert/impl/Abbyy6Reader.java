@@ -6,6 +6,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
+import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
@@ -60,23 +61,62 @@ public class Abbyy6Reader extends StaxReader {
 			processLineAttributes(tag, currentLine);
 			currentParagraph.getLines().add(currentLine);
 		} else if (name.equals("formatting")) {
+			// TODO: ein Word template mit lang, font
 			XMLEvent nextEvent = eventReader.peek();
-			if(nextEvent.isCharacters()) {
+			if(nextEvent.isCharacters() && !nextEvent.asCharacters().isWhiteSpace()) {
 				processLineWithoutCharParams(nextEvent);
 				eventReader.nextEvent();
 			}
 		} else if (name.equals("charParams")) {
 			XMLEvent nextEvent = eventReader.peek();
 			if(nextEvent.isCharacters()) {
-				//page.setTextBlock(page.getTextBlock() + "\nchars/ " + nextEvent.asCharacters().toString() + " /chars");
+				processCharParamTag(tag, nextEvent);
 				eventReader.nextEvent();
 			}
+		}
+	}
+	
+	private void processCharParamTag(StartElement tag, XMLEvent charEvent) {
+		char ch = charEvent.asCharacters().getData().charAt(0);
+		Char modelChar = new Char();
+		processCharAttributes(tag, modelChar);
+		modelChar.setValue(""+ch);
+		boolean isLetter = Character.isLetter(ch);
+		if (startOfLine() && isLetter) {
+			switchToWord();
+			setTopLeftCoordinate(currentWord, modelChar);
+		} else if (startOfLine() && !isLetter) {
+			switchToNonWord();
+			setTopLeftCoordinate(currentNonWord, modelChar);
+		} else if (inWord() && !isLetter) {
+			setBottomRightCoordinateIfPresent(currentWord, modelChar);
+			switchToNonWord();
+			setTopLeftCoordinate(currentNonWord, modelChar);
+		} else if (inNonWord() && isLetter) {
+			setBottomRightCoordinateIfPresent(currentNonWord, modelChar);
+			switchToWord();
+			setTopLeftCoordinate(currentWord, modelChar);
+		}
+		currentLineItem.getCharacters().add(modelChar);
+
+	}
+	
+	private void setTopLeftCoordinate(LineItem li, Char ch) {
+		li.setLeft(new Integer(ch.getLeft()));
+		li.setTop(new Integer(ch.getTop()));
+	}
+	private void setBottomRightCoordinateIfPresent(LineItem li, Char ch) {
+		if (ch.getRight() != null && ch.getBottom() != null) {
+			li.setRight(new Integer(ch.getRight()));
+			li.setBottom(new Integer(ch.getBottom()));
 		}
 	}
 	
 	private void processLineWithoutCharParams(XMLEvent charEvent) {
 		String chars = charEvent.asCharacters().getData();
 		for(char ch : chars.toCharArray()) {
+			Char modelChar = new Char();
+			modelChar.setValue(""+ch);
 			boolean isLetter = Character.isLetter(ch);
 			if (startOfLine() && isLetter) {
 				switchToWord();
@@ -87,8 +127,6 @@ public class Abbyy6Reader extends StaxReader {
 			} else if (inNonWord() && isLetter) {
 				switchToWord();
 			}
-			Char modelChar = new Char();
-			modelChar.setValue(""+ch);
 			currentLineItem.getCharacters().add(modelChar);
 		}
 	}
@@ -118,7 +156,11 @@ public class Abbyy6Reader extends StaxReader {
 				.getLocalPart();
 		if (name.equals("page")) {
 			writer.writePage(page);
-		} else if (name.equals("formatting")) {
+		} else if (name.equals("formatting")) {			
+			int lastIndex = currentLineItem.getCharacters().size() - 1;
+			Char lastChar = currentLineItem.getCharacters().get(lastIndex);
+			// coordinates for the last word or non-word, since they cannot be handled in the startelement
+			setBottomRightCoordinateIfPresent(currentLineItem, lastChar);
 			currentLineItem = null;
 		}
 	}
@@ -148,7 +190,8 @@ public class Abbyy6Reader extends StaxReader {
 		} else if (blockType.equals("Table")) {
 			item = new Table();
 			// TODO: Separator ist von abbyy10
-		} else if (blockType.equals("Picture") || blockType.equals("Barcode") || blockType.equals("Separator")) {
+		} else if (blockType.equals("Picture") || blockType.equals("Barcode") || blockType.equals("Separator")
+				 || blockType.equals("SeparatorsBox") || blockType.equals("Checkmark") || blockType.equals("GroupCheckmark")) {
 			item = new Image();
 		}
 		processBlockAttributes(tag, item);
@@ -187,6 +230,23 @@ public class Abbyy6Reader extends StaxReader {
 				line.setTop(new Integer(attrValue));
 			} else if (attrName.equals("b")) {
 				line.setBottom(new Integer(attrValue));
+			}
+		}
+	}
+	private void processCharAttributes(StartElement tag, Char ch) {
+		Iterator<?> attributes = tag.getAttributes();
+		while (attributes.hasNext()) {
+			Attribute attr = (Attribute) attributes.next();
+			String attrName = attr.getName().getLocalPart();
+			String attrValue = attr.getValue();
+			if (attrName.equals("l")) {
+				ch.setLeft(new Integer(attrValue));
+			} else if (attrName.equals("r")) {
+				ch.setRight(new Integer(attrValue));
+			} else if (attrName.equals("t")) {
+				ch.setTop(new Integer(attrValue));
+			} else if (attrName.equals("b")) {
+				ch.setBottom(new Integer(attrValue));
 			}
 		}
 	}

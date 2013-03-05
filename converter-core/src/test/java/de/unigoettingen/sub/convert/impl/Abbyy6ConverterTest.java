@@ -40,13 +40,13 @@ public class Abbyy6ConverterTest {
 	@Test
 	public void test() throws IOException {
 		File abbyy = new File(
-				System.getProperty("user.dir") + "/src/test/resources/abbyy6_withoutCharParams.xml");
+				System.getProperty("user.dir") + "/src/test/resources/20130128_sohnrey_dorfmusikanten_1914_tif.xml");
 		InputStream is = new FileInputStream(abbyy);
 		ConvertReader reader = new Abbyy6Reader();
 		ConvertWriter writer = new TeiP5Writer();
 		
-		//OutputStream s = new FileOutputStream("/tmp/bla.xml");
-		OutputStream s = System.out;
+		OutputStream s = new FileOutputStream("/tmp/bla.xml");
+		//OutputStream s = System.out;
 		writer.setTarget(s);
 		
 		reader.setWriter(writer);
