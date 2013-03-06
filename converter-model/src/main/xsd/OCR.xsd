@@ -6,10 +6,27 @@
 	<element name="document">
 		<complexType>
 			<sequence>
-				<element name="pages" type="tns:Page" maxOccurs="unbounded"></element>
+				<element name="metadata" type="tns:Metadata"/>
+				<element name="pages" type="tns:Page" maxOccurs="unbounded"/>
 			</sequence>
 		</complexType>
 	</element>
+
+	<complexType name="Metadata">
+		<sequence>
+			<element name="ocrSoftwareName" type="string"/>
+			<element name="ocrSoftwareVersion" type="string"/>
+			<element name="readingDirection" type="tns:ReadingDirection"/>
+			<element name="languages" type="string" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<simpleType name="ReadingDirection">
+		<restriction base="string">
+			<enumeration value="left-to-right"/>
+			<enumeration value="right-to-left"/>
+		</restriction>
+	</simpleType>
 
 	<complexType name="Page">
 		<sequence>

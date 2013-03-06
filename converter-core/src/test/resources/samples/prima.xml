@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PcGts pcGtsId="" xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2010-03-19" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schema.primaresearch.org/PAGE/gts/pagecontent/2010-03-19 http://schema.primaresearch.org/PAGE/gts/pagecontent/2010-03-19/pagecontent.xsd">
+
+	<Metadata>
+		<Creator></Creator>
+		<Created></Created>
+		<LastChange></LastChange>
+		<Comments></Comments>
+	</Metadata>
+
+	<Page imageHeight="" imageFilename="" imageWidth="">
+	
+		<TextRegion id="" orientation="" fontSize="" bgColour="black" indented="true" kerning="" leading="" primaryLanguage="Afrikaans"
+			primaryScript="Arabic" readingDirection="left-to-right" readingOrientation="" reverseVideo="true" type="paragraph"
+			secondaryLanguage="Afrikaans" secondaryScript="Arabic" textColour="black">
+				
+		</TextRegion>
+	
+	</Page>
+
+</PcGts>

@@ -1,0 +1,33 @@
+<document>
+	<metadata>
+		<ocrSoftwareName></ocrSoftwareName>
+		<ocrSoftwareVersion></ocrSoftwareVersion>
+		<readingDirection></readingDirection>
+		<language></language>
+		<language></language>
+	</metadata>
+	<page number="" height="" width="" orientation="">
+		<textBlock number="" left="" right="" top="" bottom="" language="" font="" fontSize="" fontStyles="bold italic underline" fontColor="">
+			<paragraph language="" left="" right="" top="" bottom="" font="" fontSize="" fontStyles="bold italic underline" fontColor="">
+				<line language="" left="" right="" top="" bottom="" font="" fontSize="" fontStyles="bold italic underline" fontColor="">
+					<word language="" confidence="" left="" right="" top="" bottom="" font="" fontSize="" fontStyles="bold italic underline" fontColor="">
+						<character confidence="" left="" right="" top="" bottom="" font="" fontSize="" fontStyles="bold italic underline" fontColor=""></character>
+						<character></character>
+					</word>
+					<nonWord confidence="" left="" right="" top="" bottom="" font="" fontSize="" fontStyles="bold italic underline" fontColor="">
+						<character></character>
+						<character></character>
+					</nonWord>
+				</line>
+			</paragraph>
+		</textBlock>
+		<table number="" left="" right="" top="" bottom="">
+			<row>
+				<cell>
+					<textBlock></textBlock>
+				</cell>
+			</row>
+		</table>
+		<image number="" uri="" left="" right="" top="" bottom=""/>
+	</page>
+</document>

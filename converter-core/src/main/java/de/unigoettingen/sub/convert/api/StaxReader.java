@@ -54,8 +54,7 @@ public abstract class StaxReader implements ConvertReader {
 			eventReader.close();
 
 		} catch (XMLStreamException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalArgumentException("Error reading XML", e);
 		}
 
 

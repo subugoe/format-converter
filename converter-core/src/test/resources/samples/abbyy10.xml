@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document xmlns="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" version="1.0" producer="" pagesCount="218" languages="" mainLanguage="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml">
+
+	<documentData>
+		<paragraphStyles>
+			<paragraphStyle name="" id="" role="text" align="Left" mainFontStyleId="" after="0" before="0" fixedLineSpacing="true"
+				leftIndent="0" lineSpacing="-1" lineSpacingRatio="1" rightIndent="0" roleLevel="-1" startIndent="0">
+				<fontStyle ff="" id="" fs="" backgroundColor="0" baseFont="false" bold="false" color="0" italic="false"
+					scaling="1000" smallcaps="false" spacing="0" strikeout="false" underline="false"/>	
+			</paragraphStyle>
+		</paragraphStyles>
+		<sections>
+			<section>
+				<stream beginPage="" endPage="" role="text" vertCjk="false">
+					<elemId id=""/>
+					<mainText columnCount="" rtl="false"/>
+				</stream>
+			</section>
+		</sections>
+	</documentData>
+	
+	<page height="" resolution="" width="" originalCoords="false">
+		<block blockType="Text" blockName="" isHidden="false" pageElemId="" b="" l="" r="" t="">
+			<region>
+				<rect b="" l="" t="" r=""/>
+			</region>
+			<text backgroundColor="16777215" id="" inverted="false" mirrored="false" orientation="Normal">
+				<par align="Left" dropCap-b="" dropCap-l="" dropCap-r="" dropCap-t="" dropCapCharsCount="0" id=""
+					hasOverflowedHead="false" hasOverflowedTail="false" leftIndent="0" lineSpacing="0" rightIndent="0"
+					startIndent="0" style="">
+					<line b="" l="" t="" r="" baseline="">
+						<formatting lang="" bold="false" color="0" ff="" fs="" italic="false" scaling="1000" smallcaps="false"
+							spacing="0" strikeout="false" style="" subscript="false" superscript="false" underline="false">
+							<charParams t="" r="" l="" b="" baseLine="" characterHeight="" charConfidence="" hasUncertainHeight="true"
+								meanStrokeWidth="" proofed="false" serifProbability="" suspicious="false" wordFromDictionary="true"
+								wordIdentifier="true" wordNormal="true" wordNumeric="true" wordPenalty="" wordStart="true">
+								<charRecVariants>
+									<charRecVariant charConfidence="" serifProbability="">A</charRecVariant>
+									<charRecVariant charConfidence="" serifProbability="">B</charRecVariant>
+								</charRecVariants>
+							</charParams>
+							<charParams t="" r="" l="" b="">A</charParams>
+							<wordRecVariants>
+								<wordRecVariant meanStrokeWidth="" wordFromDictionary="true" wordIdentifier="true" wordNormal="true"
+									wordNumeric="true" wordPenalty="">
+									<variantText>
+										<charParams t="" r="" l="" b="">A</charParams>
+									</variantText>
+								</wordRecVariant>
+							</wordRecVariants>
+						</formatting>
+					</line>
+					<line b="" l="" t="" r="" baseline="">bla bla</line>
+				</par>
+			</text>
+		</block>
+		
+		<block blockType="Separator">
+			<separator thickness="" type="Black">
+				<start x="" y=""/>
+				<end x="" y=""/>
+			</separator>
+		</block>
+		
+		<block blockType="SeparatorsBox">
+			<separatorsBox>
+				<separator thickness="" type="Dotted">
+					<start x="" y=""/>
+					<end x="" y=""/>
+				</separator>
+			</separatorsBox>
+		</block>
+		
+		<block blockType="Table">
+			<row>
+				<cell width="" height="" align="Top" bottomBorder="Black" colSpan="1" leftBorder="Black" picture="false"
+					rightBorder="Black" rowSpan="1" topBorder="Black">
+					<text backgroundColor="16777215">
+						<par>
+							<line b="" l="" t="" r="" baseline="">bla</line>
+						</par>
+					</text>
+				</cell>
+			</row>
+		</block>
+		
+		<block blockType="Barcode"></block>
+		<block blockType="Checkmark"></block>
+		<block blockType="GroupCheckmark"></block>
+		<block blockType="Picture"></block>
+		
+		<pageStream streamType="">
+			<pageElement pageElemId="">
+				<barcode BarcodeValue=""/>
+			</pageElement>
+			<pageElement pageElemId="">
+				<picture id="">
+					<caption>
+						<pageElement pageElemId="">
+						</pageElement>
+					</caption>
+				</picture>
+			</pageElement>
+			<pageElement pageElemId="">
+				<text></text>
+			</pageElement>
+			<pageElement pageElemId="">
+				<table id="">
+					<caption><pageElement pageElemId=""></pageElement></caption>
+					<tableCell bottomPos="" topPos="" VerticalAlignment="top" leftPos="" rightPos="">
+						<text pageElemId=""></text>
+					</tableCell>
+				</table>
+			</pageElement>
+		</pageStream>
+		
+		<pageSection>
+			<pageStream streamType=""></pageStream>
+		</pageSection>
+		
+	</page>
+
+</document>

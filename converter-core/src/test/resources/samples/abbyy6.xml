@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document xmlns="http://www.abbyy.com/FineReader_xml/FineReader6-schema-v1.xml" version="1.0" producer="" pagesCount="218" languages="" mainLanguage="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.abbyy.com/FineReader_xml/FineReader6-schema-v1.xml http://www.abbyy.com/FineReader_xml/FineReader6-schema-v1.xml">
+	<page height="100" resolution="50" width="100" originalCoords="false">
+		<block b="99" l="1" t="1" blockType="Text" r="99">
+			<region>
+				<rect b="99" l="1" t="1" r="99"/>
+				<rect b="100" l="1" t="99" r="99"/>
+			</region>
+			<text backgroundColor="16777215" orientation="Normal" inverted="false" mirrored="false">
+				<par align="Left" leftIndent="0" rightIndent="0" startIndent="0" lineSpacing="0" dropCapCharsCount="0" 
+					dropCap-l="" dropCap-r="" dropCap-t="">
+					<line b="" l="" t="" r="" baseline="">
+						<formatting lang="GermanStandard" bold="false" color="0" italic="false" smallcaps="false" underline="false" scaling="1000"
+							spacing="0" strikeout="false" subscript="false" superscript="false" ff="Times New Roman" fs="10.5">
+							<charParams r="" l="" b="" t="" charConfidence="" suspicious="false" meanStrokeWidth="" wordStart="true"
+								proofed="false" serifProbability="" wordFromDictionary="true" wordIdentifier="true"
+								wordNormal="true" wordNumeric="true" wordPenalty="">A</charParams>
+						</formatting>
+					</line>
+					<line b="" l="" t="" r="" baseline="">bla bla</line>
+				</par>
+			</text>
+		</block>
+		
+		<block b="" l="" t="" blockType="Table" r="">
+			<region>
+				<rect b="" l="" t="" r=""/>
+			</region>
+			<row>
+				<cell width="" height="" align="Top" bottomBorder="Black" colSpan="1" leftBorder="Black" rightBorder="Black"
+					rowSpan="1" picture="false" topBorder="Black">
+					<text><par><line b="" l="" t="" r="" baseline="">bla</line></par></text>
+				</cell>
+			</row>
+		</block>
+		
+		<block b="" l="" t="" blockType="Picture" r="">
+			<region><rect b="" l="" t="" r=""/></region>
+			
+		</block>
+		
+		<block b="" l="" t="" blockType="Barcode" r="">
+			<region><rect b="" l="" t="" r=""/></region>
+			
+		</block>
+		
+	</page>
+</document>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+
+	<Description>
+		<MeasurementUnit>pixel</MeasurementUnit>
+		<OCRProcessing ID="">
+			<ocrProcessingStep>
+				<processingAgency></processingAgency>
+				<processingSoftware></processingSoftware>
+				<processingDateTime></processingDateTime>
+				<processingStepDescription></processingStepDescription>
+				<processingStepSettings></processingStepSettings>
+			</ocrProcessingStep>
+			<preProcessingStep>
+				<processingAgency></processingAgency>
+			</preProcessingStep>
+			<postProcessingStep>
+				<processingAgency></processingAgency>
+			</postProcessingStep>
+		</OCRProcessing>
+		<sourceImageInformation>
+			<fileIdentifier fileIdentifierLocation=""></fileIdentifier>
+			<fileName></fileName>
+		</sourceImageInformation>
+	</Description>
+
+	<Layout STYLEREFS="">
+		<Page ID="" PHYSICAL_IMG_NR="" ACCURACY="" HEIGHT="" PAGECLASS="" PC="" POSITION="Left" PRINTED_IMG_NR="" PROCESSING=""
+			QUALITY_DETAIL="" QUALITY="OK" STYLEREFS="" WIDTH="">
+			<PrintSpace HPOS="" VPOS="" WIDTH="" HEIGHT="" ID="" STYLEREFS="">
+				<TextBlock HPOS="" HEIGHT="" ID="" WIDTH="" VPOS="" actuate="onLoad" arcrole="" href="" IDNEXT="" language=""
+					role="" ROTATION="" show="new" STYLEREFS="" title="" type="simple">
+					<TextLine HPOS="" VPOS="" WIDTH="" HEIGHT="" BASELINE="" CS="true" ID="" STYLEREFS="">
+						<String CONTENT="" CC="" HEIGHT="" HPOS="" ID="" STYLE="bold" STYLEREFS="" SUBS_CONTENT="" SUBS_TYPE="HypPart1"
+							VPOS="" WC="" WIDTH="">
+							<ALTERNATIVE PURPOSE="">bla</ALTERNATIVE>
+							<ALTERNATIVE PURPOSE="">blub</ALTERNATIVE>
+						</String>
+						<SP HPOS="" ID="" VPOS="" WIDTH=""/>
+						<HYP CONTENT="" HPOS="" VPOS="" WIDTH=""/>
+					</TextLine>
+				</TextBlock>
+				<TextBlock>
+					<Shape>
+						<Circle HPOS="" RADIUS="" VPOS=""/>
+					</Shape>
+				</TextBlock>
+				<TextBlock HPOS="" HEIGHT="" ID="" WIDTH="" VPOS="">
+					<Shape>
+						<Ellipse HLENGTH="" HPOS="" VLENGTH="" VPOS=""/>
+					</Shape>
+				</TextBlock>
+				<TextBlock HPOS="" HEIGHT="" ID="" WIDTH="" VPOS="">
+					<Shape>
+						<Polygon POINTS=""/>
+					</Shape>
+				</TextBlock>
+				<Illustration HPOS="" HEIGHT="" ID="" WIDTH="" VPOS="" actuate="onLoad" arcrole="" FILEID="" href="" IDNEXT=""
+					role="" ROTATION="" show="new" STYLEREFS="" title="" TYPE="" type="simple">
+					<Shape><Circle/></Shape>
+				</Illustration>
+				<GraphicalElement HPOS="" HEIGHT="" ID="" WIDTH="" VPOS="" actuate="onLoad" arcrole="" href="" IDNEXT=""
+					role="" ROTATION="" show="new" STYLEREFS="" title="" type="simple">
+					<Shape><Polygon POINTS=""/></Shape>
+				</GraphicalElement>
+				<ComposedBlock HPOS="" HEIGHT="" ID="" WIDTH="" VPOS="" actuate="onLoad" arcrole="" FILEID="" href="" IDNEXT=""
+					role="" ROTATION="" show="new" STYLEREFS="" title="" TYPE="" type="simple">
+					<ComposedBlock HPOS="" HEIGHT="" ID="" WIDTH="" VPOS=""></ComposedBlock>
+					<TextBlock HPOS="" HEIGHT="" ID="" WIDTH="" VPOS=""></TextBlock>
+					<Shape></Shape>
+				</ComposedBlock>
+			</PrintSpace>
+			
+			
+			<BottomMargin HPOS="" VPOS="" WIDTH="" HEIGHT="" ID="" STYLEREFS="">
+				<ComposedBlock HPOS="" HEIGHT="" ID="" WIDTH="" VPOS=""></ComposedBlock>
+				<TextBlock HPOS="" HEIGHT="" ID="" WIDTH="" VPOS=""></TextBlock>
+			</BottomMargin>	
+			<LeftMargin HPOS="" VPOS="" WIDTH="" HEIGHT=""></LeftMargin>
+			<RightMargin HPOS="" VPOS="" WIDTH="" HEIGHT=""></RightMargin>
+			<TopMargin HPOS="" VPOS="" WIDTH="" HEIGHT=""></TopMargin>
+		</Page>
+	</Layout>
+
+	<Styles>
+		<TextStyle FONTSIZE="" FONTCOLOR="" FONTFAMILY="" FONTSTYLE="bold" FONTTYPE="serif" FONTWIDTH="proportional" ID=""/>
+		<ParagraphStyle ID="" ALIGN="Left" FIRSTLINE="" LEFT="" LINESPACE="" RIGHT=""/>
+	</Styles>
+
+
+</alto>

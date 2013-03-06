@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE TEI SYSTEM "http://www.tei-c.org/release/xml/tei/custom/schema/dtd/tei_lite.dtd">
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+	<teiHeader ana="" corresp="" facs="" n="" next="" prev="" rend="" type="text" xml:id="" xml:lang="">
+		<fileDesc>
+			<titleStmt>
+				<title key="" level="a" subtype="" type=""></title>
+				<author nymRef="" ref="" role="" key=""></author>
+				<editor></editor>
+				<funder></funder>
+				<principal></principal>
+				<sponsor></sponsor>
+				<respStmt><name></name><resp></resp></respStmt>
+			</titleStmt>
+			<editionStmt></editionStmt>
+			<publicationStmt></publicationStmt>
+			<notesStmt></notesStmt>
+			<sourceDesc></sourceDesc>
+			<extent></extent>
+		</fileDesc>
+		<encodingDesc>
+			<classDecl><taxonomy></taxonomy></classDecl>
+			<editorialDecl></editorialDecl>
+			<projectDesc></projectDesc>
+			<samplingDecl></samplingDecl>
+		</encodingDesc>
+		<profileDesc>
+			<creation when=""></creation>
+			<langUsage>
+				<language ident=""></language>
+				<language ident=""></language>
+			</langUsage>
+		</profileDesc>
+	</teiHeader>
+	<text>
+		<front></front>
+		<back></back>
+		<body>
+			<div>
+				<p>
+					A
+					<lb/>
+					B
+					<figure></figure>
+					<graphic url=""></graphic>
+					<label></label>
+					<lg>
+						<l></l>
+					</lg>
+				</p>
+			</div>
+			<pb/>
+		</body>
+	</text>
+</TEI>

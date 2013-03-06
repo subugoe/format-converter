@@ -69,8 +69,6 @@ public class TeiP5Writer extends StaxWriter {
 			xwriter.writeEndElement(); // div
 
 		}
-		//xwriter.writeCharacters("" + page.getHeight());
-
 		xwriter.writeEmptyElement("pb");
 	}
 

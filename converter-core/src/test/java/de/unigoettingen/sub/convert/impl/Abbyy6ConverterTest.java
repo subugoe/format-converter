@@ -40,7 +40,7 @@ public class Abbyy6ConverterTest {
 	@Test
 	public void test() throws IOException {
 		File abbyy = new File(
-				System.getProperty("user.dir") + "/src/test/resources/20130128_sohnrey_dorfmusikanten_1914_tif.xml");
+				System.getProperty("user.dir") + "/src/test/resources/some_file.xml");
 		InputStream is = new FileInputStream(abbyy);
 		ConvertReader reader = new Abbyy6Reader();
 		ConvertWriter writer = new TeiP5Writer();
