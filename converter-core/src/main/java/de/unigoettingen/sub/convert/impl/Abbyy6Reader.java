@@ -15,6 +15,7 @@ import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Image;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
+import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.NonWord;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
@@ -33,7 +34,16 @@ public class Abbyy6Reader extends StaxReader {
 	private LineItem currentLineItem;
 	
 	@Override
-	protected void handleStartDocument() {
+	protected void handleStartDocument(XMLEventReader eventReader) throws XMLStreamException {
+		
+		// check for the right xml format
+		XMLEvent nextEvent = eventReader.peek();
+		if (nextEvent.isStartElement()) {
+			String rootElement = nextEvent.asStartElement().getName().getLocalPart();
+			if (!"document".equals(rootElement)) {
+				throw new XMLStreamException("Wrong XML format");
+			}
+		}
 		writer.writeStart();
 	}
 	@Override
@@ -41,7 +51,9 @@ public class Abbyy6Reader extends StaxReader {
 		StartElement tag = event.asStartElement();
 		String name = tag.getName().getLocalPart();
 		if (name.equals("document")) {
-			writer.writeMetadata();
+			Metadata meta = new Metadata();
+			processDocumentAttributes(tag, meta);
+			writer.writeMetadata(meta);
 		} else if (name.equals("page")) {
 			page = new Page();
 			processPageAttributes(tag);
@@ -76,6 +88,20 @@ public class Abbyy6Reader extends StaxReader {
 		}
 	}
 	
+	private void processDocumentAttributes(StartElement tag, Metadata meta) {
+		Iterator<?> attributes = tag.getAttributes();
+		while (attributes.hasNext()) {
+			Attribute attr = (Attribute) attributes.next();
+			String attrName = attr.getName().getLocalPart();
+			if (attrName.equals("producer")) {
+				meta.setOcrSoftwareName(attr.getValue());
+			} else if (attrName.equals("mainLanguage")) {
+				meta.getLanguages().add(attr.getValue());
+			} else if (attrName.equals("languages")) {
+				meta.getLanguages().add(attr.getValue());
+			}
+		}
+	}
 	private void processCharParamTag(StartElement tag, XMLEvent charEvent) {
 		char ch = charEvent.asCharacters().getData().charAt(0);
 		Char modelChar = new Char();

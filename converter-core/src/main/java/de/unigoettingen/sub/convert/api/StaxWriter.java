@@ -8,6 +8,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 
 abstract public class StaxWriter implements ConvertWriter {
@@ -43,9 +44,9 @@ abstract public class StaxWriter implements ConvertWriter {
 	}
 
 	@Override
-	public void writeMetadata() {
+	public void writeMetadata(Metadata meta) {
 		try {
-			writeMetadataStax();
+			writeMetadataStax(meta);
 			xwriter.flush();
 		} catch (XMLStreamException e) {
 			// TODO Auto-generated catch block
@@ -80,7 +81,7 @@ abstract public class StaxWriter implements ConvertWriter {
 	}
 	
 	abstract protected void writeStartStax() throws XMLStreamException;
-	abstract protected void writeMetadataStax() throws XMLStreamException;
+	abstract protected void writeMetadataStax(Metadata meta) throws XMLStreamException;
 	abstract protected void writePageStax(Page page) throws XMLStreamException;
 	abstract protected void writeEndStax() throws XMLStreamException;
 

@@ -10,6 +10,7 @@ import javax.xml.stream.XMLStreamWriter;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.api.StaxWriter;
 import de.unigoettingen.sub.convert.model.Document;
+import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 
 public class Abbyy6Writer extends StaxWriter {
@@ -69,7 +70,7 @@ public class Abbyy6Writer extends StaxWriter {
 	}
 
 	@Override
-	public void writeMetadata() {
+	public void writeMetadata(Metadata meta) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -81,7 +82,7 @@ public class Abbyy6Writer extends StaxWriter {
 	}
 
 	@Override
-	protected void writeMetadataStax() throws XMLStreamException {
+	protected void writeMetadataStax(Metadata meta) throws XMLStreamException {
 		// TODO Auto-generated method stub
 		
 	}

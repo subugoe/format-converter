@@ -23,6 +23,10 @@ public abstract class StaxReader implements ConvertReader {
 	@Override
 	public void read(InputStream is) {
 		
+		if (writer == null) {
+			throw new IllegalStateException("The Writer is not set");
+		}
+		
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 
 		try {
@@ -34,7 +38,7 @@ public abstract class StaxReader implements ConvertReader {
 				switch (event.getEventType()) {
 
 				case XMLStreamConstants.START_DOCUMENT:
-					handleStartDocument();
+					handleStartDocument(eventReader);
 					break;
 				case XMLStreamConstants.START_ELEMENT:
 					handleStartElement(event, eventReader);
@@ -60,7 +64,7 @@ public abstract class StaxReader implements ConvertReader {
 
 	}
 	
-	abstract protected void handleStartDocument();
+	abstract protected void handleStartDocument(XMLEventReader eventReader) throws XMLStreamException;
 	abstract protected void handleStartElement(XMLEvent event, XMLEventReader eventReader) throws XMLStreamException;
 	abstract protected void handleEndElement(XMLEvent event);
 	abstract protected void handleEndDocument();

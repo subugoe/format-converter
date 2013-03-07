@@ -6,6 +6,7 @@ import de.unigoettingen.sub.convert.api.StaxWriter;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
+import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
@@ -24,7 +25,7 @@ public class TeiP5Writer extends StaxWriter {
 	}
 
 	@Override
-	protected void writeMetadataStax() throws XMLStreamException {
+	protected void writeMetadataStax(Metadata meta) throws XMLStreamException {
 		xwriter.writeStartElement("teiHeader");
 		xwriter.writeEndElement();
 
