@@ -15,7 +15,7 @@ abstract public class StaxWriter implements ConvertWriter {
 
 	protected XMLStreamWriter xwriter;
 	
-	private OutputStream output;// = System.out;
+	private OutputStream output;
 		
 	@Override
 	public void setTarget(OutputStream stream) {
@@ -26,56 +26,62 @@ abstract public class StaxWriter implements ConvertWriter {
 					.createXMLStreamWriter(output);
 			xwriter = new IndentingXMLStreamWriter(xwriter);
 		} catch (XMLStreamException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not initialize the stream writer");
 		}
 	}
 	
 	@Override
 	public void writeStart() {
+		checkOutputStream();
 		try {
 			writeStartStax();
 			xwriter.flush();
 		} catch (XMLStreamException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not write XML header");
 		}
 
 	}
 
+	private void checkOutputStream() {
+		if (output == null) {
+			throw new IllegalStateException("The output target is not set");
+		}
+		
+	}
+
 	@Override
 	public void writeMetadata(Metadata meta) {
+		checkOutputStream();
 		try {
 			writeMetadataStax(meta);
 			xwriter.flush();
 		} catch (XMLStreamException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not write XML metadata");
 		}
 
 	}
 
 	@Override
 	public void writePage(Page page) {
+		checkOutputStream();
 		try {
 			writePageStax(page);
 			xwriter.flush();
 		} catch (XMLStreamException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not write XML page");
 		}
 
 	}
 
 	@Override
 	public void writeEnd() {
+		checkOutputStream();
 		try {
 			writeEndStax();
 			xwriter.flush();
 			xwriter.close();
 		} catch (XMLStreamException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not write XML file ending");
 		}
 
 	}
