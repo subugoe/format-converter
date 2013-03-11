@@ -42,7 +42,7 @@ public class Abbyy6ConverterTest {
 		File abbyy = new File(
 				System.getProperty("user.dir") + "/src/test/resources/abbyy6_twoPages.xml");
 		InputStream is = new FileInputStream(abbyy);
-		ConvertReader reader = new Abbyy6Reader();
+		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new TeiP5Writer();
 		
 		//OutputStream s = new FileOutputStream("/tmp/bla.xml");

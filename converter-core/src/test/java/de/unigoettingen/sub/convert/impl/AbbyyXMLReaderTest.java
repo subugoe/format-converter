@@ -33,7 +33,7 @@ import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Word;
 
-public class Abbyy6ReaderTest {
+public class AbbyyXMLReaderTest {
 
 	private ConvertReader reader;
 	private ConvertWriter writerMock;
@@ -48,7 +48,7 @@ public class Abbyy6ReaderTest {
 
 	@Before
 	public void setUp() throws Exception {
-		reader = new Abbyy6Reader();
+		reader = new AbbyyXMLReader();
 		writerMock = mock(ConvertWriter.class);
 	}
 
@@ -157,6 +157,13 @@ public class Abbyy6ReaderTest {
 		Line line = block.getParagraphs().get(0).getLines().get(0);
 		assertCoordinatesArePresent(line);
 		
+	}
+	
+	@Test
+	public void emptyFormattingElementShouldBeIgnored() throws FileNotFoundException {
+		reader.setWriter(writerMock);
+		reader.read(fromFile("abbyy10_emptyFormatting.xml"));
+		// used to throw a NullPointerException
 	}
 	
 	private InputStream fromFile(String file) throws FileNotFoundException {

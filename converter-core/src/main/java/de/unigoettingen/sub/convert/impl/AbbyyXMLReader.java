@@ -24,7 +24,7 @@ import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Word;
 
-public class Abbyy6Reader extends StaxReader {
+public class AbbyyXMLReader extends StaxReader {
 
 	private PageItem currentPageItem;
 	private Paragraph currentParagraph;
@@ -182,12 +182,14 @@ public class Abbyy6Reader extends StaxReader {
 				.getLocalPart();
 		if (name.equals("page")) {
 			writer.writePage(page);
-		} else if (name.equals("formatting")) {			
-			int lastIndex = currentLineItem.getCharacters().size() - 1;
-			Char lastChar = currentLineItem.getCharacters().get(lastIndex);
-			// coordinates for the last word or non-word, since they cannot be handled in the startelement
-			setBottomRightCoordinateIfPresent(currentLineItem, lastChar);
-			currentLineItem = null;
+		} else if (name.equals("formatting")) {	
+			if (currentLineItem != null) { // formatting might have been empty
+				int lastIndex = currentLineItem.getCharacters().size() - 1;
+				Char lastChar = currentLineItem.getCharacters().get(lastIndex);
+				// coordinates for the last word or non-word, since they cannot be handled in the startelement
+				setBottomRightCoordinateIfPresent(currentLineItem, lastChar);
+				currentLineItem = null;
+			}
 		}
 	}
 	@Override
