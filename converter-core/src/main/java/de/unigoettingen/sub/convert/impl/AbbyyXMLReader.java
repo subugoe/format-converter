@@ -6,7 +6,6 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
-import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
@@ -107,7 +106,7 @@ public class AbbyyXMLReader extends StaxReader {
 		Char modelChar = new Char();
 		processCharAttributes(tag, modelChar);
 		modelChar.setValue(""+ch);
-		boolean isLetter = Character.isLetter(ch);
+		boolean isLetter = Character.isLetter(ch); // TODO: digits also words
 		if (startOfLine() && isLetter) {
 			switchToWord();
 			setTopLeftCoordinate(currentWord, modelChar);
@@ -143,7 +142,7 @@ public class AbbyyXMLReader extends StaxReader {
 		for(char ch : chars.toCharArray()) {
 			Char modelChar = new Char();
 			modelChar.setValue(""+ch);
-			boolean isLetter = Character.isLetter(ch);
+			boolean isLetter = Character.isLetter(ch); // TODO: digits
 			if (startOfLine() && isLetter) {
 				switchToWord();
 			} else if (startOfLine() && !isLetter) {
@@ -183,7 +182,7 @@ public class AbbyyXMLReader extends StaxReader {
 		if (name.equals("page")) {
 			writer.writePage(page);
 		} else if (name.equals("formatting")) {	
-			if (currentLineItem != null) { // formatting might have been empty
+			if (currentLineItem != null) { // formatting element might have been empty
 				int lastIndex = currentLineItem.getCharacters().size() - 1;
 				Char lastChar = currentLineItem.getCharacters().get(lastIndex);
 				// coordinates for the last word or non-word, since they cannot be handled in the startelement
