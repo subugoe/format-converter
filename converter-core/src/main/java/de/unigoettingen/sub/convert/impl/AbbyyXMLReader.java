@@ -106,18 +106,18 @@ public class AbbyyXMLReader extends StaxReader {
 		Char modelChar = new Char();
 		processCharAttributes(tag, modelChar);
 		modelChar.setValue(""+ch);
-		boolean isLetter = Character.isLetter(ch); // TODO: digits also words
-		if (startOfLine() && isLetter) {
+		boolean isLetterOrDigit = Character.isLetterOrDigit(ch);
+		if (startOfLine() && isLetterOrDigit) {
 			switchToWord();
 			setTopLeftCoordinate(currentWord, modelChar);
-		} else if (startOfLine() && !isLetter) {
+		} else if (startOfLine() && !isLetterOrDigit) {
 			switchToNonWord();
 			setTopLeftCoordinate(currentNonWord, modelChar);
-		} else if (inWord() && !isLetter) {
+		} else if (inWord() && !isLetterOrDigit) {
 			setBottomRightCoordinateIfPresent(currentWord, modelChar);
 			switchToNonWord();
 			setTopLeftCoordinate(currentNonWord, modelChar);
-		} else if (inNonWord() && isLetter) {
+		} else if (inNonWord() && isLetterOrDigit) {
 			setBottomRightCoordinateIfPresent(currentNonWord, modelChar);
 			switchToWord();
 			setTopLeftCoordinate(currentWord, modelChar);
@@ -142,14 +142,14 @@ public class AbbyyXMLReader extends StaxReader {
 		for(char ch : chars.toCharArray()) {
 			Char modelChar = new Char();
 			modelChar.setValue(""+ch);
-			boolean isLetter = Character.isLetter(ch); // TODO: digits
-			if (startOfLine() && isLetter) {
+			boolean isLetterOrDigit = Character.isLetterOrDigit(ch);
+			if (startOfLine() && isLetterOrDigit) {
 				switchToWord();
-			} else if (startOfLine() && !isLetter) {
+			} else if (startOfLine() && !isLetterOrDigit) {
 				switchToNonWord();
-			} else if (inWord() && !isLetter) {
+			} else if (inWord() && !isLetterOrDigit) {
 				switchToNonWord();
-			} else if (inNonWord() && isLetter) {
+			} else if (inNonWord() && isLetterOrDigit) {
 				switchToWord();
 			}
 			currentLineItem.getCharacters().add(modelChar);

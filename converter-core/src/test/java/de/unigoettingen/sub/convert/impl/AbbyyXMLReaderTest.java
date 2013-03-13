@@ -28,6 +28,7 @@ import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
+import de.unigoettingen.sub.convert.model.NonWord;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.TextBlock;
@@ -152,11 +153,29 @@ public class AbbyyXMLReaderTest {
 		reader.read(fromFile("abbyy6.xml"));
 		verify(writerMock).writePage(argument.capture());
 		
-		Page page = argument.getValue();
-		TextBlock block = (TextBlock) page.getPageItems().get(0);
-		Line line = block.getParagraphs().get(0).getLines().get(0);
+		Line line = firstLineOnPage(argument.getValue());
 		assertCoordinatesArePresent(line);
 		
+	}
+	
+	@Test
+	public void digitsShouldBecomeWords() throws FileNotFoundException {
+		ArgumentCaptor<Page> argument = ArgumentCaptor.forClass(Page.class);
+		reader.setWriter(writerMock);
+		reader.read(fromFile("abbyy6_withDigits.xml"));
+		verify(writerMock).writePage(argument.capture());
+		
+		Line line = firstLineOnPage(argument.getValue());
+		LineItem item = line.getLineItems().get(0);
+		assertTrue(item instanceof Word);
+		assertEquals(4, item.getCharacters().size());
+
+	}
+
+	private Line firstLineOnPage(Page page) {
+		TextBlock block = (TextBlock) page.getPageItems().get(0);
+		Line line = block.getParagraphs().get(0).getLines().get(0);
+		return line;
 	}
 	
 	@Test
