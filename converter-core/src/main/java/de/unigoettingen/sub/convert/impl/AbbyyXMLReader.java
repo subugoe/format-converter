@@ -10,6 +10,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import de.unigoettingen.sub.convert.api.StaxReader;
+import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Image;
 import de.unigoettingen.sub.convert.model.Line;
@@ -19,6 +20,7 @@ import de.unigoettingen.sub.convert.model.NonWord;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
+import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Word;
@@ -31,6 +33,8 @@ public class AbbyyXMLReader extends StaxReader {
 	private LineItem currentWord;
 	private LineItem currentNonWord;
 	private LineItem currentLineItem;
+	private Row currentTableRow;
+	private Cell currentTableCell;
 	
 	@Override
 	protected void handleStartDocument(XMLEventReader eventReader) throws XMLStreamException {
@@ -65,7 +69,9 @@ public class AbbyyXMLReader extends StaxReader {
 				TextBlock block = (TextBlock) currentPageItem;
 				block.getParagraphs().add(currentParagraph);
 			} else if (currentPageItem instanceof Table) {
-				//
+				TextBlock tableBlock = new TextBlock();
+				currentTableCell.setContent(tableBlock);
+				tableBlock.getParagraphs().add(currentParagraph);
 			}
 		} else if (name.equals("line")) {
 			currentLine = new Line();
@@ -84,6 +90,13 @@ public class AbbyyXMLReader extends StaxReader {
 				processCharParamTag(tag, nextEvent);
 				eventReader.nextEvent();
 			}
+		} else if (name.equals("row")) {
+			Table table = (Table) currentPageItem;
+			currentTableRow = new Row();
+			table.getRows().add(currentTableRow);
+		} else if (name.equals("cell")) {
+			currentTableCell = new Cell();
+			currentTableRow.getCells().add(currentTableCell);
 		}
 	}
 	

@@ -24,13 +24,15 @@ import org.mockito.ArgumentCaptor;
 
 import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
+import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
-import de.unigoettingen.sub.convert.model.NonWord;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.Paragraph;
+import de.unigoettingen.sub.convert.model.Row;
+import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Word;
 
@@ -132,15 +134,10 @@ public class AbbyyXMLReaderTest {
 		
 		verify(writerMock, times(2)).writePage(any(Page.class));
 	}
-	
-	@Test
-	public void pageShouldContainCertainValues() throws FileNotFoundException {
-		ArgumentCaptor<Page> argument = ArgumentCaptor.forClass(Page.class);
-		reader.setWriter(writerMock);
-		reader.read(fromFile("abbyy6_withoutCharParams.xml"));
-		verify(writerMock).writePage(argument.capture());
 		
-		Page page = argument.getValue();
+	@Test
+	public void pageShouldContainCertainValues() throws FileNotFoundException {		
+		Page page = firstPageFromFile("abbyy6_withoutCharParams.xml");
 		assertNotNull(page.getPageItems());
 		TextBlock block = (TextBlock)page.getPageItems().get(0);
 		assertSomeValuesAreCorrect(block);
@@ -148,24 +145,18 @@ public class AbbyyXMLReaderTest {
 	
 	@Test
 	public void wordsAndCharsShouldHaveCoordinates() throws FileNotFoundException {
-		ArgumentCaptor<Page> argument = ArgumentCaptor.forClass(Page.class);
-		reader.setWriter(writerMock);
-		reader.read(fromFile("abbyy6.xml"));
-		verify(writerMock).writePage(argument.capture());
+		Page page = firstPageFromFile("abbyy6.xml");
 		
-		Line line = firstLineOnPage(argument.getValue());
+		Line line = firstLineOnPage(page);
 		assertCoordinatesArePresent(line);
 		
 	}
 	
 	@Test
 	public void digitsShouldBecomeWords() throws FileNotFoundException {
-		ArgumentCaptor<Page> argument = ArgumentCaptor.forClass(Page.class);
-		reader.setWriter(writerMock);
-		reader.read(fromFile("abbyy6_withDigits.xml"));
-		verify(writerMock).writePage(argument.capture());
+		Page page = firstPageFromFile("abbyy6_withDigits.xml");
 		
-		Line line = firstLineOnPage(argument.getValue());
+		Line line = firstLineOnPage(page);
 		LineItem item = line.getLineItems().get(0);
 		assertTrue(item instanceof Word);
 		assertEquals(4, item.getCharacters().size());
@@ -185,6 +176,28 @@ public class AbbyyXMLReaderTest {
 		// used to throw a NullPointerException
 	}
 	
+	@Test
+	public void tableShouldContainATextBlock () throws FileNotFoundException {
+		Page page = firstPageFromFile("abbyy10_table.xml");
+		Table table = (Table) page.getPageItems().get(0);
+		assertEquals("number of rows", 1, table.getRows().size());
+		
+		Row row = table.getRows().get(0);
+		assertEquals("number of cells", 1, row.getCells().size());
+		
+		Cell cell = row.getCells().get(0);
+		assertTrue(cell.getContent() instanceof TextBlock);
+		
+	}
+	
+	private Page firstPageFromFile(String file) throws FileNotFoundException {
+		ArgumentCaptor<Page> argument = ArgumentCaptor.forClass(Page.class);
+		reader.setWriter(writerMock);
+		reader.read(fromFile(file));
+		verify(writerMock).writePage(argument.capture());
+		return argument.getValue();
+	}
+
 	private InputStream fromFile(String file) throws FileNotFoundException {
 		File dir = new File(System.getProperty("user.dir") + "/src/test/resources/");
 		return new FileInputStream(new File(dir, file));

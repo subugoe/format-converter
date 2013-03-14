@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document xmlns="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" version="1.0" producer="" pagesCount="218" languages="" mainLanguage="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml">
+	
+	<page height="1" resolution="1" width="1" originalCoords="false">
+		
+		<block blockType="Table">
+			<row>
+				<cell width="1" height="1" align="Top" bottomBorder="Black" colSpan="1" leftBorder="Black" picture="false"
+					rightBorder="Black" rowSpan="1" topBorder="Black">
+					<text backgroundColor="16777215">
+						<par>
+							<line b="1" l="2" t="3" r="4" baseline="2">
+							<formatting lang="">bla</formatting>
+							</line>
+						</par>
+					</text>
+				</cell>
+			</row>
+		</block>
+			
+	</page>
+
+</document>
