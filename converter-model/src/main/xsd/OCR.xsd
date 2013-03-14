@@ -39,8 +39,11 @@
 	</complexType>
 
 	<complexType name="PageItem" abstract="true">
-		<attributeGroup ref="tns:Coordinates" />
-		<attribute name="number" type="int" />		
+		<complexContent>
+			<extension base="tns:WithCoordinates">
+				<attribute name="number" type="int" />
+			</extension>
+		</complexContent>	
 	</complexType>
 
 	<complexType name="TextBlock">
@@ -86,30 +89,39 @@
 	</complexType>
 
 	<complexType name="Paragraph">
-		<sequence>
-			<element name="lines" type="tns:Line" maxOccurs="unbounded"/>
-		</sequence>
-		<attributeGroup ref="tns:Coordinates" />
-		<attributeGroup ref="tns:FontInfo" />
-		<attribute name="language" type="string" />
+		<complexContent>
+			<extension base="tns:WithCoordinates">
+				<sequence>
+					<element name="lines" type="tns:Line" maxOccurs="unbounded"/>
+				</sequence>
+				<attributeGroup ref="tns:FontInfo" />
+				<attribute name="language" type="string" />
+			</extension>
+		</complexContent>	
 	</complexType>
 
 	<complexType name="Line">
-		<sequence>
-			<element name="lineItems" type="tns:LineItem" maxOccurs="unbounded"/>
-		</sequence>
-		<attributeGroup ref="tns:Coordinates" />
-		<attributeGroup ref="tns:FontInfo" />
-		<attribute name="language" type="string" />
+		<complexContent>
+			<extension base="tns:WithCoordinates">
+				<sequence>
+					<element name="lineItems" type="tns:LineItem" maxOccurs="unbounded"/>
+				</sequence>
+				<attributeGroup ref="tns:FontInfo" />
+				<attribute name="language" type="string" />
+			</extension>
+		</complexContent>	
 	</complexType>
 
 	<complexType name="LineItem" abstract="true">
-		<sequence>
-			<element name="characters" type="tns:Char" maxOccurs="unbounded" />
-		</sequence>
-		<attributeGroup ref="tns:Coordinates" />
-		<attributeGroup ref="tns:FontInfo" />
-		<attribute name="confidence" type="float" />
+		<complexContent>
+			<extension base="tns:WithCoordinates">
+				<sequence>
+					<element name="characters" type="tns:Char" maxOccurs="unbounded" />
+				</sequence>
+				<attributeGroup ref="tns:FontInfo" />
+				<attribute name="confidence" type="float" />
+			</extension>
+		</complexContent>
 	</complexType>
 
 	<complexType name="Word">
@@ -135,6 +147,10 @@
 				<attribute name="confidence" type="float" />
 			</extension>
 		</simpleContent>
+	</complexType>
+
+	<complexType name="WithCoordinates" abstract="true">
+		<attributeGroup ref="tns:Coordinates" />
 	</complexType>
 
 	<attributeGroup name="Coordinates">

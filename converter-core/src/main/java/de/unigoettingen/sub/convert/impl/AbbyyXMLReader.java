@@ -23,6 +23,7 @@ import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
+import de.unigoettingen.sub.convert.model.WithCoordinates;
 import de.unigoettingen.sub.convert.model.Word;
 
 public class AbbyyXMLReader extends StaxReader {
@@ -75,7 +76,7 @@ public class AbbyyXMLReader extends StaxReader {
 			}
 		} else if (name.equals("line")) {
 			currentLine = new Line();
-			processLineAttributes(tag, currentLine);
+			processCoordinateAttributes(tag, currentLine);
 			currentParagraph.getLines().add(currentLine);
 		} else if (name.equals("formatting")) {
 			// TODO: ein Word template mit lang, font
@@ -234,11 +235,11 @@ public class AbbyyXMLReader extends StaxReader {
 				 || blockType.equals("SeparatorsBox") || blockType.equals("Checkmark") || blockType.equals("GroupCheckmark")) {
 			item = new Image();
 		}
-		processBlockAttributes(tag, item);
+		processCoordinateAttributes(tag, item);
 		return item;
 	}
 	
-	private void processBlockAttributes(StartElement tag, PageItem item) {
+	private void processCoordinateAttributes(StartElement tag, WithCoordinates item) {
 		Iterator<?> attributes = tag.getAttributes();
 		while (attributes.hasNext()) {
 			Attribute attr = (Attribute) attributes.next();
@@ -256,23 +257,6 @@ public class AbbyyXMLReader extends StaxReader {
 		}
 	}
 	
-	private void processLineAttributes(StartElement tag, Line line) {
-		Iterator<?> attributes = tag.getAttributes();
-		while (attributes.hasNext()) {
-			Attribute attr = (Attribute) attributes.next();
-			String attrName = attr.getName().getLocalPart();
-			String attrValue = attr.getValue();
-			if (attrName.equals("l")) {
-				line.setLeft(new Integer(attrValue));
-			} else if (attrName.equals("r")) {
-				line.setRight(new Integer(attrValue));
-			} else if (attrName.equals("t")) {
-				line.setTop(new Integer(attrValue));
-			} else if (attrName.equals("b")) {
-				line.setBottom(new Integer(attrValue));
-			}
-		}
-	}
 	private void processCharAttributes(StartElement tag, Char ch) {
 		Iterator<?> attributes = tag.getAttributes();
 		while (attributes.hasNext()) {
