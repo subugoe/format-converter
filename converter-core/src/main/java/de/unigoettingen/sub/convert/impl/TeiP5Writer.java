@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.xml.stream.XMLStreamException;
 
 import de.unigoettingen.sub.convert.api.StaxWriter;
+import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Image;
 import de.unigoettingen.sub.convert.model.Line;
@@ -14,6 +15,7 @@ import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
+import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Word;
@@ -79,38 +81,15 @@ public class TeiP5Writer extends StaxWriter {
 
 	@Override
 	protected void writePageStax(Page page) throws XMLStreamException {
-
 		for (PageItem item : page.getPageItems()) {
 			if (item instanceof TextBlock) {
 				TextBlock block = (TextBlock) item;
-				for (Paragraph par : block.getParagraphs()) {
-					xwriter.writeStartElement("p");
-					xwriter.writeAttribute("id", "ID" + paragraphCounter);
-					for (Line line : par.getLines()) {
-						for (LineItem lineItem : line.getLineItems()) {
-							if (lineItem instanceof Word) {
-								xwriter.writeStartElement("w");
-								if (lineItem.getTop() != null && lineItem.getRight() != null) {
-									xwriter.writeAttribute("function", wordCoordinates(lineItem));
-								}
-							}
-							for (Char ch : lineItem.getCharacters()) {
-								xwriter.writeCharacters(ch.getValue());
-							}
-							if (lineItem instanceof Word) {
-								xwriter.writeEndElement(); // w
-							}
-
-						}
-						xwriter.writeEmptyElement("lb");
-					}
-					xwriter.writeEndElement(); // p
-					paragraphCounter++;
-				}
+				writeTextBlock(block);
 			} else if (item instanceof Table) {
-				// TODO
+				Table table = (Table) item;
+				writeTable(table);
 			} else if (item instanceof Image) {
-				// TODO
+				// TODO: image on page
 			}
 		}
 		xwriter.writeEmptyElement("milestone");
@@ -118,6 +97,53 @@ public class TeiP5Writer extends StaxWriter {
 		xwriter.writeAttribute("type", "page");
 		xwriter.writeEmptyElement("pb");
 		pageCounter++;
+	}
+
+	private void writeTable(Table table) throws XMLStreamException {
+		xwriter.writeStartElement("table");
+		for (Row row : table.getRows()) {
+			xwriter.writeStartElement("row");
+			for (Cell cell : row.getCells()) {
+				xwriter.writeStartElement("cell");
+				PageItem cellContent = cell.getContent();
+				if (cellContent instanceof TextBlock) {
+					TextBlock cellBlock = (TextBlock) cellContent;
+					writeTextBlock(cellBlock);
+				} else if (cellContent instanceof Image) {
+					// TODO: image in table
+				}
+				xwriter.writeEndElement(); // cell
+			}
+			xwriter.writeEndElement(); // row
+		}
+		xwriter.writeEndElement(); // table
+	}
+
+	private void writeTextBlock(TextBlock block) throws XMLStreamException {
+		for (Paragraph par : block.getParagraphs()) {
+			xwriter.writeStartElement("p");
+			xwriter.writeAttribute("id", "ID" + paragraphCounter);
+			for (Line line : par.getLines()) {
+				for (LineItem lineItem : line.getLineItems()) {
+					if (lineItem instanceof Word) {
+						xwriter.writeStartElement("w");
+						if (lineItem.getTop() != null && lineItem.getRight() != null) {
+							xwriter.writeAttribute("function", wordCoordinates(lineItem));
+						}
+					}
+					for (Char ch : lineItem.getCharacters()) {
+						xwriter.writeCharacters(ch.getValue());
+					}
+					if (lineItem instanceof Word) {
+						xwriter.writeEndElement(); // w
+					}
+
+				}
+				xwriter.writeEmptyElement("lb");
+			}
+			xwriter.writeEndElement(); // p
+			paragraphCounter++;
+		}
 	}
 
 	private String wordCoordinates(LineItem word) {

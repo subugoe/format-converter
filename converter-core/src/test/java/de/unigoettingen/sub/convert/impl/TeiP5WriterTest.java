@@ -157,4 +157,15 @@ public class TeiP5WriterTest {
 		assertTrue(output.contains("<w function=\"1,2,3,4\">test</w>"));
 
 	}
+	
+	@Test
+	public void shouldCreateTable() {
+		Page page = ModelObjectFactory.createPageWithTable();
+		String output = processPage(page);
+		
+		assertTrue(output.contains("<table>"));
+		assertTrue(output.contains("<row>"));
+		assertTrue(output.contains("<cell>"));
+		assertTrue(output.contains("<w>a</w>"));
+	}
 }

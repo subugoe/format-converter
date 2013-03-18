@@ -1,5 +1,6 @@
 package de.unigoettingen.sub.convert.impl;
 
+import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
@@ -7,6 +8,8 @@ import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.NonWord;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.Paragraph;
+import de.unigoettingen.sub.convert.model.Row;
+import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Word;
 
@@ -74,6 +77,29 @@ public class ModelObjectFactory {
 		item.setTop(2);
 		item.setRight(3);
 		item.setBottom(4);
+		return page;
+	}
+
+	public static Page createPageWithTable() {
+		Page page = new Page();
+		Table table = new Table();
+		Row row = new Row();
+		Cell cell = new Cell();
+		TextBlock block = new TextBlock();
+		Paragraph par = new Paragraph();
+		Line line = new Line();
+		Word word = new Word();
+		Char ch = new Char();
+		ch.setValue("a");
+		
+		word.getCharacters().add(ch);
+		line.getLineItems().add(word);
+		par.getLines().add(line);
+		block.getParagraphs().add(par);
+		cell.setContent(block);
+		row.getCells().add(cell);
+		table.getRows().add(row);
+		page.getPageItems().add(table);
 		return page;
 	}
 
