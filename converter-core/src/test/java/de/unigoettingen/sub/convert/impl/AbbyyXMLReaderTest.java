@@ -178,12 +178,12 @@ public class AbbyyXMLReaderTest {
 	
 	@Test
 	public void tableShouldContainATextBlock () throws FileNotFoundException {
-		Page page = firstPageFromFile("abbyy10_table.xml");
+		Page page = firstPageFromFile("abbyy10_withTable.xml");
 		Table table = (Table) page.getPageItems().get(0);
-		assertEquals("number of rows", 1, table.getRows().size());
+		assertEquals("number of rows", 2, table.getRows().size());
 		
 		Row row = table.getRows().get(0);
-		assertEquals("number of cells", 1, row.getCells().size());
+		assertEquals("number of cells", 5, row.getCells().size());
 		
 		Cell cell = row.getCells().get(0);
 		assertTrue(cell.getContent() instanceof TextBlock);

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document xmlns="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" version="1.0" producer="" pagesCount="708" languages="">
+    <documentData>
+        <sections>
+            <section><stream role="text" beginPage="0"><mainText columnCount="1"/><elemId id="{AF538F79-EB4D-4666-97F9-52098AB2DD34}"/></stream>
+            </section>
+            <section><stream role="text" beginPage="0"><mainText columnCount="1"/><elemId id="{6FD2E808-D674-403A-9D25-01032EF1B70D}"/></stream><stream role="incut" beginPage="0"><elemId id="{3F172776-7972-4DC1-846B-5897B88F38DD}"/></stream><stream role="incut" beginPage="0"><elemId id="{E565EE6B-21EB-41AD-A796-9D4E3B65EEED}"/></stream>
+            </section>
+        </sections>
+    </documentData>
+    <page width="5058" height="3200" resolution="600">
+<block blockType="Table" pageElemId="{9D532D0C-B911-47D7-BF42-73BCCD2A1D43}" l="252" t="176" r="4668" b="2904"><region><rect l="252" t="176" r="4668" b="2904"/></region>
+<row>
+<cell width="854" height="294">
+<text id="{09C29FF4-DE0B-49D8-A874-818397D91991}">
+<par leftIndent="400" rightIndent="400" lineSpacing="1020">
+<line baseline="361" l="289" t="304" r="988" b="362"><formatting lang="Russian" ff="Times New Roman" fs="9.5" bold="1" spacing="-10">
+<charParams l="289" t="319" r="328" b="361" suspicious="1">а</charParams>
+<charParams l="326" t="319" r="399" b="361" suspicious="1">ш</charParams>
+<charParams l="400" t="304" r="415" b="362" suspicious="1"> </charParams></formatting><formatting lang="GermanStandard" ff="Times New Roman" fs="9.5" bold="1" spacing="-10">
+<charParams l="416" t="304" r="457" b="362" suspicious="1">S</charParams>
+<charParams l="456" t="304" r="553" b="361" suspicious="1">^</charParams>
+<charParams l="551" t="309" r="578" b="362" suspicious="1">t</charParams>
+<charParams l="579" t="305" r="592" b="362" suspicious="1"> </charParams>
+<charParams l="593" t="305" r="643" b="361" suspicious="1">d</charParams>
+<charParams l="643" t="344" r="654" b="362" suspicious="1">.</charParams>
+<charParams l="655" t="305" r="672" b="362"> </charParams>
+<charParams l="673" t="305" r="709" b="361">f</charParams>
+<charParams l="709" t="305" r="738" b="360" suspicious="1">i</charParams>
+<charParams l="738" t="304" r="760" b="360">l</charParams>
+<charParams l="760" t="319" r="822" b="361" suspicious="1">m</charParams>
+<charParams l="822" t="335" r="845" b="347">-</charParams></formatting><formatting lang="Russian" ff="Times New Roman" fs="9.5" bold="1" spacing="-10">
+<charParams l="865" t="320" r="927" b="361" suspicious="1">Ш</charParams>
+<charParams l="927" t="320" r="947" b="359" suspicious="1">1</charParams>
+<charParams l="947" t="305" r="988" b="361" suspicious="1">д</charParams></formatting></line>
+<line baseline="446" l="289" t="388" r="1013" b="446"><formatting lang="Russian" ff="Times New Roman" fs="9." italic="1">
+<charParams l="289" t="388" r="338" b="446" suspicious="1">Ш</charParams>
+<charParams l="333" t="403" r="385" b="446" suspicious="1">т</charParams>
+<charParams l="378" t="404" r="416" b="445" suspicious="1">п</charParams>
+<charParams l="409" t="403" r="478" b="446" suspicious="1">т</charParams>
+<charParams l="472" t="405" r="498" b="445" suspicious="1">е</charParams>
+<charParams l="491" t="389" r="529" b="446" suspicious="1">Ё</charParams>
+<charParams l="520" t="404" r="554" b="445" suspicious="1">м</charParams>
+<charParams l="551" t="404" r="599" b="445" suspicious="1">т</charParams>
+<charParams l="598" t="390" r="686" b="446" suspicious="1">Ш</charParams>
+<charParams l="680" t="405" r="759" b="446" suspicious="1">т</charParams>
+<charParams l="752" t="405" r="806" b="445" suspicious="1">м</charParams>
+<charParams l="798" t="389" r="906" b="446" suspicious="1">Ш</charParams>
+<charParams l="896" t="389" r="920" b="445" suspicious="1">^</charParams>
+<charParams l="912" t="393" r="1013" b="446" suspicious="1">Ш</charParams></formatting></line></par>
+</text></cell>
+<cell width="1166" height="294">
+<text id="{A999189E-C2BF-49D8-8F17-2E12BC8B692C}">
+<par leftIndent="300">
+<line baseline="274" l="1141" t="219" r="1894" b="275"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.5" bold="1" spacing="-10">
+<charParams l="1141" t="260" r="1156" b="275">.</charParams>
+<charParams l="1166" t="260" r="1182" b="275">.</charParams>
+<charParams l="1190" t="259" r="1206" b="275">.</charParams>
+<charParams l="1207" t="236" r="1228" b="275"> </charParams>
+<charParams l="1229" t="236" r="1265" b="275">a</charParams>
+<charParams l="1265" t="220" r="1285" b="275">l</charParams>
+<charParams l="1285" t="236" r="1315" b="275">s</charParams>
+<charParams l="1316" t="220" r="1333" b="275"> </charParams>
+<charParams l="1334" t="220" r="1403" b="274" suspicious="1">M</charParams>
+<charParams l="1403" t="235" r="1438" b="275" suspicious="1">e</charParams>
+<charParams l="1437" t="225" r="1462" b="275" suspicious="1">t</charParams>
+<charParams l="1462" t="235" r="1499" b="275" suspicious="1">a</charParams>
+<charParams l="1498" t="235" r="1550" b="274" suspicious="1">w</charParams>
+<charParams l="1553" t="220" r="1572" b="274" suspicious="1">i</charParams>
+<charParams l="1573" t="238" r="1579" b="274" suspicious="1">i</charParams>
+<charParams l="1579" t="235" r="1664" b="274" suspicious="1">^</charParams>
+<charParams l="1664" t="235" r="1684" b="274" suspicious="1">i</charParams>
+<charParams l="1684" t="235" r="1712" b="274" suspicious="1">№</charParams>
+<charParams l="1712" t="235" r="1750" b="274" suspicious="1">»</charParams>
+<charParams l="1750" t="235" r="1766" b="274" suspicious="1">;</charParams>
+<charParams l="1766" t="220" r="1807" b="274" suspicious="1">h</charParams>
+<charParams l="1807" t="235" r="1843" b="275" suspicious="1">a</charParams>
+<charParams l="1843" t="219" r="1868" b="273" suspicious="1">f</charParams>
+<charParams l="1868" t="221" r="1894" b="273" suspicious="1">t</charParams></formatting></line></par>
+</text></cell>
+<cell width="642" height="294">
+<text id="{D64DE601-3842-42F7-9E93-961C6F96AE01}">
+<par leftIndent="400">
+<line baseline="272" l="2308" t="218" r="2482" b="272"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.5" bold="1" spacing="-10">
+<charParams l="2308" t="257" r="2323" b="272">.</charParams>
+<charParams l="2332" t="257" r="2348" b="272">.</charParams>
+<charParams l="2357" t="257" r="2372" b="272">.</charParams>
+<charParams l="2373" t="232" r="2394" b="272"> </charParams>
+<charParams l="2395" t="232" r="2432" b="272">a</charParams>
+<charParams l="2432" t="218" r="2452" b="271">l</charParams>
+<charParams l="2452" t="232" r="2482" b="272">s</charParams></formatting></line></par>
+<par leftIndent="400">
+<line baseline="357" l="2303" t="302" r="2775" b="372"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.5" bold="1" spacing="-10">
+<charParams l="2303" t="303" r="2349" b="357">F</charParams>
+<charParams l="2349" t="303" r="2369" b="357" suspicious="1">i</charParams>
+<charParams l="2370" t="303" r="2389" b="357" suspicious="1">l</charParams>
+<charParams l="2391" t="318" r="2450" b="358">m</charParams>
+<charParams l="2450" t="318" r="2488" b="372">g</charParams>
+<charParams l="2486" t="318" r="2520" b="358">e</charParams>
+<charParams l="2520" t="318" r="2549" b="357">s</charParams>
+<charParams l="2549" t="318" r="2581" b="357">c</charParams>
+<charParams l="2582" t="303" r="2622" b="357" suspicious="1">h</charParams>
+<charParams l="2622" t="303" r="2642" b="356" suspicious="1">i</charParams>
+<charParams l="2642" t="318" r="2677" b="357" suspicious="1">c</charParams>
+<charParams l="2677" t="302" r="2698" b="356">l</charParams>
+<charParams l="2698" t="318" r="2718" b="357" suspicious="1">i</charParams>
+<charParams l="2718" t="306" r="2742" b="357">t</charParams>
+<charParams l="2742" t="318" r="2775" b="357">e</charParams></formatting></line></par>
+</text></cell>
+<cell width="990" height="294">
+<text id="{D71819EE-CD62-49FA-9D0A-FD9B2395884C}">
+<par leftIndent="400">
+<line baseline="271" l="2949" t="217" r="3123" b="271"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.5" bold="1" spacing="-10">
+<charParams l="2949" t="256" r="2964" b="271">.</charParams>
+<charParams l="2973" t="256" r="2989" b="271">.</charParams>
+<charParams l="2998" t="256" r="3013" b="271">.</charParams>
+<charParams l="3014" t="232" r="3035" b="271"> </charParams>
+<charParams l="3036" t="232" r="3073" b="271">a</charParams>
+<charParams l="3073" t="217" r="3093" b="271">l</charParams>
+<charParams l="3093" t="231" r="3123" b="271">s</charParams></formatting></line></par>
+<par leftIndent="400">
+<line baseline="355" l="2944" t="300" r="3775" b="357"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.5" bold="1" spacing="-10">
+<charParams l="2944" t="302" r="3013" b="356">M</charParams>
+<charParams l="3015" t="318" r="3047" b="356">e</charParams>
+<charParams l="3047" t="302" r="3089" b="356">d</charParams>
+<charParams l="3089" t="302" r="3108" b="356" suspicious="1">i</charParams>
+<charParams l="3108" t="318" r="3142" b="357">e</charParams>
+<charParams l="3142" t="318" r="3162" b="355" suspicious="1">i</charParams>
+<charParams l="3162" t="318" r="3182" b="355" suspicious="1">i</charParams>
+<charParams l="3182" t="302" r="3224" b="356">k</charParams>
+<charParams l="3223" t="318" r="3242" b="356" suspicious="1">i</charParams>
+<charParams l="3242" t="318" r="3263" b="355" suspicious="1">i</charParams>
+<charParams l="3263" t="302" r="3284" b="355">l</charParams>
+<charParams l="3285" t="306" r="3311" b="356">t</charParams>
+<charParams l="3311" t="318" r="3330" b="355" suspicious="1">i</charParams>
+<charParams l="3330" t="318" r="3351" b="355" suspicious="1">i</charParams>
+<charParams l="3351" t="318" r="3385" b="355" suspicious="1">r</charParams>
+<charParams l="3385" t="318" r="3436" b="354">w</charParams>
+<charParams l="3436" t="301" r="3455" b="354" suspicious="1">i</charParams>
+<charParams l="3455" t="318" r="3486" b="356">s</charParams>
+<charParams l="3486" t="317" r="3513" b="356">s</charParams>
+<charParams l="3513" t="317" r="3547" b="356">e</charParams>
+<charParams l="3545" t="317" r="3616" b="356" suspicious="1">m</charParams>
+<charParams l="3616" t="317" r="3648" b="355" suspicious="1">c</charParams>
+<charParams l="3648" t="302" r="3688" b="355">h</charParams>
+<charParams l="3688" t="317" r="3724" b="355">a</charParams>
+<charParams l="3724" t="300" r="3748" b="354">l</charParams>
+<charParams l="3748" t="302" r="3775" b="354" suspicious="1">l</charParams></formatting></line></par>
+</text></cell>
+<cell width="764" height="294">
+<text id="{68F9A19E-7398-437C-A25E-F1016C6C52CC}">
+<par leftIndent="400" rightIndent="2200" lineSpacing="1020">
+<line baseline="270" l="3939" t="214" r="4114" b="270"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.5" bold="1" spacing="-10">
+<charParams l="3939" t="254" r="3955" b="270">.</charParams>
+<charParams l="3964" t="254" r="3979" b="269">.</charParams>
+<charParams l="3989" t="254" r="4004" b="269">.</charParams>
+<charParams l="4005" t="230" r="4026" b="270"> </charParams>
+<charParams l="4027" t="230" r="4064" b="270">a</charParams>
+<charParams l="4064" t="214" r="4084" b="269">l</charParams>
+<charParams l="4084" t="230" r="4114" b="270">s</charParams></formatting></line>
+<line baseline="354" l="3934" t="301" r="4172" b="370"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.5" bold="1" spacing="-10">
+<charParams l="3934" t="301" r="3981" b="355">P</charParams>
+<charParams l="3981" t="317" r="4010" b="354">r</charParams>
+<charParams l="4010" t="316" r="4051" b="355">o</charParams>
+<charParams l="4044" t="301" r="4073" b="370">j</charParams>
+<charParams l="4074" t="316" r="4108" b="355">e</charParams>
+<charParams l="4108" t="301" r="4149" b="354">k</charParams>
+<charParams l="4149" t="305" r="4172" b="354">t</charParams></formatting></line></par>
+</text></cell></row>
+<row>
+<cell width="854" height="122">
+<text id="{81D528F1-95D0-4B71-BBF0-6E93ED439C04}">
+<par leftIndent="400" lineSpacing="-1"></par>
+</text></cell>
+<cell width="1166" height="122">
+<text id="{AA6C4C24-C01E-4B67-A7B2-8B61447124E6}">
+<par leftIndent="300">
+<line baseline="568" l="1135" t="512" r="1545" b="569"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.">
+<charParams l="1135" t="512" r="1190" b="568">H</charParams>
+<charParams l="1187" t="528" r="1221" b="568">e</charParams>
+<charParams l="1223" t="512" r="1244" b="568">l</charParams>
+<charParams l="1244" t="528" r="1302" b="569">m</charParams>
+<charParams l="1299" t="529" r="1337" b="568">u</charParams>
+<charParams l="1336" t="521" r="1359" b="568">t</charParams>
+<charParams l="1360" t="512" r="1377" b="568"> </charParams>
+<charParams l="1378" t="512" r="1431" b="568">K</charParams>
+<charParams l="1430" t="528" r="1467" b="568" suspicious="1">ö</charParams>
+<charParams l="1466" t="528" r="1491" b="568">r</charParams>
+<charParams l="1491" t="521" r="1514" b="567">t</charParams>
+<charParams l="1512" t="528" r="1545" b="568">e</charParams></formatting></line></par>
+</text></cell>
+<cell width="642" height="122">
+<text id="{53B15889-B996-492E-8A38-941802F47184}">
+<par leftIndent="400">
+<line baseline="565" l="2297" t="510" r="2745" b="566"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.">
+<charParams l="2297" t="511" r="2325" b="566" suspicious="1">J</charParams>
+<charParams l="2332" t="527" r="2368" b="565" suspicious="1">o</charParams>
+<charParams l="2369" t="526" r="2403" b="566">a</charParams>
+<charParams l="2401" t="526" r="2432" b="565">c</charParams>
+<charParams l="2434" t="511" r="2470" b="566">h</charParams>
+<charParams l="2470" t="510" r="2490" b="565">i</charParams>
+<charParams l="2491" t="526" r="2549" b="565">m</charParams>
+<charParams l="2550" t="511" r="2567" b="565"> </charParams>
+<charParams l="2568" t="511" r="2609" b="564">P</charParams>
+<charParams l="2611" t="526" r="2642" b="565">a</charParams>
+<charParams l="2642" t="526" r="2675" b="564">e</charParams>
+<charParams l="2675" t="526" r="2707" b="565">c</charParams>
+<charParams l="2709" t="511" r="2745" b="564">h</charParams></formatting></line></par>
+</text></cell>
+<cell width="990" height="122">
+<text id="{F5D054AD-AA71-472E-81B2-DBA39D923F41}">
+<par leftIndent="400">
+<line baseline="563" l="2946" t="509" r="3425" b="565"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.">
+<charParams l="2946" t="511" r="2998" b="564">K</charParams>
+<charParams l="2998" t="525" r="3034" b="564">n</charParams>
+<charParams l="3035" t="526" r="3071" b="565">u</charParams>
+<charParams l="3072" t="518" r="3094" b="563">t</charParams>
+<charParams l="3095" t="509" r="3111" b="563"> </charParams>
+<charParams l="3112" t="509" r="3184" b="563">f</charParams>
+<charParams l="3112" t="509" r="3184" b="563">f</charParams>
+<charParams l="3112" t="509" r="3184" b="563">i</charParams>
+<charParams l="3184" t="525" r="3216" b="564">c</charParams>
+<charParams l="3218" t="509" r="3256" b="564">k</charParams>
+<charParams l="3255" t="525" r="3288" b="564">e</charParams>
+<charParams l="3287" t="518" r="3309" b="564">t</charParams>
+<charParams l="3309" t="509" r="3346" b="563">h</charParams>
+<charParams l="3346" t="509" r="3365" b="563">i</charParams>
+<charParams l="3365" t="525" r="3398" b="563">e</charParams>
+<charParams l="3398" t="525" r="3425" b="563">r</charParams></formatting></line></par>
+</text></cell>
+<cell width="764" height="122">
+<text id="{A90DEDF3-AC8B-4D90-839C-F6E163997E18}">
+<par leftIndent="400">
+<line baseline="563" l="3935" t="508" r="4421" b="564"><formatting lang="GermanStandard" ff="Times New Roman" fs="9.">
+<charParams l="3935" t="508" r="3987" b="564">H</charParams>
+<charParams l="3988" t="524" r="4020" b="562">e</charParams>
+<charParams l="4022" t="508" r="4041" b="563">l</charParams>
+<charParams l="4042" t="523" r="4099" b="563">m</charParams>
+<charParams l="4099" t="525" r="4135" b="563">u</charParams>
+<charParams l="4137" t="517" r="4157" b="562">t</charParams>
+<charParams l="4158" t="508" r="4177" b="563"> </charParams>
+<charParams l="4178" t="508" r="4216" b="563">S</charParams>
+<charParams l="4216" t="525" r="4248" b="563">c</charParams>
+<charParams l="4251" t="508" r="4288" b="563">h</charParams>
+<charParams l="4287" t="524" r="4320" b="563">a</charParams>
+<charParams l="4320" t="524" r="4357" b="562">n</charParams>
+<charParams l="4357" t="525" r="4390" b="562">z</charParams>
+<charParams l="4390" t="524" r="4421" b="564">e</charParams></formatting></line></par>
+</text></cell></row>
+</block>
+
+<block blockType="Text" pageElemId="{864774D4-6297-46C3-B735-DB5E5C903A7A}" l="248" t="2958" r="568" b="3036"><region><rect l="248" t="2958" r="568" b="3036"/></region>
+<text id="{864774D4-6297-46C3-B735-DB5E5C903A7A}">
+<par>
+<line baseline="3024" l="261" t="2970" r="556" b="3025"><formatting lang="GermanStandard" ff="Times New Roman" fs="10." bold="1">
+<charParams l="261" t="2971" r="308" b="3024">T</charParams>
+<charParams l="312" t="2987" r="345" b="3024">a</charParams>
+<charParams l="344" t="2971" r="384" b="3024">b</charParams>
+<charParams l="384" t="2986" r="418" b="3024">e</charParams>
+<charParams l="419" t="2970" r="441" b="3024">l</charParams>
+<charParams l="442" t="2971" r="463" b="3024">l</charParams>
+<charParams l="464" t="2986" r="497" b="3024">e</charParams>
+<charParams l="498" t="2970" r="519" b="3025"> </charParams>
+<charParams l="520" t="2970" r="556" b="3025">2</charParams></formatting></line></par>
+</text>
+</block>
+
+</page>
+</document>

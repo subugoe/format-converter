@@ -71,7 +71,7 @@
 			</separatorsBox>
 		</block>
 		
-		<block blockType="Table">
+		<block blockType="Table" b="" l="" r="" t=""><region><rect b="" l="" t="" r=""/></region>
 			<row>
 				<cell width="" height="" align="Top" bottomBorder="Black" colSpan="1" leftBorder="Black" picture="false"
 					rightBorder="Black" rowSpan="1" topBorder="Black">
