@@ -2,6 +2,7 @@ package de.unigoettingen.sub.convert.impl;
 
 import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
+import de.unigoettingen.sub.convert.model.Image;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
@@ -100,6 +101,17 @@ public class ModelObjectFactory {
 		row.getCells().add(cell);
 		table.getRows().add(row);
 		page.getPageItems().add(table);
+		return page;
+	}
+
+	public static Page createPageWithImage() {
+		Page page = new Page();
+		Image image = new Image();
+		image.setLeft(1);
+		image.setTop(2);
+		image.setRight(3);
+		image.setBottom(4);
+		page.getPageItems().add(image);
 		return page;
 	}
 

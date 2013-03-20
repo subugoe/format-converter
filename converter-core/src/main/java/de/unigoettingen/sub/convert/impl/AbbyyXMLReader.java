@@ -36,22 +36,26 @@ public class AbbyyXMLReader extends StaxReader {
 	private LineItem currentLineItem;
 	private Row currentTableRow;
 	private Cell currentTableCell;
-	
+
 	@Override
-	protected void handleStartDocument(XMLEventReader eventReader) throws XMLStreamException {
-		
+	protected void handleStartDocument(XMLEventReader eventReader)
+			throws XMLStreamException {
+
 		// check for the right xml format
 		XMLEvent nextEvent = eventReader.peek();
 		if (nextEvent.isStartElement()) {
-			String rootElement = nextEvent.asStartElement().getName().getLocalPart();
+			String rootElement = nextEvent.asStartElement().getName()
+					.getLocalPart();
 			if (!"document".equals(rootElement)) {
 				throw new XMLStreamException("Wrong XML format");
 			}
 		}
 		writer.writeStart();
 	}
+
 	@Override
-	protected void handleStartElement(XMLEvent event, XMLEventReader eventReader) throws XMLStreamException {
+	protected void handleStartElement(XMLEvent event, XMLEventReader eventReader)
+			throws XMLStreamException {
 		StartElement tag = event.asStartElement();
 		String name = tag.getName().getLocalPart();
 		if (name.equals("document")) {
@@ -81,13 +85,14 @@ public class AbbyyXMLReader extends StaxReader {
 		} else if (name.equals("formatting")) {
 			// TODO: ein Word template mit lang, font
 			XMLEvent nextEvent = eventReader.peek();
-			if(nextEvent.isCharacters() && !nextEvent.asCharacters().isWhiteSpace()) {
+			if (nextEvent.isCharacters()
+					&& !nextEvent.asCharacters().isWhiteSpace()) {
 				processLineWithoutCharParams(nextEvent);
 				eventReader.nextEvent();
 			}
 		} else if (name.equals("charParams")) {
 			XMLEvent nextEvent = eventReader.peek();
-			if(nextEvent.isCharacters()) {
+			if (nextEvent.isCharacters()) {
 				processCharParamTag(tag, nextEvent);
 				eventReader.nextEvent();
 			}
@@ -100,7 +105,7 @@ public class AbbyyXMLReader extends StaxReader {
 			currentTableRow.getCells().add(currentTableCell);
 		}
 	}
-	
+
 	private void processDocumentAttributes(StartElement tag, Metadata meta) {
 		Iterator<?> attributes = tag.getAttributes();
 		while (attributes.hasNext()) {
@@ -115,11 +120,12 @@ public class AbbyyXMLReader extends StaxReader {
 			}
 		}
 	}
+
 	private void processCharParamTag(StartElement tag, XMLEvent charEvent) {
 		char ch = charEvent.asCharacters().getData().charAt(0);
 		Char modelChar = new Char();
 		processCharAttributes(tag, modelChar);
-		modelChar.setValue(""+ch);
+		modelChar.setValue("" + ch);
 		boolean isLetterOrDigit = Character.isLetterOrDigit(ch);
 		if (startOfLine() && isLetterOrDigit) {
 			switchToWord();
@@ -139,23 +145,24 @@ public class AbbyyXMLReader extends StaxReader {
 		currentLineItem.getCharacters().add(modelChar);
 
 	}
-	
+
 	private void setTopLeftCoordinate(LineItem li, Char ch) {
 		li.setLeft(new Integer(ch.getLeft()));
 		li.setTop(new Integer(ch.getTop()));
 	}
+
 	private void setBottomRightCoordinateIfPresent(LineItem li, Char ch) {
 		if (ch.getRight() != null && ch.getBottom() != null) {
 			li.setRight(new Integer(ch.getRight()));
 			li.setBottom(new Integer(ch.getBottom()));
 		}
 	}
-	
+
 	private void processLineWithoutCharParams(XMLEvent charEvent) {
 		String chars = charEvent.asCharacters().getData();
-		for(char ch : chars.toCharArray()) {
+		for (char ch : chars.toCharArray()) {
 			Char modelChar = new Char();
-			modelChar.setValue(""+ch);
+			modelChar.setValue("" + ch);
 			boolean isLetterOrDigit = Character.isLetterOrDigit(ch);
 			if (startOfLine() && isLetterOrDigit) {
 				switchToWord();
@@ -169,47 +176,54 @@ public class AbbyyXMLReader extends StaxReader {
 			currentLineItem.getCharacters().add(modelChar);
 		}
 	}
+
 	private boolean startOfLine() {
 		return currentLineItem == null;
 	}
+
 	private boolean inWord() {
 		return currentLineItem instanceof Word;
 	}
+
 	private boolean inNonWord() {
 		return currentLineItem instanceof NonWord;
 	}
+
 	private void switchToWord() {
 		currentWord = new Word();
 		currentLine.getLineItems().add(currentWord);
 		currentLineItem = currentWord;
 	}
+
 	private void switchToNonWord() {
 		currentNonWord = new NonWord();
 		currentLine.getLineItems().add(currentNonWord);
 		currentLineItem = currentNonWord;
 	}
-	
+
 	@Override
 	protected void handleEndElement(XMLEvent event) {
-		String name = event.asEndElement().getName()
-				.getLocalPart();
+		String name = event.asEndElement().getName().getLocalPart();
 		if (name.equals("page")) {
 			writer.writePage(page);
-		} else if (name.equals("formatting")) {	
-			if (currentLineItem != null) { // formatting element might have been empty
+		} else if (name.equals("formatting")) {
+			if (currentLineItem != null) { // formatting element might have been
+											// empty
 				int lastIndex = currentLineItem.getCharacters().size() - 1;
 				Char lastChar = currentLineItem.getCharacters().get(lastIndex);
-				// coordinates for the last word or non-word, since they cannot be handled in the startelement
+				// coordinates for the last word or non-word, since they cannot
+				// be handled in the startelement
 				setBottomRightCoordinateIfPresent(currentLineItem, lastChar);
 				currentLineItem = null;
 			}
 		}
 	}
+
 	@Override
 	protected void handleEndDocument() {
 		writer.writeEnd();
 	}
-	
+
 	private void processPageAttributes(StartElement tag) {
 		Iterator<?> attributes = tag.getAttributes();
 		while (attributes.hasNext()) {
@@ -222,24 +236,30 @@ public class AbbyyXMLReader extends StaxReader {
 			}
 		}
 	}
-	
+
 	private PageItem createPageItem(StartElement tag) {
-		String blockType = tag.getAttributeByName(new QName("blockType")).getValue();
+		String blockType = tag.getAttributeByName(new QName("blockType"))
+				.getValue();
 		PageItem item = null;
 		if (blockType.equals("Text")) {
 			item = new TextBlock();
 		} else if (blockType.equals("Table")) {
 			item = new Table();
-			// TODO: Separator ist von abbyy10
-		} else if (blockType.equals("Picture") || blockType.equals("Barcode") || blockType.equals("Separator")
-				 || blockType.equals("SeparatorsBox") || blockType.equals("Checkmark") || blockType.equals("GroupCheckmark")) {
+		} else if (blockType.equals("Picture")) {
+			item = new Image();
+			// TODO: Separator usw
+		} else if (blockType.equals("Barcode") || blockType.equals("Separator")
+				|| blockType.equals("SeparatorsBox")
+				|| blockType.equals("Checkmark")
+				|| blockType.equals("GroupCheckmark")) {
 			item = new Image();
 		}
 		processCoordinateAttributes(tag, item);
 		return item;
 	}
-	
-	private void processCoordinateAttributes(StartElement tag, WithCoordinates item) {
+
+	private void processCoordinateAttributes(StartElement tag,
+			WithCoordinates item) {
 		Iterator<?> attributes = tag.getAttributes();
 		while (attributes.hasNext()) {
 			Attribute attr = (Attribute) attributes.next();
@@ -256,7 +276,7 @@ public class AbbyyXMLReader extends StaxReader {
 			}
 		}
 	}
-	
+
 	private void processCharAttributes(StartElement tag, Char ch) {
 		Iterator<?> attributes = tag.getAttributes();
 		while (attributes.hasNext()) {
@@ -274,5 +294,5 @@ public class AbbyyXMLReader extends StaxReader {
 			}
 		}
 	}
-	
+
 }

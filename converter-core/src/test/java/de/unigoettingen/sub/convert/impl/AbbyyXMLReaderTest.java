@@ -4,11 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
+
+import static org.hamcrest.CoreMatchers.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,10 +27,12 @@ import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
+import de.unigoettingen.sub.convert.model.Image;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
+import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Table;
@@ -188,6 +191,19 @@ public class AbbyyXMLReaderTest {
 		Cell cell = row.getCells().get(0);
 		assertTrue(cell.getContent() instanceof TextBlock);
 		
+	}
+	
+	@Test
+	public void shouldReadPictureWithCoordinates() throws FileNotFoundException {
+		Page page = firstPageFromFile("abbyy10_withPicture.xml");
+		PageItem item = page.getPageItems().get(0);
+		assertThat("object type", item, instanceOf(Image.class));
+		
+		Image image = (Image) item;
+		assertEquals("left coordinate", new Integer(388), image.getLeft());
+		assertEquals("top coordinate", new Integer(1499), image.getTop());
+		assertEquals("right coordinate", new Integer(580), image.getRight());
+		assertEquals("bottom coordinate", new Integer(1623), image.getBottom());
 	}
 	
 	private Page firstPageFromFile(String file) throws FileNotFoundException {

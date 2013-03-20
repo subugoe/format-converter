@@ -18,6 +18,7 @@ import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
+import de.unigoettingen.sub.convert.model.WithCoordinates;
 import de.unigoettingen.sub.convert.model.Word;
 
 public class TeiP5Writer extends StaxWriter {
@@ -89,7 +90,8 @@ public class TeiP5Writer extends StaxWriter {
 				Table table = (Table) item;
 				writeTable(table);
 			} else if (item instanceof Image) {
-				// TODO: image on page
+				Image image = (Image) item;
+				writeImage(image);
 			}
 		}
 		xwriter.writeEmptyElement("milestone");
@@ -97,6 +99,16 @@ public class TeiP5Writer extends StaxWriter {
 		xwriter.writeAttribute("type", "page");
 		xwriter.writeEmptyElement("pb");
 		pageCounter++;
+	}
+
+	private void writeImage(Image image) throws XMLStreamException {
+		xwriter.writeStartElement("figure");
+		xwriter.writeAttribute("id", "ID" + paragraphCounter);
+		if (image.getTop() != null && image.getRight() != null) {
+			xwriter.writeAttribute("function", wordCoordinates(image));
+		}
+		xwriter.writeEndElement(); // figure
+		paragraphCounter++;
 	}
 
 	private void writeTable(Table table) throws XMLStreamException {
@@ -110,7 +122,8 @@ public class TeiP5Writer extends StaxWriter {
 					TextBlock cellBlock = (TextBlock) cellContent;
 					writeTextBlock(cellBlock);
 				} else if (cellContent instanceof Image) {
-					// TODO: image in table
+					Image cellImage = (Image) cellContent;
+					writeImage(cellImage);
 				}
 				xwriter.writeEndElement(); // cell
 			}
@@ -146,8 +159,8 @@ public class TeiP5Writer extends StaxWriter {
 		}
 	}
 
-	private String wordCoordinates(LineItem word) {
-		return "" + word.getLeft() + "," + word.getTop() + "," + word.getRight() + "," + word.getBottom();
+	private String wordCoordinates(WithCoordinates item) {
+		return "" + item.getLeft() + "," + item.getTop() + "," + item.getRight() + "," + item.getBottom();
 	}
 	
 	@Override

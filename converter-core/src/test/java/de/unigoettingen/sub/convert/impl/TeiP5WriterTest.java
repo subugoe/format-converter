@@ -1,6 +1,7 @@
 package de.unigoettingen.sub.convert.impl;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -167,5 +168,15 @@ public class TeiP5WriterTest {
 		assertTrue(output.contains("<row>"));
 		assertTrue(output.contains("<cell>"));
 		assertTrue(output.contains("<w>a</w>"));
+	}
+	
+	@Test
+	public void shouldWriteFigure() {
+		Page page = ModelObjectFactory.createPageWithImage();
+		String output = processPage(page);
+
+		assertThat(output, containsString("<figure"));
+		assertThat(output, containsString("id=\"ID1\""));
+		assertThat(output, containsString("function=\"1,2,3,4\""));
 	}
 }
