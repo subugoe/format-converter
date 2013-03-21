@@ -110,13 +110,17 @@ public class AbbyyXMLReader extends StaxReader {
 		Iterator<?> attributes = tag.getAttributes();
 		while (attributes.hasNext()) {
 			Attribute attr = (Attribute) attributes.next();
+			String attrValue = attr.getValue();
+			if (attrValue.isEmpty()) {
+				continue;
+			}
 			String attrName = attr.getName().getLocalPart();
 			if (attrName.equals("producer")) {
-				meta.setOcrSoftwareName(attr.getValue());
+				meta.setOcrSoftwareName(attrValue);
 			} else if (attrName.equals("mainLanguage")) {
-				meta.getLanguages().add(attr.getValue());
+				meta.getLanguages().add(attrValue);
 			} else if (attrName.equals("languages")) {
-				meta.getLanguages().add(attr.getValue());
+				meta.getLanguages().add(attrValue);
 			}
 		}
 	}
