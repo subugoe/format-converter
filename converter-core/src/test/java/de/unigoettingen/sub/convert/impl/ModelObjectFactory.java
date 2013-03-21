@@ -100,6 +100,10 @@ public class ModelObjectFactory {
 		cell.setContent(block);
 		row.getCells().add(cell);
 		table.getRows().add(row);
+		table.setLeft(1);
+		table.setTop(2);
+		table.setRight(3);
+		table.setBottom(4);
 		page.getPageItems().add(table);
 		return page;
 	}

@@ -105,7 +105,7 @@ public class TeiP5Writer extends StaxWriter {
 		xwriter.writeStartElement("figure");
 		xwriter.writeAttribute("id", "ID" + paragraphCounter);
 		if (image.getTop() != null && image.getRight() != null) {
-			xwriter.writeAttribute("function", wordCoordinates(image));
+			xwriter.writeAttribute("function", coordinatesFor(image));
 		}
 		xwriter.writeEndElement(); // figure
 		paragraphCounter++;
@@ -113,6 +113,9 @@ public class TeiP5Writer extends StaxWriter {
 
 	private void writeTable(Table table) throws XMLStreamException {
 		xwriter.writeStartElement("table");
+		if (table.getTop() != null && table.getRight() != null) {
+			xwriter.writeAttribute("function", coordinatesFor(table));
+		}
 		for (Row row : table.getRows()) {
 			xwriter.writeStartElement("row");
 			for (Cell cell : row.getCells()) {
@@ -141,7 +144,7 @@ public class TeiP5Writer extends StaxWriter {
 					if (lineItem instanceof Word) {
 						xwriter.writeStartElement("w");
 						if (lineItem.getTop() != null && lineItem.getRight() != null) {
-							xwriter.writeAttribute("function", wordCoordinates(lineItem));
+							xwriter.writeAttribute("function", coordinatesFor(lineItem));
 						}
 					}
 					for (Char ch : lineItem.getCharacters()) {
@@ -159,7 +162,7 @@ public class TeiP5Writer extends StaxWriter {
 		}
 	}
 
-	private String wordCoordinates(WithCoordinates item) {
+	private String coordinatesFor(WithCoordinates item) {
 		return "" + item.getLeft() + "," + item.getTop() + "," + item.getRight() + "," + item.getBottom();
 	}
 	

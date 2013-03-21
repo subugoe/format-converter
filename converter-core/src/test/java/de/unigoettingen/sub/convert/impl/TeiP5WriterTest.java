@@ -63,8 +63,8 @@ public class TeiP5WriterTest {
 		
 		String output = baos.toString();
 
-		assertTrue(output.contains("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"));
-		assertTrue(output.contains("<TEI xmlns=\"http://www.tei-c.org/ns/1.0\""));
+		assertThat(output, containsString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"));
+		assertThat(output, containsString("<TEI xmlns=\"http://www.tei-c.org/ns/1.0\""));
 	}
 	
 	@Test
@@ -73,9 +73,9 @@ public class TeiP5WriterTest {
 		writer.writeMetadata(new Metadata());
 		String output = baos.toString();
 
-		assertTrue(output.contains("<teiHeader></teiHeader>"));
-		assertTrue(output.contains("<text>"));
-		assertTrue(output.contains("<body"));
+		assertThat(output, containsString("<teiHeader></teiHeader>"));
+		assertThat(output, containsString("<text>"));
+		assertThat(output, containsString("<body"));
 	}
 	
 	@Test
@@ -85,8 +85,8 @@ public class TeiP5WriterTest {
 		writer.writeMetadata(meta);
 		String output = baos.toString();
 		
-		assertTrue(output.contains("<creation>Finereader 8.0</creation>"));
-		assertTrue(output.contains("<language>GermanStandard</language>"));
+		assertThat(output, containsString("<creation>Finereader 8.0</creation>"));
+		assertThat(output, containsString("<language>GermanStandard</language>"));
 	}
 		
 	@Test
@@ -95,7 +95,7 @@ public class TeiP5WriterTest {
 		String output = processPage(page);
 		
 		assertTrue(output.contains("<milestone n=\"1\" type=\"page\"/>"));
-		assertTrue(output.contains("<pb"));
+		assertThat(output, containsString("<pb"));
 	}
 	
 	@Test
@@ -106,7 +106,7 @@ public class TeiP5WriterTest {
 		writer.writePage(page);
 		
 		String output = baos.toString();
-		assertTrue(output.contains("<milestone n=\"2\""));
+		assertThat(output, containsString("<milestone n=\"2\""));
 	}
 
 	@Test
@@ -114,7 +114,7 @@ public class TeiP5WriterTest {
 		Page page = ModelObjectFactory.createPageWithOneParagraph();
 		String output = processPage(page);
 
-		assertTrue(output.contains("<p id=\"ID1\"></p>"));
+		assertThat(output, containsString("<p id=\"ID1\"></p>"));
 	}
 	
 	@Test
@@ -122,7 +122,7 @@ public class TeiP5WriterTest {
 		Page page = ModelObjectFactory.createPageWithTwoParagraphs();
 		String output = processPage(page);
 
-		assertTrue(output.contains("<p id=\"ID2\"></p>"));
+		assertThat(output, containsString("<p id=\"ID2\"></p>"));
 	}
 	
 	@Test
@@ -130,7 +130,7 @@ public class TeiP5WriterTest {
 		Page page = ModelObjectFactory.createPageWithOneLine();
 		String output = processPage(page);
 
-		assertTrue(output.contains("<lb/>"));
+		assertThat(output, containsString("<lb/>"));
 	}
 	
 	@Test
@@ -138,7 +138,7 @@ public class TeiP5WriterTest {
 		Page page = ModelObjectFactory.createPageWithOneWord("test");
 		String output = processPage(page);
 
-		assertTrue(output.contains("<w>test</w>"));
+		assertThat(output, containsString("<w>test</w>"));
 	}
 	
 	@Test
@@ -146,8 +146,8 @@ public class TeiP5WriterTest {
 		Page page = ModelObjectFactory.createPageWithOneNonWord("...");
 		String output = processPage(page);
 		
-		assertFalse(output.contains("<w>...</w>"));
-		assertTrue(output.contains("..."));
+		assertThat(output, not(containsString("<w>...</w>")));
+		assertThat(output, containsString("..."));
 	}
 	
 	@Test
@@ -155,19 +155,20 @@ public class TeiP5WriterTest {
 		Page page = ModelObjectFactory.createPageWithOneWordAndCoordinates("test");
 		String output = processPage(page);
 
-		assertTrue(output.contains("<w function=\"1,2,3,4\">test</w>"));
+		assertThat(output, containsString("<w function=\"1,2,3,4\">test</w>"));
 
 	}
 	
 	@Test
-	public void shouldCreateTable() {
+	public void shouldCreateTableWithCoordinates() {
 		Page page = ModelObjectFactory.createPageWithTable();
 		String output = processPage(page);
 		
-		assertTrue(output.contains("<table>"));
-		assertTrue(output.contains("<row>"));
-		assertTrue(output.contains("<cell>"));
-		assertTrue(output.contains("<w>a</w>"));
+		assertThat(output, containsString("<table"));
+		assertThat(output, containsString("<row>"));
+		assertThat(output, containsString("<cell>"));
+		assertThat(output, containsString("<w>a</w>"));
+		assertThat(output, containsString("function=\"1,2,3,4\""));
 	}
 	
 	@Test

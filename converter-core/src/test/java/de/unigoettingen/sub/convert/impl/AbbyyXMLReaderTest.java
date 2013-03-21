@@ -3,7 +3,6 @@ package de.unigoettingen.sub.convert.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
@@ -37,6 +36,7 @@ import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
+import de.unigoettingen.sub.convert.model.WithCoordinates;
 import de.unigoettingen.sub.convert.model.Word;
 
 public class AbbyyXMLReaderTest {
@@ -114,7 +114,7 @@ public class AbbyyXMLReaderTest {
 
 		Metadata meta = argument.getValue();
 		assertEquals("FineReader 8.0", meta.getOcrSoftwareName());
-		assertTrue(meta.getLanguages().contains("GermanStandard"));
+		assertThat(meta.getLanguages(), hasItem("GermanStandard"));
 	}
 	
 	@Test
@@ -147,12 +147,17 @@ public class AbbyyXMLReaderTest {
 	}
 	
 	@Test
-	public void wordsAndCharsShouldHaveCoordinates() throws FileNotFoundException {
+	public void linesWordsAndCharsShouldHaveCoordinates() throws FileNotFoundException {
 		Page page = firstPageFromFile("abbyy6.xml");
 		
 		Line line = firstLineOnPage(page);
 		assertCoordinatesArePresent(line);
 		
+		LineItem firstWord = line.getLineItems().get(0);
+		assertCoordinatesArePresent(firstWord);
+		
+		Char firstChar = firstWord.getCharacters().get(0);
+		assertCharCoordinates(firstChar);
 	}
 	
 	@Test
@@ -161,9 +166,8 @@ public class AbbyyXMLReaderTest {
 		
 		Line line = firstLineOnPage(page);
 		LineItem item = line.getLineItems().get(0);
-		assertTrue(item instanceof Word);
-		assertEquals(4, item.getCharacters().size());
-
+		assertThat(item, instanceOf(Word.class));
+		assertEquals("# of digits", 4, item.getCharacters().size());
 	}
 
 	private Line firstLineOnPage(Page page) {
@@ -180,16 +184,18 @@ public class AbbyyXMLReaderTest {
 	}
 	
 	@Test
-	public void tableShouldContainATextBlock () throws FileNotFoundException {
+	public void tableShouldContainCoordinatesAndATextBlock () throws FileNotFoundException {
 		Page page = firstPageFromFile("abbyy10_withTable.xml");
 		Table table = (Table) page.getPageItems().get(0);
+		
+		assertCoordinatesArePresent(table);
 		assertEquals("number of rows", 2, table.getRows().size());
 		
 		Row row = table.getRows().get(0);
 		assertEquals("number of cells", 5, row.getCells().size());
 		
 		Cell cell = row.getCells().get(0);
-		assertTrue(cell.getContent() instanceof TextBlock);
+		assertThat(cell.getContent(), instanceOf(TextBlock.class));
 		
 	}
 	
@@ -197,13 +203,22 @@ public class AbbyyXMLReaderTest {
 	public void shouldReadPictureWithCoordinates() throws FileNotFoundException {
 		Page page = firstPageFromFile("abbyy10_withPicture.xml");
 		PageItem item = page.getPageItems().get(0);
-		assertThat("object type", item, instanceOf(Image.class));
 		
-		Image image = (Image) item;
-		assertEquals("left coordinate", new Integer(388), image.getLeft());
-		assertEquals("top coordinate", new Integer(1499), image.getTop());
-		assertEquals("right coordinate", new Integer(580), image.getRight());
-		assertEquals("bottom coordinate", new Integer(1623), image.getBottom());
+		assertThat("object type", item, instanceOf(Image.class));
+		assertCoordinatesArePresent(item);
+	}
+
+	private void assertCoordinatesArePresent(WithCoordinates modelItem) {
+		assertThat("left coordinate", modelItem.getLeft(), instanceOf(Integer.class));
+		assertThat("top coordinate", modelItem.getTop(), instanceOf(Integer.class));
+		assertThat("right coordinate", modelItem.getRight(), instanceOf(Integer.class));
+		assertThat("bottom coordinate", modelItem.getBottom(), instanceOf(Integer.class));
+	}
+	private void assertCharCoordinates(Char ch) {
+		assertThat("left coordinate", ch.getLeft(), instanceOf(Integer.class));
+		assertThat("top coordinate", ch.getTop(), instanceOf(Integer.class));
+		assertThat("right coordinate", ch.getRight(), instanceOf(Integer.class));
+		assertThat("bottom coordinate", ch.getBottom(), instanceOf(Integer.class));
 	}
 	
 	private Page firstPageFromFile(String file) throws FileNotFoundException {
@@ -241,17 +256,4 @@ public class AbbyyXMLReaderTest {
 		assertEquals(expectedString, strB.toString());
 	}
 	
-	private void assertCoordinatesArePresent(Line line) {
-		Word firstWord = (Word)line.getLineItems().get(0);
-		assertEquals(new Integer(1220), firstWord.getLeft());
-		assertEquals(new Integer(1036), firstWord.getTop());
-		assertEquals(new Integer(2744), firstWord.getRight());
-		assertEquals(new Integer(1248), firstWord.getBottom());
-		
-		Char firstChar = firstWord.getCharacters().get(0);
-		assertEquals(new Integer(1220), firstChar.getLeft());
-		assertEquals(new Integer(1036), firstChar.getTop());
-		assertEquals(new Integer(1464), firstChar.getRight());
-		assertEquals(new Integer(1244), firstChar.getBottom());
-	}
 }
