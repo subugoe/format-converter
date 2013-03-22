@@ -165,10 +165,12 @@ public class TeiP5WriterTest {
 		String output = processPage(page);
 		
 		assertThat(output, containsString("<table"));
+		assertThat(output, containsString("function=\"1,2,3,4\""));
+		assertThat(output, containsString("rows=\"1\""));
+		assertThat(output, containsString("cols=\"1\""));
 		assertThat(output, containsString("<row>"));
 		assertThat(output, containsString("<cell>"));
 		assertThat(output, containsString("<w>a</w>"));
-		assertThat(output, containsString("function=\"1,2,3,4\""));
 	}
 	
 	@Test

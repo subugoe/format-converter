@@ -116,6 +116,10 @@ public class TeiP5Writer extends StaxWriter {
 		if (table.getTop() != null && table.getRight() != null) {
 			xwriter.writeAttribute("function", coordinatesFor(table));
 		}
+		int rowsCount = table.getRows().size();
+		xwriter.writeAttribute("rows", ""+rowsCount);
+		int columnsCount = table.getRows().get(0).getCells().size();
+		xwriter.writeAttribute("cols", ""+columnsCount);
 		for (Row row : table.getRows()) {
 			xwriter.writeStartElement("row");
 			for (Cell cell : row.getCells()) {
