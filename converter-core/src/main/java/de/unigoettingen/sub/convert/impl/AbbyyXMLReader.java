@@ -1,6 +1,8 @@
 package de.unigoettingen.sub.convert.impl;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
@@ -13,6 +15,7 @@ import de.unigoettingen.sub.convert.api.StaxReader;
 import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Image;
+import de.unigoettingen.sub.convert.model.Language;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
@@ -25,9 +28,12 @@ import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.WithCoordinates;
 import de.unigoettingen.sub.convert.model.Word;
+import de.unigoettingen.sub.convert.util.LanguageMapper;
 
 public class AbbyyXMLReader extends StaxReader {
 
+	private LanguageMapper map = new LanguageMapper();
+	
 	private PageItem currentPageItem;
 	private Paragraph currentParagraph;
 	private Line currentLine;
@@ -108,6 +114,7 @@ public class AbbyyXMLReader extends StaxReader {
 
 	private void processDocumentAttributes(StartElement tag, Metadata meta) {
 		Iterator<?> attributes = tag.getAttributes();
+		Set<String> processedLanguages = new HashSet<String>();
 		while (attributes.hasNext()) {
 			Attribute attr = (Attribute) attributes.next();
 			String attrValue = attr.getValue();
@@ -117,10 +124,16 @@ public class AbbyyXMLReader extends StaxReader {
 			String attrName = attr.getName().getLocalPart();
 			if (attrName.equals("producer")) {
 				meta.setOcrSoftwareName(attrValue);
-			} else if (attrName.equals("mainLanguage")) {
-				meta.getLanguages().add(attrValue);
-			} else if (attrName.equals("languages")) {
-				meta.getLanguages().add(attrValue);
+			} else if (attrName.equals("mainLanguage") || attrName.equals("languages")) {
+				if (!processedLanguages.add(attrValue)) {
+					continue;
+				}
+				String languageId = map.abbyyToIso(attrValue);
+				String languageDescription = attrValue;
+				Language l = new Language();
+				l.setLangId(languageId);
+				l.setValue(languageDescription);
+				meta.getLanguages().add(l);
 			}
 		}
 	}

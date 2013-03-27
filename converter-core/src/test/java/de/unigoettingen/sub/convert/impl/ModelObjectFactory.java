@@ -3,6 +3,7 @@ package de.unigoettingen.sub.convert.impl;
 import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Image;
+import de.unigoettingen.sub.convert.model.Language;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
@@ -19,8 +20,14 @@ public class ModelObjectFactory {
 	public static Metadata createSimpleMetadata() {
 		Metadata meta = new Metadata();
 		meta.setOcrSoftwareName("Finereader 8.0");
-		meta.getLanguages().add("GermanStandard");
-		meta.getLanguages().add("GermanStandard");
+		Language l1 = new Language();
+		l1.setValue("GermanStandard");
+		l1.setLangId("de");
+		Language l2 = new Language();
+		l2.setValue("GermanStandard");
+		l2.setLangId("de");
+		meta.getLanguages().add(l1);
+		meta.getLanguages().add(l2);
 		return meta;
 	}
 

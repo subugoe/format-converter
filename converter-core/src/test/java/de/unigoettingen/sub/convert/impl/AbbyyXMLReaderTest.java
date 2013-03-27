@@ -27,6 +27,7 @@ import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Image;
+import de.unigoettingen.sub.convert.model.Language;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
@@ -114,7 +115,11 @@ public class AbbyyXMLReaderTest {
 
 		Metadata meta = argument.getValue();
 		assertEquals("FineReader 8.0", meta.getOcrSoftwareName());
-		assertThat(meta.getLanguages(), hasItem("GermanStandard"));
+		assertEquals("same languages should become one", 1, meta.getLanguages().size());
+		
+		Language language = meta.getLanguages().get(0);
+		assertEquals("de", language.getLangId());
+		assertEquals("GermanStandard", language.getValue());
 	}
 	
 	@Test

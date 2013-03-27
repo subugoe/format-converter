@@ -9,6 +9,7 @@ import de.unigoettingen.sub.convert.api.StaxWriter;
 import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Image;
+import de.unigoettingen.sub.convert.model.Language;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
@@ -56,10 +57,11 @@ public class TeiP5Writer extends StaxWriter {
 			}
 			if (langs) {
 				xwriter.writeStartElement("langUsage");
-				Set<String> langsSet = new HashSet<String>(meta.getLanguages());
-				for (String lang : langsSet) {
+				Set<Language> langsSet = new HashSet<Language>(meta.getLanguages());
+				for (Language lang : langsSet) {
 					xwriter.writeStartElement("language");
-					xwriter.writeCharacters(lang);
+					xwriter.writeAttribute("ident", lang.getLangId());
+					xwriter.writeCharacters(lang.getValue());
 					xwriter.writeEndElement(); // language
 				}
 				xwriter.writeEndElement(); // langUsage

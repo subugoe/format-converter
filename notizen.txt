@@ -3,4 +3,4 @@ font, lang, usw aus formatting lesen
 
 Höhe/Breite von Zellen lesen?
 
-Separator, Barcode,... benutzen?
+Separator, Barcode,... benutzen? in Sohnrey nach Beispielen suchen

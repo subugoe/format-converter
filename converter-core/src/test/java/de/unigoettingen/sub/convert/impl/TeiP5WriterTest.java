@@ -86,7 +86,7 @@ public class TeiP5WriterTest {
 		String output = baos.toString();
 		
 		assertThat(output, containsString("<creation>Finereader 8.0</creation>"));
-		assertThat(output, containsString("<language>GermanStandard</language>"));
+		assertThat(output, containsString("<language ident=\"de\">GermanStandard</language>"));
 	}
 		
 	@Test

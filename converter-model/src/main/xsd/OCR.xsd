@@ -17,7 +17,7 @@
 			<element name="ocrSoftwareName" type="string"/>
 			<element name="ocrSoftwareVersion" type="string"/>
 			<element name="readingDirection" type="tns:ReadingDirection"/>
-			<element name="languages" type="string" maxOccurs="unbounded"/>
+			<element name="languages" type="tns:Language" maxOccurs="unbounded"/>
 		</sequence>
 	</complexType>
 	
@@ -27,6 +27,14 @@
 			<enumeration value="right-to-left"/>
 		</restriction>
 	</simpleType>
+
+	<complexType name="Language">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="langId"/>
+			</extension>
+		</simpleContent>
+	</complexType>
 
 	<complexType name="Page">
 		<sequence>
