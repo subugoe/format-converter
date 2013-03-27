@@ -1,4 +1,3 @@
-font, lang, usw aus formatting lesen
 
 
 Höhe/Breite von Zellen lesen?

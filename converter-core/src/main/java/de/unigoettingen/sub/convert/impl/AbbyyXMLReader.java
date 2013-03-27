@@ -28,6 +28,7 @@ import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.WithCoordinates;
 import de.unigoettingen.sub.convert.model.Word;
+import de.unigoettingen.sub.convert.model.FontStyleEnum;
 import de.unigoettingen.sub.convert.util.LanguageMapper;
 
 public class AbbyyXMLReader extends StaxReader {
@@ -42,6 +43,8 @@ public class AbbyyXMLReader extends StaxReader {
 	private LineItem currentLineItem;
 	private Row currentTableRow;
 	private Cell currentTableCell;
+
+	private Word currentWordAttributeContainer;
 
 	@Override
 	protected void handleStartDocument(XMLEventReader eventReader)
@@ -89,7 +92,8 @@ public class AbbyyXMLReader extends StaxReader {
 			processCoordinateAttributes(tag, currentLine);
 			currentParagraph.getLines().add(currentLine);
 		} else if (name.equals("formatting")) {
-			// TODO: ein Word template mit lang, font
+			currentWordAttributeContainer = new Word();
+			processFormattingAttributes(tag, currentWordAttributeContainer);
 			XMLEvent nextEvent = eventReader.peek();
 			if (nextEvent.isCharacters()
 					&& !nextEvent.asCharacters().isWhiteSpace()) {
@@ -110,6 +114,36 @@ public class AbbyyXMLReader extends StaxReader {
 			currentTableCell = new Cell();
 			currentTableRow.getCells().add(currentTableCell);
 		}
+	}
+
+	private void processFormattingAttributes(StartElement tag,
+			Word wordContainer) {
+		Iterator<?> attributes = tag.getAttributes();
+		while (attributes.hasNext()) {
+			Attribute attr = (Attribute) attributes.next();
+			String attrName = attr.getName().getLocalPart();
+			String attrValue = attr.getValue();
+			if (attrValue.isEmpty()) {
+				continue;
+			}
+			if (attrName.equals("lang") ) {
+				String isoLanguage = map.abbyyToIso(attrValue);
+				wordContainer.setLanguage(isoLanguage);
+			} else if (attrName.equals("ff")) {
+				wordContainer.setFont(attrValue);
+			} else if (attrName.equals("fs")) {
+				wordContainer.setFontSize(attrValue);
+			} else if (attrName.equals("color")) {
+				wordContainer.setFontColor(attrValue);
+			} else if (attrName.equals("bold") && attrValue.equals("true")) {
+				wordContainer.getFontStyles().add(FontStyleEnum.BOLD);
+			} else if (attrName.equals("italic") && attrValue.equals("true")) {
+				wordContainer.getFontStyles().add(FontStyleEnum.ITALIC);
+			} else if (attrName.equals("underline") && attrValue.equals("true")) {
+				wordContainer.getFontStyles().add(FontStyleEnum.UNDERLINE);
+			}
+		}
+
 	}
 
 	private void processDocumentAttributes(StartElement tag, Metadata meta) {
@@ -207,15 +241,32 @@ public class AbbyyXMLReader extends StaxReader {
 	}
 
 	private void switchToWord() {
-		currentWord = new Word();
+		currentWord = constructUsingWordContainer(new Word());
 		currentLine.getLineItems().add(currentWord);
 		currentLineItem = currentWord;
 	}
 
 	private void switchToNonWord() {
-		currentNonWord = new NonWord();
+		currentNonWord = constructUsingWordContainer(new NonWord());
 		currentLine.getLineItems().add(currentNonWord);
 		currentLineItem = currentNonWord;
+	}
+
+	private LineItem constructUsingWordContainer(LineItem type) {
+		LineItem item;
+		if (type instanceof Word) {
+			item = new Word();
+			((Word)item).setLanguage(currentWordAttributeContainer.getLanguage());
+		} else {
+			item = new NonWord();
+		}
+		item.setFont(currentWordAttributeContainer.getFont());
+		item.setFontSize(currentWordAttributeContainer.getFontSize());
+		item.setFontColor(currentWordAttributeContainer.getFontColor());
+		for (FontStyleEnum style : currentWordAttributeContainer.getFontStyles()) {
+			item.getFontStyles().add(style);
+		}
+		return item;
 	}
 
 	@Override

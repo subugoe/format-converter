@@ -26,11 +26,13 @@ import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
+import de.unigoettingen.sub.convert.model.FontStyleEnum;
 import de.unigoettingen.sub.convert.model.Image;
 import de.unigoettingen.sub.convert.model.Language;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
+import de.unigoettingen.sub.convert.model.NonWord;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
@@ -211,6 +213,37 @@ public class AbbyyXMLReaderTest {
 		
 		assertThat("object type", item, instanceOf(Image.class));
 		assertCoordinatesArePresent(item);
+	}
+	
+	@Test
+	public void wordShouldContainLanguageAndFontInfos() throws FileNotFoundException {
+		Page page = firstPageFromFile("abbyy6.xml");
+		Line line = firstLineOnPage(page);
+		LineItem item = line.getLineItems().get(0);
+		
+		Word word = (Word) item;
+		assertEquals("ISO language", "de", word.getLanguage());
+		assertEquals("font type", "Times New Roman", word.getFont());
+		assertEquals("font size", "38.", word.getFontSize());
+		assertEquals("font color", "123", word.getFontColor());
+		assertThat(word.getFontStyles(), hasItem(FontStyleEnum.BOLD));
+		assertThat(word.getFontStyles(), hasItem(FontStyleEnum.ITALIC));
+		assertThat(word.getFontStyles(), hasItem(FontStyleEnum.UNDERLINE));
+	}
+
+	@Test
+	public void nonWordShouldContainFontInfos() throws FileNotFoundException {
+		Page page = firstPageFromFile("abbyy6.xml");
+		Line line = firstLineOnPage(page);
+		LineItem item = line.getLineItems().get(1);
+		
+		NonWord word = (NonWord) item;
+		assertEquals("font type", "Times New Roman", word.getFont());
+		assertEquals("font size", "38.", word.getFontSize());
+		assertEquals("font color", "123", word.getFontColor());
+		assertThat(word.getFontStyles(), hasItem(FontStyleEnum.BOLD));
+		assertThat(word.getFontStyles(), hasItem(FontStyleEnum.ITALIC));
+		assertThat(word.getFontStyles(), hasItem(FontStyleEnum.UNDERLINE));
 	}
 
 	private void assertCoordinatesArePresent(WithCoordinates modelItem) {

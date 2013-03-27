@@ -169,7 +169,7 @@
 	</attributeGroup>
 	<attributeGroup name="FontInfo">
 		<attribute name="font" type="string" />
-		<attribute name="fontSize" type="int" />
+		<attribute name="fontSize" type="string" />
 		<attribute name="fontStyles" type="tns:FontStylesType" />
 		<attribute name="fontColor" type="string" />
 	</attributeGroup>

@@ -6,14 +6,15 @@
 <block blockType="Text" l="604" t="748" r="3182" b="2598"><region><rect l="604" t="748" r="3182" b="2598"></rect></region>
 <text>
 <par leftIndent="432" lineSpacing="305">
-<line baseline="1248" l="1220" t="1032" r="2744" b="1252"><formatting lang="GermanStandard" ff="Times New Roman" fs="38.">
+<line baseline="1248" l="1220" t="1032" r="2744" b="1252"><formatting lang="GermanStandard" ff="Times New Roman" fs="38." color="123" bold="true" italic="true" underline="true">
 <charParams l="1220" t="1036" r="1464" b="1244">M</charParams>
 <charParams l="1496" t="1032" r="1676" b="1244">E</charParams>
 <charParams l="1708" t="1036" r="1944" b="1248">M</charParams>
 <charParams l="1972" t="1032" r="2172" b="1252">O</charParams>
 <charParams l="2204" t="1040" r="2300" b="1248">I</charParams>
 <charParams l="2336" t="1040" r="2532" b="1248">R</charParams>
-<charParams l="2560" t="1040" r="2744" b="1248">E</charParams></formatting></line></par>
+<charParams l="2560" t="1040" r="2744" b="1248">E</charParams>
+<charParams l="2560" t="1040" r="2744" b="1248">!</charParams></formatting></line></par>
 <par leftIndent="1120">
 <line baseline="1550" l="1908" t="1482" r="2076" b="1550"><formatting lang="GermanStandard" ff="Times New Roman" fs="11." bold="true" spacing="-12">
 <charParams l="1908" t="1482" r="1954" b="1550">S</charParams>

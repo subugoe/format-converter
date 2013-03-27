@@ -3,14 +3,14 @@
 		<ocrSoftwareName></ocrSoftwareName>
 		<ocrSoftwareVersion></ocrSoftwareVersion>
 		<readingDirection></readingDirection>
-		<language></language>
-		<language></language>
+		<language langId="de">GermanStandard</language>
+		<language langId="fr">FrenchStandard</language>
 	</metadata>
 	<page number="" height="" width="" orientation="">
 		<textBlock number="" left="" right="" top="" bottom="" language="" font="" fontSize="" fontStyles="bold italic underline" fontColor="">
 			<paragraph language="" left="" right="" top="" bottom="" font="" fontSize="" fontStyles="bold italic underline" fontColor="">
 				<line language="" left="" right="" top="" bottom="" font="" fontSize="" fontStyles="bold italic underline" fontColor="">
-					<word language="" confidence="" left="" right="" top="" bottom="" font="" fontSize="" fontStyles="bold italic underline" fontColor="">
+					<word language="de" confidence="" left="" right="" top="" bottom="" font="" fontSize="" fontStyles="bold italic underline" fontColor="">
 						<character confidence="" left="" right="" top="" bottom="" font="" fontSize="" fontStyles="bold italic underline" fontColor=""></character>
 						<character></character>
 					</word>
