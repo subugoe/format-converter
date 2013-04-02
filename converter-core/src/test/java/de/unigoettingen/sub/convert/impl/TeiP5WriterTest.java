@@ -87,6 +87,7 @@ public class TeiP5WriterTest {
 		
 		assertThat(output, containsString("<creation>Finereader 8.0</creation>"));
 		assertThat(output, containsString("<language ident=\"de\">GermanStandard</language>"));
+		assertThat(output, containsString("<language>SomeUnknownLanguage</language>"));
 	}
 		
 	@Test

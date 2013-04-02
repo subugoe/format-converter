@@ -76,7 +76,9 @@ public class AbbyyXMLReader extends StaxReader {
 			processPageAttributes(tag);
 		} else if (name.equals("block")) {
 			currentPageItem = createPageItem(tag);
-			page.getPageItems().add(currentPageItem);
+			if (currentPageItem != null) {
+				page.getPageItems().add(currentPageItem);
+			}
 		} else if (name.equals("par")) {
 			currentParagraph = new Paragraph();
 			if (currentPageItem instanceof TextBlock) {
@@ -135,11 +137,11 @@ public class AbbyyXMLReader extends StaxReader {
 				wordContainer.setFontSize(attrValue);
 			} else if (attrName.equals("color")) {
 				wordContainer.setFontColor(attrValue);
-			} else if (attrName.equals("bold") && attrValue.equals("true")) {
+			} else if (attrName.equals("bold") && (attrValue.equals("true") || attrValue.equals("1"))) {
 				wordContainer.getFontStyles().add(FontStyleEnum.BOLD);
-			} else if (attrName.equals("italic") && attrValue.equals("true")) {
+			} else if (attrName.equals("italic") && (attrValue.equals("true") || attrValue.equals("1"))) {
 				wordContainer.getFontStyles().add(FontStyleEnum.ITALIC);
-			} else if (attrName.equals("underline") && attrValue.equals("true")) {
+			} else if (attrName.equals("underline") && (attrValue.equals("true") || attrValue.equals("1"))) {
 				wordContainer.getFontStyles().add(FontStyleEnum.UNDERLINE);
 			}
 		}
@@ -315,12 +317,12 @@ public class AbbyyXMLReader extends StaxReader {
 			item = new Table();
 		} else if (blockType.equals("Picture")) {
 			item = new Image();
-			// TODO: Separator usw
+			// following block types are ignored
 		} else if (blockType.equals("Barcode") || blockType.equals("Separator")
 				|| blockType.equals("SeparatorsBox")
 				|| blockType.equals("Checkmark")
 				|| blockType.equals("GroupCheckmark")) {
-			item = new Image();
+			return null;
 		}
 		processCoordinateAttributes(tag, item);
 		return item;

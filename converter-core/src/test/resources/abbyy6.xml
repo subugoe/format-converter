@@ -6,7 +6,7 @@
 <block blockType="Text" l="604" t="748" r="3182" b="2598"><region><rect l="604" t="748" r="3182" b="2598"></rect></region>
 <text>
 <par leftIndent="432" lineSpacing="305">
-<line baseline="1248" l="1220" t="1032" r="2744" b="1252"><formatting lang="GermanStandard" ff="Times New Roman" fs="38." color="123" bold="true" italic="true" underline="true">
+<line baseline="1248" l="1220" t="1032" r="2744" b="1252"><formatting lang="GermanStandard" ff="Times New Roman" fs="38." color="123" bold="true" italic="true" underline="1">
 <charParams l="1220" t="1036" r="1464" b="1244">M</charParams>
 <charParams l="1496" t="1032" r="1676" b="1244">E</charParams>
 <charParams l="1708" t="1036" r="1944" b="1248">M</charParams>

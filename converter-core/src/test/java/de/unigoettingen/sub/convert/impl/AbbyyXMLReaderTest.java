@@ -125,6 +125,21 @@ public class AbbyyXMLReaderTest {
 	}
 	
 	@Test
+	public void metadataWithUnknownLanguage() throws FileNotFoundException {
+		ArgumentCaptor<Metadata> argument = ArgumentCaptor.forClass(Metadata.class);
+		reader.setWriter(writerMock);
+		reader.read(fromFile("abbyy6_meta_unknownLanguage.xml"));
+		
+		verify(writerMock).writeMetadata(argument.capture());
+
+		Metadata meta = argument.getValue();
+		
+		Language language = meta.getLanguages().get(0);
+		assertNull(language.getLangId());
+		assertEquals("SomeUnknownLanguage", language.getValue());
+	}
+	
+	@Test
 	public void emptyPageWithHeightAndWidth() throws FileNotFoundException {
 		ArgumentCaptor<Page> argument = ArgumentCaptor.forClass(Page.class);
 		reader.setWriter(writerMock);
@@ -244,6 +259,13 @@ public class AbbyyXMLReaderTest {
 		assertThat(word.getFontStyles(), hasItem(FontStyleEnum.BOLD));
 		assertThat(word.getFontStyles(), hasItem(FontStyleEnum.ITALIC));
 		assertThat(word.getFontStyles(), hasItem(FontStyleEnum.UNDERLINE));
+	}
+	
+	@Test
+	public void specialAbbyyBlockTypesShouldBeIgnored() throws FileNotFoundException {
+		Page page = firstPageFromFile("abbyy10_specialBlockTypes.xml");
+		
+		assertEquals("page items", 0, page.getPageItems().size());
 	}
 
 	private void assertCoordinatesArePresent(WithCoordinates modelItem) {

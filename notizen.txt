@@ -1,5 +1,2 @@
+im Abbyy document: languages="lang1,lang2" parsen? -> Beispiele suchen
 
-
-Höhe/Breite von Zellen lesen?
-
-Separator, Barcode,... benutzen? in Sohnrey nach Beispielen suchen

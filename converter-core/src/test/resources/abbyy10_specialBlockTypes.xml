@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document xmlns="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" version="1.0" producer="" pagesCount="708" languages="">
+    <documentData>
+        <sections>
+            <section><stream role="text" beginPage="0"><mainText columnCount="1"/><elemId id="{AF538F79-EB4D-4666-97F9-52098AB2DD34}"/></stream>
+            </section>
+            <section><stream role="text" beginPage="0"><mainText columnCount="1"/><elemId id="{6FD2E808-D674-403A-9D25-01032EF1B70D}"/></stream><stream role="incut" beginPage="0"><elemId id="{3F172776-7972-4DC1-846B-5897B88F38DD}"/></stream><stream role="incut" beginPage="0"><elemId id="{E565EE6B-21EB-41AD-A796-9D4E3B65EEED}"/></stream>
+            </section>
+        </sections>
+    </documentData>
+    <page width="5058" height="3200" resolution="600">
+
+<block blockType="Separator" l="704" t="1549" r="1062" b="1564"><region><rect l="704" t="1549" r="1062" b="1564"/></region>
+<separator type="Black" thickness="15"><start x="704" y="1556"/><end x="1062" y="1556"/>
+</separator>
+</block>
+
+		<block blockType="SeparatorsBox">
+			<separatorsBox>
+				<separator thickness="2" type="Dotted">
+					<start x="1" y="1"/>
+					<end x="1" y="1"/>
+				</separator>
+			</separatorsBox>
+		</block>
+
+		<block blockType="Barcode"></block>
+		<block blockType="Checkmark"></block>
+		<block blockType="GroupCheckmark"></block>
+
+</page>
+</document>

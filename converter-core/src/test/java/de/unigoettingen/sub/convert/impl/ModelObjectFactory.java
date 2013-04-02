@@ -24,8 +24,7 @@ public class ModelObjectFactory {
 		l1.setValue("GermanStandard");
 		l1.setLangId("de");
 		Language l2 = new Language();
-		l2.setValue("GermanStandard");
-		l2.setLangId("de");
+		l2.setValue("SomeUnknownLanguage");
 		meta.getLanguages().add(l1);
 		meta.getLanguages().add(l2);
 		return meta;

@@ -60,7 +60,9 @@ public class TeiP5Writer extends StaxWriter {
 				Set<Language> langsSet = new HashSet<Language>(meta.getLanguages());
 				for (Language lang : langsSet) {
 					xwriter.writeStartElement("language");
-					xwriter.writeAttribute("ident", lang.getLangId());
+					if (lang.getLangId() != null) {
+						xwriter.writeAttribute("ident", lang.getLangId());
+					}
 					xwriter.writeCharacters(lang.getValue());
 					xwriter.writeEndElement(); // language
 				}
