@@ -8,25 +8,32 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
 
-import de.unigoettingen.sub.convert.model.Page;
-
+/**
+ * 
+ * Expects an XML stream and uses the Stax API to parse the document.
+ * 
+ */
 public abstract class StaxReader implements ConvertReader {
 
 	protected ConvertWriter writer;
-	protected Page page = new Page();
 
 	@Override
 	public void setWriter(ConvertWriter w) {
 		writer = w;
 	}
-	
+
+	/**
+	 * reads an XML stream. The handleXXX() hook methods are called for each
+	 * relevant XML event. Concrete implementations only need to implement the
+	 * hook methods.
+	 */
 	@Override
 	public void read(InputStream is) {
-		
+
 		if (writer == null) {
 			throw new IllegalStateException("The Writer is not set");
 		}
-		
+
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 
 		try {
@@ -47,7 +54,7 @@ public abstract class StaxReader implements ConvertReader {
 					handleEndElement(event);
 					break;
 				case XMLStreamConstants.CHARACTERS:
-					//String s = event.asCharacters().toString();
+					// String s = event.asCharacters().toString();
 					break;
 				case XMLStreamConstants.END_DOCUMENT:
 					handleEndDocument();
@@ -61,12 +68,16 @@ public abstract class StaxReader implements ConvertReader {
 			throw new IllegalArgumentException("Error reading XML", e);
 		}
 
-
 	}
-	
-	abstract protected void handleStartDocument(XMLEventReader eventReader) throws XMLStreamException;
-	abstract protected void handleStartElement(XMLEvent event, XMLEventReader eventReader) throws XMLStreamException;
+
+	abstract protected void handleStartDocument(XMLEventReader eventReader)
+			throws XMLStreamException;
+
+	abstract protected void handleStartElement(XMLEvent event,
+			XMLEventReader eventReader) throws XMLStreamException;
+
 	abstract protected void handleEndElement(XMLEvent event);
+
 	abstract protected void handleEndDocument();
 
 }

@@ -22,11 +22,19 @@ import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.WithCoordinates;
 import de.unigoettingen.sub.convert.model.Word;
 
+/**
+ * 
+ * Converts objects of the inner format into TEI P5 XML.
+ * 
+ */
 public class TeiP5Writer extends StaxWriter {
 
 	private int pageCounter = 1;
 	private int paragraphCounter = 1;
-	
+
+	/**
+	 * Writes the start of a TEI document.
+	 */
 	@Override
 	protected void writeStartStax() throws XMLStreamException {
 
@@ -36,6 +44,10 @@ public class TeiP5Writer extends StaxWriter {
 
 	}
 
+	/**
+	 * Writes the TEI header including information about the languages used in
+	 * the document.
+	 */
 	@Override
 	protected void writeMetadataStax(Metadata meta) throws XMLStreamException {
 		xwriter.writeStartElement("teiHeader");
@@ -47,17 +59,18 @@ public class TeiP5Writer extends StaxWriter {
 			xwriter.writeStartElement("profileDesc");
 			if (swName || swVersion) {
 				xwriter.writeStartElement("creation");
-					if (swName) {
-						xwriter.writeCharacters(meta.getOcrSoftwareName());
-					}
-					if (swVersion) {
-						xwriter.writeCharacters(meta.getOcrSoftwareVersion());
-					}
+				if (swName) {
+					xwriter.writeCharacters(meta.getOcrSoftwareName());
+				}
+				if (swVersion) {
+					xwriter.writeCharacters(meta.getOcrSoftwareVersion());
+				}
 				xwriter.writeEndElement(); // creation
 			}
 			if (langs) {
 				xwriter.writeStartElement("langUsage");
-				Set<Language> langsSet = new HashSet<Language>(meta.getLanguages());
+				Set<Language> langsSet = new HashSet<Language>(
+						meta.getLanguages());
 				for (Language lang : langsSet) {
 					xwriter.writeStartElement("language");
 					if (lang.getLangId() != null) {
@@ -67,11 +80,11 @@ public class TeiP5Writer extends StaxWriter {
 					xwriter.writeEndElement(); // language
 				}
 				xwriter.writeEndElement(); // langUsage
-				
+
 			}
 			xwriter.writeEndElement(); // profileDesc
 		}
-		
+
 		xwriter.writeEndElement(); // teiHeader
 
 		addTeiStartElements();
@@ -84,6 +97,9 @@ public class TeiP5Writer extends StaxWriter {
 
 	}
 
+	/**
+	 * Writes one page including a page break.
+	 */
 	@Override
 	protected void writePageStax(Page page) throws XMLStreamException {
 		for (PageItem item : page.getPageItems()) {
@@ -121,9 +137,9 @@ public class TeiP5Writer extends StaxWriter {
 			xwriter.writeAttribute("function", coordinatesFor(table));
 		}
 		int rowsCount = table.getRows().size();
-		xwriter.writeAttribute("rows", ""+rowsCount);
+		xwriter.writeAttribute("rows", "" + rowsCount);
 		int columnsCount = table.getRows().get(0).getCells().size();
-		xwriter.writeAttribute("cols", ""+columnsCount);
+		xwriter.writeAttribute("cols", "" + columnsCount);
 		for (Row row : table.getRows()) {
 			xwriter.writeStartElement("row");
 			for (Cell cell : row.getCells()) {
@@ -151,8 +167,10 @@ public class TeiP5Writer extends StaxWriter {
 				for (LineItem lineItem : line.getLineItems()) {
 					if (lineItem instanceof Word) {
 						xwriter.writeStartElement("w");
-						if (lineItem.getTop() != null && lineItem.getRight() != null) {
-							xwriter.writeAttribute("function", coordinatesFor(lineItem));
+						if (lineItem.getTop() != null
+								&& lineItem.getRight() != null) {
+							xwriter.writeAttribute("function",
+									coordinatesFor(lineItem));
 						}
 					}
 					for (Char ch : lineItem.getCharacters()) {
@@ -171,9 +189,13 @@ public class TeiP5Writer extends StaxWriter {
 	}
 
 	private String coordinatesFor(WithCoordinates item) {
-		return "" + item.getLeft() + "," + item.getTop() + "," + item.getRight() + "," + item.getBottom();
+		return "" + item.getLeft() + "," + item.getTop() + ","
+				+ item.getRight() + "," + item.getBottom();
 	}
-	
+
+	/**
+	 * Writes the necessary TEI end tags.
+	 */
 	@Override
 	protected void writeEndStax() throws XMLStreamException {
 		addTeiEndElements();

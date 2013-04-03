@@ -31,10 +31,17 @@ import de.unigoettingen.sub.convert.model.Word;
 import de.unigoettingen.sub.convert.model.FontStyleEnum;
 import de.unigoettingen.sub.convert.util.LanguageMapper;
 
+/**
+ * 
+ * Can read Abbyy XML format versions 6 and 10.
+ * Transforms the input into the internal model.
+ *
+ */
 public class AbbyyXMLReader extends StaxReader {
 
 	private LanguageMapper map = new LanguageMapper();
-	
+
+	private Page currentPage;
 	private PageItem currentPageItem;
 	private Paragraph currentParagraph;
 	private Line currentLine;
@@ -72,12 +79,12 @@ public class AbbyyXMLReader extends StaxReader {
 			processDocumentAttributes(tag, meta);
 			writer.writeMetadata(meta);
 		} else if (name.equals("page")) {
-			page = new Page();
+			currentPage = new Page();
 			processPageAttributes(tag);
 		} else if (name.equals("block")) {
 			currentPageItem = createPageItem(tag);
 			if (currentPageItem != null) {
-				page.getPageItems().add(currentPageItem);
+				currentPage.getPageItems().add(currentPageItem);
 			}
 		} else if (name.equals("par")) {
 			currentParagraph = new Paragraph();
@@ -275,7 +282,7 @@ public class AbbyyXMLReader extends StaxReader {
 	protected void handleEndElement(XMLEvent event) {
 		String name = event.asEndElement().getName().getLocalPart();
 		if (name.equals("page")) {
-			writer.writePage(page);
+			writer.writePage(currentPage);
 		} else if (name.equals("formatting")) {
 			if (currentLineItem != null) { // formatting element might have been
 											// empty
@@ -300,9 +307,9 @@ public class AbbyyXMLReader extends StaxReader {
 			Attribute attr = (Attribute) attributes.next();
 			String attrName = attr.getName().getLocalPart();
 			if (attrName.equals("width")) {
-				page.setWidth(new Integer(attr.getValue()));
+				currentPage.setWidth(new Integer(attr.getValue()));
 			} else if (attrName.equals("height")) {
-				page.setHeight(new Integer(attr.getValue()));
+				currentPage.setHeight(new Integer(attr.getValue()));
 			}
 		}
 	}

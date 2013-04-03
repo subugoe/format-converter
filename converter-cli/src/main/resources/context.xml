@@ -4,7 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
 	<bean id="abbyyReader" class="de.unigoettingen.sub.convert.impl.AbbyyXMLReader"/>
+	<!-- add more beans of type ConvertReader -->
+	
 	<bean id="teiWriter" class="de.unigoettingen.sub.convert.impl.TeiP5Writer"/>
+	<!-- add more beans of type ConvertWriter -->
 
 	<bean id="converter" class="de.unigoettingen.sub.convert.cli.Converter">
 		<property name="readers">
@@ -12,6 +15,7 @@
 				<entry key="abbyyxml">
 					<ref local="abbyyReader"/>
 				</entry>
+				<!-- add more reader entries -->
 			</map>
 		</property>
 		<property name="writers">
@@ -19,6 +23,7 @@
 				<entry key="tei">
 					<ref local="teiWriter"/>
 				</entry>
+				<!-- add more writer entries -->
 			</map>
 		</property>
 	</bean>

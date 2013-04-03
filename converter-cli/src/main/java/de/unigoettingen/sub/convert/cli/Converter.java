@@ -8,6 +8,14 @@ import java.util.Set;
 import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 
+/**
+ * 
+ * This class is configured with Spring, see context.xml.
+ * You can add any number of readers and writers there.
+ * The actual reader and writer are chosen at runtime using the map keys
+ * passed into convert() method.
+ *
+ */
 public class Converter {
 
 	private Map<String, ConvertReader> readers;

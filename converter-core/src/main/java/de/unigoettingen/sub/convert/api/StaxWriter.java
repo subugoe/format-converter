@@ -11,25 +11,31 @@ import javax.xml.stream.XMLStreamWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 
+/**
+ * 
+ * Encapsulates common Stax behavior and exception handling for child classes.
+ * Concrete children only need to implement the writeXXXStax() hook methods.
+ * 
+ */
 abstract public class StaxWriter implements ConvertWriter {
 
 	protected XMLStreamWriter xwriter;
-	
+
 	private OutputStream output;
-		
+
 	@Override
 	public void setTarget(OutputStream stream) {
 		output = stream;
 		XMLOutputFactory outfactory = XMLOutputFactory.newInstance();
 		try {
-			xwriter = outfactory
-					.createXMLStreamWriter(output);
+			xwriter = outfactory.createXMLStreamWriter(output);
 			xwriter = new IndentingXMLStreamWriter(xwriter);
 		} catch (XMLStreamException e) {
-			throw new IllegalStateException("Could not initialize the stream writer");
+			throw new IllegalStateException(
+					"Could not initialize the stream writer");
 		}
 	}
-	
+
 	@Override
 	public void writeStart() {
 		checkOutputStream();
@@ -46,7 +52,7 @@ abstract public class StaxWriter implements ConvertWriter {
 		if (output == null) {
 			throw new IllegalStateException("The output target is not set");
 		}
-		
+
 	}
 
 	@Override
@@ -85,10 +91,14 @@ abstract public class StaxWriter implements ConvertWriter {
 		}
 
 	}
-	
+
 	abstract protected void writeStartStax() throws XMLStreamException;
-	abstract protected void writeMetadataStax(Metadata meta) throws XMLStreamException;
+
+	abstract protected void writeMetadataStax(Metadata meta)
+			throws XMLStreamException;
+
 	abstract protected void writePageStax(Page page) throws XMLStreamException;
+
 	abstract protected void writeEndStax() throws XMLStreamException;
 
 }
