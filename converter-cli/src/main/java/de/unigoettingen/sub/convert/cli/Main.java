@@ -2,8 +2,8 @@ package de.unigoettingen.sub.convert.cli;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Set;
@@ -23,7 +23,7 @@ public class Main {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"context.xml");
@@ -72,7 +72,7 @@ public class Main {
 
 		LOGGER.info("Starting conversion");
 		converter.convert(inFormat, is, outFormat, os);
-		LOGGER.info("Finished conversion");
+		LOGGER.info("Finished conversion, input file: " + infile.getCanonicalPath());
 
 	}
 

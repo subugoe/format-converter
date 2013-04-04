@@ -27,7 +27,7 @@ import de.unigoettingen.sub.convert.model.Word;
  * Converts objects of the inner format into TEI P5 XML.
  * 
  */
-public class TeiP5Writer extends StaxWriter {
+public class TeiP4Writer extends StaxWriter {
 
 	private int pageCounter = 1;
 	private int paragraphCounter = 1;
@@ -39,8 +39,7 @@ public class TeiP5Writer extends StaxWriter {
 	protected void writeStartStax() throws XMLStreamException {
 
 		xwriter.writeStartDocument("UTF-8", "1.0");
-		xwriter.writeStartElement("TEI");
-		xwriter.writeDefaultNamespace("http://www.tei-c.org/ns/1.0");
+		xwriter.writeStartElement("TEI.2");
 
 	}
 

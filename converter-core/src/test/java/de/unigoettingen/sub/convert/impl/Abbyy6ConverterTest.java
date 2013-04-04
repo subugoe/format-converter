@@ -41,7 +41,7 @@ public class Abbyy6ConverterTest {
 				System.getProperty("user.dir") + "/src/test/resources/abbyy6_meta_twoLanguages.xml");
 		InputStream is = new FileInputStream(abbyy);
 		ConvertReader reader = new AbbyyXMLReader();
-		ConvertWriter writer = new TeiP5Writer();
+		ConvertWriter writer = new TeiP4Writer();
 		
 		//OutputStream s = new FileOutputStream("/tmp/bla.xml");
 		OutputStream s = System.out;

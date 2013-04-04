@@ -16,7 +16,7 @@ import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 
-public class TeiP5WriterTest {
+public class TeiP4WriterTest {
 
 	private ConvertWriter writer;
 	private OutputStream baos;
@@ -31,7 +31,7 @@ public class TeiP5WriterTest {
 
 	@Before
 	public void setUp() throws Exception {
-		writer = new TeiP5Writer();
+		writer = new TeiP4Writer();
 		baos = new ByteArrayOutputStream();
 	}
 
@@ -64,7 +64,7 @@ public class TeiP5WriterTest {
 		String output = baos.toString();
 
 		assertThat(output, containsString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"));
-		assertThat(output, containsString("<TEI xmlns=\"http://www.tei-c.org/ns/1.0\""));
+		assertThat(output, containsString("<TEI.2"));
 	}
 	
 	@Test
