@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -109,13 +110,8 @@ public class AbbyyXMLReaderTest {
 	
 	@Test
 	public void metadataObjectShouldContainInfos() throws FileNotFoundException {
-		ArgumentCaptor<Metadata> argument = ArgumentCaptor.forClass(Metadata.class);
-		reader.setWriter(writerMock);
-		reader.read(fromFile("abbyy6_metadata.xml"));
-		
-		verify(writerMock).writeMetadata(argument.capture());
+		Metadata meta = metadataFromFile("abbyy6_metadata.xml");
 
-		Metadata meta = argument.getValue();
 		assertEquals("FineReader 8.0", meta.getOcrSoftwareName());
 		assertEquals("same languages should become one", 1, meta.getLanguages().size());
 		
@@ -126,17 +122,37 @@ public class AbbyyXMLReaderTest {
 	
 	@Test
 	public void metadataWithUnknownLanguage() throws FileNotFoundException {
-		ArgumentCaptor<Metadata> argument = ArgumentCaptor.forClass(Metadata.class);
-		reader.setWriter(writerMock);
-		reader.read(fromFile("abbyy6_meta_unknownLanguage.xml"));
-		
-		verify(writerMock).writeMetadata(argument.capture());
-
-		Metadata meta = argument.getValue();
+		Metadata meta = metadataFromFile("abbyy6_meta_unknownLanguage.xml");
 		
 		Language language = meta.getLanguages().get(0);
 		assertNull(language.getLangId());
 		assertEquals("SomeUnknownLanguage", language.getValue());
+	}
+
+	@Test
+	public void metadataWithTwoLanguages() throws FileNotFoundException {
+		Metadata meta = metadataFromFile("abbyy6_meta_twoLanguages.xml");
+		
+		assertEquals("# of languages", 2, meta.getLanguages().size());
+		Language language0 = meta.getLanguages().get(0);
+		Language language1 = meta.getLanguages().get(1);
+		
+		ArrayList<String> languageIds = new ArrayList<String>();
+		languageIds.add(language0.getValue());
+		languageIds.add(language1.getValue());
+		
+		assertThat(languageIds, hasItems("GermanStandard", "EnglishUnitedStates"));
+	}
+
+	private Metadata metadataFromFile(String file) throws FileNotFoundException {
+		ArgumentCaptor<Metadata> argument = ArgumentCaptor.forClass(Metadata.class);
+		reader.setWriter(writerMock);
+		reader.read(fromFile(file));
+		
+		verify(writerMock).writeMetadata(argument.capture());
+
+		Metadata meta = argument.getValue();
+		return meta;
 	}
 	
 	@Test

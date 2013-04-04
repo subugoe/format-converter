@@ -168,16 +168,20 @@ public class AbbyyXMLReader extends StaxReader {
 			if (attrName.equals("producer")) {
 				meta.setOcrSoftwareName(attrValue);
 			} else if (attrName.equals("mainLanguage") || attrName.equals("languages")) {
-				if (!processedLanguages.add(attrValue)) {
-					continue;
+				String[] splitLangs = attrValue.split(",");
+				for(String lang : splitLangs) {
+					processedLanguages.add(lang);
 				}
-				String languageId = map.abbyyToIso(attrValue);
-				String languageDescription = attrValue;
-				Language l = new Language();
-				l.setLangId(languageId);
-				l.setValue(languageDescription);
-				meta.getLanguages().add(l);
 			}
+		}
+		for (String abbyyLanguage : processedLanguages) {
+			String languageId = map.abbyyToIso(abbyyLanguage);
+			String languageDescription = abbyyLanguage;
+			Language l = new Language();
+			l.setLangId(languageId);
+			l.setValue(languageDescription);
+			meta.getLanguages().add(l);
+
 		}
 	}
 

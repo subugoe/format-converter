@@ -1,2 +1,1 @@
-im Abbyy document: languages="lang1,lang2" parsen? -> Beispiele suchen
 

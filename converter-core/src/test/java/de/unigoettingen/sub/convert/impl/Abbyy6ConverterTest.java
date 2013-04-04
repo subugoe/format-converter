@@ -38,7 +38,7 @@ public class Abbyy6ConverterTest {
 	@Test
 	public void test() throws IOException {
 		File abbyy = new File(
-				System.getProperty("user.dir") + "/src/test/resources/abbyy6_metadata.xml");
+				System.getProperty("user.dir") + "/src/test/resources/abbyy6_meta_twoLanguages.xml");
 		InputStream is = new FileInputStream(abbyy);
 		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new TeiP5Writer();
