@@ -24,6 +24,7 @@ public class PDFWriter implements ConvertWriter {
 		pdfDocument = new Document();
 		try {
 			pwriter = PdfWriter.getInstance(pdfDocument, output);
+			pwriter.setCompressionLevel(0);
 			pdfDocument.open();
 			
 		} catch (DocumentException e) {
@@ -43,7 +44,7 @@ public class PDFWriter implements ConvertWriter {
 		pdfDocument.addCreator(creator);
 
 		pdfDocument.addLanguage("de");
-		pdfDocument.addLanguage("bla");
+		//pdfDocument.addLanguage("bla");
 		
 		pwriter.flush();
 		

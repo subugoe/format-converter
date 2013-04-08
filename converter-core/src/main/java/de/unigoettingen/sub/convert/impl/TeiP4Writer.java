@@ -62,7 +62,7 @@ public class TeiP4Writer extends StaxWriter {
 					xwriter.writeCharacters(meta.getOcrSoftwareName());
 				}
 				if (swVersion) {
-					xwriter.writeCharacters(meta.getOcrSoftwareVersion());
+					xwriter.writeCharacters(" " + meta.getOcrSoftwareVersion());
 				}
 				xwriter.writeEndElement(); // creation
 			}

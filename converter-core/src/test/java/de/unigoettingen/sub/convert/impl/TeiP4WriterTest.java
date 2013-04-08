@@ -15,6 +15,14 @@ import org.junit.Test;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
+import de.unigoettingen.sub.convert.model.builders.LanguageBuilder;
+import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.ParagraphBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.LineBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.WordBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.NonWordBuilder.*;
 
 public class TeiP4WriterTest {
 
@@ -40,9 +48,15 @@ public class TeiP4WriterTest {
 		baos.close();
 	}
 
-	private String processPage(Page page) {
+	private String process(Page page) {
 		writer.setTarget(baos);
 		writer.writePage(page);
+		return baos.toString();
+	}
+
+	private String process(Metadata meta) {
+		writer.setTarget(baos);
+		writer.writeMetadata(meta);
 		return baos.toString();
 	}
 
@@ -69,9 +83,8 @@ public class TeiP4WriterTest {
 	
 	@Test
 	public void emptyMetadataShouldLeadToEmptyTEIHeaderPlusSomeStartTags() {
-		writer.setTarget(baos);
-		writer.writeMetadata(new Metadata());
-		String output = baos.toString();
+		Metadata meta = metadata().build();
+		String output = process(meta);
 
 		assertThat(output, containsString("<teiHeader></teiHeader>"));
 		assertThat(output, containsString("<text>"));
@@ -79,21 +92,44 @@ public class TeiP4WriterTest {
 	}
 	
 	@Test
-	public void outputShouldContainCorrectMetadata() {
-		writer.setTarget(baos);
-		Metadata meta = ModelObjectFactory.createSimpleMetadata();
-		writer.writeMetadata(meta);
-		String output = baos.toString();
+	public void outputShouldContainLanguageAndItsValidId() {
+		Metadata meta = metadata().with(language().withLangId("de").withValue("GermanStandard")).build();
+		String output = process(meta);
 		
-		assertThat(output, containsString("<creation>Finereader 8.0</creation>"));
 		assertThat(output, containsString("<language ident=\"de\">GermanStandard</language>"));
-		assertThat(output, containsString("<language>SomeUnknownLanguage</language>"));
 	}
 		
 	@Test
+	public void outputShouldContainInvalidLanguageWithoutId() {
+		Metadata meta = metadata().with(language().withValue("SomeUnknownLanguage")).build();
+		String output = process(meta);
+		
+		assertThat(output, containsString("<language>SomeUnknownLanguage</language>"));
+	}
+	
+	@Test
+	public void outputShouldContainCreatorInfos() {
+		Metadata meta = metadata().withSoftwareName("Finereader").withSoftwareVersion("8.0").build();
+		String output = process(meta);
+		
+		assertThat(output, containsString("<creation>Finereader 8.0</creation>"));
+	}
+
+	@Test
+	public void outputShouldContainTwoLanguages() {
+		LanguageBuilder l1 = language().withValue("lang1");
+		LanguageBuilder l2 = language().withValue("lang2");
+		Metadata meta = metadata().with(l1).with(l2).build();
+		String output = process(meta);
+		
+		assertThat(output, containsString("<language>lang1</language>"));
+		assertThat(output, containsString("<language>lang2</language>"));
+	}
+
+	@Test
 	public void emptyPageShouldResultInAPageBreak() {
 		Page page = new Page();
-		String output = processPage(page);
+		String output = process(page);
 		
 		assertTrue(output.contains("<milestone n=\"1\" type=\"page\"/>"));
 		assertThat(output, containsString("<pb"));
@@ -109,43 +145,43 @@ public class TeiP4WriterTest {
 		String output = baos.toString();
 		assertThat(output, containsString("<milestone n=\"2\""));
 	}
-
+	
 	@Test
 	public void paragraphShouldGetAnID() {
-		Page page = ModelObjectFactory.createPageWithOneParagraph();
-		String output = processPage(page);
+		Page page = page().with(paragraph()).build();
+		String output = process(page);
 
 		assertThat(output, containsString("<p id=\"ID1\"></p>"));
 	}
 	
 	@Test
 	public void paragraphIDShouldBeIncremented() {
-		Page page = ModelObjectFactory.createPageWithTwoParagraphs();
-		String output = processPage(page);
+		Page page = page().with(paragraph()).with(paragraph()).build();
+		String output = process(page);
 
 		assertThat(output, containsString("<p id=\"ID2\"></p>"));
 	}
 	
 	@Test
 	public void addLineBreakAfterALine() {
-		Page page = ModelObjectFactory.createPageWithOneLine();
-		String output = processPage(page);
+		Page page = page().with(line()).build();
+		String output = process(page);
 
 		assertThat(output, containsString("<lb/>"));
 	}
 	
 	@Test
 	public void shouldWrapWordInTags() {
-		Page page = ModelObjectFactory.createPageWithOneWord("test");
-		String output = processPage(page);
+		Page page = page().with(word("test")).build();
+		String output = process(page);
 
 		assertThat(output, containsString("<w>test</w>"));
 	}
 	
 	@Test
 	public void shouldNotWrapNonWordInTags() {
-		Page page = ModelObjectFactory.createPageWithOneNonWord("...");
-		String output = processPage(page);
+		Page page = page().with(nonWord("...")).build();
+		String output = process(page);
 		
 		assertThat(output, not(containsString("<w>...</w>")));
 		assertThat(output, containsString("..."));
@@ -153,8 +189,8 @@ public class TeiP4WriterTest {
 	
 	@Test
 	public void shouldAddWordCoordinates() {
-		Page page = ModelObjectFactory.createPageWithOneWordAndCoordinates("test");
-		String output = processPage(page);
+		Page page = page().with(word("test").withCoordinatesLTRB(1, 2, 3, 4)).build();
+		String output = process(page);
 
 		assertThat(output, containsString("<w function=\"1,2,3,4\">test</w>"));
 
@@ -163,7 +199,7 @@ public class TeiP4WriterTest {
 	@Test
 	public void shouldCreateTableWithCoordinates() {
 		Page page = ModelObjectFactory.createPageWithTable();
-		String output = processPage(page);
+		String output = process(page);
 		
 		assertThat(output, containsString("<table"));
 		assertThat(output, containsString("function=\"1,2,3,4\""));
@@ -177,7 +213,7 @@ public class TeiP4WriterTest {
 	@Test
 	public void shouldWriteFigure() {
 		Page page = ModelObjectFactory.createPageWithImage();
-		String output = processPage(page);
+		String output = process(page);
 
 		assertThat(output, containsString("<figure"));
 		assertThat(output, containsString("id=\"ID1\""));

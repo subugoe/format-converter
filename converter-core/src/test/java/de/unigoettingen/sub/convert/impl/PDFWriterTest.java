@@ -19,6 +19,9 @@ import com.itextpdf.text.pdf.RandomAccessFileOrArray;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
+import de.unigoettingen.sub.convert.model.Page;
+import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.TextBlockBuilder.*;
 
 public class PDFWriterTest {
 
@@ -37,7 +40,7 @@ public class PDFWriterTest {
 		baos.close();
 	}
 
-	@Test
+	//@Test
 	public void test() throws IOException {
 		
 		Metadata meta = ModelObjectFactory.createSimpleMetadata();
@@ -54,7 +57,7 @@ public class PDFWriterTest {
 		System.out.println(reader.getCatalog());
 	}
 	
-	@Test
+	//@Test
 	public void testWithFile() throws FileNotFoundException {
 		//writer.setTarget(new FileOutputStream("/tmp/test.pdf"));
 		writer.setTarget(System.out);
@@ -67,6 +70,12 @@ public class PDFWriterTest {
 		writer.writePage(null);
 		writer.writeEnd();
 
+	}
+	
+	@Test
+	public void testBuilder() {
+		Page page = page().with(textBlock()).with(textBlock()).build();
+		System.out.println(page.getPageItems().size());
 	}
 
     private String parsePdf(PdfReader reader) throws IOException {
