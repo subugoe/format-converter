@@ -6,16 +6,14 @@ public class LanguageBuilder {
 
 	private Language lang = new Language();
 
-	public static LanguageBuilder language() {
-		return new LanguageBuilder();
+	public static LanguageBuilder language(String langValue) {
+		LanguageBuilder builder = new LanguageBuilder();
+		builder.lang.setValue(langValue);
+		return builder;
 	}
 
 	public LanguageBuilder withLangId(String langId) {
 		lang.setLangId(langId);
-		return this;
-	}
-	public LanguageBuilder withValue(String value) {
-		lang.setValue(value);
 		return this;
 	}
 	

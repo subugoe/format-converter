@@ -22,6 +22,8 @@ import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.TextBlockBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.*;
 
 public class PDFWriterTest {
 
@@ -43,7 +45,7 @@ public class PDFWriterTest {
 	//@Test
 	public void test() throws IOException {
 		
-		Metadata meta = ModelObjectFactory.createSimpleMetadata();
+		Metadata meta = metadata().withSoftwareName("Finereader").withSoftwareVersion("8.0").build();
 		
 		writer.writeStart();
 		writer.writeMetadata(meta);
@@ -52,16 +54,16 @@ public class PDFWriterTest {
 		
 		PdfReader reader = new PdfReader(baos.toByteArray());
 		
-		assertEquals("Creator ", "Finereader 8.0", reader.getInfo().get("Creator"));
+		assertEquals("Creator", "Finereader 8.0", reader.getInfo().get("Creator"));
 		
 		System.out.println(reader.getCatalog());
 	}
 	
-	//@Test
+	@Test
 	public void testWithFile() throws FileNotFoundException {
 		//writer.setTarget(new FileOutputStream("/tmp/test.pdf"));
 		writer.setTarget(System.out);
-		Metadata meta = ModelObjectFactory.createSimpleMetadata();
+		Metadata meta = metadata().with(language("German")).build();
 		
 		writer.writeStart();
 		writer.writeMetadata(meta);
@@ -72,12 +74,6 @@ public class PDFWriterTest {
 
 	}
 	
-	@Test
-	public void testBuilder() {
-		Page page = page().with(textBlock()).with(textBlock()).build();
-		System.out.println(page.getPageItems().size());
-	}
-
     private String parsePdf(PdfReader reader) throws IOException {
 		
         // we can inspect the syntax of the imported page

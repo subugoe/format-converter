@@ -23,6 +23,8 @@ import static de.unigoettingen.sub.convert.model.builders.ParagraphBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.LineBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.WordBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.NonWordBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.TableBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.ImageBuilder.*;
 
 public class TeiP4WriterTest {
 
@@ -93,7 +95,7 @@ public class TeiP4WriterTest {
 	
 	@Test
 	public void outputShouldContainLanguageAndItsValidId() {
-		Metadata meta = metadata().with(language().withLangId("de").withValue("GermanStandard")).build();
+		Metadata meta = metadata().with(language("GermanStandard").withLangId("de")).build();
 		String output = process(meta);
 		
 		assertThat(output, containsString("<language ident=\"de\">GermanStandard</language>"));
@@ -101,7 +103,7 @@ public class TeiP4WriterTest {
 		
 	@Test
 	public void outputShouldContainInvalidLanguageWithoutId() {
-		Metadata meta = metadata().with(language().withValue("SomeUnknownLanguage")).build();
+		Metadata meta = metadata().with(language("SomeUnknownLanguage")).build();
 		String output = process(meta);
 		
 		assertThat(output, containsString("<language>SomeUnknownLanguage</language>"));
@@ -117,9 +119,7 @@ public class TeiP4WriterTest {
 
 	@Test
 	public void outputShouldContainTwoLanguages() {
-		LanguageBuilder l1 = language().withValue("lang1");
-		LanguageBuilder l2 = language().withValue("lang2");
-		Metadata meta = metadata().with(l1).with(l2).build();
+		Metadata meta = metadata().with(language("lang1")).with(language("lang2")).build();
 		String output = process(meta);
 		
 		assertThat(output, containsString("<language>lang1</language>"));
@@ -198,7 +198,7 @@ public class TeiP4WriterTest {
 	
 	@Test
 	public void shouldCreateTableWithCoordinates() {
-		Page page = ModelObjectFactory.createPageWithTable();
+		Page page = page().with(table().withCoordinatesLTRB(1, 2, 3, 4).with(word("a"))).build();
 		String output = process(page);
 		
 		assertThat(output, containsString("<table"));
@@ -212,7 +212,7 @@ public class TeiP4WriterTest {
 	
 	@Test
 	public void shouldWriteFigure() {
-		Page page = ModelObjectFactory.createPageWithImage();
+		Page page = page().with(image().withCoordinatesLTRB(1,2,3,4)).build();
 		String output = process(page);
 
 		assertThat(output, containsString("<figure"));
