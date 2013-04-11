@@ -15,7 +15,6 @@ import org.junit.Test;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
-import de.unigoettingen.sub.convert.model.builders.LanguageBuilder;
 import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;

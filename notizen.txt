@@ -1,5 +1,7 @@
 
-builders für Page, Paragraph, ...
+xml schema für eigenes tei
+epub ausgabe recherchieren
+ - epublib
 
 
 nonwords in <pc> tags - erst ab P5

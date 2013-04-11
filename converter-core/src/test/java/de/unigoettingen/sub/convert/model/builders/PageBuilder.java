@@ -11,6 +11,16 @@ public class PageBuilder {
 		return new PageBuilder();
 	}
 	
+	public PageBuilder withHeight(int height) {
+		page.setHeight(height);
+		return this;
+	}
+
+	public PageBuilder withWidth(int width) {
+		page.setWidth(width);
+		return this;
+	}
+
 	public PageBuilder with(PageItemBuilder item) {
 		page.getPageItems().add(item.build());
 		return this;
