@@ -12,6 +12,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPage;
@@ -42,7 +43,7 @@ public class PDFWriter implements ConvertWriter {
 		pdfDocument = new Document(PageSize.A4, 0, 0, 0, 0);
 		try {
 			pwriter = PdfWriter.getInstance(pdfDocument, output);
-			pwriter.setCompressionLevel(0); //TODO: remove this?
+			//pwriter.setCompressionLevel(0); //TODO: remove this?
 			pdfDocument.open();
 			
 		} catch (DocumentException e) {
@@ -76,6 +77,7 @@ public class PDFWriter implements ConvertWriter {
 	@Override
 	public void writePage(Page page) {
 		try {
+			//pdfDocument.setPageSize(new Rectangle(page.getWidth().floatValue(), page.getHeight().floatValue()));
 			pdfDocument.newPage();
 			pwriter.setPageEmpty(false);
 			List<LineItem> lineItems = allLineItemsFromPage(page);
@@ -110,12 +112,10 @@ public class PDFWriter implements ConvertWriter {
 				
 				float bottom = pdfDocument.getPageSize().getHeight() - top - height;
 				float strWidth = bf.getWidthPoint(word, height);
-				float decent = bf.getDescentPoint(word, height);
-				
-				cb.setHorizontalScaling(width/strWidth * 100f);
-				cb.setFontAndSize(bf, height-2.0f);
-				cb.setTextMatrix(left, bottom - decent);
-				
+				float descent = bf.getDescentPoint(word, height);
+				cb.setHorizontalScaling(width/strWidth * 80f);
+				cb.setFontAndSize(bf, height);
+				cb.setTextMatrix(left, bottom - descent);
 
 				//cb.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
 				cb.showText(word);
