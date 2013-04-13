@@ -99,6 +99,8 @@ public class AbbyyXMLReader extends StaxReader {
 		} else if (name.equals("line")) {
 			currentLine = new Line();
 			processCoordinateAttributes(tag, currentLine);
+			Integer baseline = new Integer(tag.getAttributeByName(new QName("baseline")).getValue());
+			currentLine.setBaseline(baseline);
 			currentParagraph.getLines().add(currentLine);
 		} else if (name.equals("formatting")) {
 			currentWordAttributeContainer = new Word();
@@ -194,18 +196,21 @@ public class AbbyyXMLReader extends StaxReader {
 		if (startOfLine() && isLetterOrDigit) {
 			switchToWord();
 			setTopLeftCoordinate(currentWord, modelChar);
+			setBottomRightCoordinateIfPresent(currentWord, modelChar);
 		} else if (startOfLine() && !isLetterOrDigit) {
 			switchToNonWord();
 			setTopLeftCoordinate(currentNonWord, modelChar);
+			setBottomRightCoordinateIfPresent(currentNonWord, modelChar);
 		} else if (inWord() && !isLetterOrDigit) {
-			setBottomRightCoordinateIfPresent(currentWord, modelChar);
 			switchToNonWord();
 			setTopLeftCoordinate(currentNonWord, modelChar);
-		} else if (inNonWord() && isLetterOrDigit) {
 			setBottomRightCoordinateIfPresent(currentNonWord, modelChar);
+		} else if (inNonWord() && isLetterOrDigit) {
 			switchToWord();
 			setTopLeftCoordinate(currentWord, modelChar);
+			setBottomRightCoordinateIfPresent(currentWord, modelChar);
 		}
+		setBottomRightCoordinateIfPresent(currentLineItem, modelChar);
 		currentLineItem.setTop(Math.min(modelChar.getTop(), currentLineItem.getTop()));
 		if (currentLineItem.getBottom() == null) {
 			currentLineItem.setBottom(new Integer(modelChar.getBottom()));

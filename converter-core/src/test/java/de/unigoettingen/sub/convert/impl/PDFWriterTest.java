@@ -106,7 +106,7 @@ public class PDFWriterTest {
 		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
 		String rawPdf = new String(reader.getPageContent(1));
 		
-		assertThat(rawPdf, containsString("100 543.5 Tm"));
+		assertThat(rawPdf, containsString("100 542 Tm"));
 		assertThat(rawPdf, containsString("(test)Tj"));
 		
 		assertEquals("text in pdf", "test", parsePdf(reader));
@@ -123,7 +123,7 @@ public class PDFWriterTest {
 		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
 		String rawPdf = new String(reader.getPageContent(1));
 		
-		assertThat(rawPdf, containsString("100 543.5 Tm"));
+		assertThat(rawPdf, containsString("100 542 Tm"));
 		assertThat(rawPdf, containsString("(test)Tj"));
 	}
 	

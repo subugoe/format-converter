@@ -116,6 +116,7 @@
 				</sequence>
 				<attributeGroup ref="tns:FontInfo" />
 				<attribute name="language" type="string" />
+				<attribute name="baseline" type="int" />
 			</extension>
 		</complexContent>	
 	</complexType>

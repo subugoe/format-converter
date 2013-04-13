@@ -3,6 +3,17 @@
 
 - oriantation: landscape, portrait, grad?
 
+-abbyyxml
+bessere tests für koordinaten
+test für baseline
+refactoring in reader: Koordinaten setzen
+
+-pdf
+test für 2 words
+test für nonword
+tabellen
+
+
 
 
 xml schema für eigenes tei

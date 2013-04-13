@@ -80,9 +80,9 @@ public class PDFWriter implements ConvertWriter {
 			//pdfDocument.setPageSize(new Rectangle(page.getWidth().floatValue(), page.getHeight().floatValue()));
 			pdfDocument.newPage();
 			pwriter.setPageEmpty(false);
-			List<LineItem> lineItems = allLineItemsFromPage(page);
+			List<Line> lines = allLinesFromPage(page);
 			
-			if (lineItems.isEmpty()) {
+			if (lines.isEmpty()) {
 				return;
 			}
 			
@@ -92,46 +92,62 @@ public class PDFWriter implements ConvertWriter {
 			
 			float divWidth = pdfDocument.getPageSize().getWidth() / page.getWidth();
 			cb.beginText();
-			for (LineItem item : lineItems) {
+			for (Line line : lines) {
+				Integer lineBottom = line.getBottom();
+				Integer baseline = line.getBaseline();
+				for (LineItem item : line.getLineItems()) {
 				
-				if (!hasAllCoordinates(item)) {
-					//TODO: logger
-					continue;
+					if (!hasAllCoordinates(item)) {
+						//TODO: logger
+						continue;
+					}
+					
+					String word = stringValue(item);
+					
+					float left = (float) item.getLeft() * divWidth;
+					float top = (float) item.getTop() * divWidth;
+					
+					int actualBottom = 0;
+					if (lineBottom != null) {
+						actualBottom = lineBottom;
+						
+					} else {
+						actualBottom = item.getBottom();
+					}
+					
+					Integer wordH = new Integer(actualBottom - item.getTop());
+					Integer wordW = new Integer(item.getRight() - item.getLeft()); 
+					
+					float height = wordH.floatValue() * divWidth;
+					float width = wordW.floatValue() * divWidth;
+					
+					float bottom = pdfDocument.getPageSize().getHeight() - top - height;
+					float strWidth = bf.getWidthPoint(word, height);
+					float descent = bf.getDescentPoint(word, height);
+					cb.setHorizontalScaling(width/strWidth * 100f);
+					cb.setFontAndSize(bf, height);
+					
+					float baselineCorrection = 0f;
+					if (baseline != null && lineBottom != null) {
+						baselineCorrection = (lineBottom - baseline) * divWidth;
+					}
+					cb.setTextMatrix(left, bottom + baselineCorrection);
+	
+					//cb.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
+					cb.showText(word);
+
 				}
-				
-				String word = stringValue(item);
-				
-				float left = (float) item.getLeft() * divWidth;
-				float top = (float) item.getTop() * divWidth;
-				
-				Integer wordH = new Integer(item.getBottom() - item.getTop());
-				Integer wordW = new Integer(item.getRight() - item.getLeft()); 
-				
-				float height = wordH.floatValue() * divWidth;
-				float width = wordW.floatValue() * divWidth;
-				
-				float bottom = pdfDocument.getPageSize().getHeight() - top - height;
-				float strWidth = bf.getWidthPoint(word, height);
-				float descent = bf.getDescentPoint(word, height);
-				cb.setHorizontalScaling(width/strWidth * 80f);
-				cb.setFontAndSize(bf, height);
-				cb.setTextMatrix(left, bottom - descent);
-
-				cb.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
-				cb.showText(word);
-
-
 			}
 			cb.endText();
 			
-			File imageFile = new File(
-					System.getProperty("user.dir") + "/src/test/resources/00000004.tif");
-			RandomAccessFileOrArray ra = new RandomAccessFileOrArray(new FileInputStream(imageFile));
-			Image image = TiffImage.getTiffImage(ra, 1);
-			
-			image.scalePercent(divWidth * 100f);
-			image.setAlignment(Image.LEFT);
-			pdfDocument.add(image);
+//			File imageFile = new File(
+//					System.getProperty("user.dir") + "/src/test/resources/00000004.tif");
+//			RandomAccessFileOrArray ra = new RandomAccessFileOrArray(new FileInputStream(imageFile));
+//			Image image = TiffImage.getTiffImage(ra, 1);
+//			
+//			image.scalePercent(divWidth * 100f);
+//			image.setAlignment(Image.LEFT);
+//			pdfDocument.add(image);
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -159,22 +175,20 @@ public class PDFWriter implements ConvertWriter {
 		return sb.toString();
 	}
 
-	private List<LineItem> allLineItemsFromPage(Page page) {
-		List<LineItem> lineItems = new ArrayList<LineItem>();
+	private List<Line> allLinesFromPage(Page page) {
+		List<Line> lines = new ArrayList<Line>();
 		for (PageItem item : page.getPageItems()) {
 			if (item instanceof TextBlock) {
 				TextBlock block = (TextBlock) item;
 				for (Paragraph par : block.getParagraphs()) {
 					for (Line line : par.getLines()) {
-						for (LineItem lineItem : line.getLineItems()) {
-							lineItems.add(lineItem);
-						}
+						lines.add(line);
 					}
 				}
 			}
 		}
 		
-		return lineItems;
+		return lines;
 	}
 
 	@Override
