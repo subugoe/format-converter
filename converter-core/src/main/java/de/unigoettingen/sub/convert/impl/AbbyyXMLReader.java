@@ -206,6 +206,12 @@ public class AbbyyXMLReader extends StaxReader {
 			switchToWord();
 			setTopLeftCoordinate(currentWord, modelChar);
 		}
+		currentLineItem.setTop(Math.min(modelChar.getTop(), currentLineItem.getTop()));
+		if (currentLineItem.getBottom() == null) {
+			currentLineItem.setBottom(new Integer(modelChar.getBottom()));
+		} else {
+			currentLineItem.setBottom(Math.max(modelChar.getBottom(), currentLineItem.getBottom()));
+		}
 		currentLineItem.getCharacters().add(modelChar);
 
 	}
@@ -218,7 +224,7 @@ public class AbbyyXMLReader extends StaxReader {
 	private void setBottomRightCoordinateIfPresent(LineItem li, Char ch) {
 		if (ch.getRight() != null && ch.getBottom() != null) {
 			li.setRight(new Integer(ch.getRight()));
-			li.setBottom(new Integer(ch.getBottom()));
+			//li.setBottom(new Integer(ch.getBottom()));
 		}
 	}
 

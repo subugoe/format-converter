@@ -117,21 +117,21 @@ public class PDFWriter implements ConvertWriter {
 				cb.setFontAndSize(bf, height);
 				cb.setTextMatrix(left, bottom - descent);
 
-				//cb.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
+				cb.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
 				cb.showText(word);
 
 
 			}
 			cb.endText();
 			
-//			File imageFile = new File(
-//					System.getProperty("user.dir") + "/src/test/resources/00000004.tif");
-//			RandomAccessFileOrArray ra = new RandomAccessFileOrArray(new FileInputStream(imageFile));
-//			Image image = TiffImage.getTiffImage(ra, 1);
-//			
-//			image.scalePercent(divWidth * 100f);
-//			image.setAlignment(Image.LEFT);
-//			pdfDocument.add(image);
+			File imageFile = new File(
+					System.getProperty("user.dir") + "/src/test/resources/00000004.tif");
+			RandomAccessFileOrArray ra = new RandomAccessFileOrArray(new FileInputStream(imageFile));
+			Image image = TiffImage.getTiffImage(ra, 1);
+			
+			image.scalePercent(divWidth * 100f);
+			image.setAlignment(Image.LEFT);
+			pdfDocument.add(image);
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

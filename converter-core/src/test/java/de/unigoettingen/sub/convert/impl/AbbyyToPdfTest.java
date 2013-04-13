@@ -30,7 +30,7 @@ public class AbbyyToPdfTest {
 		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new PDFWriter();
 		
-		OutputStream s = new FileOutputStream("/tmp/sohnrey_big.pdf");
+		OutputStream s = new FileOutputStream("/tmp/sohnrey_top_bottom.pdf");
 		//OutputStream s = System.out;
 		writer.setTarget(s);
 		

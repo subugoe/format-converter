@@ -1,6 +1,9 @@
 
 - kein A4 für PDF, sondern jede Seite so groß wie das Image?
 
+- oriantation: landscape, portrait, grad?
+
+
 
 xml schema für eigenes tei
 epub ausgabe recherchieren
