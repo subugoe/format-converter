@@ -2,13 +2,16 @@ package de.unigoettingen.sub.convert.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.itextpdf.text.Chunk;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
@@ -16,7 +19,6 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfPage;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.RandomAccessFileOrArray;
 import com.itextpdf.text.pdf.codec.TiffImage;
@@ -29,15 +31,17 @@ import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.TextBlock;
-import de.unigoettingen.sub.convert.model.Word;
 import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Char;
 
 public class PDFWriter implements ConvertWriter {
 
+	private final static Logger LOGGER = LoggerFactory.getLogger(PDFWriter.class);
 	private OutputStream output;
 	private Document pdfDocument;
 	private PdfWriter pwriter;
+	private Page currentPage;
+	private int pageNumber = 0;
 	
 	@Override
 	public void writeStart() {
@@ -48,8 +52,7 @@ public class PDFWriter implements ConvertWriter {
 			pdfDocument.open();
 			
 		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error("Error while writing start of document.", e);
 		}
 
 	}
@@ -77,6 +80,16 @@ public class PDFWriter implements ConvertWriter {
 
 	@Override
 	public void writePage(Page page) {
+		pageNumber++;
+		currentPage = page;
+		if (currentPage.getWidth() == null || currentPage.getHeight() == null) {
+			int pdfPageWidth = (int)pdfDocument.getPageSize().getWidth();
+			int pdfPageHeight = (int)pdfDocument.getPageSize().getHeight();
+			currentPage.setWidth(pdfPageWidth);
+			currentPage.setWidth(pdfPageHeight);
+			LOGGER.warn("Page size is not set in input document. Setting to defaults. Width: "
+					+ pdfPageWidth + ", height: " + pdfPageHeight);
+		}
 		try {
 			//pdfDocument.setPageSize(new Rectangle(page.getWidth().floatValue(), page.getHeight().floatValue()));
 			pdfDocument.newPage();
@@ -87,69 +100,22 @@ public class PDFWriter implements ConvertWriter {
 				return;
 			}
 			
-			PdfContentByte cb = pwriter.getDirectContent();
-			BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-
+			PdfContentByte pdfPage = pwriter.getDirectContent();
 			
-			float divWidth = pdfDocument.getPageSize().getWidth() / page.getWidth();
-			cb.beginText();
+			pdfPage.beginText();
 			for (Line line : lines) {
-				Integer lineBottom = line.getBottom();
-				Integer baseline = line.getBaseline();
-				Integer actualTop = computeTopOfLine(line);
-				for (LineItem item : line.getLineItems()) {
-				
-					if (!hasAllCoordinates(item)) {
-						//TODO: logger
-						continue;
-					}
-					
-					String word = stringValue(item);
-					
-					float left = (float) item.getLeft() * divWidth;
-					float top = (float) actualTop * divWidth;
-					
-					int actualBottom = 0;
-					if (lineBottom != null) {
-						actualBottom = lineBottom;
-						
+				for (LineItem word : line.getLineItems()) {
+					if (hasAllCoordinates(word)) {
+						putWordOnPage(pdfPage, word, line);
 					} else {
-						actualBottom = item.getBottom();
+						LOGGER.warn("Word will be ignored, because it has no coordinates: '" + stringValue(word) + "', on page " + pageNumber+ ".");
 					}
-					
-					Integer wordH = new Integer(actualBottom - actualTop);
-					Integer wordW = new Integer(item.getRight() - item.getLeft()); 
-					
-					float height = wordH.floatValue() * divWidth;
-					float width = wordW.floatValue() * divWidth;
-					
-					float bottom = pdfDocument.getPageSize().getHeight() - top - height;
-					float strWidth = bf.getWidthPoint(word, height);
-					float descent = bf.getDescentPoint(word, height);
-					cb.setHorizontalScaling(width/strWidth * 100f);
-					cb.setFontAndSize(bf, height);
-					
-					float baselineCorrection = 0f;
-					if (baseline != null && lineBottom != null) {
-						baselineCorrection = (lineBottom - baseline) * divWidth;
-					}
-					cb.setTextMatrix(left, bottom + baselineCorrection);
-	
-					//cb.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
-					cb.showText(word);
-
 				}
 			}
-			cb.endText();
+			pdfPage.endText();
 			
-			File imageFile = new File(
-					System.getProperty("user.dir") + "/src/test/resources/00000001.tif");
-			RandomAccessFileOrArray ra = new RandomAccessFileOrArray(new FileInputStream(imageFile));
-			Image image = TiffImage.getTiffImage(ra, 1);
+			putImageOnPage();
 			
-			image.scalePercent(divWidth * 100f);
-			image.setAlignment(Image.LEFT);
-			pdfDocument.add(image);
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -162,7 +128,70 @@ public class PDFWriter implements ConvertWriter {
 
 	}
 
-	private Integer computeTopOfLine(Line line) {
+	private void putImageOnPage() throws DocumentException, FileNotFoundException, IOException {
+		File imageFile = new File(
+				System.getProperty("user.dir") + "/src/test/resources/00000001.tif");
+		RandomAccessFileOrArray ra = new RandomAccessFileOrArray(new FileInputStream(imageFile));
+		Image image = TiffImage.getTiffImage(ra, 1);
+		
+		image.scalePercent(pdfSize(100));
+		image.setAlignment(Image.LEFT);
+		pdfDocument.add(image);
+	}
+
+	private void putWordOnPage(PdfContentByte pdfPage, LineItem word,
+			Line line) throws DocumentException, IOException {
+		Integer left = word.getLeft();
+		Integer top = computeTop(line);
+		Integer right = word.getRight();
+		Integer bottom = computeBottom(line, word);
+		
+		Integer wordHeight = bottom - top;
+		Integer wordWidth = right - left; 
+		
+		float pdfWordHeight = pdfSize(wordHeight);
+		float pdfWordWidth = pdfSize(wordWidth);
+		float pdfDistanceFromPageTopToWordBottom = pdfSize(bottom);
+		float pdfPageHeight = pdfDocument.getPageSize().getHeight();
+		
+		float leftOnPdfPage = pdfSize(left);
+		// in pdf, coordinates start from left bottom corner
+		float bottomOnPdfPage = pdfPageHeight - pdfDistanceFromPageTopToWordBottom;
+
+		BaseFont font = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+
+		String wordString = stringValue(word);
+		float fontSize = pdfWordHeight;
+		float widthCorrectionForFont = font.getWidthPoint(wordString, fontSize);
+		pdfPage.setHorizontalScaling(pdfWordWidth/widthCorrectionForFont * 100f);
+		pdfPage.setFontAndSize(font, fontSize);
+		
+		float baselineCorrection = 0f;
+		Integer baseline = line.getBaseline();
+		if (baseline != null) {
+			baselineCorrection = pdfSize(bottom - baseline);
+		}
+		pdfPage.setTextMatrix(leftOnPdfPage, bottomOnPdfPage + baselineCorrection);
+
+		//cb.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
+		pdfPage.showText(wordString);
+	}
+
+	private float pdfSize(Integer originalSize) {
+		float widthRelation = pdfDocument.getPageSize().getWidth() / currentPage.getWidth();
+		return originalSize.floatValue() * widthRelation;
+	}
+
+	private Integer computeBottom(Line line, LineItem currentItem) {
+		Integer lineBottom = line.getBottom();
+		if (lineBottom != null) {
+			return lineBottom;
+		} else {
+			return currentItem.getBottom();
+		}
+	}
+
+	private Integer computeTop(Line line) {
 		if (line.getTop() != null) {
 			return line.getTop();
 		}
@@ -200,7 +229,6 @@ public class PDFWriter implements ConvertWriter {
 				}
 			}
 		}
-		
 		return lines;
 	}
 

@@ -128,6 +128,12 @@ public class PDFWriterTest {
 	}
 	
 	@Test
+	public void wordWithoutCoordinates() {
+		Page page = page().with(word("test")).build();
+		writeToPdfBaos(page);
+	}
+	
+	@Test
 	public void testWithFile() throws FileNotFoundException {
 	}
 	
