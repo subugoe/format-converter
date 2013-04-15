@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.itextpdf.text.Chunk;
@@ -95,6 +96,7 @@ public class PDFWriter implements ConvertWriter {
 			for (Line line : lines) {
 				Integer lineBottom = line.getBottom();
 				Integer baseline = line.getBaseline();
+				Integer actualTop = computeTopOfLine(line);
 				for (LineItem item : line.getLineItems()) {
 				
 					if (!hasAllCoordinates(item)) {
@@ -105,7 +107,7 @@ public class PDFWriter implements ConvertWriter {
 					String word = stringValue(item);
 					
 					float left = (float) item.getLeft() * divWidth;
-					float top = (float) item.getTop() * divWidth;
+					float top = (float) actualTop * divWidth;
 					
 					int actualBottom = 0;
 					if (lineBottom != null) {
@@ -115,7 +117,7 @@ public class PDFWriter implements ConvertWriter {
 						actualBottom = item.getBottom();
 					}
 					
-					Integer wordH = new Integer(actualBottom - item.getTop());
+					Integer wordH = new Integer(actualBottom - actualTop);
 					Integer wordW = new Integer(item.getRight() - item.getLeft()); 
 					
 					float height = wordH.floatValue() * divWidth;
@@ -140,14 +142,14 @@ public class PDFWriter implements ConvertWriter {
 			}
 			cb.endText();
 			
-//			File imageFile = new File(
-//					System.getProperty("user.dir") + "/src/test/resources/00000004.tif");
-//			RandomAccessFileOrArray ra = new RandomAccessFileOrArray(new FileInputStream(imageFile));
-//			Image image = TiffImage.getTiffImage(ra, 1);
-//			
-//			image.scalePercent(divWidth * 100f);
-//			image.setAlignment(Image.LEFT);
-//			pdfDocument.add(image);
+			File imageFile = new File(
+					System.getProperty("user.dir") + "/src/test/resources/00000001.tif");
+			RandomAccessFileOrArray ra = new RandomAccessFileOrArray(new FileInputStream(imageFile));
+			Image image = TiffImage.getTiffImage(ra, 1);
+			
+			image.scalePercent(divWidth * 100f);
+			image.setAlignment(Image.LEFT);
+			pdfDocument.add(image);
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -158,6 +160,17 @@ public class PDFWriter implements ConvertWriter {
 			pwriter.flush();
 		}
 
+	}
+
+	private Integer computeTopOfLine(Line line) {
+		if (line.getTop() != null) {
+			return line.getTop();
+		}
+		List<Integer> wordTops = new ArrayList<Integer>();
+		for (LineItem item : line.getLineItems()) {
+			wordTops.add(item.getTop());
+		}
+		return Collections.min(wordTops);
 	}
 
 	private boolean hasAllCoordinates(LineItem item) {

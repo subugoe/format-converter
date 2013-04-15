@@ -1,7 +1,7 @@
 
 - kein A4 für PDF, sondern jede Seite so groß wie das Image?
 
-- oriantation: landscape, portrait, grad?
+- orientation: landscape, portrait, grad?
 
 -abbyyxml
 bessere tests für koordinaten
