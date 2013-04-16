@@ -26,6 +26,7 @@ import static de.unigoettingen.sub.convert.model.builders.TextBlockBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.WordBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.NonWordBuilder.*;
 
 public class PDFWriterTest {
 
@@ -102,14 +103,25 @@ public class PDFWriterTest {
 				.with(word("test").withCoordinatesLTRB(100,200,400,300))
 				.build();
 		writeToPdfBaos(page);
-		
-		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
-		String rawPdf = new String(reader.getPageContent(1));
+		String rawPdf = readFromPdfBaos();
 		
 		assertThat(rawPdf, containsString("100 542 Tm"));
 		assertThat(rawPdf, containsString("(test)Tj"));
+	}
+	
+	@Test
+	public void writesTwoWordsUsingDefaultPageSize() throws IOException {
+		Page page = page()
+				.with(word("test").withCoordinatesLTRB(100,200,400,300))
+				.with(word("test2").withCoordinatesLTRB(100,300,400,400))
+				.build();
+		writeToPdfBaos(page);
+		String rawPdf = readFromPdfBaos();
 		
-		assertEquals("text in pdf", "test", parsePdf(reader));
+		assertThat(rawPdf, containsString("100 542 Tm"));
+		assertThat(rawPdf, containsString("(test)Tj"));
+		assertThat(rawPdf, containsString("100 442 Tm"));
+		assertThat(rawPdf, containsString("(test2)Tj"));
 	}
 	
 	@Test
@@ -119,22 +131,40 @@ public class PDFWriterTest {
 				.with(word("test").withCoordinatesLTRB(100*2,200*2,400*2,300*2))
 				.build();
 		writeToPdfBaos(page);
-		
-		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
-		String rawPdf = new String(reader.getPageContent(1));
+		String rawPdf = readFromPdfBaos();
 		
 		assertThat(rawPdf, containsString("100 542 Tm"));
 		assertThat(rawPdf, containsString("(test)Tj"));
 	}
 	
 	@Test
-	public void wordWithoutCoordinates() {
+	public void writesNonWordOnPage() throws IOException {
+		Page page = page()
+				.with(nonWord("!??").withCoordinatesLTRB(100,200,400,300))
+				.build();
+		writeToPdfBaos(page);
+		String rawPdf = readFromPdfBaos();
+		
+		assertThat(rawPdf, containsString("100 542 Tm"));
+		assertThat(rawPdf, containsString("(!??)Tj"));
+	}
+	
+	@Test
+	public void wordWithoutCoordinatesIsIgnored() throws IOException {
 		Page page = page().with(word("test")).build();
 		writeToPdfBaos(page);
+		String rawPdf = readFromPdfBaos();
+
+		assertThat(rawPdf, not(containsString("test")));
 	}
 	
 	@Test
 	public void testWithFile() throws FileNotFoundException {
+	}
+	
+	private String readFromPdfBaos() throws IOException {
+		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
+		return new String(reader.getPageContent(1));
 	}
 	
 	private void writeToPdfBaos(Page... pages) {

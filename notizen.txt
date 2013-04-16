@@ -5,14 +5,8 @@
 
 - wieso sind Zahlen immer kleiner als Original im Image?
 
--abbyyxml
-bessere tests für koordinaten
-test für baseline
-refactoring in reader: Koordinaten setzen
 
 -pdf
-test für 2 words
-test für nonword
 tabellen
 
 

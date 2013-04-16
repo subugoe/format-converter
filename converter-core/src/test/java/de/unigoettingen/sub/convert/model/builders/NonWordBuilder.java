@@ -24,6 +24,15 @@ public class NonWordBuilder {
 		return this;
 	}
 	
+	public NonWordBuilder withCoordinatesLTRB(int left, int top, int right, int bottom) {
+		nonWord.setLeft(left);
+		nonWord.setTop(top);
+		nonWord.setRight(right);
+		nonWord.setBottom(bottom);
+		return this;
+	}
+
+	
 	public NonWord build() {
 		return nonWord;
 	}

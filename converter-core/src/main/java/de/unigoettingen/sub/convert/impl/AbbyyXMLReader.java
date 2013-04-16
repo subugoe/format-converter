@@ -195,41 +195,52 @@ public class AbbyyXMLReader extends StaxReader {
 		boolean isLetterOrDigit = Character.isLetterOrDigit(ch);
 		if (startOfLine() && isLetterOrDigit) {
 			switchToWord();
-			setTopLeftCoordinate(currentWord, modelChar);
-			setBottomRightCoordinateIfPresent(currentWord, modelChar);
+			setTopLeft(currentWord, modelChar);
+			setBottom(currentWord, modelChar);
 		} else if (startOfLine() && !isLetterOrDigit) {
 			switchToNonWord();
-			setTopLeftCoordinate(currentNonWord, modelChar);
-			setBottomRightCoordinateIfPresent(currentNonWord, modelChar);
+			setTopLeft(currentNonWord, modelChar);
+			setBottom(currentNonWord, modelChar);
 		} else if (inWord() && !isLetterOrDigit) {
 			switchToNonWord();
-			setTopLeftCoordinate(currentNonWord, modelChar);
-			setBottomRightCoordinateIfPresent(currentNonWord, modelChar);
+			setTopLeft(currentNonWord, modelChar);
+			setBottom(currentNonWord, modelChar);
 		} else if (inNonWord() && isLetterOrDigit) {
 			switchToWord();
-			setTopLeftCoordinate(currentWord, modelChar);
-			setBottomRightCoordinateIfPresent(currentWord, modelChar);
+			setTopLeft(currentWord, modelChar);
+			setBottom(currentWord, modelChar);
 		}
-		setBottomRightCoordinateIfPresent(currentLineItem, modelChar);
-		currentLineItem.setTop(Math.min(modelChar.getTop(), currentLineItem.getTop()));
-		if (currentLineItem.getBottom() == null) {
-			currentLineItem.setBottom(new Integer(modelChar.getBottom()));
-		} else {
-			currentLineItem.setBottom(Math.max(modelChar.getBottom(), currentLineItem.getBottom()));
-		}
+		// must be updated after each character as the word/nonword grows
+		setRight(currentLineItem, modelChar);
+		// find the highest character in word
+		correctTopIfNecessary(currentLineItem, modelChar);
+		// find the deepest character in word
+		correctBottomIfNecessary(currentLineItem, modelChar);
+		
 		currentLineItem.getCharacters().add(modelChar);
 
 	}
 
-	private void setTopLeftCoordinate(LineItem li, Char ch) {
+	private void setBottom(LineItem item, Char ch) {
+		item.setBottom(new Integer(ch.getBottom()));
+	}
+
+	private void correctTopIfNecessary(LineItem item, Char ch) {
+		item.setTop(Math.min(ch.getTop(), item.getTop()));
+	}
+
+	private void correctBottomIfNecessary(LineItem item, Char ch) {
+		item.setBottom(Math.max(item.getBottom(), ch.getBottom()));
+	}
+	
+	private void setTopLeft(LineItem li, Char ch) {
 		li.setLeft(new Integer(ch.getLeft()));
 		li.setTop(new Integer(ch.getTop()));
 	}
 
-	private void setBottomRightCoordinateIfPresent(LineItem li, Char ch) {
-		if (ch.getRight() != null && ch.getBottom() != null) {
+	private void setRight(LineItem li, Char ch) {
+		if (ch.getRight() != null) {
 			li.setRight(new Integer(ch.getRight()));
-			//li.setBottom(new Integer(ch.getBottom()));
 		}
 	}
 
@@ -305,7 +316,7 @@ public class AbbyyXMLReader extends StaxReader {
 				Char lastChar = currentLineItem.getCharacters().get(lastIndex);
 				// coordinates for the last word or non-word, since they cannot
 				// be handled in the startelement
-				setBottomRightCoordinateIfPresent(currentLineItem, lastChar);
+				setRight(currentLineItem, lastChar);
 				currentLineItem = null;
 			}
 		}

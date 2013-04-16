@@ -82,14 +82,7 @@ public class PDFWriter implements ConvertWriter {
 	public void writePage(Page page) {
 		pageNumber++;
 		currentPage = page;
-		if (currentPage.getWidth() == null || currentPage.getHeight() == null) {
-			int pdfPageWidth = (int)pdfDocument.getPageSize().getWidth();
-			int pdfPageHeight = (int)pdfDocument.getPageSize().getHeight();
-			currentPage.setWidth(pdfPageWidth);
-			currentPage.setWidth(pdfPageHeight);
-			LOGGER.warn("Page size is not set in input document. Setting to defaults. Width: "
-					+ pdfPageWidth + ", height: " + pdfPageHeight);
-		}
+		checkPageSize();
 		try {
 			//pdfDocument.setPageSize(new Rectangle(page.getWidth().floatValue(), page.getHeight().floatValue()));
 			pdfDocument.newPage();
@@ -128,6 +121,17 @@ public class PDFWriter implements ConvertWriter {
 
 	}
 
+	private void checkPageSize() {
+		if (currentPage.getWidth() == null || currentPage.getHeight() == null) {
+			int pdfPageWidth = (int)pdfDocument.getPageSize().getWidth();
+			int pdfPageHeight = (int)pdfDocument.getPageSize().getHeight();
+			currentPage.setWidth(pdfPageWidth);
+			currentPage.setHeight(pdfPageHeight);
+			LOGGER.warn("Page size is not set in input document. Setting to defaults. Width: "
+					+ pdfPageWidth + ", height: " + pdfPageHeight);
+		}
+	}
+	
 	private void putImageOnPage() throws DocumentException, FileNotFoundException, IOException {
 		File imageFile = new File(
 				System.getProperty("user.dir") + "/src/test/resources/00000001.tif");
@@ -173,7 +177,7 @@ public class PDFWriter implements ConvertWriter {
 		}
 		pdfPage.setTextMatrix(leftOnPdfPage, bottomOnPdfPage + baselineCorrection);
 
-		//cb.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
+		pdfPage.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
 		pdfPage.showText(wordString);
 	}
 

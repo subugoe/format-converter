@@ -283,6 +283,14 @@ public class AbbyyXMLReaderTest {
 		
 		assertEquals("page items", 0, page.getPageItems().size());
 	}
+	
+	@Test
+	public void readsBaseline() throws FileNotFoundException {
+		Page page = firstPageFromFile("abbyy6.xml");
+		Line line = firstLineFromPage(page);
+		
+		assertEquals("Baseline", new Integer(1248), line.getBaseline());
+	}
 
 	private void assertCoordinatesArePresent(WithCoordinates modelItem) {
 		assertThat("left coordinate", modelItem.getLeft(), instanceOf(Integer.class));
@@ -295,6 +303,12 @@ public class AbbyyXMLReaderTest {
 		assertThat("top coordinate", ch.getTop(), instanceOf(Integer.class));
 		assertThat("right coordinate", ch.getRight(), instanceOf(Integer.class));
 		assertThat("bottom coordinate", ch.getBottom(), instanceOf(Integer.class));
+	}
+	
+	private Line firstLineFromPage(Page page) {
+		TextBlock block = (TextBlock)page.getPageItems().get(0);
+		Paragraph par = block.getParagraphs().get(0);
+		return par.getLines().get(0);
 	}
 	
 	private Page firstPageFromFile(String file) throws FileNotFoundException {
