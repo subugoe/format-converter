@@ -239,9 +239,7 @@ public class AbbyyXMLReader extends StaxReader {
 	}
 
 	private void setRight(LineItem li, Char ch) {
-		if (ch.getRight() != null) {
-			li.setRight(new Integer(ch.getRight()));
-		}
+		li.setRight(new Integer(ch.getRight()));
 	}
 
 	private void processLineWithoutCharParams(XMLEvent charEvent) {
@@ -310,15 +308,7 @@ public class AbbyyXMLReader extends StaxReader {
 		if (name.equals("page")) {
 			writer.writePage(currentPage);
 		} else if (name.equals("formatting")) {
-			if (currentLineItem != null) { // formatting element might have been
-											// empty
-				int lastIndex = currentLineItem.getCharacters().size() - 1;
-				Char lastChar = currentLineItem.getCharacters().get(lastIndex);
-				// coordinates for the last word or non-word, since they cannot
-				// be handled in the startelement
-				setRight(currentLineItem, lastChar);
-				currentLineItem = null;
-			}
+			currentLineItem = null;
 		}
 	}
 
