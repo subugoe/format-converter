@@ -53,6 +53,8 @@ public class PDFWriter implements ConvertWriter {
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "folder] (containing original Tiff images)";
 	private static final String PAGESIZE_DESCRIPTION = "A4 or original], default is A4";
 	
+	private ResourceHandler resourceHandler = new ResourceHandler();
+	
 	public PDFWriter() {
 		options.put("images", FOLDER_WITH_IMAGES_DESCRIPTION);
 		options.put("pagesize", PAGESIZE_DESCRIPTION);
@@ -98,17 +100,19 @@ public class PDFWriter implements ConvertWriter {
 		currentPage = page;
 		try {
 			setPageSize();
-			//pdfDocument.setPageSize(new Rectangle(page.getWidth().floatValue(), page.getHeight().floatValue()));
 			pdfDocument.newPage();
 			pwriter.setPageEmpty(false);
-			List<Line> lines = allLinesFromPage(page);
 			
+			PdfContentByte pdfPage = pwriter.getDirectContent();
+			if (imagesAvailable()) {
+				pdfPage.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
+				putImageOnPage();
+			}
+
+			List<Line> lines = allLinesFromPage(page);
 			if (lines.isEmpty()) {
 				return;
 			}
-			
-			PdfContentByte pdfPage = pwriter.getDirectContent();
-			
 			pdfPage.beginText();
 			for (Line line : lines) {
 				for (LineItem word : line.getLineItems()) {
@@ -121,8 +125,6 @@ public class PDFWriter implements ConvertWriter {
 			}
 			pdfPage.endText();
 			
-			//putImageOnPage();
-			
 		} catch (DocumentException e) {
 			throw new IllegalStateException("Error while writing page, number " + pageNumber, e);
 		} catch (IOException e) {
@@ -131,6 +133,10 @@ public class PDFWriter implements ConvertWriter {
 			pwriter.flush();
 		}
 
+	}
+
+	private boolean imagesAvailable() {
+		return !options.get("images").equals(FOLDER_WITH_IMAGES_DESCRIPTION);
 	}
 
 	private void setPageSize() {
@@ -150,8 +156,10 @@ public class PDFWriter implements ConvertWriter {
 	}
 	
 	private void putImageOnPage() throws DocumentException, FileNotFoundException, IOException {
-		File imageFile = new File(
-				System.getProperty("user.dir") + "/src/test/resources/00000001.tif");
+		File imagesFolder = new File(options.get("images"));
+//		File[] images = resourceHandler.getImagesFromFolder(imagesFolder);
+		
+		File imageFile = new File("/home/dennis/digi/fertig/20130128_sohnrey_bruderhof_1898_tif/00000001.tif");
 		RandomAccessSource source = new RandomAccessSourceFactory().createSource(new FileInputStream(imageFile));
 		RandomAccessFileOrArray ra = new RandomAccessFileOrArray(source);
 		Image image = TiffImage.getTiffImage(ra, 1);
@@ -196,7 +204,6 @@ public class PDFWriter implements ConvertWriter {
 		}
 		pdfPage.setTextMatrix(leftOnPdfPage, bottomOnPdfPage + baselineCorrection);
 
-		//pdfPage.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
 		pdfPage.showText(wordString);
 	}
 
@@ -282,7 +289,7 @@ public class PDFWriter implements ConvertWriter {
 
 	@Override
 	public void setImplementationSpecificOptions(Map<String, String> options) {
-		this.options = options;
+		this.options.putAll(options);
 	}
 
 	@Override

@@ -109,7 +109,7 @@ public class PDFWriterTest {
 	}
 	
 	@Test
-	public void usesA4EvenIfOriginalIsDifferent() throws IOException {
+	public void usesA4AsDefaultEvenIfOriginalIsDifferent() throws IOException {
 		Page page = page().withWidth(1).withHeight(2).build();
 
 		writeToPdfBaos(page);
@@ -226,6 +226,28 @@ public class PDFWriterTest {
 		assertThat(rawPdf, containsString("(test)"));
 	}
 		
+	@Test
+	public void doesNotPutImageBehindText() throws IOException {
+		Page page = pageA4().build();
+		writeToPdfBaos(page);
+		String rawPdf = readFromPdfBaos();
+		
+		assertThat(rawPdf, not(containsString("/img0")));
+	}
+	
+	@Test
+	public void putsImageBehindTextIfOptionIsSet() throws IOException {
+		Page page = pageA4().build();
+		Map<String, String> options = new HashMap<String, String>();
+		options.put("images", System.getProperty("user.dir") + "/src/test/resources/withOneImage");
+		writer.setImplementationSpecificOptions(options);
+		writeToPdfBaos(page);
+		String rawPdf = readFromPdfBaos();
+		
+		assertThat(rawPdf, containsString("/img0"));
+	}
+	
+	
 	private String readFromPdfBaos() throws IOException {
 		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
 		return new String(reader.getPageContent(1));
