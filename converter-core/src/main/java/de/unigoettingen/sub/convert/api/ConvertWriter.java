@@ -1,6 +1,7 @@
 package de.unigoettingen.sub.convert.api;
 
 import java.io.OutputStream;
+import java.util.Map;
 
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
@@ -45,5 +46,8 @@ public interface ConvertWriter {
 	 * @param stream Typically a FileOutputStream
 	 */
 	public void setTarget(OutputStream stream);
+	
+	public void setImplementationSpecificOptions(Map<String, String> options);
+	public Map<String, String> getImplementationSpecificOptions();
 
 }

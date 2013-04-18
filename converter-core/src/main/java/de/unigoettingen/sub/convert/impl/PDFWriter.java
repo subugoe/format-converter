@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,8 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.io.RandomAccessSource;
+import com.itextpdf.text.io.RandomAccessSourceFactory;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -24,15 +28,18 @@ import com.itextpdf.text.pdf.RandomAccessFileOrArray;
 import com.itextpdf.text.pdf.codec.TiffImage;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
+import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Language;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
+import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Char;
+import de.unigoettingen.sub.convert.model.Row;
 
 public class PDFWriter implements ConvertWriter {
 
@@ -42,17 +49,24 @@ public class PDFWriter implements ConvertWriter {
 	private PdfWriter pwriter;
 	private Page currentPage;
 	private int pageNumber = 0;
+	private Map<String, String> options = new HashMap<String, String>();
+	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "folder] (containing original Tiff images)";
+	private static final String PAGESIZE_DESCRIPTION = "A4 or original], default is A4";
+	
+	public PDFWriter() {
+		options.put("images", FOLDER_WITH_IMAGES_DESCRIPTION);
+		options.put("pagesize", PAGESIZE_DESCRIPTION);
+	}
 	
 	@Override
 	public void writeStart() {
 		pdfDocument = new Document(PageSize.A4, 0, 0, 0, 0);
 		try {
 			pwriter = PdfWriter.getInstance(pdfDocument, output);
-			//pwriter.setCompressionLevel(0); //TODO: remove this?
 			pdfDocument.open();
 			
 		} catch (DocumentException e) {
-			LOGGER.error("Error while writing start of document.", e);
+			throw new IllegalStateException("Error while writing start of document.", e);
 		}
 
 	}
@@ -82,8 +96,8 @@ public class PDFWriter implements ConvertWriter {
 	public void writePage(Page page) {
 		pageNumber++;
 		currentPage = page;
-		checkPageSize();
 		try {
+			setPageSize();
 			//pdfDocument.setPageSize(new Rectangle(page.getWidth().floatValue(), page.getHeight().floatValue()));
 			pdfDocument.newPage();
 			pwriter.setPageEmpty(false);
@@ -107,21 +121,19 @@ public class PDFWriter implements ConvertWriter {
 			}
 			pdfPage.endText();
 			
-			putImageOnPage();
+			//putImageOnPage();
 			
 		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Error while writing page, number " + pageNumber, e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Error while writing page, number " + pageNumber, e);
 		} finally {
 			pwriter.flush();
 		}
 
 	}
 
-	private void checkPageSize() {
+	private void setPageSize() {
 		if (currentPage.getWidth() == null || currentPage.getHeight() == null) {
 			int pdfPageWidth = (int)pdfDocument.getPageSize().getWidth();
 			int pdfPageHeight = (int)pdfDocument.getPageSize().getHeight();
@@ -129,16 +141,23 @@ public class PDFWriter implements ConvertWriter {
 			currentPage.setHeight(pdfPageHeight);
 			LOGGER.warn("Page size is not set in input document. Setting to defaults. Width: "
 					+ pdfPageWidth + ", height: " + pdfPageHeight);
+			return;
+		}
+		boolean keepOririnalPageSize = options.get("pagesize").equals("original");
+		if (keepOririnalPageSize) {
+			pdfDocument.setPageSize(new Rectangle(currentPage.getWidth().floatValue(), currentPage.getHeight().floatValue()));
 		}
 	}
 	
 	private void putImageOnPage() throws DocumentException, FileNotFoundException, IOException {
 		File imageFile = new File(
 				System.getProperty("user.dir") + "/src/test/resources/00000001.tif");
-		RandomAccessFileOrArray ra = new RandomAccessFileOrArray(new FileInputStream(imageFile));
+		RandomAccessSource source = new RandomAccessSourceFactory().createSource(new FileInputStream(imageFile));
+		RandomAccessFileOrArray ra = new RandomAccessFileOrArray(source);
 		Image image = TiffImage.getTiffImage(ra, 1);
 		
-		image.scalePercent(pdfSize(100));
+		float pdfWidth = pdfDocument.getPageSize().getWidth();
+		image.scalePercent(pdfWidth / image.getWidth() * 100f);
 		image.setAlignment(Image.LEFT);
 		pdfDocument.add(image);
 	}
@@ -177,7 +196,7 @@ public class PDFWriter implements ConvertWriter {
 		}
 		pdfPage.setTextMatrix(leftOnPdfPage, bottomOnPdfPage + baselineCorrection);
 
-		pdfPage.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
+		//pdfPage.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
 		pdfPage.showText(wordString);
 	}
 
@@ -226,9 +245,16 @@ public class PDFWriter implements ConvertWriter {
 		for (PageItem item : page.getPageItems()) {
 			if (item instanceof TextBlock) {
 				TextBlock block = (TextBlock) item;
-				for (Paragraph par : block.getParagraphs()) {
-					for (Line line : par.getLines()) {
-						lines.add(line);
+				addLinesFromTextBlock(lines, block);
+			} else if (item instanceof Table) {
+				Table table = (Table) item;
+				for (Row row : table.getRows()) {
+					for (Cell cell : row.getCells()) {
+						PageItem cellContent = cell.getContent();
+						if (cellContent instanceof TextBlock) {
+							TextBlock tableBlock = (TextBlock) cellContent;
+							addLinesFromTextBlock(lines, tableBlock);
+						}
 					}
 				}
 			}
@@ -236,16 +262,32 @@ public class PDFWriter implements ConvertWriter {
 		return lines;
 	}
 
+	private void addLinesFromTextBlock(List<Line> lines, TextBlock block) {
+		for (Paragraph par : block.getParagraphs()) {
+			for (Line line : par.getLines()) {
+				lines.add(line);
+			}
+		}
+	}
+
 	@Override
 	public void writeEnd() {
 		pdfDocument.close();
-
 	}
 
 	@Override
 	public void setTarget(OutputStream stream) {
 		output = stream;
+	}
 
+	@Override
+	public void setImplementationSpecificOptions(Map<String, String> options) {
+		this.options = options;
+	}
+
+	@Override
+	public Map<String, String> getImplementationSpecificOptions() {
+		return options;
 	}
 
 }

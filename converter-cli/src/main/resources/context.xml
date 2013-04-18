@@ -6,7 +6,8 @@
 	<bean id="abbyyReader" class="de.unigoettingen.sub.convert.impl.AbbyyXMLReader"/>
 	<!-- add more beans of type ConvertReader -->
 	
-	<bean id="teiWriter" class="de.unigoettingen.sub.convert.impl.TeiP5Writer"/>
+	<bean id="teiWriter" class="de.unigoettingen.sub.convert.impl.TeiP4Writer"/>
+	<bean id="pdfWriter" class="de.unigoettingen.sub.convert.impl.PDFWriter"/>
 	<!-- add more beans of type ConvertWriter -->
 
 	<bean id="converter" class="de.unigoettingen.sub.convert.cli.Converter">
@@ -22,6 +23,9 @@
 			<map>
 				<entry key="tei">
 					<ref local="teiWriter"/>
+				</entry>
+				<entry key="pdf">
+					<ref local="pdfWriter"/>
 				</entry>
 				<!-- add more writer entries -->
 			</map>

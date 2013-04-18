@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.cli.CommandLine;
@@ -31,6 +33,17 @@ public class Main {
 
 		Set<String> readerNames = converter.getReaderNames();
 		Set<String> writerNames = converter.getWriterNames();
+		
+		StringBuilder allWritersOptions = new StringBuilder();
+		for (String writerName : writerNames) {
+			Set<String> optionsOfOneWriter = converter.getOptionDescriptionsForWriter(writerName);
+			if (!optionsOfOneWriter.isEmpty()) {
+				allWritersOptions.append("- for output format '").append(writerName).append("'\n");
+			}
+			for (String option : optionsOfOneWriter) {
+				allWritersOptions.append("[").append(option).append("\n");
+			}
+		}
 
 		Options options = new Options();
 		options.addOption("help", false, "print help");
@@ -40,7 +53,7 @@ public class Main {
 				+ readerNames);
 		options.addOption("outformat", true, "output format, possible values: "
 				+ writerNames);
-
+		options.addOption("outoptions", true, "implementation-specific options, comma-separated\n" + allWritersOptions);
 		CommandLineParser parser = new GnuParser();
 		CommandLine line = null;
 		try {
@@ -70,10 +83,28 @@ public class Main {
 		File outfile = new File(line.getOptionValue("outfile"));
 		OutputStream os = new FileOutputStream(outfile);
 
+		Map<String, String> writerOptions = readWriterOptions(line);
+		
 		LOGGER.info("Starting conversion");
-		converter.convert(inFormat, is, outFormat, os);
+		converter.convert(inFormat, is, outFormat, os, writerOptions);
 		LOGGER.info("Finished conversion, input file: " + infile.getCanonicalPath());
 
+	}
+
+	private static Map<String, String> readWriterOptions(CommandLine line) {
+		if (!line.hasOption("outoptions")) {
+			return new HashMap<String, String>();
+		}
+		
+		Map<String, String> outOptions = new HashMap<String, String>();
+		String allOptions = line.getOptionValue("outoptions");
+		String[] allTokenized = allOptions.split(",");
+		for (String oneOption : allTokenized) {
+			String[] oneTokenized = oneOption.split("=");
+			outOptions.put(oneTokenized[0], oneTokenized[1]);
+		}
+		
+		return outOptions;
 	}
 
 	private static boolean helpNeeded(CommandLine line) {

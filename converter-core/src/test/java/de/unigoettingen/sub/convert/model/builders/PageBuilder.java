@@ -11,6 +11,10 @@ public class PageBuilder {
 		return new PageBuilder();
 	}
 	
+	public static PageBuilder pageA4() {
+		return new PageBuilder().withWidth(595).withHeight(842);
+	}
+	
 	public PageBuilder withHeight(int height) {
 		page.setHeight(height);
 		return this;

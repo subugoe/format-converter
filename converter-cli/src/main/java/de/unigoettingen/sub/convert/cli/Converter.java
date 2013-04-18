@@ -2,6 +2,7 @@ package de.unigoettingen.sub.convert.cli;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,10 +29,13 @@ public class Converter {
 		this.writers = writers;
 	}
 
-	public void convert(String inputFormat, InputStream is, String outputFormat, OutputStream os) {
+	public void convert(String inputFormat, InputStream is, String outputFormat, OutputStream os, Map<String, String> writerOptions) {
 		ConvertReader reader = readers.get(inputFormat);
 		ConvertWriter writer = writers.get(outputFormat);
 		writer.setTarget(os);
+		if (!writerOptions.isEmpty()) {
+			writer.setImplementationSpecificOptions(writerOptions);
+		}
 		reader.setWriter(writer);
 		reader.read(is);
 	}
@@ -42,6 +46,17 @@ public class Converter {
 
 	public Set<String> getWriterNames() {
 		return writers.keySet();
+	}
+	public Set<String> getOptionDescriptionsForWriter(String writerName) {
+		Set<String> descriptions = new HashSet<String>();
+		ConvertWriter writer = writers.get(writerName);
+		Map<String, String> options = writer.getImplementationSpecificOptions();
+		
+		for (Map.Entry<String, String> entry : options.entrySet()) {
+			descriptions.add(entry.getKey() + "=" + entry.getValue());
+		}
+		
+		return descriptions;
 	}
 	
 	

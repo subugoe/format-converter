@@ -7,11 +7,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.io.RandomAccessSourceFactory;
 import com.itextpdf.text.pdf.PRTokeniser;
 import com.itextpdf.text.pdf.PdfName;
@@ -22,16 +25,16 @@ import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
-import static de.unigoettingen.sub.convert.model.builders.TextBlockBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.WordBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.NonWordBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.TableBuilder.*;
 
 public class PDFWriterTest {
 
-	private static final int A4_HEIGHT = 842;
-	private static final int A4_WIDTH = 595;
+	private static final float A4_HEIGHT = 842f;
+	private static final float A4_WIDTH = 595f;
 
 	private ConvertWriter writer;
 	private ByteArrayOutputStream pdfBaos;
@@ -95,11 +98,64 @@ public class PDFWriterTest {
 	}
 	
 	@Test
-	public void writesWordWithCoordinates() throws IOException {
+	public void usesA4AsDefaultPageSizeIfNotSetInModelPage() throws IOException {
+		writeToPdfBaos(page().build());
+		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
 		
-		//writer.setTarget(System.out);
-		//writer.setTarget(new FileOutputStream("/tmp/test.pdf"));
-		Page page = page().withHeight(A4_HEIGHT).withWidth(A4_WIDTH)
+		Rectangle actualSize = reader.getPageSize(1);
+		
+		assertEquals("default page width", A4_WIDTH, actualSize.getWidth(), 0.1f);
+		assertEquals("default page height", A4_HEIGHT, actualSize.getHeight(), 0.1f);
+	}
+	
+	@Test
+	public void usesA4EvenIfOriginalIsDifferent() throws IOException {
+		Page page = page().withWidth(1).withHeight(2).build();
+
+		writeToPdfBaos(page);
+		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
+		
+		Rectangle actualSize = reader.getPageSize(1);
+		
+		assertEquals("page width", A4_WIDTH, actualSize.getWidth(), 0.1f);
+		assertEquals("page height", A4_HEIGHT, actualSize.getHeight(), 0.1f);
+		
+	}
+	
+	@Test
+	public void usesTheOriginalPageSizeIfSetInOptions() throws IOException {
+		Page page = page().withWidth(1).withHeight(2).build();
+		Map<String, String> options = new HashMap<String, String>();
+		options.put("pagesize", "original");
+		writer.setImplementationSpecificOptions(options);
+		writeToPdfBaos(page);
+		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
+		
+		Rectangle actualSize = reader.getPageSize(1);
+		
+		assertEquals("original page width", 1f, actualSize.getWidth(), 0.1f);
+		assertEquals("original page height", 2f, actualSize.getHeight(), 0.1f);
+	}
+	
+	@Test
+	public void usesA4IfSetInOptions() throws IOException {
+		Page page = page().withWidth(1).withHeight(2).build();
+		Map<String, String> options = new HashMap<String, String>();
+		options.put("pagesize", "A4");
+		writer.setImplementationSpecificOptions(options);
+		writeToPdfBaos(page);
+		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
+		
+		Rectangle actualSize = reader.getPageSize(1);
+		
+		assertEquals("page width", A4_WIDTH, actualSize.getWidth(), 0.1f);
+		assertEquals("page height", A4_HEIGHT, actualSize.getHeight(), 0.1f);
+		
+	}
+
+	@Test
+	public void writesWordWithCoordinates() throws IOException {
+		Page page = pageA4()
 				.with(word("test").withCoordinatesLTRB(100,200,400,300))
 				.build();
 		writeToPdfBaos(page);
@@ -110,8 +166,8 @@ public class PDFWriterTest {
 	}
 	
 	@Test
-	public void writesTwoWordsUsingDefaultPageSize() throws IOException {
-		Page page = page()
+	public void writesTwoWords() throws IOException {
+		Page page = pageA4()
 				.with(word("test").withCoordinatesLTRB(100,200,400,300))
 				.with(word("test2").withCoordinatesLTRB(100,300,400,400))
 				.build();
@@ -126,8 +182,7 @@ public class PDFWriterTest {
 	
 	@Test
 	public void pageScalingDoesntChangeTheOutputCoordinates() throws IOException {
-		//writer.setTarget(new FileOutputStream("/tmp/test.pdf"));
-		Page page = page().withHeight(A4_HEIGHT*2).withWidth(A4_WIDTH*2)
+		Page page = page().withHeight((int)A4_HEIGHT*2).withWidth((int)A4_WIDTH*2)
 				.with(word("test").withCoordinatesLTRB(100*2,200*2,400*2,300*2))
 				.build();
 		writeToPdfBaos(page);
@@ -139,7 +194,7 @@ public class PDFWriterTest {
 	
 	@Test
 	public void writesNonWordOnPage() throws IOException {
-		Page page = page()
+		Page page = pageA4()
 				.with(nonWord("!??").withCoordinatesLTRB(100,200,400,300))
 				.build();
 		writeToPdfBaos(page);
@@ -151,7 +206,7 @@ public class PDFWriterTest {
 	
 	@Test
 	public void wordWithoutCoordinatesIsIgnored() throws IOException {
-		Page page = page().with(word("test")).build();
+		Page page = pageA4().with(word("test")).build();
 		writeToPdfBaos(page);
 		String rawPdf = readFromPdfBaos();
 
@@ -159,9 +214,18 @@ public class PDFWriterTest {
 	}
 	
 	@Test
-	public void testWithFile() throws FileNotFoundException {
+	public void canHandleTable() throws IOException {
+		//writer.setTarget(new FileOutputStream("/tmp/test.pdf"));
+		Page page = pageA4().with(table().with(
+				word("test").withCoordinatesLTRB(100, 200, 400, 300)
+				)).build();
+		writeToPdfBaos(page);
+		String rawPdf = readFromPdfBaos();
+
+		assertThat(rawPdf, containsString("100 542 Tm"));
+		assertThat(rawPdf, containsString("(test)"));
 	}
-	
+		
 	private String readFromPdfBaos() throws IOException {
 		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
 		return new String(reader.getPageContent(1));

@@ -1,6 +1,8 @@
 package de.unigoettingen.sub.convert.api;
 
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javanet.staxutils.IndentingXMLStreamWriter;
 
@@ -22,6 +24,8 @@ abstract public class StaxWriter implements ConvertWriter {
 	protected XMLStreamWriter xwriter;
 
 	private OutputStream output;
+	
+	protected Map<String, String> options = new HashMap<String, String>();
 
 	@Override
 	public void setTarget(OutputStream stream) {
@@ -90,6 +94,15 @@ abstract public class StaxWriter implements ConvertWriter {
 			throw new IllegalStateException("Could not write XML file ending");
 		}
 
+	}
+	
+	@Override
+	public void setImplementationSpecificOptions(Map<String, String> options) {
+		this.options = options;
+	}
+	@Override
+	public Map<String, String> getImplementationSpecificOptions() {
+		return options;
 	}
 
 	abstract protected void writeStartStax() throws XMLStreamException;

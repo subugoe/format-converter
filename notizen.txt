@@ -6,11 +6,6 @@
 - wieso sind Zahlen immer kleiner als Original im Image?
 
 
--pdf
-tabellen
-
-
-
 
 xml schema für eigenes tei
 epub ausgabe recherchieren
