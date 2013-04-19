@@ -1,10 +1,5 @@
 
-- kein A4 für PDF, sondern jede Seite so groß wie das Image?
-
 - orientation: landscape, portrait, grad?
-
-- wieso sind Zahlen immer kleiner als Original im Image?
-
 
 
 xml schema für eigenes tei

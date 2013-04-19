@@ -38,10 +38,10 @@ public class Main {
 		for (String writerName : writerNames) {
 			Set<String> optionsOfOneWriter = converter.getOptionDescriptionsForWriter(writerName);
 			if (!optionsOfOneWriter.isEmpty()) {
-				allWritersOptions.append("- for output format '").append(writerName).append("'\n");
-			}
-			for (String option : optionsOfOneWriter) {
-				allWritersOptions.append("[").append(option).append("\n");
+				allWritersOptions.append("-- for output format '").append(writerName).append("' --\n");
+				for (String option : optionsOfOneWriter) {
+					allWritersOptions.append(option).append("\n");
+				}
 			}
 		}
 

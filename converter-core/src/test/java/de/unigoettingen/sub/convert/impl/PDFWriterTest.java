@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -38,7 +37,7 @@ public class PDFWriterTest {
 
 	private ConvertWriter writer;
 	private ByteArrayOutputStream pdfBaos;
-	Map<String, String> options;
+	private Map<String, String> options;
 
 	@Before
 	public void setUp() throws Exception {
@@ -215,7 +214,6 @@ public class PDFWriterTest {
 	
 	@Test
 	public void canHandleTable() throws IOException {
-		//writer.setTarget(new FileOutputStream("/tmp/test.pdf"));
 		Page page = pageA4().with(table().with(
 				word("test").withCoordinatesLTRB(100, 200, 400, 300)
 				)).build();
@@ -249,10 +247,59 @@ public class PDFWriterTest {
 		assertThat("text rendering should be invisible", rawPdf, containsString(textRenderInvisible));
 	}
 	
+	@Test
+	public void puts2ImagesBehind2Pages() throws IOException {
+		//writer.setTarget(new FileOutputStream("/tmp/test.pdf"));
+		Page page = pageA4().build();
+		options.put("images", "src/test/resources/withTwoImages");
+		writer.setImplementationSpecificOptions(options);
+		writeToPdfBaos(page, page);
+		String rawPdf = readFromPdfBaosPages(1, 2);
+		
+		assertThat(rawPdf, containsString("/img0"));
+		assertThat(rawPdf, containsString("/img1"));
+	}
+	
+	@Test
+	public void throwsExceptionWhenTooFewImages() throws IOException {
+		Page page = pageA4().build();
+		options.put("images", "src/test/resources/withOneImage");
+		writer.setImplementationSpecificOptions(options);
+		try {
+			writeToPdfBaos(page, page);
+			fail("did not throw exception");
+		} catch (IllegalStateException e) {
+			assertEquals("error message", "No image found for page 2", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void throwsExceptionWhenWrongFolder() throws IOException {
+		Page page = pageA4().build();
+		options.put("images", "src/test/resources/xyz");
+		writer.setImplementationSpecificOptions(options);
+		try {
+			writeToPdfBaos(page, page);
+			fail("did not throw exception");
+		} catch (IllegalStateException e) {
+			assertEquals("error message", "Not a folder: src/test/resources/xyz", e.getMessage());
+		}
+	}
+	
+	
 	
 	private String readFromPdfBaos() throws IOException {
+		return readFromPdfBaosPages(1);
+	}
+	
+	private String readFromPdfBaosPages(int... pages) throws IOException {
 		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
-		return new String(reader.getPageContent(1));
+		StringBuilder allPages = new StringBuilder();
+		for (int page : pages) {
+			allPages.append(new String(reader.getPageContent(page)));
+		}
+		
+		return allPages.toString();
 	}
 	
 	private void writeToPdfBaos(Page... pages) {

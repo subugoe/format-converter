@@ -20,7 +20,9 @@ public class ResourceHandler {
 	}
 	
 	private void getTifImagesFromFolder(File folder) {
-		
+		if (!folder.isDirectory()) {
+			throw new IllegalStateException("Not a folder: " + folder.getPath());
+		}
 		FilenameFilter tifFilter = new FilenameFilter() {
 			@Override
 			public boolean accept(File file, String name) {

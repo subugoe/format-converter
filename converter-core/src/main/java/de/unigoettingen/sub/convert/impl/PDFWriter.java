@@ -50,8 +50,8 @@ public class PDFWriter implements ConvertWriter {
 	private Page currentPage;
 	private int pageNumber = 0;
 	private Map<String, String> options = new HashMap<String, String>();
-	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "folder] (containing original Tiff images)";
-	private static final String PAGESIZE_DESCRIPTION = "A4 or original], default is A4";
+	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
+	private static final String PAGESIZE_DESCRIPTION = "[A4 or original], default is A4";
 	
 	private ResourceHandler resourceHandler = new ResourceHandler();
 	
@@ -159,7 +159,6 @@ public class PDFWriter implements ConvertWriter {
 		File imagesFolder = new File(options.get("images"));
 		File imageFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
 		
-		//File imageFile = new File("/home/dennis/digi/fertig/20130128_sohnrey_bruderhof_1898_tif/00000001.tif");
 		RandomAccessSource source = new RandomAccessSourceFactory().createSource(new FileInputStream(imageFile));
 		RandomAccessFileOrArray ra = new RandomAccessFileOrArray(source);
 		Image image = TiffImage.getTiffImage(ra, 1);
