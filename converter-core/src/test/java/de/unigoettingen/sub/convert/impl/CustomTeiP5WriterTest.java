@@ -25,7 +25,7 @@ import static de.unigoettingen.sub.convert.model.builders.NonWordBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.TableBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.ImageBuilder.*;
 
-public class TeiP4WriterTest {
+public class CustomTeiP5WriterTest {
 
 	private ConvertWriter writer;
 	private OutputStream baos;
@@ -40,7 +40,7 @@ public class TeiP4WriterTest {
 
 	@Before
 	public void setUp() throws Exception {
-		writer = new TeiP4Writer();
+		writer = new CustomTeiP5Writer();
 		baos = new ByteArrayOutputStream();
 	}
 
@@ -79,7 +79,7 @@ public class TeiP4WriterTest {
 		String output = baos.toString();
 
 		assertThat(output, containsString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"));
-		assertThat(output, containsString("<TEI.2"));
+		assertThat(output, containsString("<TEI"));
 	}
 	
 	@Test

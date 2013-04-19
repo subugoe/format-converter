@@ -6,7 +6,7 @@
 	<bean id="abbyyReader" class="de.unigoettingen.sub.convert.impl.AbbyyXMLReader"/>
 	<!-- add more beans of type ConvertReader -->
 	
-	<bean id="teiWriter" class="de.unigoettingen.sub.convert.impl.TeiP4Writer"/>
+	<bean id="teiWriter" class="de.unigoettingen.sub.convert.impl.CustomTeiP5Writer"/>
 	<bean id="pdfWriter" class="de.unigoettingen.sub.convert.impl.PDFWriter"/>
 	<!-- add more beans of type ConvertWriter -->
 

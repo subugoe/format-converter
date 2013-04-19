@@ -1,8 +1,8 @@
 package de.unigoettingen.sub.convert.impl;
-import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -17,7 +17,7 @@ import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 
 
-public class Abbyy6ConverterTest {
+public class AbbyyToTeiTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -41,10 +41,10 @@ public class Abbyy6ConverterTest {
 				System.getProperty("user.dir") + "/src/test/resources/abbyy10_coverPage.xml");
 		InputStream is = new FileInputStream(abbyy);
 		ConvertReader reader = new AbbyyXMLReader();
-		ConvertWriter writer = new TeiP4Writer();
+		ConvertWriter writer = new CustomTeiP5Writer();
 		
-		//OutputStream s = new FileOutputStream("/tmp/bla.xml");
-		OutputStream s = System.out;
+		OutputStream s = new FileOutputStream("/tmp/bla.xml");
+		//OutputStream s = System.out;
 		writer.setTarget(s);
 		
 		reader.setWriter(writer);

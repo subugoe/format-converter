@@ -1,4 +1,4 @@
-package de.unigoettingen.sub.convert.impl;
+package de.unigoettingen.sub.convert.util;
 
 import java.io.File;
 import java.io.FilenameFilter;

@@ -40,6 +40,7 @@ import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Row;
+import de.unigoettingen.sub.convert.util.ResourceHandler;
 
 public class PDFWriter implements ConvertWriter {
 

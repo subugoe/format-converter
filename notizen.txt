@@ -1,10 +1,11 @@
 
-- orientation: landscape, portrait, grad?
+- orientation in pdf: landscape, portrait, grad?
 
 
 xml schema für eigenes tei
+- wie elemente in beliebiger reihenfolge definieren?
+
+
 epub ausgabe recherchieren
  - epublib
 
-
-nonwords in <pc> tags - erst ab P5

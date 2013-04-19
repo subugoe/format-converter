@@ -13,6 +13,7 @@ import de.unigoettingen.sub.convert.model.Language;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
+import de.unigoettingen.sub.convert.model.NonWord;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
@@ -20,14 +21,13 @@ import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.WithCoordinates;
-import de.unigoettingen.sub.convert.model.Word;
 
 /**
  * 
  * Converts objects of the inner format into TEI P5 XML.
  * 
  */
-public class TeiP4Writer extends StaxWriter {
+public class CustomTeiP5Writer extends StaxWriter {
 
 	private int pageCounter = 1;
 	private int paragraphCounter = 1;
@@ -39,7 +39,7 @@ public class TeiP4Writer extends StaxWriter {
 	protected void writeStartStax() throws XMLStreamException {
 
 		xwriter.writeStartDocument("UTF-8", "1.0");
-		xwriter.writeStartElement("TEI.2");
+		xwriter.writeStartElement("TEI");
 
 	}
 
@@ -164,20 +164,20 @@ public class TeiP4Writer extends StaxWriter {
 			xwriter.writeAttribute("id", "ID" + paragraphCounter);
 			for (Line line : par.getLines()) {
 				for (LineItem lineItem : line.getLineItems()) {
-					if (lineItem instanceof Word) {
-						xwriter.writeStartElement("w");
-						if (lineItem.getTop() != null
-								&& lineItem.getRight() != null) {
-							xwriter.writeAttribute("function",
-									coordinatesFor(lineItem));
-						}
+					String tagName = "w";
+					if (lineItem instanceof NonWord) {
+						tagName = "pc";
+					}
+					xwriter.writeStartElement(tagName);
+					if (lineItem.getTop() != null
+							&& lineItem.getRight() != null) {
+						xwriter.writeAttribute("function",
+								coordinatesFor(lineItem));
 					}
 					for (Char ch : lineItem.getCharacters()) {
 						xwriter.writeCharacters(ch.getValue());
 					}
-					if (lineItem instanceof Word) {
-						xwriter.writeEndElement(); // w
-					}
+					xwriter.writeEndElement(); // w or pc
 
 				}
 				xwriter.writeEmptyElement("lb");
