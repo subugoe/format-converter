@@ -2,9 +2,7 @@ package de.unigoettingen.sub.convert.impl;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 
 public class ResourceHandler {
@@ -13,12 +11,15 @@ public class ResourceHandler {
 	
 	public File getImageForPage(int pageNumber, File folder) {
 		if (images == null) {
-			getImagesFromFolder(folder);
+			getTifImagesFromFolder(folder);
+		}
+		if (images.length < pageNumber) {
+			throw new IllegalStateException("No image found for page " + pageNumber);
 		}
 		return images[pageNumber - 1];
 	}
 	
-	private void getImagesFromFolder(File folder) {
+	private void getTifImagesFromFolder(File folder) {
 		
 		FilenameFilter tifFilter = new FilenameFilter() {
 			@Override

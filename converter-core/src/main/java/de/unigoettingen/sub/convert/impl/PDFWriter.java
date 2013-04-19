@@ -157,9 +157,9 @@ public class PDFWriter implements ConvertWriter {
 	
 	private void putImageOnPage() throws DocumentException, FileNotFoundException, IOException {
 		File imagesFolder = new File(options.get("images"));
-//		File[] images = resourceHandler.getImagesFromFolder(imagesFolder);
+		File imageFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
 		
-		File imageFile = new File("/home/dennis/digi/fertig/20130128_sohnrey_bruderhof_1898_tif/00000001.tif");
+		//File imageFile = new File("/home/dennis/digi/fertig/20130128_sohnrey_bruderhof_1898_tif/00000001.tif");
 		RandomAccessSource source = new RandomAccessSourceFactory().createSource(new FileInputStream(imageFile));
 		RandomAccessFileOrArray ra = new RandomAccessFileOrArray(source);
 		Image image = TiffImage.getTiffImage(ra, 1);

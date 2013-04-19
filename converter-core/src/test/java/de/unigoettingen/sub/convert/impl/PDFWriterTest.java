@@ -38,12 +38,14 @@ public class PDFWriterTest {
 
 	private ConvertWriter writer;
 	private ByteArrayOutputStream pdfBaos;
-	
+	Map<String, String> options;
+
 	@Before
 	public void setUp() throws Exception {
 		writer = new PDFWriter();
 		pdfBaos = new ByteArrayOutputStream();
 		writer.setTarget(pdfBaos);
+		options = new HashMap<String, String>();
 	}
 
 	@After
@@ -125,7 +127,6 @@ public class PDFWriterTest {
 	@Test
 	public void usesTheOriginalPageSizeIfSetInOptions() throws IOException {
 		Page page = page().withWidth(1).withHeight(2).build();
-		Map<String, String> options = new HashMap<String, String>();
 		options.put("pagesize", "original");
 		writer.setImplementationSpecificOptions(options);
 		writeToPdfBaos(page);
@@ -140,7 +141,6 @@ public class PDFWriterTest {
 	@Test
 	public void usesA4IfSetInOptions() throws IOException {
 		Page page = page().withWidth(1).withHeight(2).build();
-		Map<String, String> options = new HashMap<String, String>();
 		options.put("pagesize", "A4");
 		writer.setImplementationSpecificOptions(options);
 		writeToPdfBaos(page);
@@ -238,13 +238,15 @@ public class PDFWriterTest {
 	@Test
 	public void putsImageBehindTextIfOptionIsSet() throws IOException {
 		Page page = pageA4().build();
-		Map<String, String> options = new HashMap<String, String>();
 		options.put("images", System.getProperty("user.dir") + "/src/test/resources/withOneImage");
 		writer.setImplementationSpecificOptions(options);
 		writeToPdfBaos(page);
 		String rawPdf = readFromPdfBaos();
 		
 		assertThat(rawPdf, containsString("/img0"));
+		
+		String textRenderInvisible = "3 Tr";
+		assertThat("text rendering should be invisible", rawPdf, containsString(textRenderInvisible));
 	}
 	
 	
