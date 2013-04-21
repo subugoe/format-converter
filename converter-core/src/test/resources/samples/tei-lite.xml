@@ -36,20 +36,18 @@
 		<front></front>
 		<back></back>
 		<body>
-			<div>
-				<p>
-					A
+				<p id="">
+					<w function="">A</w>
 					<lb/>
-					B
-					<figure></figure>
-					<graphic url=""></graphic>
+					<pc function="">.</pc>
+					<figure id="" function="" ></figure>
 					<label></label>
 					<lg>
 						<l></l>
 					</lg>
 				</p>
-			</div>
 			<pb/>
+			<milestone n="1" type="page"/>
 		</body>
 	</text>
 </TEI>

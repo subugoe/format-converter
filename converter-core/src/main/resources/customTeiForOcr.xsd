@@ -1,75 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-  <xs:element name="TEI">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="teiHeader"/>
-        <xs:element ref="text"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="teiHeader">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="text">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="body"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="body">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:choice maxOccurs="unbounded">
-          <xs:element ref="figure"/>
-          <xs:element ref="p"/>
-        </xs:choice>
-        <xs:element ref="milestone"/>
-        <xs:element ref="pb"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="figure">
-    <xs:complexType>
-      <xs:attribute name="function" use="required"/>
-      <xs:attribute name="id" use="required" type="xs:NCName"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="p">
-    <xs:complexType>
-      <xs:choice maxOccurs="unbounded">
-        <xs:element ref="lb"/>
-        <xs:element ref="pc"/>
-        <xs:element ref="w"/>
-      </xs:choice>
-      <xs:attribute name="id" use="required" type="xs:NCName"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="lb">
-    <xs:complexType/>
-  </xs:element>
-  <xs:element name="pc">
-    <xs:complexType mixed="true">
-      <xs:attribute name="function" use="required"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="w">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:NMTOKEN">
-          <xs:attribute name="function" use="required"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="milestone">
-    <xs:complexType>
-      <xs:attribute name="n" use="required" type="xs:integer"/>
-      <xs:attribute name="type" use="required" type="xs:NCName"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="pb">
-    <xs:complexType/>
-  </xs:element>
-</xs:schema>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sub.uni-goettingen.de/ent/TEI-for-OCR"
+	xmlns:tns="http://www.sub.uni-goettingen.de/ent/TEI-for-OCR" elementFormDefault="qualified">
+
+	<element name="TEI">
+		<complexType>
+			<sequence>
+				<element name="teiHeader" type="tns:TeiHeader" />
+				<element name="text" type="tns:Text" />
+			</sequence>
+		</complexType>
+	</element>
+  
+	<complexType name="TeiHeader">
+	</complexType>
+	
+	<complexType name="Text">
+		<sequence>
+			<element name="body" type="tns:Body" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="Body">
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<element name="p" type="tns:P" />
+			<element name="milestone" type="tns:Milestone" />
+			<element name="pb" type="tns:Pb" />
+		</choice>
+	</complexType>
+  
+	<complexType name="P">
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<element name="w" type="tns:W"/>
+			<element name="pc" type="tns:Pc"/>
+			<element name="figure" type="tns:Figure" />
+			<element name="lb" type="tns:Lb"/>
+		</choice>
+	</complexType>
+	
+	<complexType name="Milestone">
+		<attribute name="n" type="int" />
+		<attribute name="type" type="string" default="page" />
+	</complexType>
+  
+  	<complexType name="Pb">
+	</complexType>	
+  
+  	<complexType name="Lb">
+	</complexType>	
+  
+  	<complexType name="Figure">
+		<attribute name="id" type="string" />
+		<attribute name="function" type="string" />
+	</complexType>	
+  
+  	<complexType name="Pc">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="function" type="string" />
+			</extension>
+		</simpleContent>
+	</complexType>
+ 	
+  	<complexType name="W">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="function" type="string" />
+			</extension>
+		</simpleContent>
+	</complexType> 	
+  
+</schema>
