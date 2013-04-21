@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
+import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader;
 
 
 public class AbbyyToTeiTest {
@@ -43,8 +44,8 @@ public class AbbyyToTeiTest {
 		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new CustomTeiP5Writer();
 		
-		OutputStream s = new FileOutputStream("/tmp/bla.xml");
-		//OutputStream s = System.out;
+		//OutputStream s = new FileOutputStream("/tmp/bla.xml");
+		OutputStream s = System.out;
 		writer.setTarget(s);
 		
 		reader.setWriter(writer);

@@ -25,6 +25,7 @@ import org.mockito.ArgumentCaptor;
 
 import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
+import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader;
 import de.unigoettingen.sub.convert.model.Cell;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.FontStyleEnum;
