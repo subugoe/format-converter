@@ -44,8 +44,8 @@ public class AbbyyToTeiTest {
 		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new CustomTeiP5Writer();
 		
-		OutputStream s = new FileOutputStream("/tmp/tei.xml");
-		//OutputStream s = System.out;
+		//OutputStream s = new FileOutputStream("/tmp/tei.xml");
+		OutputStream s = System.out;
 		writer.setTarget(s);
 		
 		reader.setWriter(writer);

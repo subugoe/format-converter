@@ -17,7 +17,7 @@ class AbbyyFactory {
 	 * @param eventReader Is used to read character events
 	 * @return Object corresponding to an Abbyy XML element, the Object knows how to alter the internal model
 	 */
-	public static AbbyyElement createElementFromEvent(StartElement tag, XMLEventReader eventReader) {
+	public static AbbyyElement createElementFromTag(StartElement tag, XMLEventReader eventReader) {
 		String tagName = tag.getName().getLocalPart();
 		if (tagName.equals("page")) {
 			return new PageElement(tag);

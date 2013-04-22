@@ -6,6 +6,8 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 /**
@@ -16,7 +18,8 @@ import javax.xml.stream.events.XMLEvent;
 public abstract class StaxReader implements ConvertReader {
 
 	protected ConvertWriter writer;
-
+	protected XMLEventReader eventReader;
+	
 	@Override
 	public void setWriter(ConvertWriter w) {
 		writer = w;
@@ -37,7 +40,7 @@ public abstract class StaxReader implements ConvertReader {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 
 		try {
-			XMLEventReader eventReader = factory.createXMLEventReader(is);
+			eventReader = factory.createXMLEventReader(is);
 
 			while (eventReader.hasNext()) {
 				XMLEvent event = eventReader.nextEvent();
@@ -45,16 +48,13 @@ public abstract class StaxReader implements ConvertReader {
 				switch (event.getEventType()) {
 
 				case XMLStreamConstants.START_DOCUMENT:
-					handleStartDocument(eventReader);
+					handleStartDocument();
 					break;
 				case XMLStreamConstants.START_ELEMENT:
-					handleStartElement(event, eventReader);
+					handleStartElement(event.asStartElement());
 					break;
 				case XMLStreamConstants.END_ELEMENT:
-					handleEndElement(event);
-					break;
-				case XMLStreamConstants.CHARACTERS:
-					// String s = event.asCharacters().toString();
+					handleEndElement(event.asEndElement());
 					break;
 				case XMLStreamConstants.END_DOCUMENT:
 					handleEndDocument();
@@ -70,13 +70,12 @@ public abstract class StaxReader implements ConvertReader {
 
 	}
 
-	abstract protected void handleStartDocument(XMLEventReader eventReader)
+	abstract protected void handleStartDocument()
 			throws XMLStreamException;
 
-	abstract protected void handleStartElement(XMLEvent event,
-			XMLEventReader eventReader) throws XMLStreamException;
+	abstract protected void handleStartElement(StartElement startTag) throws XMLStreamException;
 
-	abstract protected void handleEndElement(XMLEvent event);
+	abstract protected void handleEndElement(EndElement endTag);
 
 	abstract protected void handleEndDocument();
 

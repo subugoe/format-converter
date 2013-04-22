@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
+import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
@@ -53,13 +53,13 @@ public class AbbyyXMLReader extends StaxReader {
 	 * Tells the writer to start the output.
 	 */
 	@Override
-	protected void handleStartDocument(XMLEventReader eventReader)
+	protected void handleStartDocument()
 			throws XMLStreamException {
-		checkIfXmlFormatIsCorrect(eventReader);
+		checkIfXmlFormatIsCorrect();
 		writer.writeStart();
 	}
 
-	private void checkIfXmlFormatIsCorrect(XMLEventReader eventReader)
+	private void checkIfXmlFormatIsCorrect()
 			throws XMLStreamException {
 		XMLEvent nextEvent = eventReader.peek();
 		if (nextEvent.isStartElement()) {
@@ -77,20 +77,19 @@ public class AbbyyXMLReader extends StaxReader {
 	 * correspond to the Abbyy XML input page.
 	 */
 	@Override
-	protected void handleStartElement(XMLEvent event, XMLEventReader eventReader)
+	protected void handleStartElement(StartElement startTag)
 			throws XMLStreamException {
-		StartElement tagEvent = event.asStartElement();
-		String name = tagEvent.getName().getLocalPart();
+		String name = startTag.getName().getLocalPart();
 		if (name.equals("document")) {
-			Metadata meta = createMetadataFromEvent(tagEvent);
+			Metadata meta = createMetadataFromTag(startTag);
 			writer.writeMetadata(meta);
 		} else {
-			AbbyyElement element = AbbyyFactory.createElementFromEvent(tagEvent, eventReader);
+			AbbyyElement element = AbbyyFactory.createElementFromTag(startTag, eventReader);
 			element.updatePageState(current);
 		}
 	}
 
-	private Metadata createMetadataFromEvent(StartElement tag) {
+	private Metadata createMetadataFromTag(StartElement tag) {
 		Metadata meta = new Metadata();
 		Iterator<?> attributes = tag.getAttributes();
 		Set<String> processedLanguages = new HashSet<String>();
@@ -125,8 +124,8 @@ public class AbbyyXMLReader extends StaxReader {
 	 * Sends the Page model object to the writer.
 	 */
 	@Override
-	protected void handleEndElement(XMLEvent event) {
-		String name = event.asEndElement().getName().getLocalPart();
+	protected void handleEndElement(EndElement endTag) {
+		String name = endTag.getName().getLocalPart();
 		if (name.equals("page")) {
 			writer.writePage(current.page);
 		} else if (name.equals("formatting")) {
