@@ -3,8 +3,20 @@ package de.unigoettingen.sub.convert.impl.abbyyxml;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.events.StartElement;
 
+/**
+ * 
+ * Factory for creating Objects that correspond to Abbyy XML Elements.
+ *
+ */
 class AbbyyFactory {
 
+	/**
+	 * Creates Objects for Abbyy XML elements depending on the element names
+	 * 
+	 * @param tag Start element event from Stax
+	 * @param eventReader Is used to read character events
+	 * @return Object corresponding to an Abbyy XML element, the Object knows how to alter the internal model
+	 */
 	public static AbbyyElement createElementFromEvent(StartElement tag, XMLEventReader eventReader) {
 		String tagName = tag.getName().getLocalPart();
 		if (tagName.equals("page")) {

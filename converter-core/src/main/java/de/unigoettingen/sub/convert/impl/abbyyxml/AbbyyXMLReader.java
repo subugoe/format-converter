@@ -26,7 +26,8 @@ import de.unigoettingen.sub.convert.util.LanguageMapper;
 /**
  * 
  * Can read Abbyy XML format versions 6 and 10.
- * Transforms the input into the internal model.
+ * Transforms the input into objects of the internal model and sends
+ * them page-by-page to the writer.
  *
  */
 public class AbbyyXMLReader extends StaxReader {
@@ -46,8 +47,11 @@ public class AbbyyXMLReader extends StaxReader {
 		Word wordAttributeContainer;
 	}
 	
-	CurrentPageState current = new CurrentPageState();
+	private CurrentPageState current = new CurrentPageState();
 
+	/**
+	 * Tells the writer to start the output.
+	 */
 	@Override
 	protected void handleStartDocument(XMLEventReader eventReader)
 			throws XMLStreamException {
@@ -67,22 +71,27 @@ public class AbbyyXMLReader extends StaxReader {
 		}
 	}
 
+	/**
+	 * At the start of the document, sends the available metadata to the writer.
+	 * While inside a page, updates the internal model objects, so that they
+	 * correspond to the Abbyy XML input page.
+	 */
 	@Override
 	protected void handleStartElement(XMLEvent event, XMLEventReader eventReader)
 			throws XMLStreamException {
-		StartElement tag = event.asStartElement();
-		String name = tag.getName().getLocalPart();
+		StartElement tagEvent = event.asStartElement();
+		String name = tagEvent.getName().getLocalPart();
 		if (name.equals("document")) {
-			Metadata meta = new Metadata();
-			processDocumentAttributes(tag, meta);
+			Metadata meta = createMetadataFromEvent(tagEvent);
 			writer.writeMetadata(meta);
 		} else {
-			AbbyyElement element = AbbyyFactory.createElementFromEvent(tag, eventReader);
+			AbbyyElement element = AbbyyFactory.createElementFromEvent(tagEvent, eventReader);
 			element.updatePageState(current);
 		}
 	}
 
-	private void processDocumentAttributes(StartElement tag, Metadata meta) {
+	private Metadata createMetadataFromEvent(StartElement tag) {
+		Metadata meta = new Metadata();
 		Iterator<?> attributes = tag.getAttributes();
 		Set<String> processedLanguages = new HashSet<String>();
 		while (attributes.hasNext()) {
@@ -109,14 +118,19 @@ public class AbbyyXMLReader extends StaxReader {
 			l.setValue(languageDescription);
 			meta.getLanguages().add(l);
 		}
+		return meta;
 	}
 
+	/**
+	 * Sends the Page model object to the writer.
+	 */
 	@Override
 	protected void handleEndElement(XMLEvent event) {
 		String name = event.asEndElement().getName().getLocalPart();
 		if (name.equals("page")) {
 			writer.writePage(current.page);
 		} else if (name.equals("formatting")) {
+			// this has to be done, so that a new lineItem (word/nonWord) can be started
 			finishUpLastLineItem();
 		}
 	}
@@ -125,6 +139,9 @@ public class AbbyyXMLReader extends StaxReader {
 		current.lineItem = null;
 	}
 
+	/**
+	 * Tells the writer to complete the output.
+	 */
 	@Override
 	protected void handleEndDocument() {
 		writer.writeEnd();
