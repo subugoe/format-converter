@@ -12,6 +12,30 @@
 	</element>
   
 	<complexType name="TeiHeader">
+		<sequence>
+			<element name="profileDesc" type="tns:ProfileDesc" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="ProfileDesc">
+		<sequence>
+			<element name="creation" type="string" minOccurs="0" />
+			<element name="langUsage" type="tns:LangUsage" minOccurs="0" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="LangUsage">
+		<sequence>
+			<element name="language" type="tns:Language" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="Language">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="ident" type="language" />
+			</extension>
+		</simpleContent>
 	</complexType>
 	
 	<complexType name="Text">
@@ -25,6 +49,8 @@
 			<element name="p" type="tns:P" />
 			<element name="milestone" type="tns:Milestone" />
 			<element name="pb" type="tns:Pb" />
+			<element name="figure" type="tns:Figure" />
+			<element name="table" type="tns:Table" />
 		</choice>
 	</complexType>
   
@@ -32,14 +58,14 @@
 		<choice minOccurs="0" maxOccurs="unbounded">
 			<element name="w" type="tns:W"/>
 			<element name="pc" type="tns:Pc"/>
-			<element name="figure" type="tns:Figure" />
 			<element name="lb" type="tns:Lb"/>
 		</choice>
+		<attribute name="id" type="string" use="required" />
 	</complexType>
 	
 	<complexType name="Milestone">
-		<attribute name="n" type="int" />
-		<attribute name="type" type="string" default="page" />
+		<attribute name="n" type="int" use="required" />
+		<attribute name="type" type="string" use="required" fixed="page" />
 	</complexType>
   
   	<complexType name="Pb">
@@ -49,14 +75,36 @@
 	</complexType>	
   
   	<complexType name="Figure">
-		<attribute name="id" type="string" />
-		<attribute name="function" type="string" />
-	</complexType>	
+		<attribute name="id" type="string" use="required" />
+		<attribute name="function" type="tns:Coordinates" />
+	</complexType>
+	
+	<complexType name="Table">
+		<sequence>
+			<element name="row" type="tns:Row" maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="function" type="tns:Coordinates" />
+		<attribute name="rows" type="int" />
+		<attribute name="cols" type="int" />
+	</complexType>
+	
+	<complexType name="Row">
+		<sequence>
+			<element name="cell" type="tns:Cell" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="Cell">
+		<choice>
+			<element name="p" type="tns:P" />
+			<element name="figure" type="tns:Figure" />
+		</choice>
+	</complexType>
   
   	<complexType name="Pc">
 		<simpleContent>
 			<extension base="string">
-				<attribute name="function" type="string" />
+				<attribute name="function" type="tns:Coordinates" />
 			</extension>
 		</simpleContent>
 	</complexType>
@@ -64,9 +112,15 @@
   	<complexType name="W">
 		<simpleContent>
 			<extension base="string">
-				<attribute name="function" type="string" />
+				<attribute name="function" type="tns:Coordinates" />
 			</extension>
 		</simpleContent>
-	</complexType> 	
+	</complexType>
+	
+	<simpleType name="Coordinates">
+		<restriction base="string">
+			<pattern value="\d+,\d+,\d+,\d+" />
+		</restriction>
+	</simpleType>
   
 </schema>

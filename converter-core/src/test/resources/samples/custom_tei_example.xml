@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.sub.uni-goettingen.de/ent/TEI-for-OCR">
+  <teiHeader>
+    <profileDesc>
+      <creation>Finereader 8.0</creation>
+      <langUsage>
+        <language ident="de">GermanStandard</language>
+        <language>SomeUnknownLanguage</language>
+      </langUsage>
+    </profileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <p id="ID1">
+        <w function="586,374,902,566">Der</w>
+        <pc function="903,370,1009,566"> </pc>
+        <w function="1010,370,1802,602">Bruderhof</w>
+        <lb/>
+      </p>
+      <p id="ID2">
+        <w function="383,877,539,951">Eine</w>
+        <pc function="540,875,582,947"> </pc>
+        <w function="583,875,925,967">bäuerliche</w>
+        <pc function="926,879,968,949"> </pc>
+        <w function="969,879,1183,949">Liebes</w>
+        <pc function="1187,899,1258,949">- </pc>
+        <w function="1259,879,1389,951">und</w>
+        <pc function="1390,879,1434,949"> </pc>
+        <w function="1435,877,2003,969">Leidensgeschichte</w>
+        <lb/>
+        <w function="751,1013,875,1073">aus</w>
+        <pc function="876,1003,920,1073"> </pc>
+        <w function="921,1003,1055,1073">dem</w>
+        <pc function="1056,1003,1102,1093"> </pc>
+        <w function="1103,1003,1679,1093">Hildesheimischen</w>
+        <lb/>
+      </p>
+      <p id="ID3">
+        <w function="1143,1191,1249,1239">von</w>
+        <lb/>
+      </p>
+      <p id="ID4">
+        <w function="789,1341,1159,1449">Heinrich</w>
+        <pc function="1160,1343,1216,1449"> </pc>
+        <w function="1217,1343,1597,1449">Sohnrey</w>
+        <lb/>
+      </p>
+      <p id="ID5">
+        <w function="651,1743,891,1827">Erstes</w>
+        <pc function="892,1743,938,1807"> </pc>
+        <w function="939,1743,1057,1807">bis</w>
+        <pc function="1058,1747,1104,1807"> </pc>
+        <w function="1105,1745,1377,1809">drittes</w>
+        <pc function="1378,1743,1426,1809"> </pc>
+        <w function="1427,1743,1755,1823">Tausend</w>
+        <lb/>
+      </p>
+      <figure id="ID6" function="956,2112,1464,2744"></figure>
+      <p id="ID7">
+        <w function="1087,3007,1329,3091">Leipzig</w>
+        <lb/>
+      </p>
+      <p id="ID8">
+        <pc function="780,3129,788,3178">^</pc>
+        <w function="812,3145,984,3201">eorg</w>
+        <pc function="985,3129,1033,3201"> </pc>
+        <w function="1034,3129,1381,3199">Heinrich</w>
+        <pc function="1382,3130,1428,3199"> </pc>
+        <w function="1429,3130,1686,3202">Meyer</w>
+        <lb/>
+        <w function="1142,3238,1280,3295">1898</w>
+        <lb/>
+      </p>
+      <milestone n="1" type="page"/>
+      <pb/>
+      <table function="1,2,3,4" rows="1" cols="1">
+        <row>
+          <cell>
+            <p id="ID9">
+              <w>a</w>
+              <lb/>
+            </p>
+          </cell>
+        </row>
+      </table>
+      <pb/>
+      <milestone n="2" type="page"/>
+    </body>
+  </text>
+</TEI>
