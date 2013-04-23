@@ -1,16 +1,14 @@
 package de.unigoettingen.sub.convert.impl.abbyyxml;
 
-import java.util.Iterator;
-
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader.CurrentPageState;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.LineItem;
+import de.unigoettingen.sub.convert.util.XmlAttributesExtractor;
 
 class CharParamsElement extends AbstractWordConstructingElement implements AbbyyElement {
 
@@ -28,15 +26,15 @@ class CharParamsElement extends AbstractWordConstructingElement implements Abbyy
 		this.current = current;
 		XMLEvent nextEvent = eventReader.peek();
 		if (nextEvent.isCharacters()) {
-			processCharParamTag(tag, nextEvent);
+			char ch = nextEvent.asCharacters().getData().charAt(0);
+			attachCharToLineItem(ch);
 			eventReader.nextEvent();
 		}
 	}
 
-	private void processCharParamTag(StartElement tag, XMLEvent charEvent) {
-		char ch = charEvent.asCharacters().getData().charAt(0);
+	private void attachCharToLineItem(char ch) {
 		Char modelChar = new Char();
-		processCharAttributes(tag, modelChar);
+		copyAttributesTo(modelChar);
 		modelChar.setValue("" + ch);
 		boolean isLetterOrDigit = Character.isLetterOrDigit(ch);
 		if (startOfLine() && isLetterOrDigit) {
@@ -88,22 +86,12 @@ class CharParamsElement extends AbstractWordConstructingElement implements Abbyy
 		li.setRight(new Integer(ch.getRight()));
 	}
 
-	private void processCharAttributes(StartElement tag, Char ch) {
-		Iterator<?> attributes = tag.getAttributes();
-		while (attributes.hasNext()) {
-			Attribute attr = (Attribute) attributes.next();
-			String attrName = attr.getName().getLocalPart();
-			String attrValue = attr.getValue();
-			if (attrName.equals("l")) {
-				ch.setLeft(new Integer(attrValue));
-			} else if (attrName.equals("r")) {
-				ch.setRight(new Integer(attrValue));
-			} else if (attrName.equals("t")) {
-				ch.setTop(new Integer(attrValue));
-			} else if (attrName.equals("b")) {
-				ch.setBottom(new Integer(attrValue));
-			}
-		}
+	private void copyAttributesTo(Char ch) {
+		XmlAttributesExtractor extract = new XmlAttributesExtractor(tag);
+		ch.setLeft(extract.integerValueOf("l"));
+		ch.setTop(extract.integerValueOf("t"));
+		ch.setRight(extract.integerValueOf("r"));
+		ch.setBottom(extract.integerValueOf("b"));
 	}
 
 }

@@ -1,10 +1,7 @@
 package de.unigoettingen.sub.convert.impl.abbyyxml;
 
-import java.util.Iterator;
-
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
@@ -13,6 +10,7 @@ import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.FontStyleEnum;
 import de.unigoettingen.sub.convert.model.Word;
 import de.unigoettingen.sub.convert.util.LanguageMapper;
+import de.unigoettingen.sub.convert.util.XmlAttributesExtractor;
 
 class FormattingElement extends AbstractWordConstructingElement implements AbbyyElement {
 
@@ -30,50 +28,41 @@ class FormattingElement extends AbstractWordConstructingElement implements Abbyy
 	public void updatePageState(CurrentPageState current) throws XMLStreamException {
 		this.current = current;
 		current.wordAttributeContainer = new Word();
-		processFormattingAttributes(tag, current.wordAttributeContainer);
-		XMLEvent nextEvent = eventReader.peek();
-		if (nextEvent.isCharacters()
-				&& !nextEvent.asCharacters().isWhiteSpace()) {
-			processLineWithoutCharParams(nextEvent);
+		processFormattingAttributes(current.wordAttributeContainer);
+		XMLEvent followingEvent = eventReader.peek();
+		if (isTextWithoutCoordinates(followingEvent)) {
+			String plainText = followingEvent.asCharacters().getData();
+			tokenizeText(plainText);
 			eventReader.nextEvent();
 		}
-
-
 	}
 
-	private void processFormattingAttributes(StartElement tag,
-			Word wordContainer) {
-		Iterator<?> attributes = tag.getAttributes();
-		while (attributes.hasNext()) {
-			Attribute attr = (Attribute) attributes.next();
-			String attrName = attr.getName().getLocalPart();
-			String attrValue = attr.getValue();
-			if (attrValue.isEmpty()) {
-				continue;
-			}
-			if (attrName.equals("lang") ) {
-				String isoLanguage = map.abbyyToIso(attrValue);
-				wordContainer.setLanguage(isoLanguage);
-			} else if (attrName.equals("ff")) {
-				wordContainer.setFont(attrValue);
-			} else if (attrName.equals("fs")) {
-				wordContainer.setFontSize(attrValue);
-			} else if (attrName.equals("color")) {
-				wordContainer.setFontColor(attrValue);
-			} else if (attrName.equals("bold") && (attrValue.equals("true") || attrValue.equals("1"))) {
-				wordContainer.getFontStyles().add(FontStyleEnum.BOLD);
-			} else if (attrName.equals("italic") && (attrValue.equals("true") || attrValue.equals("1"))) {
-				wordContainer.getFontStyles().add(FontStyleEnum.ITALIC);
-			} else if (attrName.equals("underline") && (attrValue.equals("true") || attrValue.equals("1"))) {
-				wordContainer.getFontStyles().add(FontStyleEnum.UNDERLINE);
-			}
+	private boolean isTextWithoutCoordinates(XMLEvent nextEvent) {
+		return nextEvent.isCharacters()
+				&& !nextEvent.asCharacters().isWhiteSpace();
+	}
+
+	private void processFormattingAttributes(Word wordContainer) {
+		XmlAttributesExtractor extract = new XmlAttributesExtractor(tag);
+		
+		String isoLanguage = map.abbyyToIso(extract.valueOf("lang"));
+		wordContainer.setLanguage(isoLanguage);
+		wordContainer.setFont(extract.valueOf("ff"));
+		wordContainer.setFontSize(extract.valueOf("fs"));
+		wordContainer.setFontColor(extract.valueOf("color"));
+		if(extract.booleanValueOf("bold")) {
+			wordContainer.getFontStyles().add(FontStyleEnum.BOLD);
 		}
-
+		if(extract.booleanValueOf("italic")) {
+			wordContainer.getFontStyles().add(FontStyleEnum.ITALIC);
+		}
+		if(extract.booleanValueOf("underline")) {
+			wordContainer.getFontStyles().add(FontStyleEnum.UNDERLINE);
+		}
 	}
 
-	private void processLineWithoutCharParams(XMLEvent charEvent) {
-		String chars = charEvent.asCharacters().getData();
-		for (char ch : chars.toCharArray()) {
+	private void tokenizeText(String text) {
+		for (char ch : text.toCharArray()) {
 			Char modelChar = new Char();
 			modelChar.setValue("" + ch);
 			boolean isLetterOrDigit = Character.isLetterOrDigit(ch);

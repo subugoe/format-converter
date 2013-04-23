@@ -1,12 +1,10 @@
 package de.unigoettingen.sub.convert.impl.abbyyxml;
 
-import java.util.Iterator;
-
-import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 
 import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader.CurrentPageState;
 import de.unigoettingen.sub.convert.model.Page;
+import de.unigoettingen.sub.convert.util.XmlAttributesExtractor;
 
 class PageElement implements AbbyyElement {
 
@@ -20,21 +18,14 @@ class PageElement implements AbbyyElement {
 	@Override
 	public void updatePageState(CurrentPageState current) {
 		newPage = new Page();
-		processPageAttributes();
+		copyAttributesTo(newPage);
 		commitStateChanges(current);
 	}
 
-	private void processPageAttributes() {
-		Iterator<?> attributes = tag.getAttributes();
-		while (attributes.hasNext()) {
-			Attribute attr = (Attribute) attributes.next();
-			String attrName = attr.getName().getLocalPart();
-			if (attrName.equals("width")) {
-				newPage.setWidth(new Integer(attr.getValue()));
-			} else if (attrName.equals("height")) {
-				newPage.setHeight(new Integer(attr.getValue()));
-			}
-		}
+	private void copyAttributesTo(Page page) {
+		XmlAttributesExtractor extract = new XmlAttributesExtractor(tag);
+		page.setWidth(extract.integerValueOf("width"));
+		page.setHeight(extract.integerValueOf("height"));
 	}
 
 	private void commitStateChanges(CurrentPageState current) {

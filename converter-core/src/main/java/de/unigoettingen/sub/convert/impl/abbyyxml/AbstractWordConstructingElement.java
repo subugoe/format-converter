@@ -34,9 +34,9 @@ abstract class AbstractWordConstructingElement implements AbbyyElement {
 		current.lineItem = current.nonWord;
 	}
 
-	private LineItem constructUsingWordContainer(LineItem type) {
+	private LineItem constructUsingWordContainer(LineItem itemType) {
 		LineItem item;
-		if (type instanceof Word) {
+		if (itemType instanceof Word) {
 			item = new Word();
 			((Word)item).setLanguage(current.wordAttributeContainer.getLanguage());
 		} else {

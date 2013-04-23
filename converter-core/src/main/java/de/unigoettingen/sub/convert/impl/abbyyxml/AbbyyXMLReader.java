@@ -1,11 +1,8 @@
 package de.unigoettingen.sub.convert.impl.abbyyxml;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
@@ -22,6 +19,7 @@ import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Word;
 import de.unigoettingen.sub.convert.util.LanguageMapper;
+import de.unigoettingen.sub.convert.util.XmlAttributesExtractor;
 
 /**
  * 
@@ -91,30 +89,14 @@ public class AbbyyXMLReader extends StaxReader {
 
 	private Metadata createMetadataFromTag(StartElement tag) {
 		Metadata meta = new Metadata();
-		Iterator<?> attributes = tag.getAttributes();
-		Set<String> processedLanguages = new HashSet<String>();
-		while (attributes.hasNext()) {
-			Attribute attr = (Attribute) attributes.next();
-			String attrValue = attr.getValue();
-			if (attrValue.isEmpty()) {
-				continue;
-			}
-			String attrName = attr.getName().getLocalPart();
-			if (attrName.equals("producer")) {
-				meta.setOcrSoftwareName(attrValue);
-			} else if (attrName.equals("mainLanguage") || attrName.equals("languages")) {
-				String[] splitLangs = attrValue.split(",");
-				for(String lang : splitLangs) {
-					processedLanguages.add(lang);
-				}
-			}
-		}
-		for (String abbyyLanguage : processedLanguages) {
+		XmlAttributesExtractor extract = new XmlAttributesExtractor(tag);
+		meta.setOcrSoftwareName(extract.valueOf("producer"));
+		Set<String> extractedLanguages = extract.commaSeparatedValuesOf("mainLanguage", "languages");
+		for (String abbyyLanguage : extractedLanguages) {
 			String languageId = map.abbyyToIso(abbyyLanguage);
-			String languageDescription = abbyyLanguage;
 			Language l = new Language();
 			l.setLangId(languageId);
-			l.setValue(languageDescription);
+			l.setValue(abbyyLanguage);
 			meta.getLanguages().add(l);
 		}
 		return meta;
