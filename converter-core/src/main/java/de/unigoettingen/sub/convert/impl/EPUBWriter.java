@@ -3,7 +3,6 @@ package de.unigoettingen.sub.convert.impl;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -21,6 +20,7 @@ import nl.siegmann.epublib.epub.EpubWriter;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Char;
+import de.unigoettingen.sub.convert.model.Language;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
@@ -32,13 +32,14 @@ import de.unigoettingen.sub.convert.util.ResourceHandler;
 
 public class EPUBWriter implements ConvertWriter {
 
-	private Book epub;
+	private Book book;
 	private OutputStream output;
 	private List<File> htmls;
 	private List<File> images;
 	private int pageNumber = 0;
 	private Map<String, String> options = new HashMap<String, String>();
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
+	private static final String PNG = "png";
 
 	private ResourceHandler resourceHandler = new ResourceHandler();
 
@@ -48,15 +49,21 @@ public class EPUBWriter implements ConvertWriter {
 	
 	@Override
 	public void writeStart() {
-		epub = new Book();
+		book = new Book();
 		htmls = new ArrayList<File>();
 		images = new ArrayList<File>();
 	}
 
 	@Override
 	public void writeMetadata(Metadata meta) {
-		// TODO Auto-generated method stub
-
+		List<Language> langs = meta.getLanguages();
+		if (!langs.isEmpty()) {
+			Language lang = langs.get(0);
+			String langId = lang.getLangId();
+			if (langId != null && !langId.isEmpty()) {
+				book.getMetadata().setLanguage(langId);
+			}
+		}
 	}
 
 	@Override
@@ -72,7 +79,7 @@ public class EPUBWriter implements ConvertWriter {
 			htmlWriter.println("<body>");
 			
 			if (imagesAvailable()) {
-				htmlWriter.println("<img src='image" + pageNumber + ".jpg'>");
+				htmlWriter.println("<img src='image" + pageNumber + "." + PNG +"'>");
 				prepareImageForPage();
 			}
 			
@@ -115,10 +122,10 @@ public class EPUBWriter implements ConvertWriter {
 		BufferedImage tif = ImageIO.read(imageFile);
 		
 		File tempDir = new File(System.getProperty("java.io.tmpdir"));
-		File tempImage = new File(tempDir, "image" + pageNumber + ".jpg");
+		File tempImage = new File(tempDir, "image" + pageNumber + "." + PNG);
 
 		FileOutputStream fos = new FileOutputStream(tempImage);
-		ImageIO.write(tif, "png", fos);
+		ImageIO.write(tif, PNG, fos);
 		
 		images.add(tempImage);
 	}
@@ -129,11 +136,11 @@ public class EPUBWriter implements ConvertWriter {
 			for (int i = 0; i < htmls.size(); i++) {
 				int pageNr = i + 1;
 				FileInputStream fis = new FileInputStream(htmls.get(i));
-				epub.addSection("Page " + pageNr, new Resource(fis, "page" + pageNr + ".html"));
+				book.addSection("Page " + pageNr, new Resource(fis, "page" + pageNr + ".html"));
 				
 				if (imagesAvailable()) {
 					FileInputStream tempImageFis = new FileInputStream(images.get(i));
-					epub.getResources().add(new Resource(tempImageFis, "image" + pageNr + ".jpg"));
+					book.getResources().add(new Resource(tempImageFis, "image" + pageNr + "." + PNG));
 				}
 			}
 	
@@ -141,7 +148,7 @@ public class EPUBWriter implements ConvertWriter {
 			
 			EpubWriter epubWriter = new EpubWriter();
 			
-			epubWriter.write(epub, output);
+			epubWriter.write(book, output);
 	
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

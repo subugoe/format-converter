@@ -25,7 +25,7 @@ public class AbbyyToEpubTest {
 	public void setUp() throws Exception {
 	}
 
-	@Test
+	//@Test
 	public void test() throws IOException {
 //		File abbyy = new File(
 //				System.getProperty("user.dir") + "/src/test/resources/abbyy10_textPage.xml");
@@ -36,7 +36,7 @@ public class AbbyyToEpubTest {
 		
 		Map<String, String> options = new HashMap<String, String>();
 		options.put("images", "/home/dennis/digi/fertig/20130128_sohnrey_bruderhof_1898_tif");
-		writer.setImplementationSpecificOptions(options);
+		//writer.setImplementationSpecificOptions(options);
 
 		
 		OutputStream s = new FileOutputStream("/tmp/sohnrey.epub");
