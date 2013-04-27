@@ -1,11 +1,6 @@
+impl specific options überarbeiten: addOption, getPossibleOptions
+
+temp Dateien handling von Epubwriter zu ResourceHandler
 
 - orientation in pdf: landscape, portrait, grad?
-
-
-xml schema für eigenes tei
-- wie elemente in beliebiger reihenfolge definieren?
-
-
-epub ausgabe recherchieren
- - epublib
 

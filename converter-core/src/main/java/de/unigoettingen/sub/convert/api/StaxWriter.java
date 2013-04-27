@@ -98,7 +98,7 @@ abstract public class StaxWriter implements ConvertWriter {
 	
 	@Override
 	public void setImplementationSpecificOptions(Map<String, String> options) {
-		this.options = options;
+		this.options.putAll(options);
 	}
 	@Override
 	public Map<String, String> getImplementationSpecificOptions() {
