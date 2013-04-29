@@ -10,6 +10,9 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 
@@ -21,11 +24,13 @@ import de.unigoettingen.sub.convert.model.Page;
  */
 abstract public class StaxWriter implements ConvertWriter {
 
+	private final static Logger LOGGER = LoggerFactory.getLogger(StaxWriter.class);
 	protected XMLStreamWriter xwriter;
 
 	private OutputStream output;
 	
-	protected Map<String, String> options = new HashMap<String, String>();
+	protected Map<String, String> supportedOptions = new HashMap<String, String>();
+	protected Map<String, String> actualOptions = new HashMap<String, String>();
 
 	@Override
 	public void setTarget(OutputStream stream) {
@@ -97,12 +102,17 @@ abstract public class StaxWriter implements ConvertWriter {
 	}
 	
 	@Override
-	public void setImplementationSpecificOptions(Map<String, String> options) {
-		this.options.putAll(options);
+	public void addImplementationSpecificOption(String key, String value) {
+		if (supportedOptions.get(key) != null) {
+			actualOptions.put(key, value);
+		} else {
+			LOGGER.warn("The option is not supported: " + key);
+		}
 	}
+	
 	@Override
-	public Map<String, String> getImplementationSpecificOptions() {
-		return options;
+	public Map<String, String> getSupportedOptions() {
+		return new HashMap<String, String>(supportedOptions);
 	}
 
 	abstract protected void writeStartStax() throws XMLStreamException;

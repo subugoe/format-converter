@@ -37,14 +37,12 @@ public class PDFWriterTest {
 
 	private ConvertWriter writer;
 	private ByteArrayOutputStream pdfBaos;
-	private Map<String, String> options;
 
 	@Before
 	public void setUp() throws Exception {
 		writer = new PDFWriter();
 		pdfBaos = new ByteArrayOutputStream();
 		writer.setTarget(pdfBaos);
-		options = new HashMap<String, String>();
 	}
 
 	@After
@@ -126,8 +124,7 @@ public class PDFWriterTest {
 	@Test
 	public void usesTheOriginalPageSizeIfSetInOptions() throws IOException {
 		Page page = page().withWidth(1).withHeight(2).build();
-		options.put("pagesize", "original");
-		writer.setImplementationSpecificOptions(options);
+		writer.addImplementationSpecificOption("pagesize", "original");
 		writeToPdfBaos(page);
 		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
 		
@@ -140,8 +137,7 @@ public class PDFWriterTest {
 	@Test
 	public void usesA4IfSetInOptions() throws IOException {
 		Page page = page().withWidth(1).withHeight(2).build();
-		options.put("pagesize", "A4");
-		writer.setImplementationSpecificOptions(options);
+		writer.addImplementationSpecificOption("pagesize", "A4");
 		writeToPdfBaos(page);
 		PdfReader reader = new PdfReader(pdfBaos.toByteArray());
 		
@@ -236,8 +232,7 @@ public class PDFWriterTest {
 	@Test
 	public void putsImageBehindTextIfOptionIsSet() throws IOException {
 		Page page = pageA4().build();
-		options.put("images", System.getProperty("user.dir") + "/src/test/resources/withOneImage");
-		writer.setImplementationSpecificOptions(options);
+		writer.addImplementationSpecificOption("images", "src/test/resources/withOneImage");
 		writeToPdfBaos(page);
 		String rawPdf = readFromPdfBaos();
 		
@@ -251,8 +246,7 @@ public class PDFWriterTest {
 	public void puts2ImagesBehind2Pages() throws IOException {
 		//writer.setTarget(new FileOutputStream("/tmp/test.pdf"));
 		Page page = pageA4().build();
-		options.put("images", "src/test/resources/withTwoImages");
-		writer.setImplementationSpecificOptions(options);
+		writer.addImplementationSpecificOption("images", "src/test/resources/withTwoImages");
 		writeToPdfBaos(page, page);
 		String rawPdf = readFromPdfBaosPages(1, 2);
 		
@@ -263,8 +257,7 @@ public class PDFWriterTest {
 	@Test
 	public void throwsExceptionWhenTooFewImages() throws IOException {
 		Page page = pageA4().build();
-		options.put("images", "src/test/resources/withOneImage");
-		writer.setImplementationSpecificOptions(options);
+		writer.addImplementationSpecificOption("images", "src/test/resources/withOneImage");
 		try {
 			writeToPdfBaos(page, page);
 			fail("did not throw exception");
@@ -276,8 +269,7 @@ public class PDFWriterTest {
 	@Test
 	public void throwsExceptionWhenWrongFolder() throws IOException {
 		Page page = pageA4().build();
-		options.put("images", "src/test/resources/xyz");
-		writer.setImplementationSpecificOptions(options);
+		writer.addImplementationSpecificOption("images", "src/test/resources/xyz");
 		try {
 			writeToPdfBaos(page, page);
 			fail("did not throw exception");

@@ -47,7 +47,7 @@ public interface ConvertWriter {
 	 */
 	public void setTarget(OutputStream stream);
 	
-	public void setImplementationSpecificOptions(Map<String, String> options);
-	public Map<String, String> getImplementationSpecificOptions();
+	public void addImplementationSpecificOption(String key, String value);
+	public Map<String, String> getSupportedOptions();
 
 }

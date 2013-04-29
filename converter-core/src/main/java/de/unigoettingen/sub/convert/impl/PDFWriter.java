@@ -50,15 +50,16 @@ public class PDFWriter implements ConvertWriter {
 	private PdfWriter pwriter;
 	private Page currentPage;
 	private int pageNumber = 0;
-	private Map<String, String> options = new HashMap<String, String>();
+	private Map<String, String> supportedOptions = new HashMap<String, String>();
+	private Map<String, String> actualOptions = new HashMap<String, String>();
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
 	private static final String PAGESIZE_DESCRIPTION = "[A4 or original], default is A4";
 	
 	private ResourceHandler resourceHandler = new ResourceHandler();
 	
 	public PDFWriter() {
-		options.put("images", FOLDER_WITH_IMAGES_DESCRIPTION);
-		options.put("pagesize", PAGESIZE_DESCRIPTION);
+		supportedOptions.put("images", FOLDER_WITH_IMAGES_DESCRIPTION);
+		supportedOptions.put("pagesize", PAGESIZE_DESCRIPTION);
 	}
 	
 	@Override
@@ -137,7 +138,7 @@ public class PDFWriter implements ConvertWriter {
 	}
 
 	private boolean imagesAvailable() {
-		return !options.get("images").equals(FOLDER_WITH_IMAGES_DESCRIPTION);
+		return actualOptions.get("images") != null;
 	}
 
 	private void setPageSize() {
@@ -150,14 +151,15 @@ public class PDFWriter implements ConvertWriter {
 					+ pdfPageWidth + ", height: " + pdfPageHeight);
 			return;
 		}
-		boolean keepOririnalPageSize = options.get("pagesize").equals("original");
+//		String pageSize = actualOptions.get("pagesize");
+		boolean keepOririnalPageSize = "original".equals(actualOptions.get("pagesize"));
 		if (keepOririnalPageSize) {
 			pdfDocument.setPageSize(new Rectangle(currentPage.getWidth().floatValue(), currentPage.getHeight().floatValue()));
 		}
 	}
 	
 	private void putImageOnPage() throws DocumentException, FileNotFoundException, IOException {
-		File imagesFolder = new File(options.get("images"));
+		File imagesFolder = new File(actualOptions.get("images"));
 		File imageFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
 		
 		RandomAccessSource source = new RandomAccessSourceFactory().createSource(new FileInputStream(imageFile));
@@ -288,13 +290,18 @@ public class PDFWriter implements ConvertWriter {
 	}
 
 	@Override
-	public void setImplementationSpecificOptions(Map<String, String> options) {
-		this.options.putAll(options);
+	public Map<String, String> getSupportedOptions() {
+		return new HashMap<String, String>(supportedOptions);
+	}
+	
+	@Override
+	public void addImplementationSpecificOption(String key, String value) {
+		if (supportedOptions.get(key) != null) {
+			actualOptions.put(key, value);
+		} else {
+			LOGGER.warn("The option is not supported: " + key);
+		}
 	}
 
-	@Override
-	public Map<String, String> getImplementationSpecificOptions() {
-		return options;
-	}
 
 }

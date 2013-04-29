@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -16,17 +19,22 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(Main.class);
-
+	private static PrintStream out = System.out;
+	private static boolean exited;
+	
+	public static void setOutputTarget(PrintStream stream) {
+		out = stream;
+	}
+	
 	public static void main(String[] args) throws IOException {
 
+		exited = false;
+		
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"context.xml");
 		Converter converter = ctx.getBean("converter", Converter.class);
@@ -34,17 +42,6 @@ public class Main {
 		Set<String> readerNames = converter.getReaderNames();
 		Set<String> writerNames = converter.getWriterNames();
 		
-		StringBuilder allWritersOptions = new StringBuilder();
-		for (String writerName : writerNames) {
-			Set<String> optionsOfOneWriter = converter.getOptionDescriptionsForWriter(writerName);
-			if (!optionsOfOneWriter.isEmpty()) {
-				allWritersOptions.append("-- for output format '").append(writerName).append("' --\n");
-				for (String option : optionsOfOneWriter) {
-					allWritersOptions.append(option).append("\n");
-				}
-			}
-		}
-
 		Options options = new Options();
 		options.addOption("help", false, "print help");
 		options.addOption("infile", true, "input file");
@@ -53,58 +50,64 @@ public class Main {
 				+ readerNames);
 		options.addOption("outformat", true, "output format, possible values: "
 				+ writerNames);
-		options.addOption("outoptions", true, "implementation-specific options, comma-separated\n" + allWritersOptions);
+		String specificOptionsForWriters = converter.constructHelpForOutputOptions();
+		options.addOption("outoptions", true, "(optional) implementation-specific options, comma-separated\n" + specificOptionsForWriters);
 		CommandLineParser parser = new GnuParser();
 		CommandLine line = null;
 		try {
 			line = parser.parse(options, args);
 		} catch (ParseException e) {
-			printHelpAndExit(options);
+			printHelpAndSetToExit(options);
 		}
 
 		if (helpNeeded(line)) {
-			printHelpAndExit(options);
+			printHelpAndSetToExit(options);
 		}
 		
 		String inFormat = line.getOptionValue("informat");
 		String outFormat = line.getOptionValue("outformat");
-		if (!readerNames.contains(inFormat)) {
-			System.out.println("Unknown input format: " + inFormat);
-			printHelpAndExit(options);
+		if (converter.unknownInput(inFormat)) {
+			out.println("Unknown input format: " + inFormat);
+			printHelpAndSetToExit(options);
 		}
-		if (!writerNames.contains(outFormat)) {
-			System.out.println("Unknown output format: " + outFormat);
-			printHelpAndExit(options);
+		if (converter.unknownOutput(outFormat)) {
+			out.println("Unknown output format: " + outFormat);
+			printHelpAndSetToExit(options);
 		}
 
-		File infile = new File(line.getOptionValue("infile"));
-		InputStream is = new FileInputStream(infile);
-
-		File outfile = new File(line.getOptionValue("outfile"));
-		OutputStream os = new FileOutputStream(outfile);
-
-		Map<String, String> writerOptions = readWriterOptions(line);
-		
-		LOGGER.info("Starting conversion");
-		converter.convert(inFormat, is, outFormat, os, writerOptions);
-		LOGGER.info("Finished conversion, input file: " + infile.getCanonicalPath());
+		if (!exited) {
+			File infile = new File(line.getOptionValue("infile"));
+			InputStream is = new FileInputStream(infile);
+	
+			File outfile = new File(line.getOptionValue("outfile"));
+			OutputStream os = new FileOutputStream(outfile);
+	
+			Map<String, String> writerOptions = parseWriterOptions(line);
+			
+			out.println("Starting conversion, input file: " + infile.getCanonicalPath());
+			Date startTime = new Date();
+			converter.convert(inFormat, is, outFormat, os, writerOptions);
+			Date finishTime = new Date();
+			long time = (finishTime.getTime()-startTime.getTime()) / 1000;
+			out.println("Finished conversion in " + time + " seconds, output file: " + outfile.getCanonicalPath());
+		}
 
 	}
 
-	private static Map<String, String> readWriterOptions(CommandLine line) {
+	private static Map<String, String> parseWriterOptions(CommandLine line) {
 		if (!line.hasOption("outoptions")) {
 			return new HashMap<String, String>();
 		}
 		
-		Map<String, String> outOptions = new HashMap<String, String>();
+		Map<String, String> outputOptions = new HashMap<String, String>();
 		String allOptions = line.getOptionValue("outoptions");
 		String[] allTokenized = allOptions.split(",");
 		for (String oneOption : allTokenized) {
 			String[] oneTokenized = oneOption.split("=");
-			outOptions.put(oneTokenized[0], oneTokenized[1]);
+			outputOptions.put(oneTokenized[0], oneTokenized[1]);
 		}
 		
-		return outOptions;
+		return outputOptions;
 	}
 
 	private static boolean helpNeeded(CommandLine line) {
@@ -113,10 +116,14 @@ public class Main {
 				|| !line.hasOption("outformat");
 	}
 
-	private static void printHelpAndExit(Options options) {
+	private static void printHelpAndSetToExit(Options options) {
+		PrintWriter pw = new PrintWriter(out);
 		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp(" ", options);
-		System.exit(0);
+		formatter.printHelp(pw, HelpFormatter.DEFAULT_WIDTH, "java -jar converter.jar <options>", "", options,
+				HelpFormatter.DEFAULT_LEFT_PAD, HelpFormatter.DEFAULT_DESC_PAD,
+				"");
+		pw.close();
+		exited = true;
 	}
 
 }

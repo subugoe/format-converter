@@ -32,9 +32,7 @@ public class AbbyyToPdfTest {
 		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new PDFWriter();
 		
-		Map<String, String> options = new HashMap<String, String>();
-		options.put("images", System.getProperty("user.dir") + "/src/test/resources/withOneImage");
-		writer.setImplementationSpecificOptions(options);
+		writer.addImplementationSpecificOption("images", "src/test/resources/withOneImage");
 
 		
 		OutputStream s = new FileOutputStream("/tmp/sohnrey_image.pdf");

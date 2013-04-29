@@ -14,6 +14,9 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.domain.Resource;
 import nl.siegmann.epublib.epub.EpubWriter;
@@ -32,19 +35,21 @@ import de.unigoettingen.sub.convert.util.ResourceHandler;
 
 public class EPUBWriter implements ConvertWriter {
 
+	private final static Logger LOGGER = LoggerFactory.getLogger(EPUBWriter.class);
 	private Book book;
 	private OutputStream output;
 	private List<File> htmls;
 	private List<File> images;
 	private int pageNumber = 0;
-	private Map<String, String> options = new HashMap<String, String>();
+	private Map<String, String> supportedOptions = new HashMap<String, String>();
+	private Map<String, String> actualOptions = new HashMap<String, String>();
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
 	private static final String PNG = "png";
 
 	private ResourceHandler resourceHandler = new ResourceHandler();
 
 	public EPUBWriter() {
-		options.put("images", FOLDER_WITH_IMAGES_DESCRIPTION);
+		supportedOptions.put("images", FOLDER_WITH_IMAGES_DESCRIPTION);
 	}
 	
 	@Override
@@ -117,7 +122,7 @@ public class EPUBWriter implements ConvertWriter {
 	}
 
 	private void prepareImageForPage() throws IOException {
-		File imagesFolder = new File(options.get("images"));
+		File imagesFolder = new File(supportedOptions.get("images"));
 		File imageFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
 		BufferedImage tif = ImageIO.read(imageFile);
 		
@@ -169,17 +174,22 @@ public class EPUBWriter implements ConvertWriter {
 	}
 
 	@Override
-	public void setImplementationSpecificOptions(Map<String, String> options) {
-		this.options.putAll(options);
-	}
-
-	@Override
-	public Map<String, String> getImplementationSpecificOptions() {
-		return options;
+	public Map<String, String> getSupportedOptions() {
+		return new HashMap<String, String>(supportedOptions);
 	}
 
 	private boolean imagesAvailable() {
-		return !options.get("images").equals(FOLDER_WITH_IMAGES_DESCRIPTION);
+		return actualOptions.get("images") != null;
+	}
+
+	@Override
+	public void addImplementationSpecificOption(String key, String value) {
+		if (supportedOptions.get(key) != null) {
+			actualOptions.put(key, value);
+		} else {
+			LOGGER.warn("The option is not supported: " + key);
+		}
+		
 	}
 
 }

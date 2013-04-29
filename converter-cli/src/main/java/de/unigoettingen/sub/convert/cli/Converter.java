@@ -33,8 +33,8 @@ public class Converter {
 		ConvertReader reader = readers.get(inputFormat);
 		ConvertWriter writer = writers.get(outputFormat);
 		writer.setTarget(os);
-		if (!writerOptions.isEmpty()) {
-			writer.setImplementationSpecificOptions(writerOptions);
+		for (Map.Entry<String, String> option : writerOptions.entrySet()) {
+			writer.addImplementationSpecificOption(option.getKey(), option.getValue());
 		}
 		reader.setWriter(writer);
 		reader.read(is);
@@ -47,10 +47,25 @@ public class Converter {
 	public Set<String> getWriterNames() {
 		return writers.keySet();
 	}
-	public Set<String> getOptionDescriptionsForWriter(String writerName) {
+	
+	public String constructHelpForOutputOptions() {
+		StringBuilder allWritersOptions = new StringBuilder();
+		for (String writerName : getWriterNames()) {
+			Set<String> optionsOfOneWriter = getOptionDescriptionsForWriter(writerName);
+			if (!optionsOfOneWriter.isEmpty()) {
+				allWritersOptions.append("-- for output format '").append(writerName).append("' --\n");
+				for (String option : optionsOfOneWriter) {
+					allWritersOptions.append(option).append("\n");
+				}
+			}
+		}
+		return allWritersOptions.toString();
+	}
+	
+	private Set<String> getOptionDescriptionsForWriter(String writerName) {
 		Set<String> descriptions = new HashSet<String>();
 		ConvertWriter writer = writers.get(writerName);
-		Map<String, String> options = writer.getImplementationSpecificOptions();
+		Map<String, String> options = writer.getSupportedOptions();
 		
 		for (Map.Entry<String, String> entry : options.entrySet()) {
 			descriptions.add(entry.getKey() + "=" + entry.getValue());
@@ -59,6 +74,13 @@ public class Converter {
 		return descriptions;
 	}
 	
+	public boolean unknownInput(String inFormat) {
+		return !getReaderNames().contains(inFormat);
+	}
+	
+	public boolean unknownOutput(String outFormat) {
+		return !getWriterNames().contains(outFormat);
+	}
 	
 	
 }
