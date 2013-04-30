@@ -122,7 +122,7 @@ public class EPUBWriter implements ConvertWriter {
 	}
 
 	private void prepareImageForPage() throws IOException {
-		File imagesFolder = new File(supportedOptions.get("images"));
+		File imagesFolder = new File(actualOptions.get("images"));
 		File imageFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
 		BufferedImage tif = ImageIO.read(imageFile);
 		

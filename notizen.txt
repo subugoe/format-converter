@@ -1,10 +1,7 @@
-impl specific options überarbeiten: addOption, getPossibleOptions
 
 temp Dateien handling von Epubwriter zu ResourceHandler
 
 HTMLWriter extrahieren
-
-Tests für cli
 
 - orientation in pdf: landscape, portrait, grad?
 
