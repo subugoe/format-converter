@@ -82,7 +82,8 @@ public class AbbyyXMLReader extends StaxReader {
 			Metadata meta = createMetadataFromTag(startTag);
 			writer.writeMetadata(meta);
 		} else {
-			AbbyyElement element = AbbyyFactory.createElementFromTag(startTag, eventReader);
+			XMLEvent nextEvent = eventReader.peek();
+			AbbyyElement element = AbbyyFactory.createElementFromTag(startTag, nextEvent);
 			element.updatePageState(current);
 		}
 	}

@@ -1,6 +1,5 @@
 package de.unigoettingen.sub.convert.impl.abbyyxml;
 
-import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
@@ -17,11 +16,11 @@ class FormattingElement extends AbstractWordConstructingElement implements Abbyy
 	private LanguageMapper map = new LanguageMapper();
 
 	private StartElement tag;
-	private XMLEventReader eventReader;
+	private XMLEvent nextEvent;
 
-	public FormattingElement(StartElement tag, XMLEventReader eventReader) {
+	public FormattingElement(StartElement tag, XMLEvent nextEvent) {
 		this.tag = tag;
-		this.eventReader = eventReader;
+		this.nextEvent = nextEvent;
 	}
 
 	@Override
@@ -29,11 +28,9 @@ class FormattingElement extends AbstractWordConstructingElement implements Abbyy
 		this.current = current;
 		current.wordAttributeContainer = new Word();
 		processFormattingAttributes(current.wordAttributeContainer);
-		XMLEvent followingEvent = eventReader.peek();
-		if (isTextWithoutCoordinates(followingEvent)) {
-			String plainText = followingEvent.asCharacters().getData();
+		if (isTextWithoutCoordinates(nextEvent)) {
+			String plainText = nextEvent.asCharacters().getData();
 			tokenizeText(plainText);
-			eventReader.nextEvent();
 		}
 	}
 

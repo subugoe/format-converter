@@ -1,6 +1,5 @@
 package de.unigoettingen.sub.convert.impl.abbyyxml;
 
-import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
@@ -13,22 +12,20 @@ import de.unigoettingen.sub.convert.util.XmlAttributesExtractor;
 class CharParamsElement extends AbstractWordConstructingElement implements AbbyyElement {
 
 	private StartElement tag;
-	private XMLEventReader eventReader;
+	private XMLEvent nextEvent;
 
-	public CharParamsElement(StartElement tag, XMLEventReader eventReader) {
+	public CharParamsElement(StartElement tag, XMLEvent nextEvent) {
 		this.tag = tag;
-		this.eventReader = eventReader;
+		this.nextEvent = nextEvent;
 	}
 
 	@Override
 	public void updatePageState(CurrentPageState current)
 			throws XMLStreamException {
 		this.current = current;
-		XMLEvent nextEvent = eventReader.peek();
 		if (nextEvent.isCharacters()) {
 			char ch = nextEvent.asCharacters().getData().charAt(0);
 			attachCharToLineItem(ch);
-			eventReader.nextEvent();
 		}
 	}
 
