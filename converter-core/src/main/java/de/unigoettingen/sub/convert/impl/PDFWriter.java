@@ -4,12 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,30 +25,28 @@ import com.itextpdf.text.pdf.RandomAccessFileOrArray;
 import com.itextpdf.text.pdf.codec.TiffImage;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
+import de.unigoettingen.sub.convert.api.WriterWithOptions;
 import de.unigoettingen.sub.convert.model.Cell;
+import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Language;
 import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
+import de.unigoettingen.sub.convert.model.Paragraph;
+import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
-import de.unigoettingen.sub.convert.model.Paragraph;
-import de.unigoettingen.sub.convert.model.Char;
-import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.util.ResourceHandler;
 
-public class PDFWriter implements ConvertWriter {
+public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(PDFWriter.class);
-	private OutputStream output;
 	private Document pdfDocument;
 	private PdfWriter pwriter;
 	private Page currentPage;
 	private int pageNumber = 0;
-	private Map<String, String> supportedOptions = new HashMap<String, String>();
-	private Map<String, String> actualOptions = new HashMap<String, String>();
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
 	private static final String PAGESIZE_DESCRIPTION = "[A4 or original], default is A4";
 	
@@ -151,7 +146,6 @@ public class PDFWriter implements ConvertWriter {
 					+ pdfPageWidth + ", height: " + pdfPageHeight);
 			return;
 		}
-//		String pageSize = actualOptions.get("pagesize");
 		boolean keepOririnalPageSize = "original".equals(actualOptions.get("pagesize"));
 		if (keepOririnalPageSize) {
 			pdfDocument.setPageSize(new Rectangle(currentPage.getWidth().floatValue(), currentPage.getHeight().floatValue()));
@@ -283,25 +277,5 @@ public class PDFWriter implements ConvertWriter {
 	public void writeEnd() {
 		pdfDocument.close();
 	}
-
-	@Override
-	public void setTarget(OutputStream stream) {
-		output = stream;
-	}
-
-	@Override
-	public Map<String, String> getSupportedOptions() {
-		return new HashMap<String, String>(supportedOptions);
-	}
-	
-	@Override
-	public void addImplementationSpecificOption(String key, String value) {
-		if (supportedOptions.get(key) != null) {
-			actualOptions.put(key, value);
-		} else {
-			LOGGER.warn("The option is not supported: " + key);
-		}
-	}
-
 
 }

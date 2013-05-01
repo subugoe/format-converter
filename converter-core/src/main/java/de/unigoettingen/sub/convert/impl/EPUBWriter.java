@@ -5,44 +5,39 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.domain.Resource;
 import nl.siegmann.epublib.epub.EpubWriter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.unigoettingen.sub.convert.api.ConvertWriter;
+import de.unigoettingen.sub.convert.api.WriterWithOptions;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Language;
+import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.TextBlock;
-import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.util.ResourceHandler;
 
-public class EPUBWriter implements ConvertWriter {
+public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(EPUBWriter.class);
 	private Book book;
-	private OutputStream output;
 	private List<File> htmls;
 	private List<File> images;
 	private int pageNumber = 0;
-	private Map<String, String> supportedOptions = new HashMap<String, String>();
-	private Map<String, String> actualOptions = new HashMap<String, String>();
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
 	private static final String PNG = "png";
 
@@ -168,28 +163,8 @@ public class EPUBWriter implements ConvertWriter {
 		}
 	}
 
-	@Override
-	public void setTarget(OutputStream stream) {
-		this.output = stream;
-	}
-
-	@Override
-	public Map<String, String> getSupportedOptions() {
-		return new HashMap<String, String>(supportedOptions);
-	}
-
 	private boolean imagesAvailable() {
 		return actualOptions.get("images") != null;
-	}
-
-	@Override
-	public void addImplementationSpecificOption(String key, String value) {
-		if (supportedOptions.get(key) != null) {
-			actualOptions.put(key, value);
-		} else {
-			LOGGER.warn("The option is not supported: " + key);
-		}
-		
 	}
 
 }

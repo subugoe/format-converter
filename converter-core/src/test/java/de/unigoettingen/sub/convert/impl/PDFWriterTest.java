@@ -4,21 +4,15 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.io.RandomAccessSourceFactory;
-import com.itextpdf.text.pdf.PRTokeniser;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.RandomAccessFileOrArray;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
@@ -244,7 +238,6 @@ public class PDFWriterTest {
 	
 	@Test
 	public void puts2ImagesBehind2Pages() throws IOException {
-		//writer.setTarget(new FileOutputStream("/tmp/test.pdf"));
 		Page page = pageA4().build();
 		writer.addImplementationSpecificOption("images", "src/test/resources/withTwoImages");
 		writeToPdfBaos(page, page);
@@ -303,19 +296,5 @@ public class PDFWriterTest {
 		writer.writeEnd();
 		
 	}
-	
-    private String parsePdf(PdfReader reader) throws IOException {
-		
-        byte[] streamBytes = reader.getPageContent(1);
-        PRTokeniser tokenizer = new PRTokeniser(new RandomAccessFileOrArray(new RandomAccessSourceFactory().createSource(streamBytes)));
-        StringBuilder sb = new StringBuilder();
-        while (tokenizer.nextToken()) {
-            if (tokenizer.getTokenType() == PRTokeniser.TokenType.STRING) {
-                sb.append(tokenizer.getStringValue());
-            }
-        }
-        reader.close();
-        return sb.toString();
-    }
 
 }

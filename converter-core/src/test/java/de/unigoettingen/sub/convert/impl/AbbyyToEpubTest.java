@@ -37,7 +37,7 @@ public class AbbyyToEpubTest {
 		writer.addImplementationSpecificOption("images", "src/test/resources/withTwoImages");
 
 		
-		OutputStream s = new FileOutputStream("/tmp/sohnrey.epub");
+		OutputStream s = new FileOutputStream("target/sohnrey.epub");
 		//OutputStream s = System.out;
 		writer.setTarget(s);
 		

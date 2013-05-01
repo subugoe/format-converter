@@ -25,15 +25,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 
 	private static PrintStream out = System.out;
-	private static boolean exited;
+	private boolean exited;
 	
-	public static void setOutputTarget(PrintStream stream) {
+	static void setOutputTarget(PrintStream stream) {
 		out = stream;
 	}
 	
 	public static void main(String[] args) throws IOException {
 
-		exited = false;
+		new Main().execute(args);
+		
+	}
+
+	private void execute(String[] args) throws IOException {
 		
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"context.xml");
@@ -93,8 +97,24 @@ public class Main {
 		}
 
 	}
+	
+	private boolean helpNeeded(CommandLine line) {
+		return line.hasOption("help") || !line.hasOption("infile")
+				|| !line.hasOption("outfile") || !line.hasOption("informat")
+				|| !line.hasOption("outformat");
+	}
 
-	private static Map<String, String> parseWriterOptions(CommandLine line) {
+	private void printHelpAndSetToExit(Options options) {
+		PrintWriter pw = new PrintWriter(out);
+		HelpFormatter formatter = new HelpFormatter();
+		formatter.printHelp(pw, HelpFormatter.DEFAULT_WIDTH, "java -jar converter.jar <options>", "", options,
+				HelpFormatter.DEFAULT_LEFT_PAD, HelpFormatter.DEFAULT_DESC_PAD,
+				"");
+		pw.close();
+		exited = true;
+	}
+
+	private Map<String, String> parseWriterOptions(CommandLine line) {
 		if (!line.hasOption("outoptions")) {
 			return new HashMap<String, String>();
 		}
@@ -108,22 +128,6 @@ public class Main {
 		}
 		
 		return outputOptions;
-	}
-
-	private static boolean helpNeeded(CommandLine line) {
-		return line.hasOption("help") || !line.hasOption("infile")
-				|| !line.hasOption("outfile") || !line.hasOption("informat")
-				|| !line.hasOption("outformat");
-	}
-
-	private static void printHelpAndSetToExit(Options options) {
-		PrintWriter pw = new PrintWriter(out);
-		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp(pw, HelpFormatter.DEFAULT_WIDTH, "java -jar converter.jar <options>", "", options,
-				HelpFormatter.DEFAULT_LEFT_PAD, HelpFormatter.DEFAULT_DESC_PAD,
-				"");
-		pw.close();
-		exited = true;
 	}
 
 }

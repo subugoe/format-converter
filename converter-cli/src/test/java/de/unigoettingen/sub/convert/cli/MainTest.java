@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 
@@ -48,7 +49,10 @@ public class MainTest {
 
 	@Test
 	public void printsHelpIfUnknownInputFormat() throws IOException {
-		Main.main(new String[]{"-infile", "bla", "-outfile", "bla", "-informat", "notvalid", "-outformat", "tei"});
+		Main.main(new String[]{"-infile", "bla", 
+				"-outfile", "bla", 
+				"-informat", "notvalid", 
+				"-outformat", "tei"});
 
 		String sysout = new String(baos.toByteArray());
 		assertThat(sysout, containsString("Unknown input format: notvalid"));
@@ -57,11 +61,22 @@ public class MainTest {
 
 	@Test
 	public void printsHelpIfUnknownOutputFormat() throws IOException {
-		Main.main(new String[]{"-infile", "bla", "-outfile", "bla", "-informat", "abbyyxml", "-outformat", "notexisting"});
+		Main.main(new String[]{"-infile", "bla", 
+				"-outfile", "bla", 
+				"-informat", "abbyyxml", 
+				"-outformat", "notexisting"});
 
 		String sysout = new String(baos.toByteArray());
 		assertThat(sysout, containsString("Unknown output format: notexisting"));
 		assertThat(sysout, containsString("usage: java -jar"));
+	}
+
+	@Test(expected=FileNotFoundException.class)
+	public void doesNotWorkIfInputNotFound() throws IOException {
+		Main.main(new String[]{"-infile", "src/test/resources/isNotThere.xml", 
+				"-outfile", "target/tei.xml", 
+				"-informat", "abbyyxml", 
+				"-outformat", "tei"});
 	}
 
 	@Test
