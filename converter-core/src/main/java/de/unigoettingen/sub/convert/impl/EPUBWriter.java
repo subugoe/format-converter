@@ -3,6 +3,7 @@ package de.unigoettingen.sub.convert.impl;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,48 +73,70 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 
 		File tempDir = new File(System.getProperty("java.io.tmpdir"));
 		File tempHtml = new File(tempDir, "page" + pageNumber + ".html");
-		PrintWriter htmlWriter = null;
+		htmls.add(tempHtml);
+		File tempImage = new File(tempDir, "image" + pageNumber + "." + PNG);
+		images.add(tempImage);
+		
+		ConvertWriter htmlWriter = new HTMLWriter();
+		
 		try {
-			htmlWriter = new PrintWriter(tempHtml);
-			htmlWriter.println("<html>");
-			htmlWriter.println("<body>");
-			
+			htmlWriter.setTarget(new FileOutputStream(tempHtml));
 			if (imagesAvailable()) {
-				htmlWriter.println("<img src='image" + pageNumber + "." + PNG +"'>");
-				prepareImageForPage();
+				String imagesSource = actualOptions.get("images");
+				htmlWriter.addImplementationSpecificOption("images", imagesSource);
+				htmlWriter.addImplementationSpecificOption("imagesoutdir", tempDir.getAbsolutePath());
+				htmlWriter.addImplementationSpecificOption("fixedpagenr", ""+pageNumber);
+				htmlWriter.addImplementationSpecificOption("onedir", "true");
 			}
-			
-			for (PageItem pageItem : page.getPageItems()) {
-				if (pageItem instanceof TextBlock) {
-					TextBlock block = (TextBlock) pageItem;
-					for (Paragraph par : block.getParagraphs()) {
-						htmlWriter.println("<p>");
-						
-						for (Line line : par.getLines()) {
-							for (LineItem item : line.getLineItems()) {
-								for (Char ch : item.getCharacters()) {
-									htmlWriter.print(ch.getValue());
-								}
-							}
-							htmlWriter.println("<br/>");
-						}
-						
-						htmlWriter.println("</p>");
-					}
-				}
-			}
-			
-			htmlWriter.println("</body>");
-			htmlWriter.println("</html>");
-			
-			htmls.add(tempHtml);
-		} catch (IOException e) {
+			htmlWriter.writeStart();
+			htmlWriter.writePage(page);
+			htmlWriter.writeEnd();
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			if (htmlWriter != null)
-				htmlWriter.close();
 		}
+		
+//		PrintWriter htmlWriter = null;
+//		try {
+//			htmlWriter = new PrintWriter(tempHtml);
+//			htmlWriter.println("<html>");
+//			htmlWriter.println("<body>");
+//			
+//			if (imagesAvailable()) {
+//				htmlWriter.println("<img src='image" + pageNumber + "." + PNG +"'>");
+//				prepareImageForPage();
+//			}
+//			
+//			for (PageItem pageItem : page.getPageItems()) {
+//				if (pageItem instanceof TextBlock) {
+//					TextBlock block = (TextBlock) pageItem;
+//					for (Paragraph par : block.getParagraphs()) {
+//						htmlWriter.println("<p>");
+//						
+//						for (Line line : par.getLines()) {
+//							for (LineItem item : line.getLineItems()) {
+//								for (Char ch : item.getCharacters()) {
+//									htmlWriter.print(ch.getValue());
+//								}
+//							}
+//							htmlWriter.println("<br/>");
+//						}
+//						
+//						htmlWriter.println("</p>");
+//					}
+//				}
+//			}
+//			
+//			htmlWriter.println("</body>");
+//			htmlWriter.println("</html>");
+//			
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			if (htmlWriter != null)
+//				htmlWriter.close();
+//		}
 	}
 
 	private void prepareImageForPage() throws IOException {
@@ -154,12 +177,12 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			for (File tempHtml : htmls) {
-				tempHtml.delete();
-			}
-			for (File tempImage : images) {
-				tempImage.delete();
-			}
+//			for (File tempHtml : htmls) {
+//				tempHtml.delete();
+//			}
+//			for (File tempImage : images) {
+//				tempImage.delete();
+//			}
 		}
 	}
 

@@ -3,7 +3,8 @@ package de.unigoettingen.sub.convert.impl;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Map;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,12 +15,12 @@ import de.unigoettingen.sub.convert.model.Page;
 import static org.hamcrest.CoreMatchers.*;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.WordBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.LineBuilder.*;
 
 public class HTMLWriterTest {
 
 	private ConvertWriter writer;
 	private ByteArrayOutputStream htmlBaos;
-	private Map<String, String> options;
 
 	@Before
 	public void setUp() throws Exception {
@@ -56,17 +57,60 @@ public class HTMLWriterTest {
 	}
 	
 	@Test
-	public void createsHtmlWithImage() {
-		Page page = page().with(word("test")).build();
+	public void writesHtmlWithEmptyLine() {
+		Page page = page().with(line()).build();
 		writer.writePage(page);
-		writer.addImplementationSpecificOption("images", "src/test/resources/withOneImage");
-		writer.addImplementationSpecificOption("imagesoutdir", "src/test/resources/withOneImage");
 		
 		String html = fromBaos();
 		
-		assertThat(html, containsString("test"));
-		
+		assertThat(html, containsString("<br/>"));
 	}
+	
+	@Test
+	public void createsHtmlWithImage() throws FileNotFoundException {
+		Page page = page().with(word("word")).build();
+		
+		writer.addImplementationSpecificOption("images", "src/test/resources/withOneImage");
+		writer.addImplementationSpecificOption("imagesoutdir", "target/test.html.images");
+		writer.writePage(page);
+		
+		String html = fromBaos();
+		
+		assertThat(html, containsString("word"));
+		assertThat(html, containsString("<img src=\"test.html.images/image1.png\""));
+	}
+
+	@Test
+	public void createsHtmlWithTwoImages() throws FileNotFoundException {
+		Page page = page().with(word("word1")).build();
+		Page page2 = page().with(word("word2")).build();
+//		writer.setTarget(new FileOutputStream("target/bla.html"));
+		
+		writer.addImplementationSpecificOption("images", "src/test/resources/withTwoImages");
+		writer.addImplementationSpecificOption("imagesoutdir", "target/test2.html.images");
+		writer.writePage(page);
+		writer.writePage(page2);
+		
+		String html = fromBaos();
+		
+		assertThat(html, containsString("<img src=\"test2.html.images/image1.png\""));
+		assertThat(html, containsString("<img src=\"test2.html.images/image2.png\""));
+	}
+	
+	@Test(expected=IllegalStateException.class)
+	public void exceptionWhenTooFewImages() throws FileNotFoundException {
+		Page page = page().with(word("word1")).build();
+		Page page2 = page().with(word("word2")).build();
+		
+		String oneImageDir = "src/test/resources/withOneImage";
+		writer.addImplementationSpecificOption("images", oneImageDir);
+		writer.addImplementationSpecificOption("imagesoutdir", "target/test3.html.images");
+		writer.writePage(page);
+
+		writer.writePage(page2);		
+	}
+	
+	
 
 	private String fromBaos() {
 		return new String(htmlBaos.toByteArray());

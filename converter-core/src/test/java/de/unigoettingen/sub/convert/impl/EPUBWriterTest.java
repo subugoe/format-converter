@@ -12,8 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -42,14 +40,12 @@ public class EPUBWriterTest {
 
 	private ConvertWriter writer;
 	private ByteArrayOutputStream epubBaos;
-	private Map<String, String> options;
 
 	@Before
 	public void setUp() throws Exception {
 		writer = new EPUBWriter();
 		epubBaos = new ByteArrayOutputStream();
 		writer.setTarget(epubBaos);
-		options = new HashMap<String, String>();
 	}
 	
 	@After
@@ -106,7 +102,7 @@ public class EPUBWriterTest {
 		
 		assertEquals("media type", "application/xhtml+xml", firstPage.getMediaType().toString());
 		assertEquals("encoding", "UTF-8", firstPage.getInputEncoding());
-		assertThat("html body must be empty", rawHtml, containsString("<body>\n</body>"));
+		assertThat(rawHtml, containsString("<div id=\"page1\""));
 	}
 	
 	@Test
@@ -119,11 +115,11 @@ public class EPUBWriterTest {
 
 		Resource firstPage = book.getContents().get(0);
 		String rawHtml = toHtml(firstPage);
-		assertThat("html body must be empty", rawHtml, containsString("<body>\n</body>"));
+		assertThat(rawHtml, containsString("<div id=\"page1\""));
 		
 		Resource secondPage = book.getContents().get(0);
 		String rawHtml2 = toHtml(secondPage);
-		assertThat("html body must be empty", rawHtml2, containsString("<body>\n</body>"));
+		assertThat(rawHtml2, containsString("<div id=\"page1\""));
 	}
 	
 	@Test

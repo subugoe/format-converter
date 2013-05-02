@@ -24,7 +24,7 @@ public class AbbyyToPdfTest {
 	public void setUp() throws Exception {
 	}
 
-	@Test
+	//@Test
 	public void test() throws IOException {
 		File abbyy = new File(
 				System.getProperty("user.dir") + "/src/test/resources/abbyy10_coverPage.xml");
@@ -35,7 +35,7 @@ public class AbbyyToPdfTest {
 		writer.addImplementationSpecificOption("images", "src/test/resources/withOneImage");
 
 		
-		OutputStream s = new FileOutputStream("/tmp/sohnrey_image.pdf");
+		OutputStream s = new FileOutputStream("target/sohnrey.pdf");
 		//OutputStream s = System.out;
 		writer.setTarget(s);
 		
