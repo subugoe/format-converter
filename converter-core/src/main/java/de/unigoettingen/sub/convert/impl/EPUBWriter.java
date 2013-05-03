@@ -1,40 +1,24 @@
 package de.unigoettingen.sub.convert.impl;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.domain.Resource;
 import nl.siegmann.epublib.epub.EpubWriter;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.api.WriterWithOptions;
-import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Language;
-import de.unigoettingen.sub.convert.model.Line;
-import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
-import de.unigoettingen.sub.convert.model.PageItem;
-import de.unigoettingen.sub.convert.model.Paragraph;
-import de.unigoettingen.sub.convert.model.TextBlock;
-import de.unigoettingen.sub.convert.util.ResourceHandler;
 
 public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(EPUBWriter.class);
 	private Book book;
 	private List<File> htmls;
 	private List<File> images;
@@ -42,7 +26,7 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
 	private static final String PNG = "png";
 
-	private ResourceHandler resourceHandler = new ResourceHandler();
+	private Page page;
 
 	public EPUBWriter() {
 		supportedOptions.put("images", FOLDER_WITH_IMAGES_DESCRIPTION);
@@ -70,124 +54,79 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 	@Override
 	public void writePage(Page page) {
 		pageNumber++;
-
+		this.page = page;
+		
 		File tempDir = new File(System.getProperty("java.io.tmpdir"));
 		File tempHtml = new File(tempDir, "page" + pageNumber + ".html");
 		htmls.add(tempHtml);
-		File tempImage = new File(tempDir, "image" + pageNumber + "." + PNG);
-		images.add(tempImage);
-		
-		ConvertWriter htmlWriter = new HTMLWriter();
-		
-		try {
-			htmlWriter.setTarget(new FileOutputStream(tempHtml));
-			if (imagesAvailable()) {
-				String imagesSource = actualOptions.get("images");
-				htmlWriter.addImplementationSpecificOption("images", imagesSource);
-				htmlWriter.addImplementationSpecificOption("imagesoutdir", tempDir.getAbsolutePath());
-				htmlWriter.addImplementationSpecificOption("fixedpagenr", ""+pageNumber);
-				htmlWriter.addImplementationSpecificOption("onedir", "true");
-			}
-			htmlWriter.writeStart();
-			htmlWriter.writePage(page);
-			htmlWriter.writeEnd();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (imagesAvailable()) {
+			images.add(new File(tempDir, "image" + pageNumber + "." + PNG));
 		}
 		
-//		PrintWriter htmlWriter = null;
-//		try {
-//			htmlWriter = new PrintWriter(tempHtml);
-//			htmlWriter.println("<html>");
-//			htmlWriter.println("<body>");
-//			
-//			if (imagesAvailable()) {
-//				htmlWriter.println("<img src='image" + pageNumber + "." + PNG +"'>");
-//				prepareImageForPage();
-//			}
-//			
-//			for (PageItem pageItem : page.getPageItems()) {
-//				if (pageItem instanceof TextBlock) {
-//					TextBlock block = (TextBlock) pageItem;
-//					for (Paragraph par : block.getParagraphs()) {
-//						htmlWriter.println("<p>");
-//						
-//						for (Line line : par.getLines()) {
-//							for (LineItem item : line.getLineItems()) {
-//								for (Char ch : item.getCharacters()) {
-//									htmlWriter.print(ch.getValue());
-//								}
-//							}
-//							htmlWriter.println("<br/>");
-//						}
-//						
-//						htmlWriter.println("</p>");
-//					}
-//				}
-//			}
-//			
-//			htmlWriter.println("</body>");
-//			htmlWriter.println("</html>");
-//			
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} finally {
-//			if (htmlWriter != null)
-//				htmlWriter.close();
-//		}
+		try {
+			writeHtmlPageToDir(tempHtml, tempDir);
+		} catch (IOException e) {
+			throw new IllegalStateException("Could not write page " + pageNumber, e);
+		}
+		
 	}
 
-	private void prepareImageForPage() throws IOException {
-		File imagesFolder = new File(actualOptions.get("images"));
-		File imageFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
-		BufferedImage tif = ImageIO.read(imageFile);
-		
-		File tempDir = new File(System.getProperty("java.io.tmpdir"));
-		File tempImage = new File(tempDir, "image" + pageNumber + "." + PNG);
+	private boolean imagesAvailable() {
+		return setOptions.get("images") != null;
+	}
 
-		FileOutputStream fos = new FileOutputStream(tempImage);
-		ImageIO.write(tif, PNG, fos);
-		
-		images.add(tempImage);
+	private void writeHtmlPageToDir(File tempHtml, File tempDir)
+			throws FileNotFoundException, IOException {
+		ConvertWriter htmlWriter = new HTMLWriter();
+		FileOutputStream htmlStream = new FileOutputStream(tempHtml);
+		htmlWriter.setTarget(htmlStream);
+		htmlWriter.addImplementationSpecificOption("fixedpagenr", ""+pageNumber);
+		if (imagesAvailable()) {
+			String imagesSource = setOptions.get("images");
+			htmlWriter.addImplementationSpecificOption("images", imagesSource);
+			htmlWriter.addImplementationSpecificOption("imagesoutdir", tempDir.getAbsolutePath());
+			htmlWriter.addImplementationSpecificOption("onedir", "true");
+		}
+		htmlWriter.writeStart();
+		htmlWriter.writePage(page);
+		htmlWriter.writeEnd();
+		htmlStream.close();
 	}
 
 	@Override
 	public void writeEnd() {
 		try {
-			for (int i = 0; i < htmls.size(); i++) {
-				int pageNr = i + 1;
-				FileInputStream fis = new FileInputStream(htmls.get(i));
-				book.addSection("Page " + pageNr, new Resource(fis, "page" + pageNr + ".html"));
-				
-				if (imagesAvailable()) {
-					FileInputStream tempImageFis = new FileInputStream(images.get(i));
-					book.getResources().add(new Resource(tempImageFis, "image" + pageNr + "." + PNG));
-				}
-			}
-	
-			
-			
+			fillBookWithTempFiles();
 			EpubWriter epubWriter = new EpubWriter();
-			
 			epubWriter.write(book, output);
 	
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not create epub", e);
 		} finally {
-//			for (File tempHtml : htmls) {
-//				tempHtml.delete();
-//			}
-//			for (File tempImage : images) {
-//				tempImage.delete();
-//			}
+			deleteTempFiles();
 		}
 	}
 
-	private boolean imagesAvailable() {
-		return actualOptions.get("images") != null;
+	private void fillBookWithTempFiles() throws IOException {
+		for (int i = 0; i < htmls.size(); i++) {
+			int pageNr = i + 1;
+			FileInputStream tempHtmlFis = new FileInputStream(htmls.get(i));
+			book.addSection("Page " + pageNr, new Resource(tempHtmlFis, "page" + pageNr + ".html"));
+			
+			if (imagesAvailable()) {
+				FileInputStream tempImageFis = new FileInputStream(images.get(i));
+				book.getResources().add(new Resource(tempImageFis, "image" + pageNr + "." + PNG));
+			}
+		}
+	}
+
+	private void deleteTempFiles() {
+		for (File tempHtml : htmls) {
+			tempHtml.delete();
+		}
+		for (File tempImage : images) {
+			tempImage.delete();
+		}
 	}
 
 }

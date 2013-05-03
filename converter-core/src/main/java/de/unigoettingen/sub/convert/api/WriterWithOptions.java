@@ -12,7 +12,7 @@ public abstract class WriterWithOptions implements ConvertWriter {
 	private final static Logger LOGGER = LoggerFactory.getLogger(WriterWithOptions.class);
 	protected OutputStream output;
 	protected Map<String, String> supportedOptions = new HashMap<String, String>();
-	protected Map<String, String> actualOptions = new HashMap<String, String>();
+	protected Map<String, String> setOptions = new HashMap<String, String>();
 
 
 	@Override
@@ -23,7 +23,7 @@ public abstract class WriterWithOptions implements ConvertWriter {
 	@Override
 	public void addImplementationSpecificOption(String key, String value) {
 		if (supportedOptions.get(key) != null) {
-			actualOptions.put(key, value);
+			setOptions.put(key, value);
 		} else {
 			LOGGER.warn("The option is not supported: " + key);
 		}

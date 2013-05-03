@@ -133,7 +133,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 	}
 
 	private boolean imagesAvailable() {
-		return actualOptions.get("images") != null;
+		return setOptions.get("images") != null;
 	}
 
 	private void setPageSize() {
@@ -146,14 +146,14 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 					+ pdfPageWidth + ", height: " + pdfPageHeight);
 			return;
 		}
-		boolean keepOririnalPageSize = "original".equals(actualOptions.get("pagesize"));
+		boolean keepOririnalPageSize = "original".equals(setOptions.get("pagesize"));
 		if (keepOririnalPageSize) {
 			pdfDocument.setPageSize(new Rectangle(currentPage.getWidth().floatValue(), currentPage.getHeight().floatValue()));
 		}
 	}
 	
 	private void putImageOnPage() throws DocumentException, FileNotFoundException, IOException {
-		File imagesFolder = new File(actualOptions.get("images"));
+		File imagesFolder = new File(setOptions.get("images"));
 		File imageFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
 		
 		RandomAccessSource source = new RandomAccessSourceFactory().createSource(new FileInputStream(imageFile));

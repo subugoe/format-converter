@@ -8,6 +8,8 @@
 	
 	<bean id="teiWriter" class="de.unigoettingen.sub.convert.impl.CustomTeiP5Writer"/>
 	<bean id="pdfWriter" class="de.unigoettingen.sub.convert.impl.PDFWriter"/>
+	<bean id="epubWriter" class="de.unigoettingen.sub.convert.impl.EPUBWriter"/>
+	<bean id="htmlWriter" class="de.unigoettingen.sub.convert.impl.HTMLWriter"/>
 	<!-- add more beans of type ConvertWriter -->
 
 	<bean id="converter" class="de.unigoettingen.sub.convert.cli.Converter">
@@ -26,6 +28,12 @@
 				</entry>
 				<entry key="pdf">
 					<ref local="pdfWriter"/>
+				</entry>
+				<entry key="epub">
+					<ref local="epubWriter"/>
+				</entry>
+				<entry key="html">
+					<ref local="htmlWriter"/>
 				</entry>
 				<!-- add more writer entries -->
 			</map>

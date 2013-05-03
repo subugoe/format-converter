@@ -16,6 +16,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.WordBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.LineBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.TableBuilder.*;
 
 public class HTMLWriterTest {
 
@@ -84,7 +85,6 @@ public class HTMLWriterTest {
 	public void createsHtmlWithTwoImages() throws FileNotFoundException {
 		Page page = page().with(word("word1")).build();
 		Page page2 = page().with(word("word2")).build();
-//		writer.setTarget(new FileOutputStream("target/bla.html"));
 		
 		writer.addImplementationSpecificOption("images", "src/test/resources/withTwoImages");
 		writer.addImplementationSpecificOption("imagesoutdir", "target/test2.html.images");
@@ -110,7 +110,22 @@ public class HTMLWriterTest {
 		writer.writePage(page2);		
 	}
 	
+	@Test
+	public void createsHtmlWithTable() throws FileNotFoundException {
+		Page page = page().with(table().with(word("word1"))).build();
+//		writer.setTarget(new FileOutputStream("target/bla.html"));
+		
+		writer.writePage(page);
+		
+		String html = fromBaos();
+		
+		assertThat(html, containsString("<table>"));
+		assertThat(html, containsString("<tr>"));
+		assertThat(html, containsString("<td>"));
+		assertThat(html, containsString("word1"));
+	}
 	
+
 
 	private String fromBaos() {
 		return new String(htmlBaos.toByteArray());

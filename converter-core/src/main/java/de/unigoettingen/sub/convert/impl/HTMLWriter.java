@@ -12,6 +12,9 @@ import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Paragraph;
+import de.unigoettingen.sub.convert.model.Row;
+import de.unigoettingen.sub.convert.model.Cell;
+import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.util.ResourceHandler;
 
@@ -21,7 +24,7 @@ public class HTMLWriter extends StaxWriter {
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
 	private static final String OUTPUT_FOLDER_FOR_IMAGES = "[folder] for the converted PNG images";
 	private static final String PAGE_NUMBER_DESCRIPTION = "[page number], sets all pages to this number (used internally for EPUB writer)";
-	private static final String ONE_DIR_DESCRIPTION = "[true or false], use the same directory for html and image files";
+	private static final String ONE_DIR_DESCRIPTION = "[true or false], use the same directory for html and image files (used internally for EPUB writer)";
 	private static final String PNG = "png";
 	private Page currentPage;
 
@@ -58,34 +61,46 @@ public class HTMLWriter extends StaxWriter {
 	@Override
 	protected void writePageStax(Page page) throws XMLStreamException {
 		
-		if (actualOptions.get("fixedpagenr") != null) {
-			pageNumber = Integer.parseInt(actualOptions.get("fixedpagenr"));
+		if (setOptions.get("fixedpagenr") != null) {
+			pageNumber = Integer.parseInt(setOptions.get("fixedpagenr"));
 		} else {
 			pageNumber++;
 		}
 		currentPage = page;
 		
+		xwriter.writeStartElement("table");
+		xwriter.writeAttribute("border", "1");
+		xwriter.writeAttribute("frame", "below");
+		xwriter.writeAttribute("rules", "none");
+		xwriter.writeStartElement("tr");
 		if (imagesAvailable()) {
+			xwriter.writeStartElement("td");
+			xwriter.writeAttribute("valign", "top");
 			addImageLink();
+			xwriter.writeEndElement();
 		}
+		xwriter.writeStartElement("td");
+		xwriter.writeAttribute("valign", "top");
 		writeHtmlPage();
-		
+		xwriter.writeEndElement();
+		xwriter.writeEndElement();
+		xwriter.writeEndElement();
 	}
 	
 	private boolean imagesAvailable() {
-		return actualOptions.get("images") != null && actualOptions.get("imagesoutdir") != null;
+		return setOptions.get("images") != null && setOptions.get("imagesoutdir") != null;
 	}
 
 	private void addImageLink() throws XMLStreamException {
 			int linesOnPage = getLinesOnPage(currentPage, 40);
-			File imageOutDir = new File(actualOptions.get("imagesoutdir"));
+			File imageOutDir = new File(setOptions.get("imagesoutdir"));
 			xwriter.writeEmptyElement("img");
-			if ("true".equals(actualOptions.get("onedir"))) {
+			if ("true".equals(setOptions.get("onedir"))) {
 				xwriter.writeAttribute("src", String.format("image%d.%s", pageNumber, PNG));
 			} else {
 				xwriter.writeAttribute("src", String.format("%s/image%d.%s", imageOutDir.getName(), pageNumber, PNG));
 			}
-			xwriter.writeAttribute("style", String.format("height: %dem; float: left", linesOnPage));
+			xwriter.writeAttribute("style", String.format("height: %dem", linesOnPage));
 			putImageForPageIntoDir(imageOutDir);
 	}
 
@@ -103,7 +118,7 @@ public class HTMLWriter extends StaxWriter {
 	}
 
 	private void putImageForPageIntoDir(File imageOutDir) {
-		File imagesFolder = new File(actualOptions.get("images"));
+		File imagesFolder = new File(setOptions.get("images"));
 		File tifFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
 		File pngFile = new File(imageOutDir, "image" + pageNumber + "." + PNG);
 		resourceHandler.tifToPng(tifFile, pngFile);
@@ -113,12 +128,15 @@ public class HTMLWriter extends StaxWriter {
 		int linesOnPage = getLinesOnPage(currentPage, 40);
 		xwriter.writeStartElement("div");
 		xwriter.writeAttribute("id", "page" + pageNumber);
-		xwriter.writeAttribute("style", "height: " + linesOnPage + "em");
+		//xwriter.writeAttribute("style", "height: " + linesOnPage + "em");
 		
 		for (PageItem pageItem : currentPage.getPageItems()) {
 			if (pageItem instanceof TextBlock) {
 				TextBlock block = (TextBlock) pageItem;
 				writeTextBlock(block);
+			} else if (pageItem instanceof Table) {
+				Table table = (Table) pageItem;
+				writeTable(table);
 			}
 		}
 		xwriter.writeEndElement(); // div
@@ -141,6 +159,24 @@ public class HTMLWriter extends StaxWriter {
 		}
 	}
 
+	private void writeTable(Table table) throws XMLStreamException {
+		xwriter.writeStartElement("table");
+		for (Row row : table.getRows()) {
+			xwriter.writeStartElement("tr");
+			for (Cell cell : row.getCells()) {
+				xwriter.writeStartElement("td");
+				PageItem item = cell.getContent();
+				if (item instanceof TextBlock) {
+					writeTextBlock((TextBlock) item);
+				}
+				xwriter.writeEndElement(); // td
+			}
+			xwriter.writeEndElement(); // tr
+		}
+		xwriter.writeEndElement(); // table
+	}
+	
+	
 
 	@Override
 	protected void writeEndStax() throws XMLStreamException {
