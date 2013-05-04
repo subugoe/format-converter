@@ -25,28 +25,42 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 
 	private static PrintStream out = System.out;
-	private boolean exited;
+	private boolean helpNeeded;
+	private Converter converter;
+	private Options options;
+	private CommandLine line;
 	
 	static void setOutputTarget(PrintStream stream) {
 		out = stream;
 	}
 	
 	public static void main(String[] args) throws IOException {
-
 		new Main().execute(args);
-		
 	}
 
 	private void execute(String[] args) throws IOException {
-		
+		initConverter();
+		initArguments(args);
+		verifyArguments();
+		if (helpNeeded()) {
+			printHelp();
+		} else {
+			convertUsingArguments();
+		}
+	}
+	
+	private void initConverter() {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"context.xml");
-		Converter converter = ctx.getBean("converter", Converter.class);
+		converter = ctx.getBean("converter", Converter.class);
+	}
 
+	private void initArguments(String[] args) {
 		Set<String> readerNames = converter.getReaderNames();
 		Set<String> writerNames = converter.getWriterNames();
+		String specificOptionsForWriters = converter.constructHelpForOutputOptions();
 		
-		Options options = new Options();
+		options = new Options();
 		options.addOption("help", false, "print help");
 		options.addOption("infile", true, "input file");
 		options.addOption("outfile", true, "output file");
@@ -54,67 +68,84 @@ public class Main {
 				+ readerNames);
 		options.addOption("outformat", true, "output format, possible values: "
 				+ writerNames);
-		String specificOptionsForWriters = converter.constructHelpForOutputOptions();
-		options.addOption("outoptions", true, "(optional) implementation-specific options, comma-separated\n" + specificOptionsForWriters);
+		options.addOption("outoptions", true, "(optional) implementation-specific options, comma-separated\n" 
+				+ specificOptionsForWriters);
 		CommandLineParser parser = new GnuParser();
-		CommandLine line = null;
 		try {
 			line = parser.parse(options, args);
 		} catch (ParseException e) {
-			printHelpAndSetToExit(options);
+			out.println("Error reading arguments: " + e.getMessage());
+			setHelpNeeded();
 		}
+	}
 
-		if (helpNeeded(line)) {
-			printHelpAndSetToExit(options);
+	private void verifyArguments() {
+		if (askingForHelp()) {
+			setHelpNeeded();
+		} else if (argumentsIncomplete()) {
+			out.println("You must at least provide -infile, -outfile, -informat, and -outformat.");
+			setHelpNeeded();
+		} else {
+			String inFormat = line.getOptionValue("informat");
+			String outFormat = line.getOptionValue("outformat");
+			if (converter.unknownInput(inFormat)) {
+				out.println("Unknown input format: " + inFormat);
+				setHelpNeeded();
+			}
+			if (converter.unknownOutput(outFormat)) {
+				out.println("Unknown output format: " + outFormat);
+				setHelpNeeded();
+			}
 		}
-		
+	}
+
+	private void convertUsingArguments() throws IOException {
 		String inFormat = line.getOptionValue("informat");
 		String outFormat = line.getOptionValue("outformat");
-		if (converter.unknownInput(inFormat)) {
-			out.println("Unknown input format: " + inFormat);
-			printHelpAndSetToExit(options);
-		}
-		if (converter.unknownOutput(outFormat)) {
-			out.println("Unknown output format: " + outFormat);
-			printHelpAndSetToExit(options);
-		}
+		File infile = new File(line.getOptionValue("infile"));
+		InputStream is = new FileInputStream(infile);
 
-		if (!exited) {
-			File infile = new File(line.getOptionValue("infile"));
-			InputStream is = new FileInputStream(infile);
-	
-			File outfile = new File(line.getOptionValue("outfile"));
-			OutputStream os = new FileOutputStream(outfile);
-	
-			Map<String, String> writerOptions = parseWriterOptions(line);
-			
-			out.println("Starting conversion, input file: " + infile.getCanonicalPath());
-			Date startTime = new Date();
-			converter.convert(inFormat, is, outFormat, os, writerOptions);
-			Date finishTime = new Date();
-			long time = (finishTime.getTime()-startTime.getTime()) / 1000;
-			out.println("Finished conversion in " + time + " seconds, output file: " + outfile.getCanonicalPath());
-		}
+		File outfile = new File(line.getOptionValue("outfile"));
+		OutputStream os = new FileOutputStream(outfile);
 
+		Map<String, String> writerOptions = parseWriterOptions();
+		
+		out.println("Starting conversion, input file: " + infile.getCanonicalPath());
+		Date startTime = new Date();
+		converter.convert(inFormat, is, outFormat, os, writerOptions);
+		Date finishTime = new Date();
+		long time = (finishTime.getTime()-startTime.getTime()) / 1000;
+		out.println("Finished conversion in " + time + " seconds, output file: " + outfile.getCanonicalPath());
+	}
+
+	private boolean askingForHelp() {
+		return line.hasOption("help");
 	}
 	
-	private boolean helpNeeded(CommandLine line) {
-		return line.hasOption("help") || !line.hasOption("infile")
+	private boolean argumentsIncomplete() {
+		return !line.hasOption("infile")
 				|| !line.hasOption("outfile") || !line.hasOption("informat")
 				|| !line.hasOption("outformat");
 	}
 
-	private void printHelpAndSetToExit(Options options) {
+	private void setHelpNeeded() {
+		helpNeeded = true;
+	}
+	
+	private boolean helpNeeded() {
+		return helpNeeded;
+	}
+	
+	private void printHelp() {
 		PrintWriter pw = new PrintWriter(out);
 		HelpFormatter formatter = new HelpFormatter();
 		formatter.printHelp(pw, HelpFormatter.DEFAULT_WIDTH, "java -jar converter.jar <options>", "", options,
 				HelpFormatter.DEFAULT_LEFT_PAD, HelpFormatter.DEFAULT_DESC_PAD,
 				"");
 		pw.close();
-		exited = true;
 	}
 
-	private Map<String, String> parseWriterOptions(CommandLine line) {
+	private Map<String, String> parseWriterOptions() {
 		if (!line.hasOption("outoptions")) {
 			return new HashMap<String, String>();
 		}

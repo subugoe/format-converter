@@ -46,6 +46,7 @@ public class AbbyyXMLReader extends StaxReader {
 	}
 	
 	private CurrentPageState current = new CurrentPageState();
+	private int pageCounter = 0;
 
 	/**
 	 * Tells the writer to start the output.
@@ -55,6 +56,7 @@ public class AbbyyXMLReader extends StaxReader {
 			throws XMLStreamException {
 		checkIfXmlFormatIsCorrect();
 		writer.writeStart();
+		System.out.print("Processed pages:");
 	}
 
 	private void checkIfXmlFormatIsCorrect()
@@ -111,6 +113,7 @@ public class AbbyyXMLReader extends StaxReader {
 		String name = endTag.getName().getLocalPart();
 		if (name.equals("page")) {
 			writer.writePage(current.page);
+			System.out.print(" " + ++pageCounter);
 		} else if (name.equals("formatting")) {
 			// this has to be done, so that a new lineItem (word/nonWord) can be started
 			finishUpLastLineItem();
