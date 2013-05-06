@@ -2,6 +2,7 @@ package de.unigoettingen.sub.convert.cli;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +22,7 @@ public class Converter {
 
 	private Map<String, ConvertReader> readers;
 	private Map<String, ConvertWriter> writers;
+	private PrintStream out;
 
 	public void setReaders(Map<String, ConvertReader> readers) {
 		this.readers = readers;
@@ -28,9 +30,16 @@ public class Converter {
 	public void setWriters(Map<String, ConvertWriter> writers) {
 		this.writers = writers;
 	}
+	
+	public void setSysOut(PrintStream out) {
+		this.out = out;
+	}
 
 	public void convert(String inputFormat, InputStream is, String outputFormat, OutputStream os, Map<String, String> writerOptions) {
 		ConvertReader reader = readers.get(inputFormat);
+		if (out != null) {
+			reader.setSystemOutput(out);
+		}
 		ConvertWriter writer = writers.get(outputFormat);
 		writer.setTarget(os);
 		for (Map.Entry<String, String> option : writerOptions.entrySet()) {

@@ -1,5 +1,6 @@
 package de.unigoettingen.sub.convert.impl.abbyyxml;
 
+import java.io.PrintStream;
 import java.util.Set;
 
 import javax.xml.stream.XMLStreamException;
@@ -19,6 +20,7 @@ import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Word;
 import de.unigoettingen.sub.convert.util.LanguageMapper;
+import de.unigoettingen.sub.convert.util.NullOutputStream;
 import de.unigoettingen.sub.convert.util.XmlAttributesExtractor;
 
 /**
@@ -47,6 +49,7 @@ public class AbbyyXMLReader extends StaxReader {
 	
 	private CurrentPageState current = new CurrentPageState();
 	private int pageCounter = 0;
+	private PrintStream out = new PrintStream(new NullOutputStream());
 
 	/**
 	 * Tells the writer to start the output.
@@ -56,7 +59,7 @@ public class AbbyyXMLReader extends StaxReader {
 			throws XMLStreamException {
 		checkIfXmlFormatIsCorrect();
 		writer.writeStart();
-		System.out.print("Processed pages:");
+		out.print("Processed pages:");
 	}
 
 	private void checkIfXmlFormatIsCorrect()
@@ -113,7 +116,7 @@ public class AbbyyXMLReader extends StaxReader {
 		String name = endTag.getName().getLocalPart();
 		if (name.equals("page")) {
 			writer.writePage(current.page);
-			System.out.print(" " + ++pageCounter);
+			out.print(" " + ++pageCounter);
 		} else if (name.equals("formatting")) {
 			// this has to be done, so that a new lineItem (word/nonWord) can be started
 			finishUpLastLineItem();
@@ -130,6 +133,12 @@ public class AbbyyXMLReader extends StaxReader {
 	@Override
 	protected void handleEndDocument() {
 		writer.writeEnd();
+		out.println();
+	}
+
+	@Override
+	public void setSystemOutput(PrintStream stream) {
+		this.out = stream;
 	}
 
 }

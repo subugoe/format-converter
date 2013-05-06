@@ -1,7 +1,4 @@
 
-temp Dateien handling von Epubwriter zu ResourceHandler
-
-HTMLWriter extrahieren
 
 file.exists testen? zB für png Dateien oder für outputs bei MainTest -> ein output-dir in target, immer leeren
 

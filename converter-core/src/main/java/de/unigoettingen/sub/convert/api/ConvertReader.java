@@ -1,6 +1,7 @@
 package de.unigoettingen.sub.convert.api;
 
 import java.io.InputStream;
+import java.io.PrintStream;
 
 /**
  * 
@@ -18,5 +19,7 @@ public interface ConvertReader {
 	public void setWriter(ConvertWriter writer);
 
 	public void read(InputStream is);
+	
+	public void setSystemOutput(PrintStream stream);
 
 }

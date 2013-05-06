@@ -53,6 +53,7 @@ public class Main {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"context.xml");
 		converter = ctx.getBean("converter", Converter.class);
+		converter.setSysOut(out);
 	}
 
 	private void initArguments(String[] args) {
