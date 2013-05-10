@@ -226,7 +226,7 @@ public class PDFWriterTest {
 	@Test
 	public void putsImageBehindTextIfOptionIsSet() throws IOException {
 		Page page = pageA4().build();
-		writer.addImplementationSpecificOption("images", "src/test/resources/withOneImage");
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
 		writeToPdfBaos(page);
 		String rawPdf = readFromPdfBaos();
 		
@@ -239,7 +239,7 @@ public class PDFWriterTest {
 	@Test
 	public void puts2ImagesBehind2Pages() throws IOException {
 		Page page = pageA4().build();
-		writer.addImplementationSpecificOption("images", "src/test/resources/withTwoImages");
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withTwoImages");
 		writeToPdfBaos(page, page);
 		String rawPdf = readFromPdfBaosPages(1, 2);
 		
@@ -250,7 +250,7 @@ public class PDFWriterTest {
 	@Test
 	public void throwsExceptionWhenTooFewImages() throws IOException {
 		Page page = pageA4().build();
-		writer.addImplementationSpecificOption("images", "src/test/resources/withOneImage");
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
 		try {
 			writeToPdfBaos(page, page);
 			fail("did not throw exception");
@@ -262,7 +262,7 @@ public class PDFWriterTest {
 	@Test
 	public void throwsExceptionWhenWrongFolder() throws IOException {
 		Page page = pageA4().build();
-		writer.addImplementationSpecificOption("images", "src/test/resources/xyz");
+		writer.addImplementationSpecificOption("scans", "src/test/resources/xyz");
 		try {
 			writeToPdfBaos(page, page);
 			fail("did not throw exception");

@@ -41,13 +41,29 @@ public class ResourceHandler {
 	public void tifToPng(File tifFile, File pngFile) {
 		try {
 			BufferedImage tifImage = ImageIO.read(tifFile);
-			pngFile.getParentFile().mkdirs();
-	
-			FileOutputStream fos = new FileOutputStream(pngFile);
-			ImageIO.write(tifImage, "png", fos);
+			ImageArea completeImage = ImageArea.createLTRB(0, 0, tifImage.getWidth(), tifImage.getHeight());
+			tifToPngAndCut(tifFile, pngFile, completeImage);
 		} catch (IOException e) {
 			throw new IllegalStateException("Error while processing image: " + tifFile.getAbsolutePath(), e);
 		}
 
+	}
+
+	public void tifToPngAndCut(File tifFile, File pngFile, ImageArea area) {
+		try {
+			BufferedImage tifImage = ImageIO.read(tifFile);
+			pngFile.getParentFile().mkdirs();
+	
+			FileOutputStream fos = new FileOutputStream(pngFile);
+			int x = area.getLeft();
+			int y = area.getTop();
+			int width = area.getRight() - area.getLeft();
+			int height = area.getBottom() - area.getTop();
+			ImageIO.write(tifImage.getSubimage(x, y, width, height), "png", fos);
+		} catch (IOException e) {
+			throw new IllegalStateException("Error while processing image: " + tifFile.getAbsolutePath(), e);
+		}
+
+		
 	}
 }

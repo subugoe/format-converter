@@ -109,7 +109,7 @@ public class MainTest {
 				"-outfile", "target/outImage.pdf", 
 				"-informat", "abbyyxml", 
 				"-outformat", "pdf",
-				"-outoptions", "images=src/test/resources/withOneImage"});
+				"-outoptions", "scans=src/test/resources/withOneImage"});
 
 		String sysout = new String(baos.toByteArray());
 		assertThat(sysout, containsString("Starting conversion"));

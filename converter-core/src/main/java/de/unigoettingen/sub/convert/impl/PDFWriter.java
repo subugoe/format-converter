@@ -53,7 +53,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 	private ResourceHandler resourceHandler = new ResourceHandler();
 	
 	public PDFWriter() {
-		supportedOptions.put("images", FOLDER_WITH_IMAGES_DESCRIPTION);
+		supportedOptions.put("scans", FOLDER_WITH_IMAGES_DESCRIPTION);
 		supportedOptions.put("pagesize", PAGESIZE_DESCRIPTION);
 	}
 	
@@ -103,7 +103,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 			PdfContentByte pdfPage = pwriter.getDirectContent();
 			if (imagesAvailable()) {
 				pdfPage.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
-				putImageOnPage();
+				putBackgroundImageOnPage();
 			}
 
 			List<Line> lines = allLinesFromPage(page);
@@ -133,7 +133,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 	}
 
 	private boolean imagesAvailable() {
-		return setOptions.get("images") != null;
+		return setOptions.get("scans") != null;
 	}
 
 	private void setPageSize() {
@@ -152,8 +152,8 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		}
 	}
 	
-	private void putImageOnPage() throws DocumentException, FileNotFoundException, IOException {
-		File imagesFolder = new File(setOptions.get("images"));
+	private void putBackgroundImageOnPage() throws DocumentException, FileNotFoundException, IOException {
+		File imagesFolder = new File(setOptions.get("scans"));
 		File imageFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
 		
 		RandomAccessSource source = new RandomAccessSourceFactory().createSource(new FileInputStream(imageFile));

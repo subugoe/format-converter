@@ -86,6 +86,17 @@ public class ResourceHandlerTest {
 		assertTrue("image should be present", png.exists());
 	}
 	
+	@Test
+	public void convertsTifToPngAndCutsArea() {
+		File tif = new File("src/test/resources/00000001.tif");
+		File png = new File("target/convertedAndCut.png");
+		png.delete();
+		
+		ImageArea area = ImageArea.createLTRB(956, 2112, 1464, 2744);
+		handler.tifToPngAndCut(tif, png, area);
+		assertTrue("image should be present", png.exists());
+	}
+	
 
 
 }

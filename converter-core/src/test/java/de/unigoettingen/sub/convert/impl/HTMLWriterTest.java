@@ -3,6 +3,7 @@ package de.unigoettingen.sub.convert.impl;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -17,6 +18,7 @@ import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.WordBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.LineBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.TableBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.ImageBuilder.*;
 
 public class HTMLWriterTest {
 
@@ -69,41 +71,41 @@ public class HTMLWriterTest {
 	
 	@Test
 	public void createsHtmlWithImage() throws FileNotFoundException {
-		Page page = page().with(word("word")).build();
+		Page page = page().withHeight(3655).with(word("word")).build();
 		
-		writer.addImplementationSpecificOption("images", "src/test/resources/withOneImage");
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
 		writer.addImplementationSpecificOption("imagesoutdir", "target/test.html.images");
 		writer.writePage(page);
 		
 		String html = fromBaos();
 		
 		assertThat(html, containsString("word"));
-		assertThat(html, containsString("<img src=\"test.html.images/image1.png\""));
+		assertThat(html, containsString("<img src=\"test.html.images/scan1.png\""));
 	}
 
 	@Test
 	public void createsHtmlWithTwoImages() throws FileNotFoundException {
-		Page page = page().with(word("word1")).build();
-		Page page2 = page().with(word("word2")).build();
+		Page page = page().withHeight(3655).with(word("word1")).build();
+		Page page2 = page().withHeight(3655).with(word("word2")).build();
 		
-		writer.addImplementationSpecificOption("images", "src/test/resources/withTwoImages");
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withTwoImages");
 		writer.addImplementationSpecificOption("imagesoutdir", "target/test2.html.images");
 		writer.writePage(page);
 		writer.writePage(page2);
 		
 		String html = fromBaos();
 		
-		assertThat(html, containsString("<img src=\"test2.html.images/image1.png\""));
-		assertThat(html, containsString("<img src=\"test2.html.images/image2.png\""));
+		assertThat(html, containsString("<img src=\"test2.html.images/scan1.png\""));
+		assertThat(html, containsString("<img src=\"test2.html.images/scan2.png\""));
 	}
 	
 	@Test(expected=IllegalStateException.class)
 	public void exceptionWhenTooFewImages() throws FileNotFoundException {
-		Page page = page().with(word("word1")).build();
-		Page page2 = page().with(word("word2")).build();
+		Page page = page().withHeight(3655).with(word("word1")).build();
+		Page page2 = page().withHeight(3655).with(word("word2")).build();
 		
 		String oneImageDir = "src/test/resources/withOneImage";
-		writer.addImplementationSpecificOption("images", oneImageDir);
+		writer.addImplementationSpecificOption("scans", oneImageDir);
 		writer.addImplementationSpecificOption("imagesoutdir", "target/test3.html.images");
 		writer.writePage(page);
 
@@ -113,7 +115,6 @@ public class HTMLWriterTest {
 	@Test
 	public void createsHtmlWithTable() throws FileNotFoundException {
 		Page page = page().with(table().with(word("word1"))).build();
-//		writer.setTarget(new FileOutputStream("target/bla.html"));
 		
 		writer.writePage(page);
 		
@@ -123,6 +124,61 @@ public class HTMLWriterTest {
 		assertThat(html, containsString("<tr>"));
 		assertThat(html, containsString("<td>"));
 		assertThat(html, containsString("word1"));
+	}
+	
+	@Test
+	public void createsHtmlWithSubimageAndScan() throws FileNotFoundException {
+		Page page = page().withHeight(3655).with(image().withCoordinatesLTRB(956, 2112, 1464, 2744)).build();
+		File resultImage = new File("target/test_subimage.html.images/subimage1-1.png");
+		resultImage.delete();
+		
+		String oneImageDir = "src/test/resources/withOneImage";
+		writer.addImplementationSpecificOption("scans", oneImageDir);
+		writer.addImplementationSpecificOption("imagesoutdir", "target/test_subimage.html.images");
+		writer.writePage(page);
+		
+		String html = fromBaos();
+		
+		assertThat(html, containsString("<img src=\"test_subimage.html.images/scan1.png\""));
+		assertThat(html, containsString("<img src=\"test_subimage.html.images/subimage1-1.png\""));
+		assertTrue("image must be present", resultImage.exists());
+		
+	}
+	
+	@Test
+	public void createsHtmlWithoutScan() throws FileNotFoundException {
+		Page page = page().withHeight(3655).with(image().withCoordinatesLTRB(956, 2112, 1464, 2744)).build();
+		
+		String oneImageDir = "src/test/resources/withOneImage";
+		writer.addImplementationSpecificOption("scans", oneImageDir);
+		writer.addImplementationSpecificOption("includescans", "false");
+		writer.addImplementationSpecificOption("imagesoutdir", "target/test_subimageNoScan.html.images");
+		writer.writePage(page);
+		
+		String html = fromBaos();
+		
+		assertThat(html, not(containsString("<img src=\"test_subimageNoScan.html.images/scan1.png\"")));
+		assertThat(html, containsString("<img src=\"test_subimageNoScan.html.images/subimage1-1.png\""));
+	}
+	
+	@Test
+	public void createsHtmlWithTwoSubimages() throws FileNotFoundException {
+		Page page = page().withHeight(3655)
+				.with(image().withCoordinatesLTRB(956, 2112, 1464, 2744))
+				.with(image().withCoordinatesLTRB(956, 2400, 1464, 2744))
+				.build();
+		//writer.setTarget(new FileOutputStream("target/bla.html"));
+		
+		String oneImageDir = "src/test/resources/withOneImage";
+		writer.addImplementationSpecificOption("scans", oneImageDir);
+		writer.addImplementationSpecificOption("imagesoutdir", "target/test_2subimages.html.images");
+		writer.writePage(page);
+		
+		String html = fromBaos();
+		
+		assertThat(html, containsString("<img src=\"test_2subimages.html.images/subimage1-1.png\""));
+		assertThat(html, containsString("<img src=\"test_2subimages.html.images/subimage1-2.png\""));
+		
 	}
 	
 

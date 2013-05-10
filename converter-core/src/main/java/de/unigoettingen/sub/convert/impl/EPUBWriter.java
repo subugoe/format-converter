@@ -21,7 +21,7 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 
 	private Book book;
 	private List<File> htmls;
-	private List<File> images;
+	private List<File> scans;
 	private int pageNumber = 0;
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
 	private static final String PNG = "png";
@@ -29,14 +29,14 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 	private Page page;
 
 	public EPUBWriter() {
-		supportedOptions.put("images", FOLDER_WITH_IMAGES_DESCRIPTION);
+		supportedOptions.put("scans", FOLDER_WITH_IMAGES_DESCRIPTION);
 	}
 	
 	@Override
 	public void writeStart() {
 		book = new Book();
 		htmls = new ArrayList<File>();
-		images = new ArrayList<File>();
+		scans = new ArrayList<File>();
 	}
 
 	@Override
@@ -59,8 +59,8 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 		File tempDir = new File(System.getProperty("java.io.tmpdir"));
 		File tempHtml = new File(tempDir, "page" + pageNumber + ".html");
 		htmls.add(tempHtml);
-		if (imagesAvailable()) {
-			images.add(new File(tempDir, "image" + pageNumber + "." + PNG));
+		if (scansAvailable()) {
+			scans.add(new File(tempDir, "scan" + pageNumber + "." + PNG));
 		}
 		
 		try {
@@ -71,8 +71,8 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 		
 	}
 
-	private boolean imagesAvailable() {
-		return setOptions.get("images") != null;
+	private boolean scansAvailable() {
+		return setOptions.get("scans") != null;
 	}
 
 	private void writeHtmlPageToDir(File tempHtml, File tempDir)
@@ -81,9 +81,9 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 		FileOutputStream htmlStream = new FileOutputStream(tempHtml);
 		htmlWriter.setTarget(htmlStream);
 		htmlWriter.addImplementationSpecificOption("fixedpagenr", ""+pageNumber);
-		if (imagesAvailable()) {
-			String imagesSource = setOptions.get("images");
-			htmlWriter.addImplementationSpecificOption("images", imagesSource);
+		if (scansAvailable()) {
+			String imagesSource = setOptions.get("scans");
+			htmlWriter.addImplementationSpecificOption("scans", imagesSource);
 			htmlWriter.addImplementationSpecificOption("imagesoutdir", tempDir.getAbsolutePath());
 			htmlWriter.addImplementationSpecificOption("onedir", "true");
 		}
@@ -113,9 +113,9 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 			FileInputStream tempHtmlFis = new FileInputStream(htmls.get(i));
 			book.addSection("Page " + pageNr, new Resource(tempHtmlFis, "page" + pageNr + ".html"));
 			
-			if (imagesAvailable()) {
-				FileInputStream tempImageFis = new FileInputStream(images.get(i));
-				book.getResources().add(new Resource(tempImageFis, "image" + pageNr + "." + PNG));
+			if (scansAvailable()) {
+				FileInputStream tempImageFis = new FileInputStream(scans.get(i));
+				book.getResources().add(new Resource(tempImageFis, "scan" + pageNr + "." + PNG));
 			}
 		}
 	}
@@ -124,7 +124,7 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 		for (File tempHtml : htmls) {
 			tempHtml.delete();
 		}
-		for (File tempImage : images) {
+		for (File tempImage : scans) {
 			tempImage.delete();
 		}
 	}
