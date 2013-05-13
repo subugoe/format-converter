@@ -154,7 +154,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 	
 	private void putBackgroundImageOnPage() throws DocumentException, FileNotFoundException, IOException {
 		File imagesFolder = new File(setOptions.get("scans"));
-		File imageFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
+		File imageFile = resourceHandler.getTifImageForPage(pageNumber, imagesFolder);
 		
 		RandomAccessSource source = new RandomAccessSourceFactory().createSource(new FileInputStream(imageFile));
 		RandomAccessFileOrArray ra = new RandomAccessFileOrArray(source);

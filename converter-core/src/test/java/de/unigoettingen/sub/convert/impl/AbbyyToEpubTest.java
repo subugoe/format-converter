@@ -31,8 +31,9 @@ public class AbbyyToEpubTest {
 		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new EPUBWriter();
 		
-//		writer.addImplementationSpecificOption("images", "/home/dennis/digi/fertig/20130128_sohnrey_bruderhof_1898_tif");
-		writer.addImplementationSpecificOption("images", "src/test/resources/withTwoImages");
+//		writer.addImplementationSpecificOption("scans", "/home/dennis/digi/fertig/20130128_sohnrey_bruderhof_1898_tif");
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withTwoImages");
+		writer.addImplementationSpecificOption("includescans", "false");
 
 		
 		OutputStream s = new FileOutputStream("target/sohnrey.epub");

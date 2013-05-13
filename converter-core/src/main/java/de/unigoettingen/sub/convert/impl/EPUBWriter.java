@@ -1,6 +1,7 @@
 package de.unigoettingen.sub.convert.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,13 +22,13 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 
 	private Book book;
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
-	private static final String PNG = "png";
-
+	private static final String INCLUDE_SCANS_DESCRIPTION = "[true or false], include the original scanned images into the result file, default is 'true'";
 	private ResourceHandler resourceHandler = new ResourceHandler();
 	private Page page;
 
 	public EPUBWriter() {
 		supportedOptions.put("scans", FOLDER_WITH_IMAGES_DESCRIPTION);
+		supportedOptions.put("includescans", INCLUDE_SCANS_DESCRIPTION);
 	}
 	
 	@Override
@@ -79,6 +80,7 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 			htmlWriter.addImplementationSpecificOption("scans", imagesSource);
 			htmlWriter.addImplementationSpecificOption("imagesoutdir", tempDir.getAbsolutePath());
 			htmlWriter.addImplementationSpecificOption("onedir", "true");
+			htmlWriter.addImplementationSpecificOption("includescans", setOptions.get("includescans"));
 		}
 		htmlWriter.writeStart();
 		htmlWriter.writePage(page);
@@ -103,11 +105,20 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 	private void fillBookWithTempFiles() throws IOException {
 		for (int pageNr = 1; pageNr <= resourceHandler.getCurrentPageNumber(); pageNr++) {
 			InputStream tempHtmlFis = resourceHandler.getHtmlPage(pageNr);
-			book.addSection("Page " + pageNr, new Resource(tempHtmlFis, "page" + pageNr + ".html"));
+			String htmlName = resourceHandler.getNameForHtml(pageNr);
+			book.addSection("Page " + pageNr, new Resource(tempHtmlFis, htmlName));
 			
 			if (scansAvailable()) {
 				InputStream tempImageFis = resourceHandler.getScanForPage(pageNr);
-				book.getResources().add(new Resource(tempImageFis, "scan" + pageNr + "." + PNG));
+				String scanName = resourceHandler.getNameForScan(pageNr);
+				book.getResources().add(new Resource(tempImageFis, scanName));
+			}
+		}
+		if (scansAvailable()) {
+			for (File subimage : resourceHandler.getAllSubimages()) {
+				InputStream is = new FileInputStream(subimage);
+				book.getResources().add(new Resource(is, subimage.getName()));
+
 			}
 		}
 	}

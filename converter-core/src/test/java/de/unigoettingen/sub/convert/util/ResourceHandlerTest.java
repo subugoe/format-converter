@@ -20,7 +20,7 @@ public class ResourceHandlerTest {
 	@Test
 	public void getsOneImage() {
 		File dir = new File("src/test/resources/withOneImage");
-		File image = handler.getImageForPage(1, dir);
+		File image = handler.getTifImageForPage(1, dir);
 		
 		assertEquals("image file", new File(dir, "00000001.tif"), image);
 	}
@@ -28,8 +28,8 @@ public class ResourceHandlerTest {
 	@Test
 	public void getsTwoImages() {
 		File dir = new File("src/test/resources/withTwoImages");
-		File image1 = handler.getImageForPage(1, dir);
-		File image2 = handler.getImageForPage(2, dir);
+		File image1 = handler.getTifImageForPage(1, dir);
+		File image2 = handler.getTifImageForPage(2, dir);
 		
 		assertEquals("image file", new File(dir, "00000001.tif"), image1);
 		assertEquals("image file", new File(dir, "00000004.tif"), image2);
@@ -39,7 +39,7 @@ public class ResourceHandlerTest {
 	public void withIllegalPageNumber() {
 		File dir = new File("src/test/resources/withOneImage");
 		try {
-			handler.getImageForPage(0, dir);
+			handler.getTifImageForPage(0, dir);
 			fail("exception was expected");
 		} catch (IllegalStateException e) {
 			assertEquals("error message", "No image found for page 0", e.getMessage());
@@ -50,7 +50,7 @@ public class ResourceHandlerTest {
 	public void withTooHighPageNumber() {
 		File dir = new File("src/test/resources/withOneImage");
 		try {
-			handler.getImageForPage(2, dir);
+			handler.getTifImageForPage(2, dir);
 			fail("exception was expected");
 		} catch (IllegalStateException e) {
 			assertEquals("error message", "No image found for page 2", e.getMessage());
@@ -61,7 +61,7 @@ public class ResourceHandlerTest {
 	public void withIllegalDir() {
 		File dir = new File("src/test/resources/some_file.txt");
 		try {
-			handler.getImageForPage(1, dir);
+			handler.getTifImageForPage(1, dir);
 			fail("exception was expected");
 		} catch (IllegalStateException e) {
 			assertThat(e.getMessage(), containsString("Not a folder"));

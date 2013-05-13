@@ -122,7 +122,7 @@ public class HTMLWriter extends StaxWriter {
 
 	private void putScanForPageIntoDir(File imageOutDir) {
 		File imagesFolder = new File(setOptions.get("scans"));
-		File tifFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
+		File tifFile = resourceHandler.getTifImageForPage(pageNumber, imagesFolder);
 		File pngFile = new File(imageOutDir, resourceHandler.getNameForCurrentScan());
 		resourceHandler.tifToPng(tifFile, pngFile);
 	}
@@ -142,6 +142,8 @@ public class HTMLWriter extends StaxWriter {
 				resourceHandler.incrementSubimageCounter();
 				Image image = (Image) pageItem;
 				writeSubimage(image);
+				// This is necessary for EPUBWriter
+				resourceHandler.addCurrentSubimageToTemp();
 			}
 		}
 		xwriter.writeEndElement(); // div
@@ -199,7 +201,7 @@ public class HTMLWriter extends StaxWriter {
 	
 	private void putSubimageIntoDir(Image image, File imageOutDir) {
 		File imagesFolder = new File(setOptions.get("scans"));
-		File tifFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
+		File tifFile = resourceHandler.getTifImageForPage(pageNumber, imagesFolder);
 		File pngFile = new File(imageOutDir, resourceHandler.getNameForCurrentSubimage());
 		ImageArea area = ImageArea.createLTRB(image.getLeft(), image.getTop(), image.getRight(), image.getBottom());
 		resourceHandler.tifToPngAndCut(tifFile, pngFile, area);

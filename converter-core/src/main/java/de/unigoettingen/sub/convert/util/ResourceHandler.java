@@ -23,12 +23,12 @@ public class ResourceHandler {
 	
 	private List<File> htmls = new ArrayList<File>();
 	private List<File> scans = new ArrayList<File>();
+	private List<File> subimages = new ArrayList<File>();
 	private File tempDir = new File(System.getProperty("java.io.tmpdir"));
 
 	public int getCurrentPageNumber() {
 		return pageNumber;
 	}
-	
 	public void incrementPageNumber() {
 		pageNumber++;
 	}
@@ -36,11 +36,17 @@ public class ResourceHandler {
 	public void incrementSubimageCounter() {
 		subimageCounter++;
 	}
-	
-	public String getNameForCurrentScan() {
-		return "scan" + pageNumber + ".png";
+
+	public String getNameForHtml(int number) {
+		return "page" + number + ".html";
 	}
 	
+	public String getNameForScan(int number) {
+		return "scan" + number + ".png";
+	}
+	public String getNameForCurrentScan() {
+		return getNameForScan(pageNumber);
+	}
 	public String getNameForCurrentScan(String parentFolder) {
 		return parentFolder + "/" + getNameForCurrentScan();
 	}
@@ -48,13 +54,12 @@ public class ResourceHandler {
 	public String getNameForCurrentSubimage() {
 		return "subimage" + pageNumber + "-" + subimageCounter + ".png";
 	}
-	
 	public String getNameForCurrentSubimage(String parentFolder) {
 		return parentFolder + "/" + getNameForCurrentSubimage();
 	}
 	
 	public void addCurrentHtmlToTemp() {
-		File tempHtml = new File(tempDir, "page" + pageNumber + ".html");
+		File tempHtml = new File(tempDir, getNameForHtml(pageNumber));
 		htmls.add(tempHtml);
 	}
 	
@@ -63,8 +68,13 @@ public class ResourceHandler {
 		scans.add(tempHtml);
 	}
 	
+	public void addCurrentSubimageToTemp() {
+		File tempSubimage = new File(tempDir, getNameForCurrentSubimage());
+		subimages.add(tempSubimage);
+	}
+	
 	public File getNextTempHtmlFile() {
-		return new File(tempDir, "page" + (pageNumber+1) + ".html");
+		return new File(tempDir, getNameForHtml(pageNumber + 1));
 	}
 	
 	public InputStream getHtmlPage(int pageNumber) throws FileNotFoundException {
@@ -77,6 +87,10 @@ public class ResourceHandler {
 		return new FileInputStream(scans.get(index));
 	}
 	
+	public List<File> getAllSubimages() {
+		return subimages;
+	}
+	
 	public void deleteTempFiles() {
 		for (File tempHtml : htmls) {
 			tempHtml.delete();
@@ -86,7 +100,7 @@ public class ResourceHandler {
 		}
 	}
 
-	public File getImageForPage(int pageNumber, File folder) {
+	public File getTifImageForPage(int pageNumber, File folder) {
 		if (images == null) {
 			getTifImagesFromFolder(folder);
 		}
