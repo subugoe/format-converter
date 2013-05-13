@@ -1,4 +1,4 @@
-
+Duplikation in HTMLWriter: write image / write subimage
 
 file.exists testen? zB für png Dateien oder für outputs bei MainTest -> ein output-dir in target, immer leeren
 

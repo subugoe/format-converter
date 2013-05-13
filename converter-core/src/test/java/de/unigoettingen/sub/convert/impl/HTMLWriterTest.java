@@ -70,6 +70,18 @@ public class HTMLWriterTest {
 	}
 	
 	@Test
+	public void writesHtmlWithTwoPages() {
+		Page page = page().with(line()).build();
+		writer.writePage(page);
+		writer.writePage(page);
+		
+		String html = fromBaos();
+		
+		assertThat(html, containsString("id=\"page1\""));
+		assertThat(html, containsString("id=\"page2\""));
+	}
+		
+	@Test
 	public void createsHtmlWithImage() throws FileNotFoundException {
 		Page page = page().withHeight(3655).with(word("word")).build();
 		
@@ -82,6 +94,21 @@ public class HTMLWriterTest {
 		assertThat(html, containsString("word"));
 		assertThat(html, containsString("<img src=\"test.html.images/scan1.png\""));
 	}
+
+	@Test
+	public void createsHtmlAndScanImageInSameDir() {
+		Page page = page().withHeight(3655).build();
+		
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
+		writer.addImplementationSpecificOption("imagesoutdir", "target/test_onedir.html.images");
+		writer.addImplementationSpecificOption("onedir", "true");
+		writer.writePage(page);
+		
+		String html = fromBaos();
+		
+		assertThat(html, containsString("<img src=\"scan1.png\""));
+	}
+
 
 	@Test
 	public void createsHtmlWithTwoImages() throws FileNotFoundException {

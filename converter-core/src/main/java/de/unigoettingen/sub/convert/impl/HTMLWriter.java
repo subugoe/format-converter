@@ -23,13 +23,10 @@ import de.unigoettingen.sub.convert.util.ResourceHandler;
 public class HTMLWriter extends StaxWriter {
 
 	private int pageNumber = 0;
-	private int subimageNumber = 0;
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
 	private static final String OUTPUT_FOLDER_FOR_IMAGES = "[folder] for the converted PNG images";
-	private static final String PAGE_NUMBER_DESCRIPTION = "[page number], sets all pages to this number (used internally for EPUB writer)";
 	private static final String ONE_DIR_DESCRIPTION = "[true or false], use the same directory for html and image files (used internally for EPUB writer)";
 	private static final String INCLUDE_SCANS_DESCRIPTION = "[true or false], include the original scanned images into the result file, default is 'true'";
-	private static final String PNG = "png";
 	private Page currentPage;
 
 	private ResourceHandler resourceHandler = new ResourceHandler();
@@ -37,10 +34,15 @@ public class HTMLWriter extends StaxWriter {
 	public HTMLWriter() {
 		supportedOptions.put("scans", FOLDER_WITH_IMAGES_DESCRIPTION);
 		supportedOptions.put("imagesoutdir", OUTPUT_FOLDER_FOR_IMAGES);
-		supportedOptions.put("fixedpagenr", PAGE_NUMBER_DESCRIPTION);
 		supportedOptions.put("onedir", ONE_DIR_DESCRIPTION);
 		supportedOptions.put("includescans", INCLUDE_SCANS_DESCRIPTION);
 	}
+	
+	public HTMLWriter(ResourceHandler resourceHandler) {
+		this();
+		this.resourceHandler = resourceHandler;
+	}
+	
 	
 	@Override
 	protected void writeStartStax() throws XMLStreamException {
@@ -66,11 +68,8 @@ public class HTMLWriter extends StaxWriter {
 	@Override
 	protected void writePageStax(Page page) throws XMLStreamException {
 		
-		if (setOptions.get("fixedpagenr") != null) {
-			pageNumber = Integer.parseInt(setOptions.get("fixedpagenr"));
-		} else {
-			pageNumber++;
-		}
+		resourceHandler.incrementPageNumber();
+		pageNumber = resourceHandler.getCurrentPageNumber();
 		currentPage = page;
 		
 		if (scansAvailable() && includeScans()) {
@@ -91,11 +90,13 @@ public class HTMLWriter extends StaxWriter {
 			int imageHeight = scaleToHeightInEm(currentPage.getHeight());
 			File imageOutDir = new File(setOptions.get("imagesoutdir"));
 			xwriter.writeEmptyElement("img");
+			String scanFileName = "";
 			if ("true".equals(setOptions.get("onedir"))) {
-				xwriter.writeAttribute("src", String.format("scan%d.%s", pageNumber, PNG));
+				scanFileName = resourceHandler.getNameForCurrentScan();
 			} else {
-				xwriter.writeAttribute("src", String.format("%s/scan%d.%s", imageOutDir.getName(), pageNumber, PNG));
+				scanFileName = resourceHandler.getNameForCurrentScan(imageOutDir.getName());
 			}
+			xwriter.writeAttribute("src", scanFileName);
 			xwriter.writeAttribute("style", String.format("height: %dem", imageHeight));
 			putScanForPageIntoDir(imageOutDir);
 	}
@@ -122,7 +123,7 @@ public class HTMLWriter extends StaxWriter {
 	private void putScanForPageIntoDir(File imageOutDir) {
 		File imagesFolder = new File(setOptions.get("scans"));
 		File tifFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
-		File pngFile = new File(imageOutDir, "scan" + pageNumber + "." + PNG);
+		File pngFile = new File(imageOutDir, resourceHandler.getNameForCurrentScan());
 		resourceHandler.tifToPng(tifFile, pngFile);
 	}
 
@@ -138,7 +139,7 @@ public class HTMLWriter extends StaxWriter {
 				Table table = (Table) pageItem;
 				writeTable(table);
 			} else if (scansAvailable() && pageItem instanceof Image) {
-				subimageNumber++;
+				resourceHandler.incrementSubimageCounter();
 				Image image = (Image) pageItem;
 				writeSubimage(image);
 			}
@@ -185,11 +186,13 @@ public class HTMLWriter extends StaxWriter {
 		int imageHeight = scaleToHeightInEm(heightInPix);
 		File imageOutDir = new File(setOptions.get("imagesoutdir"));
 		xwriter.writeEmptyElement("img");
+		String subimageFileName = "";
 		if ("true".equals(setOptions.get("onedir"))) {
-			xwriter.writeAttribute("src", String.format("subimage%d-%d.%s", pageNumber, subimageNumber, PNG));
+			subimageFileName = resourceHandler.getNameForCurrentSubimage();
 		} else {
-			xwriter.writeAttribute("src", String.format("%s/subimage%d-%d.%s", imageOutDir.getName(), pageNumber, subimageNumber, PNG));
+			subimageFileName = resourceHandler.getNameForCurrentSubimage(imageOutDir.getName());
 		}
+		xwriter.writeAttribute("src", subimageFileName);
 		xwriter.writeAttribute("style", String.format("height: %dem", imageHeight));
 		putSubimageIntoDir(image, imageOutDir);
 	}
@@ -197,7 +200,7 @@ public class HTMLWriter extends StaxWriter {
 	private void putSubimageIntoDir(Image image, File imageOutDir) {
 		File imagesFolder = new File(setOptions.get("scans"));
 		File tifFile = resourceHandler.getImageForPage(pageNumber, imagesFolder);
-		File pngFile = new File(imageOutDir, "subimage" + pageNumber + "-" + subimageNumber + "." + PNG);
+		File pngFile = new File(imageOutDir, resourceHandler.getNameForCurrentSubimage());
 		ImageArea area = ImageArea.createLTRB(image.getLeft(), image.getTop(), image.getRight(), image.getBottom());
 		resourceHandler.tifToPngAndCut(tifFile, pngFile, area);
 	}
