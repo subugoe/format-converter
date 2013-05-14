@@ -1,12 +1,13 @@
 package de.unigoettingen.sub.convert.impl;
 
+import static de.unigoettingen.sub.convert.model.builders.ImageBuilder.image;
 import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.language;
 import static de.unigoettingen.sub.convert.model.builders.LineBuilder.line;
 import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.metadata;
 import static de.unigoettingen.sub.convert.model.builders.NonWordBuilder.nonWord;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.page;
 import static de.unigoettingen.sub.convert.model.builders.WordBuilder.word;
-import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -141,12 +142,47 @@ public class EPUBWriterTest {
 	
 	@Test
 	public void writesPageWithEmptyLine() throws IOException {
-//		writer.setTarget(new FileOutputStream("/tmp/out.epub"));
 		Page page = page().with(line()).build();
 		writeToEpubBook(page);
 		
 		String rawHtml = firstHtmlPage();
 		assertThat(rawHtml, containsString("<br/>"));
+	}
+	
+	@Test
+	public void writesPageWithScan() throws IOException {
+		Page page = page().withHeight(3655).build();
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
+		writeToEpubBook(page);
+		
+		String rawHtml = firstHtmlPage();
+		assertThat(rawHtml, containsString("<img src=\"scan1.png\""));
+	}
+	
+	@Test
+	public void writesPageWithSubimageAndScan() throws IOException {
+		Page page = page().withHeight(3655).
+				with(image().withCoordinatesLTRB(956, 2112, 1464, 2744)).build();
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
+		writeToEpubBook(page);
+		
+		String rawHtml = firstHtmlPage();
+		assertThat(rawHtml, containsString("<img src=\"scan1.png\""));
+		assertThat(rawHtml, containsString("<img src=\"subimage1-1.png\""));
+	}
+	
+	@Test
+	public void writesPageWithSubimageButWithoutScan() throws IOException {
+//		writer.setTarget(new FileOutputStream("/tmp/out.epub"));
+		Page page = page().withHeight(3655).
+				with(image().withCoordinatesLTRB(956, 2112, 1464, 2744)).build();
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
+		writer.addImplementationSpecificOption("includescans", "false");
+		writeToEpubBook(page);
+		
+		String rawHtml = firstHtmlPage();
+		assertThat(rawHtml, not(containsString("<img src=\"scan1.png\"")));
+		assertThat(rawHtml, containsString("<img src=\"subimage1-1.png\""));
 	}
 	
 	

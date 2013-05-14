@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.junit.After;
@@ -19,6 +20,7 @@ import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.*;
+import static de.unigoettingen.sub.convert.model.builders.ImageBuilder.image;
 import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.WordBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.NonWordBuilder.*;
@@ -271,7 +273,23 @@ public class PDFWriterTest {
 		}
 	}
 	
+	@Test
+	public void putsImageAndSubimageBehindText() throws IOException {
+		Page page = pageA4().
+				with(image().withCoordinatesLTRB(956, 2112, 1464, 2744)).
+				build();
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
+		writer.setTarget(new FileOutputStream("target/pdf.pdf"));
+		writeToPdfBaos(page);
+		String rawPdf = readFromPdfBaos();
+		
+		assertThat(rawPdf, containsString("/img0"));
+		
+		String textRenderInvisible = "3 Tr";
+		assertThat("text rendering should be invisible", rawPdf, containsString(textRenderInvisible));
+	}
 	
+
 	
 	private String readFromPdfBaos() throws IOException {
 		return readFromPdfBaosPages(1);

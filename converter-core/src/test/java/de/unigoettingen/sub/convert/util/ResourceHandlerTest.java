@@ -97,6 +97,15 @@ public class ResourceHandlerTest {
 		assertTrue("image should be present", png.exists());
 	}
 	
+	@Test
+	public void convertsTifToPngAndCutsAreaToBytes() {
+		File tif = new File("src/test/resources/00000001.tif");
+		
+		ImageArea area = ImageArea.createLTRB(956, 2112, 1464, 2744);
+		byte[] imageBytes = handler.tifToPngAndCut(tif, area);
+		assertTrue("returned image must not be empty", imageBytes.length > 0);
+	}
+	
 
 
 }

@@ -1,6 +1,7 @@
 package de.unigoettingen.sub.convert.util;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,6 +100,9 @@ public class ResourceHandler {
 		for (File tempImage : scans) {
 			tempImage.delete();
 		}
+		for (File tempSubimage : subimages) {
+			tempSubimage.delete();
+		}
 	}
 
 	public File getTifImageForPage(int pageNumber, File folder) {
@@ -137,19 +142,46 @@ public class ResourceHandler {
 
 	public void tifToPngAndCut(File tifFile, File pngFile, ImageArea area) {
 		try {
-			BufferedImage tifImage = ImageIO.read(tifFile);
+			BufferedImage originalImage = ImageIO.read(tifFile);
 			pngFile.getParentFile().mkdirs();
 	
 			FileOutputStream fos = new FileOutputStream(pngFile);
-			int x = area.getLeft();
-			int y = area.getTop();
-			int width = area.getRight() - area.getLeft();
-			int height = area.getBottom() - area.getTop();
-			ImageIO.write(tifImage.getSubimage(x, y, width, height), "png", fos);
+			cutAndWriteToStream(originalImage, area, fos);
 		} catch (IOException e) {
 			throw new IllegalStateException("Error while processing image: " + tifFile.getAbsolutePath(), e);
 		}
-
-		
+	}
+	private void cutAndWriteToStream(BufferedImage originalImage,
+			ImageArea area, OutputStream os) throws IOException {
+		int x = area.getLeft();
+		int y = area.getTop();
+		int width = area.getRight() - area.getLeft();
+		int height = area.getBottom() - area.getTop();
+		ImageIO.write(originalImage.getSubimage(x, y, width, height), "png", os);
+	}
+	
+	public byte[] tifToPngAndCut(File tifFile, ImageArea area) {
+		byte[] imageBytes = null;
+		try {
+			BufferedImage originalImage = ImageIO.read(tifFile);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			cutAndWriteToStream(originalImage, area, baos);
+			imageBytes = baos.toByteArray();
+		} catch (IOException e) {
+			throw new IllegalStateException("Error while processing image: " + tifFile.getAbsolutePath(), e);
+		}
+		return imageBytes;
+	}
+	
+	public int getWidthOfImage(int pageNumber, File folder) {
+		int width = 0;
+		File tifFile = getTifImageForPage(pageNumber, folder);
+		try {
+			BufferedImage bufImage = ImageIO.read(tifFile);
+			width = bufImage.getWidth();
+		} catch (IOException e) {
+			throw new IllegalStateException("Error while processing image: " + tifFile.getAbsolutePath(), e);
+		}
+		return width;
 	}
 }

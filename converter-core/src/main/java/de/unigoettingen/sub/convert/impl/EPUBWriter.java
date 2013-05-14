@@ -58,13 +58,17 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 		}
 		
 		resourceHandler.addCurrentHtmlToTemp();
-		if (scansAvailable()) {
+		if (scansAvailable() && includeScans()) {
 			resourceHandler.addCurrentScanToTemp();
 		}
 	}
 
 	private boolean scansAvailable() {
 		return setOptions.get("scans") != null;
+	}
+
+	private boolean includeScans() {
+		return !"false".equals(setOptions.get("includescans"));
 	}
 
 	private void writeHtmlPageToTemp()
@@ -98,7 +102,7 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 		} catch (IOException e) {
 			throw new IllegalStateException("Could not create epub", e);
 		} finally {
-			//resourceHandler.deleteTempFiles();
+			resourceHandler.deleteTempFiles();
 		}
 	}
 
@@ -108,7 +112,7 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 			String htmlName = resourceHandler.getNameForHtml(pageNr);
 			book.addSection("Page " + pageNr, new Resource(tempHtmlFis, htmlName));
 			
-			if (scansAvailable()) {
+			if (scansAvailable() && includeScans()) {
 				InputStream tempImageFis = resourceHandler.getScanForPage(pageNr);
 				String scanName = resourceHandler.getNameForScan(pageNr);
 				book.getResources().add(new Resource(tempImageFis, scanName));
@@ -118,7 +122,6 @@ public class EPUBWriter extends WriterWithOptions implements ConvertWriter {
 			for (File subimage : resourceHandler.getAllSubimages()) {
 				InputStream is = new FileInputStream(subimage);
 				book.getResources().add(new Resource(is, subimage.getName()));
-
 			}
 		}
 	}

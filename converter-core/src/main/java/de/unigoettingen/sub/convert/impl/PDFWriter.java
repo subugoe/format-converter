@@ -22,6 +22,7 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.RandomAccessFileOrArray;
+import com.itextpdf.text.pdf.codec.PngImage;
 import com.itextpdf.text.pdf.codec.TiffImage;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
@@ -38,6 +39,7 @@ import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.Row;
 import de.unigoettingen.sub.convert.model.Table;
 import de.unigoettingen.sub.convert.model.TextBlock;
+import de.unigoettingen.sub.convert.util.ImageArea;
 import de.unigoettingen.sub.convert.util.ResourceHandler;
 
 public class PDFWriter extends WriterWithOptions implements ConvertWriter {
@@ -106,6 +108,8 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 				putBackgroundImageOnPage();
 			}
 
+			putAllSubimagesOnPage();
+			
 			List<Line> lines = allLinesFromPage(page);
 			if (lines.isEmpty()) {
 				return;
@@ -166,6 +170,24 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		pdfDocument.add(image);
 	}
 
+	private void putAllSubimagesOnPage() throws IOException, DocumentException {
+		for (PageItem image : currentPage.getPageItems()) {
+			if (image instanceof de.unigoettingen.sub.convert.model.Image) {
+				File imagesFolder = new File(setOptions.get("scans"));
+				File tifFile = resourceHandler.getTifImageForPage(pageNumber, imagesFolder);
+				ImageArea area = ImageArea.createLTRB(image.getLeft(), image.getTop(), image.getRight(), image.getBottom());
+				byte[] imageBytes = resourceHandler.tifToPngAndCut(tifFile, area);
+				
+				int imageWidth = resourceHandler.getWidthOfImage(pageNumber, imagesFolder);
+				Image pngImage = PngImage.getImage(imageBytes);
+				float pdfWidth = pdfDocument.getPageSize().getWidth();
+				pngImage.scalePercent(pdfWidth / imageWidth * 100f);
+				pngImage.setAlignment(Image.LEFT);
+				pdfDocument.add(pngImage);
+			}
+		}
+	}
+	
 	private void putWordOnPage(PdfContentByte pdfPage, LineItem word,
 			Line line) throws DocumentException, IOException {
 		Integer left = word.getLeft();
