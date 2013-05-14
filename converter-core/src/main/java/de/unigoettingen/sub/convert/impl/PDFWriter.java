@@ -108,7 +108,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 				putBackgroundImageOnPage();
 			}
 
-			putAllSubimagesOnPage();
+			putAllSubimagesOnPage(pdfPage);
 			
 			List<Line> lines = allLinesFromPage(page);
 			if (lines.isEmpty()) {
@@ -170,7 +170,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		pdfDocument.add(image);
 	}
 
-	private void putAllSubimagesOnPage() throws IOException, DocumentException {
+	private void putAllSubimagesOnPage(PdfContentByte pdfPage) throws IOException, DocumentException {
 		for (PageItem image : currentPage.getPageItems()) {
 			if (image instanceof de.unigoettingen.sub.convert.model.Image) {
 				File imagesFolder = new File(setOptions.get("scans"));
@@ -182,8 +182,8 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 				Image pngImage = PngImage.getImage(imageBytes);
 				float pdfWidth = pdfDocument.getPageSize().getWidth();
 				pngImage.scalePercent(pdfWidth / imageWidth * 100f);
-				pngImage.setAlignment(Image.LEFT);
-				pdfDocument.add(pngImage);
+				pngImage.setAbsolutePosition(10, 50);
+				pdfPage.addImage(pngImage);
 			}
 		}
 	}
