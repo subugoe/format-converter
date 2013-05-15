@@ -279,14 +279,32 @@ public class PDFWriterTest {
 				with(image().withCoordinatesLTRB(956, 2112, 1464, 2744)).
 				build();
 		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
-		writer.setTarget(new FileOutputStream("target/pdf.pdf"));
 		writeToPdfBaos(page);
 		String rawPdf = readFromPdfBaos();
 		
 		assertThat(rawPdf, containsString("/img0"));
+		assertThat(rawPdf, containsString("/img1"));
 		
 		String textRenderInvisible = "3 Tr";
 		assertThat("text rendering should be invisible", rawPdf, containsString(textRenderInvisible));
+	}
+	
+	@Test
+	public void putsOnlySubimageBehindText() throws IOException {
+		Page page = pageA4().
+				with(image().withCoordinatesLTRB(956, 2112, 1464, 2744)).
+				build();
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
+		writer.addImplementationSpecificOption("includescans", "false");
+//		writer.setTarget(new FileOutputStream("target/pdf.pdf"));
+		writeToPdfBaos(page);
+		String rawPdf = readFromPdfBaos();
+		
+		assertThat(rawPdf, containsString("/img0"));
+		assertThat(rawPdf, not(containsString("/img1")));
+		
+		String textRenderInvisible = "3 Tr";
+		assertThat("text should be visible", rawPdf, not(containsString(textRenderInvisible)));
 	}
 	
 

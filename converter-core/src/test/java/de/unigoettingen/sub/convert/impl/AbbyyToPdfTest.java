@@ -32,7 +32,8 @@ public class AbbyyToPdfTest {
 		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new PDFWriter();
 		
-		writer.addImplementationSpecificOption("images", "src/test/resources/withOneImage");
+		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
+		writer.addImplementationSpecificOption("includescans", "false");
 
 		
 		OutputStream s = new FileOutputStream("target/sohnrey.pdf");

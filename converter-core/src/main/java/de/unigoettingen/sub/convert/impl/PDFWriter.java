@@ -51,12 +51,14 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 	private int pageNumber = 0;
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
 	private static final String PAGESIZE_DESCRIPTION = "[A4 or original], default is A4";
+	private static final String INCLUDE_SCANS_DESCRIPTION = "[true or false], include the original scanned images into the result file, default is 'true'";
 	
 	private ResourceHandler resourceHandler = new ResourceHandler();
 	
 	public PDFWriter() {
 		supportedOptions.put("scans", FOLDER_WITH_IMAGES_DESCRIPTION);
 		supportedOptions.put("pagesize", PAGESIZE_DESCRIPTION);
+		supportedOptions.put("includescans", INCLUDE_SCANS_DESCRIPTION);
 	}
 	
 	@Override
@@ -103,12 +105,14 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 			pwriter.setPageEmpty(false);
 			
 			PdfContentByte pdfPage = pwriter.getDirectContent();
-			if (imagesAvailable()) {
+			if (imagesAvailable() && includeScans()) {
 				pdfPage.setTextRenderingMode(PdfContentByte.TEXT_RENDER_MODE_INVISIBLE);
 				putBackgroundImageOnPage();
 			}
 
-			putAllSubimagesOnPage(pdfPage);
+			if (imagesAvailable()) {
+				putAllSubimagesOnPage(pdfPage);
+			}
 			
 			List<Line> lines = allLinesFromPage(page);
 			if (lines.isEmpty()) {
@@ -138,6 +142,10 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 
 	private boolean imagesAvailable() {
 		return setOptions.get("scans") != null;
+	}
+
+	private boolean includeScans() {
+		return !"false".equals(setOptions.get("includescans"));
 	}
 
 	private void setPageSize() {
@@ -181,8 +189,11 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 				int imageWidth = resourceHandler.getWidthOfImage(pageNumber, imagesFolder);
 				Image pngImage = PngImage.getImage(imageBytes);
 				float pdfWidth = pdfDocument.getPageSize().getWidth();
+				float pdfHeight = pdfDocument.getPageSize().getHeight();
 				pngImage.scalePercent(pdfWidth / imageWidth * 100f);
-				pngImage.setAbsolutePosition(10, 50);
+				float absoluteX = pdfWidth / imageWidth * image.getLeft();
+				float absoluteY = pdfHeight - pdfWidth / imageWidth * image.getBottom();
+				pngImage.setAbsolutePosition(absoluteX, absoluteY);
 				pdfPage.addImage(pngImage);
 			}
 		}
