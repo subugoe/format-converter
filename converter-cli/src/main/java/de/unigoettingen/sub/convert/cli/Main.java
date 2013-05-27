@@ -30,7 +30,11 @@ public class Main {
 	private Options options;
 	private CommandLine line;
 	
-	static void setOutputTarget(PrintStream stream) {
+	/**
+	 * Used for testing
+	 * 
+	 */
+	static void redirectSystemOutputTo(PrintStream stream) {
 		out = stream;
 	}
 	

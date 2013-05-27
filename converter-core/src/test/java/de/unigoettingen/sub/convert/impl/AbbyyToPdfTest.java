@@ -24,16 +24,16 @@ public class AbbyyToPdfTest {
 	public void setUp() throws Exception {
 	}
 
-	//@Test
+	@Test
 	public void test() throws IOException {
 		File abbyy = new File(
-				System.getProperty("user.dir") + "/src/test/resources/abbyy10_coverPage.xml");
+				System.getProperty("user.dir") + "/src/test/resources/abbyy10_coverAndText.xml");
 		InputStream is = new FileInputStream(abbyy);
 		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new PDFWriter();
 		
-		writer.addImplementationSpecificOption("scans", "src/test/resources/withOneImage");
-		writer.addImplementationSpecificOption("includescans", "false");
+		//writer.addImplementationSpecificOption("scans", "src/test/resources/withTwoImages");
+		//writer.addImplementationSpecificOption("includescans", "false");
 
 		
 		OutputStream s = new FileOutputStream("target/sohnrey.pdf");

@@ -20,7 +20,7 @@ public class MainTest {
 	public void setUp() throws Exception {
 		baos = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(baos);
-		Main.setOutputTarget(out);
+		Main.redirectSystemOutputTo(out);
 	}
 
 	@Test
@@ -129,5 +129,55 @@ public class MainTest {
 		assertThat(sysout, containsString("Finished conversion"));
 	}
 
+	@Test
+	public void convertsAbbyyToPdfWithSubimageAndTextOnly() throws IOException {
+		Main.main(new String[]{"-infile", "src/test/resources/abbyy10_coverPage.xml", 
+				"-outfile", "target/outSubimage.pdf", 
+				"-informat", "abbyyxml", 
+				"-outformat", "pdf",
+				"-outoptions", "scans=src/test/resources/coverImage,includescans=false"});
+
+		String sysout = new String(baos.toByteArray());
+		assertThat(sysout, containsString("Starting conversion"));
+		assertThat(sysout, containsString("Finished conversion"));
+	}
+
+	@Test
+	public void convertsAbbyyToEpub() throws IOException {
+		Main.main(new String[]{"-infile", "src/test/resources/abbyy10_textPage.xml", 
+				"-outfile", "target/out.epub", 
+				"-informat", "abbyyxml", 
+				"-outformat", "epub"});
+
+		String sysout = new String(baos.toByteArray());
+		assertThat(sysout, containsString("Starting conversion"));
+		assertThat(sysout, containsString("Finished conversion"));
+	}
+
+	@Test
+	public void convertsAbbyyToEpubWithImage() throws IOException {
+		Main.main(new String[]{"-infile", "src/test/resources/abbyy10_textPage.xml", 
+				"-outfile", "target/outImage.epub", 
+				"-informat", "abbyyxml", 
+				"-outformat", "epub",
+				"-outoptions", "scans=src/test/resources/withOneImage"});
+
+		String sysout = new String(baos.toByteArray());
+		assertThat(sysout, containsString("Starting conversion"));
+		assertThat(sysout, containsString("Finished conversion"));
+	}
+
+	@Test
+	public void convertsAbbyyToEpubWithSubimageAndTextOnly() throws IOException {
+		Main.main(new String[]{"-infile", "src/test/resources/abbyy10_coverPage.xml", 
+				"-outfile", "target/outSubimage.epub", 
+				"-informat", "abbyyxml", 
+				"-outformat", "epub",
+				"-outoptions", "scans=src/test/resources/coverImage,includescans=false"});
+
+		String sysout = new String(baos.toByteArray());
+		assertThat(sysout, containsString("Starting conversion"));
+		assertThat(sysout, containsString("Finished conversion"));
+	}
 
 }
