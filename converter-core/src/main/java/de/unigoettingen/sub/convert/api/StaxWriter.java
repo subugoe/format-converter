@@ -26,7 +26,7 @@ abstract public class StaxWriter extends WriterWithOptions implements ConvertWri
 		super.setTarget(stream);
 		XMLOutputFactory outfactory = XMLOutputFactory.newInstance();
 		try {
-			xwriter = outfactory.createXMLStreamWriter(output);
+			xwriter = outfactory.createXMLStreamWriter(output, "UTF-8");
 			xwriter = new IndentingXMLStreamWriter(xwriter);
 		} catch (XMLStreamException e) {
 			throw new IllegalStateException(

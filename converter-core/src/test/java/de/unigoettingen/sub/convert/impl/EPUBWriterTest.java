@@ -211,7 +211,7 @@ public class EPUBWriterTest {
 	}	
 
 	private String toHtml(Resource htmlPage) throws IOException {
-		return new String(htmlPage.getData());
+		return new String(htmlPage.getData(), "UTF-8");
 	}
 	
 }
