@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="format-converter">
+<project name="converter-core">
 	 <body>
+	 	<menu ref="parent"/>
 	 	<menu name="Documentation">
 		   <item name="Overview" href="overview.html"/>
 		</menu>

@@ -6,8 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -105,22 +107,31 @@ public class Main {
 	}
 
 	private void convertUsingArguments() throws IOException {
-		String inFormat = line.getOptionValue("informat");
-		String outFormat = line.getOptionValue("outformat");
-		File infile = new File(line.getOptionValue("infile"));
-		InputStream is = new FileInputStream(infile);
-
-		File outfile = new File(line.getOptionValue("outfile"));
-		OutputStream os = new FileOutputStream(outfile);
-
-		Map<String, String> writerOptions = parseWriterOptions();
-		
-		out.println("Starting conversion, input file: " + infile.getCanonicalPath());
-		Date startTime = new Date();
-		converter.convert(inFormat, is, outFormat, os, writerOptions);
-		Date finishTime = new Date();
-		long time = (finishTime.getTime()-startTime.getTime()) / 1000;
-		out.println("Finished conversion in " + time + " seconds, output file: " + outfile.getCanonicalPath());
+		InputStream is = null;
+		OutputStream os = null;
+		try {
+			String inFormat = line.getOptionValue("informat");
+			String outFormat = line.getOptionValue("outformat");
+			File infile = new File(line.getOptionValue("infile"));
+			is = new FileInputStream(infile);
+	
+			File outfile = new File(line.getOptionValue("outfile"));
+			os = new FileOutputStream(outfile);
+	
+			Map<String, String> writerOptions = parseWriterOptions();
+			
+			out.println("Starting conversion, input file: " + infile.getCanonicalPath());
+			Date startTime = new Date();
+			converter.convert(inFormat, is, outFormat, os, writerOptions);
+			Date finishTime = new Date();
+			long time = (finishTime.getTime()-startTime.getTime()) / 1000;
+			out.println("Finished conversion in " + time + " seconds, output file: " + outfile.getCanonicalPath());
+		} finally {
+			if (is != null)
+				is.close();
+			if (os != null)
+				os.close();
+		}
 	}
 
 	private boolean askingForHelp() {
@@ -141,8 +152,9 @@ public class Main {
 		return helpNeeded;
 	}
 	
-	private void printHelp() {
-		PrintWriter pw = new PrintWriter(out);
+	private void printHelp() throws UnsupportedEncodingException {
+		OutputStreamWriter osw = new OutputStreamWriter(out, "UTF8");
+		PrintWriter pw = new PrintWriter(osw);
 		HelpFormatter formatter = new HelpFormatter();
 		formatter.printHelp(pw, HelpFormatter.DEFAULT_WIDTH, "java -jar converter.jar <options>", "", options,
 				HelpFormatter.DEFAULT_LEFT_PAD, HelpFormatter.DEFAULT_DESC_PAD,
