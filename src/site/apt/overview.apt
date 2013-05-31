@@ -1,6 +1,16 @@
-Übersicht
+Ptoject Overview
 
-  Dieses Projekt enthält mehrere OCR-Implementierungen (zum Zugriff auf einen Abbyy Recognition Server, Tesseract OCR Engine).
+  The goal of this project is converting between different document formats.
+  The focus is on formats that can be used to store documents coming from OCR engines, like for example Abbyy XML, PDF, or TEI.
   
-  Für den Anwender stehen mehrere Frontend-Schnittstellen zur Verfügung, die beliebig mit den Implementierungen 
-  kombinierbar sind (Kommandozeilen-Tool, Web Service, Servlet) 
+  The main components that do the converting are Readers and Writers. The general idea is that a Reader reads a file of format A,
+  transforms its contents into elements of an internal model, passes those elements to a Writer, and the Writer 
+  transforms them into a file of format B. There is one Reader implementation for each supported input format and one Writer
+  implementation for each supported output format. Each Reader can be combined with each Writer, so that any supported input format
+  can be converted into any supported output format.
+  
+  The implementations for supported input and output formats are contained in the module "Core Library". The internal model
+  that is used as "glue" between the Readers and Writers is defined in the module "Internal Model".
+  
+  The module "Commandline Interface" contains a ready-to-use CLI-tool that can be used to convert one file of a supported
+  input format into one file of a supported output format.
