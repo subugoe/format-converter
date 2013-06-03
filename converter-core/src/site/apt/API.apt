@@ -1,0 +1,16 @@
+API
+
+  The public API consists of two interfaces: ConvertReader and ConvertWriter. A ConvertReader is able to read an input
+  stream and convert its contents into elements of the internal OCR model. A ConvertWriter receives the model elements,
+  converts them into the output format, and writes them to the output stream. 
+  
+  The ConvertReader is the acting class. You have to create an instance of it and pass an instance of a ConvertWriter to it.
+  After that, you only command the ConvertReader to read a stream. It automatically invokes the ConvertWriter to write to
+  the output.
+  
+[./sequence-diagram.png]
+
+  For concrete examples of correct usage, see test cases in the package "integrationtests".
+  
+  
+  

@@ -3,7 +3,8 @@
 	 <body>
 	 	<menu ref="parent"/>
 	 	<menu name="Documentation">
-		   <item name="Overview" href="overview.html"/>
+		   <item name="Usage" href="usage.html"/>
+		   <item name="Configuration and extension" href="config.html"/>
 		</menu>
 	 	<menu ref="reports"/>
 	 </body>

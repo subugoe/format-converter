@@ -1,0 +1,10 @@
+OCR model
+
+  The model contained in this module is a representation of a generic OCR document. It consists of typical elements that
+  make up a document, like pages, paragraphs, images, words, and characters. The specific characteristic of an OCRed document
+  is that many of its elements can have coordinates which define the position on the page. 
+  
+Implementation
+
+  The OCR model is defined in an XML Schema document. JAXB is used to generate Java classes that correspond to the 
+  model elements. The classes are used in the other modules of this project.

@@ -1,4 +1,4 @@
-package de.unigoettingen.sub.convert.impl;
+package de.unigoettingen.sub.convert.integrationtests;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
+import de.unigoettingen.sub.convert.impl.CustomTeiP5Writer;
 import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader;
 
 
@@ -36,7 +37,7 @@ public class AbbyyToTeiTest {
 	public void tearDown() throws Exception {
 	}
 
-	//@Test
+	@Test
 	public void test() throws IOException {
 		File abbyy = new File(
 				System.getProperty("user.dir") + "/src/test/resources/abbyy10_coverPage.xml");
@@ -44,8 +45,8 @@ public class AbbyyToTeiTest {
 		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new CustomTeiP5Writer();
 		
-		//OutputStream s = new FileOutputStream("/tmp/tei.xml");
-		OutputStream s = System.out;
+		OutputStream s = new FileOutputStream("target/tei.xml");
+		//OutputStream s = System.out;
 		writer.setTarget(s);
 		
 		reader.setWriter(writer);

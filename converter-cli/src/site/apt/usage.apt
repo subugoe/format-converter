@@ -1,0 +1,31 @@
+Usage of the commandline tool
+
+  This commandline tool can be used to convert one input file of a supported input format into one output file
+  of a supported output format. To find out all possible parameters, execute the following:
+  
++----------------+
+java -jar format-converter.jar -help
++----------------+
+
+  The main syntax looks like this:
+  
++---------------+
+java -jar format-converter.jar -infile <input_file> -informat <format> 
+                               -outfile <output_file> -outformat <format> -outoptions <options>
++---------------+
+
+  Example:
+ 
++---------------+
+java -jar format-converter.jar -infile /tmp/abbyy.xml -informat abbyyxml -outfile /tmp/out.tei -outformat tei
++---------------+
+ 
+  The parameter "-outoptions" is optional. It can be used to adapt the format of the output file. For example, a PDF output file can 
+  contain the original scanned images as background on the respective pages. You can provide the folder of the images like this:
+  
++------------------+
+java -jar format-converter.jar -infile /tmp/abbyy.xml -informat abbyyxml 
+                               -outfile /tmp/out.pdf -outformat pdf -outoptions scans=/tmp/scans
++-----------------+
+
+  To find out more about all possible outoptions for each output format, use the "-help" parameter.

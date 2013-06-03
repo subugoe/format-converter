@@ -1,4 +1,4 @@
-package de.unigoettingen.sub.convert.impl;
+package de.unigoettingen.sub.convert.integrationtests;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
+import de.unigoettingen.sub.convert.impl.HTMLWriter;
 import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader;
 
 public class AbbyyToHtmlTest {

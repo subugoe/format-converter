@@ -3,7 +3,8 @@
 	 <body>
 	 	<menu ref="parent"/>
 	 	<menu name="Documentation">
-		   <item name="Overview" href="overview.html"/>
+		   <item name="API" href="API.html"/>
+		   <item name="Implementations" href="implementations.html"/>
 		</menu>
 	 	<menu ref="reports"/>
 	 </body>

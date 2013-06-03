@@ -1,0 +1,40 @@
+Readers
+
+  At the time of writing, there is only one ConvertReader implementation for reading Abbyy XML files.
+  It can read XML files produced by Abbyy Recognition Server versions 6 through 10.
+  
+Writers
+
+  There are several implementations of ConvertWriter which produce documents of the correspondent output formats.
+  Some implementations accept specific options that are used to adapt the output. Refer to the source code of the
+  implementations to find out the actual syntax for each option (method getSupportedOptions()).
+
+* TEI output
+  
+  This implementation produces TEI P5 output. If the input provided by the ConvertReader contains coordinates for words,
+  then the coordinates are written as "function" arguments of the <w> and <pc> elements. For details, see the XML Schema
+  in src/main/resources/customTeiForOcr.xsd.
+  
+* PDF output
+
+  The PDF implementation will only work, if the input contains word coordinates. The coordinates are used to place the words
+  at absolute coordinates on the pages. The same holds for images and tables. 
+
+** Implementation specific options 
+
+  If you have the original scanned images in TIFF format, you can provide the folder containing them. If you do, the text 
+  in the output will be invisible (but still markable). The images for each page will be placed as backgrounds of that page,
+  so that you can copy&paste text directly from the image. If there are recognized subimages (little images 
+  on the page), they too are placed in front of the background scan. There is an option to have normal visible text and subimages
+  only, i.e. no background scans.
+  
+  By default, the page size of the output PDF will be A4. If you have a document that does not fit to these proportions,
+  you can set the page size to "original" instead.
+  
+* EPUB output
+
+** Implementation specific options 
+
+  You can provide the folder containing the original scanned images in TIFF format. In this case, the scan of each page 
+  will be placed before the text of that page. Recognized subimages will be put inside the text on the right position.
+  You also have the option to leave out the scans and have only the text and the subimages in the document.
