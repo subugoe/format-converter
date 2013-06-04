@@ -1,3 +1,49 @@
 Configuration with Spring
 
+  The commandline interface uses Spring to define all supported Readers and Writers. The configuration is in the 
+  file "context.xml". For each Reader and Writer, there is a bean referencing the correspondent implementation class.
+  All the beans are injected into the application with Spring's <map> element. This way, it is possible 
+  to choose each combination of Reader/Writer from the commandline.
   
+Adding more Readers or Writers
+
+  New Readers and Writers should be as lightweight as possible, e.i. they should be easy to instantiate with the 
+  no-arg constructor. The reason is that they all will be instantiated by Spring at runtime, no matter if you want 
+  to use them or not.
+  
+* Example: adding a new Reader called MyNewReader. 
+  
+  After implementing the class MyNewReader, you must add it to the Spring configuration in context.xml. First, 
+  you add a new bean with an arbitrary id.
+  
++----------------------+
+	<bean id="myReader" class="de.unigoettingen.sub.convert.impl.MyNewReader"/>
++----------------------+
+
+  Then, you must add an entry into the map containing all Readers.
+  
++----------------------+
+		<property name="readers">
+			<map>
+				...
+				<entry key="newformat">
+					<ref local="myReader"/>
+				</entry>
+			</map>
+		</property>
++----------------------+
+  
+  The reference must be the same as the id of the bean. The key is used as the format that you choose on the commandline
+  with the parameter "-informat".
+  
+  This means you can now execute the following:
+  
++----------------------+
+	java -jar format-converter.jar -infile somefile.abc -informat newformat ...
++----------------------+
+  
+* Adding a new Writer
+
+  Adding a Writer is almost the same as adding a Reader. The only difference is that you have to add the entry into 
+  the map containing the Writers. If you implement the method that delivers all supported implementation specific
+  options, then those options will be shown in the help output.
