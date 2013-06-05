@@ -63,7 +63,8 @@ class CharParamsElement extends AbstractWordConstructingElement implements Abbyy
 	}
 	
 	private void setBottom(LineItem item, Char ch) {
-		item.setBottom(new Integer(ch.getBottom()));
+		
+		item.setBottom(ch.getBottom());
 	}
 
 	private void correctTopIfNecessary(LineItem item, Char ch) {
@@ -75,12 +76,12 @@ class CharParamsElement extends AbstractWordConstructingElement implements Abbyy
 	}
 	
 	private void setTopLeft(LineItem li, Char ch) {
-		li.setLeft(new Integer(ch.getLeft()));
-		li.setTop(new Integer(ch.getTop()));
+		li.setLeft(ch.getLeft());
+		li.setTop(ch.getTop());
 	}
 
 	private void setRight(LineItem li, Char ch) {
-		li.setRight(new Integer(ch.getRight()));
+		li.setRight(ch.getRight());
 	}
 
 	private void copyAttributesTo(Char ch) {

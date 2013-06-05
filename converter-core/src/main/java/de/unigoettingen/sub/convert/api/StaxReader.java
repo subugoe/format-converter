@@ -59,6 +59,8 @@ public abstract class StaxReader implements ConvertReader {
 				case XMLStreamConstants.END_DOCUMENT:
 					handleEndDocument();
 					break;
+				default:
+					// ignore all of the other events
 				}
 			}
 

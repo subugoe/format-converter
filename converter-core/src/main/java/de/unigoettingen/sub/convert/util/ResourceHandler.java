@@ -16,9 +16,13 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class ResourceHandler {
 
+	private final static Logger LOGGER = LoggerFactory.getLogger(ResourceHandler.class);
 	private File[] images;
 	private int pageNumber = 0;
 	private int subimageCounter = 0;
@@ -94,17 +98,20 @@ public class ResourceHandler {
 	}
 	
 	public void deleteTempFiles() {
-		for (File tempHtml : htmls) {
-			tempHtml.delete();
-		}
-		for (File tempImage : scans) {
-			tempImage.delete();
-		}
-		for (File tempSubimage : subimages) {
-			tempSubimage.delete();
+		deleteAllInList(htmls);
+		deleteAllInList(scans);
+		deleteAllInList(subimages);
+	}
+	
+	private void deleteAllInList(List<File> files) {
+		for (File tempFile : files) {
+			boolean deleted = tempFile.delete();
+			if (!deleted) {
+				LOGGER.warn("Could not delete temp file: " + tempFile.getAbsolutePath());
+			}
 		}
 	}
-
+	
 	public File getTifImageForPage(int pageNumber, File folder) {
 		if (images == null) {
 			getTifImagesFromFolder(folder);
@@ -141,14 +148,26 @@ public class ResourceHandler {
 	}
 
 	public void tifToPngAndCut(File tifFile, File pngFile, ImageArea area) {
+		FileOutputStream fos = null;
 		try {
 			BufferedImage originalImage = ImageIO.read(tifFile);
-			pngFile.getParentFile().mkdirs();
-	
-			FileOutputStream fos = new FileOutputStream(pngFile);
+			boolean madeDirs = pngFile.getParentFile().mkdirs();
+			if (madeDirs) {
+				LOGGER.debug("created directory " + pngFile.getParentFile().getAbsolutePath());
+			}
+			
+			fos = new FileOutputStream(pngFile);
 			cutAndWriteToStream(originalImage, area, fos);
 		} catch (IOException e) {
 			throw new IllegalStateException("Error while processing image: " + tifFile.getAbsolutePath(), e);
+		} finally {
+			if (fos != null) {
+				try {
+					fos.close();
+				} catch (IOException e) {
+					// ignore
+				}
+			}
 		}
 	}
 	private void cutAndWriteToStream(BufferedImage originalImage,

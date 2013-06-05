@@ -1,6 +1,7 @@
 package de.unigoettingen.sub.convert.impl.abbyyxml;
 
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Set;
 
 import javax.xml.stream.XMLStreamException;
@@ -34,7 +35,7 @@ public class AbbyyXMLReader extends StaxReader {
 
 	private LanguageMapper map = new LanguageMapper();
 
-	class CurrentPageState {
+	static class CurrentPageState {
 		Page page;
 		PageItem pageItem;
 		Paragraph paragraph;
@@ -49,8 +50,12 @@ public class AbbyyXMLReader extends StaxReader {
 	
 	private CurrentPageState current = new CurrentPageState();
 	private int pageCounter = 0;
-	private PrintStream out = new PrintStream(new NullOutputStream());
+	private PrintStream out = null;
 
+	public AbbyyXMLReader() throws UnsupportedEncodingException {
+		out = new PrintStream(new NullOutputStream(), false, "UTF8");
+	}
+	
 	/**
 	 * Tells the writer to start the output.
 	 */

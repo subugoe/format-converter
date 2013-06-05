@@ -43,6 +43,8 @@ class BlockElement implements AbbyyElement {
 				|| blockType.equals("Checkmark")
 				|| blockType.equals("GroupCheckmark")) {
 			return null;
+		} else {
+			return null;
 		}
 		copyAttributesTo(item);
 		return item;

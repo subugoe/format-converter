@@ -1,4 +1,4 @@
-Ptoject Overview
+Project Overview
 
   The goal of this project is converting between different document formats.
   The focus is on formats that can be used to store documents coming from OCR engines, like for example Abbyy XML, PDF, or TEI.

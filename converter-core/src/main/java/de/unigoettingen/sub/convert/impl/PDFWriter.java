@@ -168,14 +168,20 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		File imagesFolder = new File(setOptions.get("scans"));
 		File imageFile = resourceHandler.getTifImageForPage(pageNumber, imagesFolder);
 		
-		RandomAccessSource source = new RandomAccessSourceFactory().createSource(new FileInputStream(imageFile));
-		RandomAccessFileOrArray ra = new RandomAccessFileOrArray(source);
-		Image image = TiffImage.getTiffImage(ra, 1);
-		
-		float pdfWidth = pdfDocument.getPageSize().getWidth();
-		image.scalePercent(pdfWidth / image.getWidth() * 100f);
-		image.setAlignment(Image.LEFT);
-		pdfDocument.add(image);
+		FileInputStream imageStream = new FileInputStream(imageFile);
+		try {
+			RandomAccessSource source = new RandomAccessSourceFactory().createSource(imageStream);
+			RandomAccessFileOrArray ra = new RandomAccessFileOrArray(source);
+			Image image = TiffImage.getTiffImage(ra, 1);
+			
+			float pdfWidth = pdfDocument.getPageSize().getWidth();
+			image.scalePercent(pdfWidth / image.getWidth() * 100f);
+			image.setAlignment(Image.LEFT);
+			pdfDocument.add(image);
+		} finally {
+			if (imageStream != null)
+				imageStream.close();
+		}
 	}
 
 	private void putAllSubimagesOnPage(PdfContentByte pdfPage) throws IOException, DocumentException {
