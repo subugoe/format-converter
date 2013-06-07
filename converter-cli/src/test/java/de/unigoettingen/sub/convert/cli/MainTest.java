@@ -32,6 +32,16 @@ public class MainTest {
 	}
 
 	@Test
+	public void usingWrongArgument() throws IOException {
+		Main.main(new String[]{"-wrongarg"});
+
+		String sysout = new String(baos.toByteArray());
+		assertThat(sysout, containsString("Error reading arguments"));
+		assertThat(sysout, containsString("Unrecognized option: -wrongarg"));
+		assertThat(sysout, containsString("usage: java -jar"));
+	}
+
+	@Test
 	public void printsHelpIfNoArguments() throws IOException {
 		Main.main(new String[]{});
 

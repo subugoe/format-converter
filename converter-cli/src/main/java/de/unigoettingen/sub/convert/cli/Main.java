@@ -27,7 +27,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 
 	private static PrintStream out = System.out;
-	private boolean helpNeeded;
+	private boolean terminated;
 	private Converter converter;
 	private Options options;
 	private CommandLine line;
@@ -47,10 +47,10 @@ public class Main {
 	private void execute(String[] args) throws IOException {
 		initConverter();
 		initArguments(args);
-		verifyArguments();
-		if (helpNeeded()) {
-			printHelp();
-		} else {
+		if (!terminated) {
+			verifyArguments();
+		}
+		if (!terminated) {
 			convertUsingArguments();
 		}
 	}
@@ -62,7 +62,7 @@ public class Main {
 		converter.setSysOut(out);
 	}
 
-	private void initArguments(String[] args) {
+	private void initArguments(String[] args) throws IOException {
 		Set<String> readerNames = converter.getReaderNames();
 		Set<String> writerNames = converter.getWriterNames();
 		String specificOptionsForWriters = converter.constructHelpForOutputOptions();
@@ -81,28 +81,32 @@ public class Main {
 		try {
 			line = parser.parse(options, args);
 		} catch (ParseException e) {
+			terminated = true;
 			out.println("Error reading arguments: " + e.getMessage());
-			setHelpNeeded();
+			printHelp();
 		}
 	}
 
-	private void verifyArguments() {
+	private void verifyArguments() throws IOException {
 		if (askingForHelp()) {
-			setHelpNeeded();
+			terminated = true;
 		} else if (argumentsIncomplete()) {
+			terminated = true;
 			out.println("You must at least provide -infile, -outfile, -informat, and -outformat.");
-			setHelpNeeded();
 		} else {
 			String inFormat = line.getOptionValue("informat");
 			String outFormat = line.getOptionValue("outformat");
 			if (converter.unknownInput(inFormat)) {
+				terminated = true;
 				out.println("Unknown input format: " + inFormat);
-				setHelpNeeded();
 			}
 			if (converter.unknownOutput(outFormat)) {
+				terminated = true;
 				out.println("Unknown output format: " + outFormat);
-				setHelpNeeded();
 			}
+		}
+		if (terminated) {
+			printHelp();
 		}
 	}
 
@@ -144,14 +148,6 @@ public class Main {
 				|| !line.hasOption("outformat");
 	}
 
-	private void setHelpNeeded() {
-		helpNeeded = true;
-	}
-	
-	private boolean helpNeeded() {
-		return helpNeeded;
-	}
-	
 	private void printHelp() throws UnsupportedEncodingException {
 		OutputStreamWriter osw = new OutputStreamWriter(out, "UTF8");
 		PrintWriter pw = new PrintWriter(osw);
