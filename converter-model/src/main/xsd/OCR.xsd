@@ -6,20 +6,22 @@
 	<element name="document">
 		<complexType>
 			<sequence>
-				<element name="metadata" type="tns:Metadata"/>
-				<element name="pages" type="tns:Page" maxOccurs="unbounded"/>
+				<element ref="tns:Metadata"/>
+				<element ref="tns:Page" maxOccurs="unbounded"/>
 			</sequence>
 		</complexType>
 	</element>
 
-	<complexType name="Metadata">
-		<sequence>
-			<element name="ocrSoftwareName" type="string"/>
-			<element name="ocrSoftwareVersion" type="string"/>
-			<element name="readingDirection" type="tns:ReadingDirection"/>
-			<element name="languages" type="tns:Language" maxOccurs="unbounded"/>
-		</sequence>
-	</complexType>
+	<element name="Metadata">
+		<complexType>
+			<sequence>
+				<element name="ocrSoftwareName" type="string"/>
+				<element name="ocrSoftwareVersion" type="string"/>
+				<element name="readingDirection" type="tns:ReadingDirection"/>
+				<element name="languages" type="tns:Language" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
 	
 	<simpleType name="ReadingDirection">
 		<restriction base="string">
@@ -36,7 +38,8 @@
 		</simpleContent>
 	</complexType>
 
-	<complexType name="Page">
+	<element name="Page">
+		<complexType>
 		<sequence>
 			<element name="pageItems" type="tns:PageItem" maxOccurs="unbounded"/>
 		</sequence>
@@ -44,7 +47,8 @@
 		<attribute name="height" type="int"/>
 		<attribute name="width" type="int"/>
 		<attribute name="orientation" type="string"/>
-	</complexType>
+		</complexType>
+	</element>
 
 	<complexType name="PageItem" abstract="true">
 		<complexContent>
