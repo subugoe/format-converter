@@ -12,23 +12,23 @@ exclude-result-prefixes="ocr">
    
    
       <xsl:template match="ocr:document">
-		<TEI xmlns="bla">
-			<xsl:apply-templates select="ocr:Metadata"/>
+		<TEI xmlns="bla" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+			<xsl:apply-templates select="ocr:metadata"/>
 			<text>
 				<body>
-					<xsl:apply-templates select="ocr:Page"/>
+					<xsl:apply-templates select="ocr:page"/>
 				</body>
 			</text>
 		</TEI>
       </xsl:template>
       
-      <xsl:template match="ocr:Metadata">
+      <xsl:template match="ocr:metadata">
       	<teiHeader>
 			metadata
 		</teiHeader>
       </xsl:template>
       
-      <xsl:template match="ocr:Page">
+      <xsl:template match="ocr:page">
       	Page
            <xsl:apply-templates />
         <pb type="page"/>

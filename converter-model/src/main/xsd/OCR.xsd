@@ -6,13 +6,13 @@
 	<element name="document">
 		<complexType>
 			<sequence>
-				<element ref="tns:Metadata"/>
-				<element ref="tns:Page" maxOccurs="unbounded"/>
+				<element ref="tns:metadata"/>
+				<element ref="tns:page" maxOccurs="unbounded"/>
 			</sequence>
 		</complexType>
 	</element>
 
-	<element name="Metadata">
+	<element name="metadata">
 		<complexType>
 			<sequence>
 				<element name="ocrSoftwareName" type="string"/>
@@ -38,7 +38,7 @@
 		</simpleContent>
 	</complexType>
 
-	<element name="Page">
+	<element name="page">
 		<complexType>
 		<sequence>
 			<element name="pageItems" type="tns:PageItem" maxOccurs="unbounded"/>

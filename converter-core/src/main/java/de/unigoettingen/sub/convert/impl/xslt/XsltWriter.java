@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
@@ -21,10 +22,19 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stax.StAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+
+import org.custommonkey.xmlunit.DetailedDiff;
+import org.custommonkey.xmlunit.Diff;
+import org.custommonkey.xmlunit.Difference;
+import org.custommonkey.xmlunit.DifferenceConstants;
+import org.jdom2.Element;
+import org.jdom2.input.DOMBuilder;
+import org.w3c.dom.Node;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.api.StaxWriter;
@@ -45,12 +55,43 @@ public class XsltWriter extends StaxWriter {
 		
 		Document emptyMeta = new Document();
 		emptyMeta.setMetadata(new Metadata());
-		transformAndOutput(emptyMeta);
+		org.w3c.dom.Document domMeta = transformToDom(emptyMeta);
+//		org.jdom2.Document jdomMeta = new DOMBuilder().build(domMeta);
+//		
+//		Element root = jdomMeta.getRootElement();
+//		System.out.println(root.getName());
+//		System.out.println(root.getNamespacesIntroduced());
+//		System.out.println(root.getAttributes());
+//		System.out.println("#" + root.getText() + "#");
+//		
+//		Element firstChild = root.getChildren().get(0);
+//		System.out.println(firstChild.getName());
 
 		Document emptyPage = new Document();
-		emptyPage.getPage().add(new Page());
-		transformAndOutput(emptyPage);
+//		emptyPage.getPage().add(new Page());
+		org.w3c.dom.Document domEmpty = transformToDom(emptyPage);
+//		org.jdom2.Document jdomPage = new DOMBuilder().build(domPage);
+//		System.out.println(jdomPage.getRootElement().getName());
 
+		Diff d = new Diff(domEmpty, domMeta);
+		DetailedDiff dd = new DetailedDiff(d);
+		
+		
+		List<Difference> l = (List<Difference>)dd.getAllDifferences();
+		Node firstDiff = null;
+		for(Difference diff : l) {
+			if (diff.getId() == DifferenceConstants.CHILD_NODE_NOT_FOUND_ID) {
+				firstDiff = diff.getTestNodeDetail().getNode();
+				System.out.println(firstDiff);
+				break;
+			}
+//			System.out.println(diff.getDescription());
+//			System.out.println(diff.getTestNodeDetail().getNode());
+//			System.out.println(diff.getTestNodeDetail().getValue());
+//			System.out.println(diff.getId());
+//			System.out.println();
+		}
+		System.out.println(firstDiff.getParentNode() == domMeta.getFirstChild());
 	}
 
 
@@ -70,13 +111,17 @@ public class XsltWriter extends StaxWriter {
 		//tansformAndOutput(page);
 	}
 
-	private void transformAndOutput(Object fragment) {
+	private org.w3c.dom.Document transformToDom(Object fragment) {
+		org.w3c.dom.Document dom = newDom();
+		DOMResult result = new DOMResult(dom);
+		transformAndOutput(fragment, result);
+		return dom;
+	}
+	
+	private void transformAndOutput(Object fragment, Result result) {
 		try {
 			
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			factory.setNamespaceAware(true);
-		    DocumentBuilder builder = factory.newDocumentBuilder();
-		    org.w3c.dom.Document document = builder.newDocument();
+			org.w3c.dom.Document document = newDom();
 			
 			JAXBContext context = JAXBContext.newInstance(fragment.getClass());
 			Marshaller m = context.createMarshaller();
@@ -92,12 +137,12 @@ public class XsltWriter extends StaxWriter {
 			Source src = new DOMSource(document);
 
 			//OutputStream os = new ByteArrayOutputStream();
-			Result target = new StreamResult(output);
+			//Result target = new StreamResult(output);
 
 			
 			//StAXResult target = new StAXResult(xwriter);
 			
-			transformer.transform(src, target);
+			transformer.transform(src, result);
 			
 			//System.out.println(os.toString());
 			
@@ -107,9 +152,6 @@ public class XsltWriter extends StaxWriter {
 		} catch (TransformerFactoryConfigurationError e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,6 +159,22 @@ public class XsltWriter extends StaxWriter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+
+	private org.w3c.dom.Document newDom() {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true);
+		DocumentBuilder builder;
+		org.w3c.dom.Document document = null;
+		try {
+			builder = factory.newDocumentBuilder();
+			document = builder.newDocument();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return document;
 	}
 
 	@Override
