@@ -46,12 +46,6 @@ abstract public class StaxWriter extends WriterWithOptions implements ConvertWri
 
 	}
 
-	private void checkOutputStream() {
-		if (output == null) {
-			throw new IllegalStateException("The output target is not set");
-		}
-
-	}
 
 	@Override
 	public void writeMetadata(Metadata meta) {

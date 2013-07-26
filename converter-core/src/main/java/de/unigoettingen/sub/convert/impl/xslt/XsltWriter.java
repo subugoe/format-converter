@@ -3,9 +3,8 @@ package de.unigoettingen.sub.convert.impl.xslt;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -13,7 +12,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -22,102 +20,114 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
-import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stax.StAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.custommonkey.xmlunit.DetailedDiff;
-import org.custommonkey.xmlunit.Diff;
-import org.custommonkey.xmlunit.Difference;
-import org.custommonkey.xmlunit.DifferenceConstants;
-import org.jdom2.Element;
-import org.jdom2.input.DOMBuilder;
-import org.w3c.dom.Node;
-
-import de.unigoettingen.sub.convert.api.ConvertWriter;
-import de.unigoettingen.sub.convert.api.StaxWriter;
+import de.unigoettingen.sub.convert.api.WriterWithOptions;
+import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Document;
+import de.unigoettingen.sub.convert.model.Line;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
+import de.unigoettingen.sub.convert.model.Paragraph;
+import de.unigoettingen.sub.convert.model.TextBlock;
+import de.unigoettingen.sub.convert.model.Word;
 
-public class XsltWriter extends StaxWriter {
+public class XsltWriter extends WriterWithOptions {
 
 	private Document doc = new Document();
+	private boolean firstPage = true;
+	private String beforeMeta = "";
+	private String betweenMetaAndPages = "";
+	private String afterPages = "";
 	
-
+	
 	@Override
-	protected void writeStartStax() throws XMLStreamException {
-//		xwriter.writeStartDocument("UTF-8", "1.0");
-//		xwriter.writeStartElement("TEI");
-//		xwriter.writeCharacters("");
+	public void writeStart() {
 		
-		Document emptyMeta = new Document();
-		emptyMeta.setMetadata(new Metadata());
-		org.w3c.dom.Document domMeta = transformToDom(emptyMeta);
-//		org.jdom2.Document jdomMeta = new DOMBuilder().build(domMeta);
-//		
-//		Element root = jdomMeta.getRootElement();
-//		System.out.println(root.getName());
-//		System.out.println(root.getNamespacesIntroduced());
-//		System.out.println(root.getAttributes());
-//		System.out.println("#" + root.getText() + "#");
-//		
-//		Element firstChild = root.getChildren().get(0);
-//		System.out.println(firstChild.getName());
+		Document sampleDoc = new Document();
+		Metadata sampleMeta = new Metadata();
+		sampleMeta.setOcrSoftwareName("sampleSoftwareName");
+		sampleDoc.setMetadata(sampleMeta);
+		Page samplePage = newPageWithText();
+		sampleDoc.getPage().add(samplePage);
+		
+		String docXml = transformToString(sampleDoc);
 
-		Document emptyPage = new Document();
-//		emptyPage.getPage().add(new Page());
-		org.w3c.dom.Document domEmpty = transformToDom(emptyPage);
-//		org.jdom2.Document jdomPage = new DOMBuilder().build(domPage);
-//		System.out.println(jdomPage.getRootElement().getName());
-
-		Diff d = new Diff(domEmpty, domMeta);
-		DetailedDiff dd = new DetailedDiff(d);
+		String metaXml = transformToString(sampleMeta);
+		String pageXml = transformToString(samplePage);
 		
-		
-		List<Difference> l = (List<Difference>)dd.getAllDifferences();
-		Node firstDiff = null;
-		for(Difference diff : l) {
-			if (diff.getId() == DifferenceConstants.CHILD_NODE_NOT_FOUND_ID) {
-				firstDiff = diff.getTestNodeDetail().getNode();
-				System.out.println(firstDiff);
-				break;
-			}
-//			System.out.println(diff.getDescription());
-//			System.out.println(diff.getTestNodeDetail().getNode());
-//			System.out.println(diff.getTestNodeDetail().getValue());
-//			System.out.println(diff.getId());
-//			System.out.println();
+		String patternForSplit = Pattern.quote(pageXml);
+		if (!metaXml.trim().isEmpty()) {
+			patternForSplit += "|" + Pattern.quote(metaXml);
 		}
-		System.out.println(firstDiff.getParentNode() == domMeta.getFirstChild());
+		String[] xmlParts = docXml.split(patternForSplit);
+		
+		if (xmlParts.length == 2) {
+			beforeMeta = xmlParts[0];
+			afterPages = xmlParts[1];
+		} else if (xmlParts.length == 3) {
+			beforeMeta = xmlParts[0];
+			betweenMetaAndPages = xmlParts[1];
+			afterPages = xmlParts[2];
+		} else {
+			throw new IllegalStateException("Could not determine XML structure");
+		}
+		
+		try {
+			output.write(beforeMeta.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
+	private Page newPageWithText() {
+		Page page = new Page();
+		TextBlock block = new TextBlock();
+		Paragraph par = new Paragraph();
+		Line line = new Line();
+		Word w = new Word();
+		Char ch = new Char();
+		ch.setValue("a");
+		w.getCharacters().add(ch);
+		line.getLineItems().add(w);
+		par.getLines().add(line);
+		block.getParagraphs().add(par);
+		page.getPageItems().add(block);
+		return page;
+	}
 
 	@Override
-	protected void writeMetadataStax(Metadata meta) throws XMLStreamException {
+	public void writeMetadata(Metadata meta) {
 		doc.setMetadata(meta);
 
-		//tansformAndOutput(meta);
-
+		transformAndOutput(meta, new StreamResult(output));
 	}
 
 	@Override
-	protected void writePageStax(Page page) throws XMLStreamException {
+	public void writePage(Page page) {
 		doc.getPage().add(page);
 		
-
-		//tansformAndOutput(page);
+		if (firstPage) {
+			try {
+				output.write(betweenMetaAndPages.getBytes());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			firstPage = false;
+		}
+		transformAndOutput(page, new StreamResult(output));
 	}
 
-	private org.w3c.dom.Document transformToDom(Object fragment) {
-		org.w3c.dom.Document dom = newDom();
-		DOMResult result = new DOMResult(dom);
-		transformAndOutput(fragment, result);
-		return dom;
+	private String transformToString(Object fragment) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		transformAndOutput(fragment, new StreamResult(baos));
+		return baos.toString();
 	}
-	
+		
 	private void transformAndOutput(Object fragment, Result result) {
 		try {
 			
@@ -178,7 +188,7 @@ public class XsltWriter extends StaxWriter {
 	}
 
 	@Override
-	protected void writeEndStax() throws XMLStreamException {
+	public void writeEnd() {
 //		try {
 //		JAXBContext context = JAXBContext.newInstance(Document.class);
 //		Marshaller m = context.createMarshaller();
@@ -192,8 +202,13 @@ public class XsltWriter extends StaxWriter {
 //		e.printStackTrace();
 //	}
 
-//		xwriter.writeEndElement();
-//		xwriter.writeEndDocument();
+
+		try {
+			output.write(afterPages.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

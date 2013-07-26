@@ -3,7 +3,7 @@
 xmlns:ocr="http://www.sub.uni-goettingen.de/ent/OCR"
 exclude-result-prefixes="ocr">
 
-<xsl:output method="xml" indent="yes"/>
+<xsl:output method="xml"/>
 
    <xsl:template match="/">
             <xsl:apply-templates />
@@ -29,7 +29,7 @@ exclude-result-prefixes="ocr">
       </xsl:template>
       
       <xsl:template match="ocr:page">
-      	Page
+      	Page | |
            <xsl:apply-templates />
         <pb type="page"/>
       </xsl:template>

@@ -34,5 +34,11 @@ public abstract class WriterWithOptions implements ConvertWriter {
 		return new HashMap<String, String>(supportedOptions);
 	}
 
+	protected void checkOutputStream() {
+		if (output == null) {
+			throw new IllegalStateException("The output target is not set");
+		}
+
+	}
 
 }
