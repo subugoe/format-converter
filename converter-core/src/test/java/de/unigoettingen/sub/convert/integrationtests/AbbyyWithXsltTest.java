@@ -31,9 +31,10 @@ public class AbbyyWithXsltTest {
 		InputStream is = new FileInputStream("src/test/resources/abbyy10_coverAndText.xml");
 		ConvertReader reader = new AbbyyXMLReader();
 		ConvertWriter writer = new XsltWriter();
-		
-		//OutputStream s = new FileOutputStream("target/xsltResult.xml");
-		OutputStream s = System.out;
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toTei.xsl");
+
+		OutputStream s = new FileOutputStream("target/xsltResult.xml");
+		//OutputStream s = System.out;
 		writer.setTarget(s);
 		
 		reader.setWriter(writer);

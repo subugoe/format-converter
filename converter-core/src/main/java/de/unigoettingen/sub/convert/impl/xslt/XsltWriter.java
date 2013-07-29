@@ -1,6 +1,7 @@
 package de.unigoettingen.sub.convert.impl.xslt;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,15 +37,22 @@ import de.unigoettingen.sub.convert.model.Word;
 
 public class XsltWriter extends WriterWithOptions {
 
+	private static final String XSLT_DESCRIPTION = "[path] to XSLT script file";
+
 	private Document doc = new Document();
 	private boolean firstPage = true;
 	private String beforeMeta = "";
 	private String betweenMetaAndPages = "";
 	private String afterPages = "";
 	
+	public XsltWriter() {
+		supportedOptions.put("xslt", XSLT_DESCRIPTION);
+	}
+	
 	
 	@Override
 	public void writeStart() {
+		checkOutputStream();
 		
 		Document sampleDoc = new Document();
 		Metadata sampleMeta = new Metadata();
@@ -76,6 +84,7 @@ public class XsltWriter extends WriterWithOptions {
 		}
 		
 		try {
+			output.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>".getBytes());
 			output.write(beforeMeta.getBytes());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -140,9 +149,11 @@ public class XsltWriter extends WriterWithOptions {
 			m.marshal( fragment, document );
 			
 			Transformer transformer;
+			File xslt = new File(setOptions.get("xslt"));
 			transformer = TransformerFactory.newInstance().newTransformer(
-					new StreamSource("src/main/resources/internFormatToTei.xsl") );
+					new StreamSource(xslt) );
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			//transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		
 			Source src = new DOMSource(document);
 
@@ -150,7 +161,6 @@ public class XsltWriter extends WriterWithOptions {
 			//Result target = new StreamResult(output);
 
 			
-			//StAXResult target = new StAXResult(xwriter);
 			
 			transformer.transform(src, result);
 			
@@ -189,18 +199,19 @@ public class XsltWriter extends WriterWithOptions {
 
 	@Override
 	public void writeEnd() {
-//		try {
-//		JAXBContext context = JAXBContext.newInstance(Document.class);
-//		Marshaller m = context.createMarshaller();
-//		m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
+		try {
+		JAXBContext context = JAXBContext.newInstance(Document.class);
+		Marshaller m = context.createMarshaller();
+		m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
 //		m.marshal( doc, new FileOutputStream("target/intern.xml"));
-//	} catch (JAXBException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
+		m.marshal( doc, System.out);
+	} catch (JAXBException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 //	} catch (FileNotFoundException e) {
 //		// TODO Auto-generated catch block
 //		e.printStackTrace();
-//	}
+	}
 
 
 		try {

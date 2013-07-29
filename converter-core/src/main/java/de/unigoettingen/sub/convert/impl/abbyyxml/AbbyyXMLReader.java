@@ -120,8 +120,9 @@ public class AbbyyXMLReader extends StaxReader {
 	protected void handleEndElement(EndElement endTag) {
 		String name = endTag.getName().getLocalPart();
 		if (name.equals("page")) {
+			current.page.setPhysicalNumber(++pageCounter);
 			writer.writePage(current.page);
-			out.print(" " + ++pageCounter);
+			out.print(" " + pageCounter);
 		} else if (name.equals("formatting")) {
 			// this has to be done, so that a new lineItem (word/nonWord) can be started
 			finishUpLastLineItem();

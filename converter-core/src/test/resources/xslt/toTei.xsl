@@ -12,7 +12,7 @@ exclude-result-prefixes="ocr">
    
    
       <xsl:template match="ocr:document">
-		<TEI>
+		<TEI xmlns="http://www.tei-c.org/ns/1.0">
 			<xsl:apply-templates select="ocr:metadata"/>
 			<text>
 				<body>
@@ -24,14 +24,35 @@ exclude-result-prefixes="ocr">
       
       <xsl:template match="ocr:metadata">
       	<teiHeader>
-			metadata
+      		<profileDesc>
+      			<xsl:apply-templates select="ocr:ocrSoftwareName"/>
+      			<langUsage>
+      				<xsl:apply-templates select="ocr:languages"/>
+      			</langUsage>
+      		</profileDesc>
 		</teiHeader>
       </xsl:template>
       
+      <xsl:template match="ocr:ocrSoftwareName">
+      	<creation>
+      		<xsl:value-of select="text()"/><xsl:text> </xsl:text><xsl:value-of select="following-sibling::ocr:ocrSoftwareVersion"/>
+      	</creation>
+      </xsl:template>
+      
+      <xsl:template match="ocr:languages">
+      	<language>
+      	<xsl:if test="@langId">
+      		<xsl:attribute name="ident">
+      			<xsl:value-of select="@langId"/>
+      		</xsl:attribute>
+      	</xsl:if>
+      	<xsl:value-of select="text()"/></language>
+      </xsl:template>
+      
       <xsl:template match="ocr:page">
-      	Page | |
            <xsl:apply-templates />
-        <pb type="page"/>
+        <milestone n="{@physicalNumber}" type="page"/>
+        <pb/>
       </xsl:template>
       
       

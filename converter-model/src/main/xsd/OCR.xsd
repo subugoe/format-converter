@@ -43,7 +43,8 @@
 		<sequence>
 			<element name="pageItems" type="tns:PageItem" maxOccurs="unbounded"/>
 		</sequence>
-		<attribute name="number" type="int"/>
+		<attribute name="logicalNumber" type="int"/>
+		<attribute name="physicalNumber" type="int"/>
 		<attribute name="height" type="int"/>
 		<attribute name="width" type="int"/>
 		<attribute name="orientation" type="string"/>
