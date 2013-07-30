@@ -48,6 +48,7 @@ public class PageBuilder {
 	}
 	
 	public Page build() {
+		page.setPhysicalNumber(1);
 		return page;
 	}
 	

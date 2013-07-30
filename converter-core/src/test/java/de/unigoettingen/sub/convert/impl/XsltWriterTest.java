@@ -2,6 +2,8 @@ package de.unigoettingen.sub.convert.impl;
 
 import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.language;
 import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.metadata;
+import static de.unigoettingen.sub.convert.model.builders.PageBuilder.page;
+import static de.unigoettingen.sub.convert.model.builders.ParagraphBuilder.paragraph;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 
@@ -14,6 +16,7 @@ import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.impl.xslt.XsltWriter;
+import de.unigoettingen.sub.convert.model.Document;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 
@@ -62,7 +65,7 @@ public class XsltWriterTest {
 		writer.writeStart();
 		
 		String output = baos.toString();
-
+		
 		assertThat(output, containsString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"));
 		assertThat(output, containsString("<TEI"));
 	}
@@ -104,7 +107,7 @@ public class XsltWriterTest {
 	public void outputShouldContainTwoLanguages() {
 		Metadata meta = metadata().with(language("lang1")).with(language("lang2")).build();
 		String output = process(meta);
-		System.out.println(output);
+		//System.out.println(output);
 
 		writer.writeEnd();
 		assertThat(output, containsString("<language>lang1</language>"));
@@ -114,14 +117,61 @@ public class XsltWriterTest {
 	@Test
 	public void emptyPageShouldResultInAPageBreak() {
 		Page page = new Page();
+		String output = process(page);
+
+		assertThat(output, containsString("<milestone n=\"\" type=\"page\"/>"));
+		assertThat(output, containsString("<pb"));
+	}
+
+	@Test
+	public void pageWithPhysicalNumber() {
+		Page page = new Page();
 		page.setPhysicalNumber(1);
 		String output = process(page);
-		//writer.writeEnd();
 
 		assertThat(output, containsString("<milestone n=\"1\" type=\"page\"/>"));
 		assertThat(output, containsString("<pb"));
 	}
 
+	@Test
+	public void documentWithOnePage() {
+		writer.setTarget(baos);
+		writer.writeStart();
+		writer.writePage(new Page());
+		writer.writeEnd();
+		String output = baos.toString();
+		assertThat(output, containsString("<TEI"));
+		assertThat(output, containsString("<text><body>\n<milestone"));
+		assertThat(output, containsString("</body></text></TEI>"));
+	}
 	
+	@Test
+	public void completeDocumentWithMetaAndPage() {
+		writer.setTarget(baos);
+		writer.writeStart();
+		writer.writeMetadata(new Metadata());
+		writer.writePage(new Page());
+		writer.writeEnd();
+		String output = baos.toString();
+		assertThat(output, containsString("<TEI"));
+		assertThat(output, containsString("</teiHeader>\n<text><body>"));
+		assertThat(output, containsString("</body></text></TEI>"));
+	}
 	
+	@Test
+	public void paragraphShouldGetAnID() {
+		Page page = page().with(paragraph()).build();
+		String output = process(page);
+
+		assertThat(output, containsString("<p id=\"ID1_1\">"));
+	}
+
+	@Test
+	public void paragraphIDShouldBeIncremented() {
+		Page page = page().with(paragraph()).with(paragraph()).build();
+		String output = process(page);
+
+		assertThat(output, containsString("<p id=\"ID1_2\">"));
+	}
+
 }

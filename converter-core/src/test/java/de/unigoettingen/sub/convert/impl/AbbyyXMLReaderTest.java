@@ -157,7 +157,7 @@ public class AbbyyXMLReaderTest {
 	}
 	
 	@Test
-	public void emptyPageWithHeightAndWidth() throws FileNotFoundException {
+	public void emptyPageWithHeightAndWidthAndNumber() throws FileNotFoundException {
 		ArgumentCaptor<Page> argument = ArgumentCaptor.forClass(Page.class);
 		reader.setWriter(writerMock);
 		reader.read(fromFile("abbyy6_metadata.xml"));
@@ -167,6 +167,7 @@ public class AbbyyXMLReaderTest {
 		Page page = argument.getValue();
 		assertEquals(new Integer(5675), page.getHeight());
 		assertEquals(new Integer(3603), page.getWidth());
+		assertEquals(new Integer(1), page.getPhysicalNumber());
 	}
 	
 	@Test

@@ -3,7 +3,7 @@
 xmlns:ocr="http://www.sub.uni-goettingen.de/ent/OCR"
 exclude-result-prefixes="ocr">
 
-<xsl:output method="xml"/>
+<xsl:output method="xml" indent="yes"/>
 
    <xsl:template match="/">
             <xsl:apply-templates />
@@ -57,7 +57,9 @@ exclude-result-prefixes="ocr">
       
       
       <xsl:template match="ocr:paragraphs">
+      	<xsl:variable name="pageNumber" select="ancestor::ocr:page/@physicalNumber"/>
       	<p>
+      		<xsl:attribute name="id">ID<xsl:value-of select="$pageNumber"/>_<xsl:value-of select="count(preceding::ocr:paragraphs)+1"/></xsl:attribute>
       		paragraph
       	</p>
       </xsl:template>

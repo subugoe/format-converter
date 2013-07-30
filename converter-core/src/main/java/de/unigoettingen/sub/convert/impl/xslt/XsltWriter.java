@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBContext;
@@ -61,10 +62,10 @@ public class XsltWriter extends WriterWithOptions {
 		Page samplePage = newPageWithText();
 		sampleDoc.getPage().add(samplePage);
 		
-		String docXml = transformToString(sampleDoc);
+		String docXml = transformToString(sampleDoc).replaceAll("\\s+", " ");
 
-		String metaXml = transformToString(sampleMeta);
-		String pageXml = transformToString(samplePage);
+		String metaXml = transformToString(sampleMeta).replaceAll("\\s+", " ");
+		String pageXml = transformToString(samplePage).replaceAll("\\s+", " ");
 		
 		String patternForSplit = Pattern.quote(pageXml);
 		if (!metaXml.trim().isEmpty()) {
@@ -84,8 +85,8 @@ public class XsltWriter extends WriterWithOptions {
 		}
 		
 		try {
-			output.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>".getBytes());
-			output.write(beforeMeta.getBytes());
+			output.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
+			output.write((beforeMeta+"\n").getBytes());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,7 +113,8 @@ public class XsltWriter extends WriterWithOptions {
 	public void writeMetadata(Metadata meta) {
 		doc.setMetadata(meta);
 
-		transformAndOutput(meta, new StreamResult(output));
+		Transformer transformer = newTransformer();
+		transformAndOutput(meta, new StreamResult(output), transformer);
 	}
 
 	@Override
@@ -121,23 +123,26 @@ public class XsltWriter extends WriterWithOptions {
 		
 		if (firstPage) {
 			try {
-				output.write(betweenMetaAndPages.getBytes());
+				output.write((betweenMetaAndPages + "\n").getBytes());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			firstPage = false;
 		}
-		transformAndOutput(page, new StreamResult(output));
+		Transformer transformer = newTransformer();
+		transformAndOutput(page, new StreamResult(output), transformer);
 	}
 
 	private String transformToString(Object fragment) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		transformAndOutput(fragment, new StreamResult(baos));
+		Transformer transformer = newTransformer();
+		transformer.setOutputProperty(OutputKeys.INDENT, "no");
+		transformAndOutput(fragment, new StreamResult(baos), transformer);
 		return baos.toString();
 	}
 		
-	private void transformAndOutput(Object fragment, Result result) {
+	private void transformAndOutput(Object fragment, Result result, Transformer transformer) {
 		try {
 			
 			org.w3c.dom.Document document = newDom();
@@ -148,13 +153,6 @@ public class XsltWriter extends WriterWithOptions {
 			//m.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
 			m.marshal( fragment, document );
 			
-			Transformer transformer;
-			File xslt = new File(setOptions.get("xslt"));
-			transformer = TransformerFactory.newInstance().newTransformer(
-					new StreamSource(xslt) );
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			//transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-		
 			Source src = new DOMSource(document);
 
 			//OutputStream os = new ByteArrayOutputStream();
@@ -197,6 +195,25 @@ public class XsltWriter extends WriterWithOptions {
 		return document;
 	}
 
+	private Transformer newTransformer() {
+		Transformer transformer = null;
+		File xslt = new File(setOptions.get("xslt"));
+		try {
+			transformer = TransformerFactory.newInstance().newTransformer(
+					new StreamSource(xslt) );
+		} catch (TransformerConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerFactoryConfigurationError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+		return transformer;
+	}
+	
 	@Override
 	public void writeEnd() {
 		try {
@@ -204,7 +221,7 @@ public class XsltWriter extends WriterWithOptions {
 		Marshaller m = context.createMarshaller();
 		m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
 //		m.marshal( doc, new FileOutputStream("target/intern.xml"));
-		m.marshal( doc, System.out);
+		//m.marshal( doc, System.out);
 	} catch (JAXBException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
