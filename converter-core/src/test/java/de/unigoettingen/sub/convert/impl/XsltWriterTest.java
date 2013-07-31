@@ -1,10 +1,11 @@
 package de.unigoettingen.sub.convert.impl;
 
 import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.language;
+import static de.unigoettingen.sub.convert.model.builders.LineBuilder.line;
 import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.metadata;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.page;
 import static de.unigoettingen.sub.convert.model.builders.ParagraphBuilder.paragraph;
-import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
@@ -16,7 +17,6 @@ import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.impl.xslt.XsltWriter;
-import de.unigoettingen.sub.convert.model.Document;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 
@@ -107,7 +107,6 @@ public class XsltWriterTest {
 	public void outputShouldContainTwoLanguages() {
 		Metadata meta = metadata().with(language("lang1")).with(language("lang2")).build();
 		String output = process(meta);
-		//System.out.println(output);
 
 		writer.writeEnd();
 		assertThat(output, containsString("<language>lang1</language>"));
@@ -134,15 +133,30 @@ public class XsltWriterTest {
 	}
 
 	@Test
+	public void secondPageShouldCreateSecondMilestone() {
+		writer.setTarget(baos);
+		Page page = new Page();
+		page.setPhysicalNumber(1);
+		writer.writePage(page);
+		page.setPhysicalNumber(2);
+		writer.writePage(page);
+		
+		String output = baos.toString();
+		assertThat(output, containsString("<milestone n=\"2\""));
+	}
+
+	@Test
 	public void documentWithOnePage() {
 		writer.setTarget(baos);
 		writer.writeStart();
 		writer.writePage(new Page());
 		writer.writeEnd();
 		String output = baos.toString();
+
 		assertThat(output, containsString("<TEI"));
-		assertThat(output, containsString("<text><body>\n<milestone"));
-		assertThat(output, containsString("</body></text></TEI>"));
+		output = output.replaceAll("\\n", " ");
+		assertTrue("text and body are in the wrong place", output.matches(".*<text>\\s*<body>\\s*<milestone.*"));
+		assertTrue("text and body must close just before tei", output.matches(".*</body>\\s*</text>\\s*</TEI>.*"));
 	}
 	
 	@Test
@@ -153,9 +167,12 @@ public class XsltWriterTest {
 		writer.writePage(new Page());
 		writer.writeEnd();
 		String output = baos.toString();
+//		System.out.println(output);
+
 		assertThat(output, containsString("<TEI"));
-		assertThat(output, containsString("</teiHeader>\n<text><body>"));
-		assertThat(output, containsString("</body></text></TEI>"));
+		output = output.replaceAll("\\n", " ");
+		assertTrue("header should be before text and body", output.matches(".*</teiHeader>\\s*<text>\\s*<body>.*"));
+		assertTrue("text and body must close just before tei", output.matches(".*</body>\\s*</text>\\s*</TEI>.*"));
 	}
 	
 	@Test
@@ -163,7 +180,7 @@ public class XsltWriterTest {
 		Page page = page().with(paragraph()).build();
 		String output = process(page);
 
-		assertThat(output, containsString("<p id=\"ID1_1\">"));
+		assertThat(output, containsString("<p id=\"ID1_1\""));
 	}
 
 	@Test
@@ -171,7 +188,15 @@ public class XsltWriterTest {
 		Page page = page().with(paragraph()).with(paragraph()).build();
 		String output = process(page);
 
-		assertThat(output, containsString("<p id=\"ID1_2\">"));
+		assertThat(output, containsString("<p id=\"ID1_2\""));
+	}
+
+	@Test
+	public void addLineBreakAfterALine() {
+		Page page = page().with(line()).build();
+		String output = process(page);
+
+		assertThat(output, containsString("<lb/>"));
 	}
 
 }

@@ -60,8 +60,13 @@ exclude-result-prefixes="ocr">
       	<xsl:variable name="pageNumber" select="ancestor::ocr:page/@physicalNumber"/>
       	<p>
       		<xsl:attribute name="id">ID<xsl:value-of select="$pageNumber"/>_<xsl:value-of select="count(preceding::ocr:paragraphs)+1"/></xsl:attribute>
-      		paragraph
+      		<xsl:apply-templates />
       	</p>
+      </xsl:template>
+      
+      <xsl:template match="ocr:lines">
+      	<xsl:apply-templates/>
+      	<lb/>
       </xsl:template>
    
 </xsl:stylesheet>

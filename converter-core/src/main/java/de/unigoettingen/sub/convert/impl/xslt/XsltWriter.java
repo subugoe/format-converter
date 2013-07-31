@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBContext;
@@ -62,15 +63,18 @@ public class XsltWriter extends WriterWithOptions {
 		Page samplePage = newPageWithText();
 		sampleDoc.getPage().add(samplePage);
 		
-		String docXml = transformToString(sampleDoc).replaceAll("\\s+", " ");
+		String docXml = transformToString(sampleDoc);
 
-		String metaXml = transformToString(sampleMeta).replaceAll("\\s+", " ");
-		String pageXml = transformToString(samplePage).replaceAll("\\s+", " ");
-		
-		String patternForSplit = Pattern.quote(pageXml);
+		String metaXml = transformToString(sampleMeta);
+		metaXml = makeToRegex(metaXml);
+		String pageXml = transformToString(samplePage);
+		pageXml = makeToRegex(pageXml);
+
+		String patternForSplit = pageXml;
 		if (!metaXml.trim().isEmpty()) {
-			patternForSplit += "|" + Pattern.quote(metaXml);
+			patternForSplit += "|" + metaXml;
 		}
+
 		String[] xmlParts = docXml.split(patternForSplit);
 		
 		if (xmlParts.length == 2) {
@@ -86,12 +90,24 @@ public class XsltWriter extends WriterWithOptions {
 		
 		try {
 			output.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
-			output.write((beforeMeta+"\n").getBytes());
+			output.write((beforeMeta).getBytes());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
+	private String makeToRegex(String xmlFragment) {
+		Character[] regexSymbols = {'|', '&', '?', '+', '\\', '['};
+		for (char symbol : regexSymbols) {
+			xmlFragment = xmlFragment.replace(symbol, '.');
+		}
+		xmlFragment = xmlFragment.replaceAll("\\s+", "\\\\s*");
+		xmlFragment = xmlFragment.replaceAll("><", ">\\\\s*<");
+
+		return xmlFragment;
+	}
+
 
 	private Page newPageWithText() {
 		Page page = new Page();
@@ -123,7 +139,7 @@ public class XsltWriter extends WriterWithOptions {
 		
 		if (firstPage) {
 			try {
-				output.write((betweenMetaAndPages + "\n").getBytes());
+				output.write((betweenMetaAndPages).getBytes());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -137,7 +153,7 @@ public class XsltWriter extends WriterWithOptions {
 	private String transformToString(Object fragment) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		Transformer transformer = newTransformer();
-		transformer.setOutputProperty(OutputKeys.INDENT, "no");
+		//transformer.setOutputProperty(OutputKeys.INDENT, "no");
 		transformAndOutput(fragment, new StreamResult(baos), transformer);
 		return baos.toString();
 	}
@@ -221,7 +237,7 @@ public class XsltWriter extends WriterWithOptions {
 		Marshaller m = context.createMarshaller();
 		m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
 //		m.marshal( doc, new FileOutputStream("target/intern.xml"));
-		//m.marshal( doc, System.out);
+		m.marshal( doc, System.out);
 	} catch (JAXBException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
