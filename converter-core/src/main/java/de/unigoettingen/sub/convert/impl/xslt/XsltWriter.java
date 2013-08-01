@@ -27,6 +27,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.unigoettingen.sub.convert.api.WriterWithOptions;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.Document;
@@ -38,7 +41,7 @@ import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Word;
 
 public class XsltWriter extends WriterWithOptions {
-
+	private final static Logger LOGGER = LoggerFactory.getLogger(XsltWriter.class);
 	private static final String XSLT_DESCRIPTION = "[path] to XSLT script file";
 
 	private Document doc = new Document();
@@ -55,6 +58,7 @@ public class XsltWriter extends WriterWithOptions {
 	@Override
 	public void writeStart() {
 		checkOutputStream();
+		checkXsltSheet();
 		
 		Document sampleDoc = new Document();
 		Metadata sampleMeta = new Metadata();
@@ -92,13 +96,20 @@ public class XsltWriter extends WriterWithOptions {
 			output.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
 			output.write((beforeMeta).getBytes());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error("Could not write to xml output", e);
 		}
 	}
 
+	private void checkXsltSheet() {
+		if (setOptions.get("xslt") == null) {
+			throw new IllegalArgumentException("Path to XSLT file is not set");
+		}
+		
+	}
+
+
 	private String makeToRegex(String xmlFragment) {
-		Character[] regexSymbols = {'|', '&', '?', '+', '\\', '['};
+		Character[] regexSymbols = {'|', '&', '?', '+', '*', '\\', '['};
 		for (char symbol : regexSymbols) {
 			xmlFragment = xmlFragment.replace(symbol, '.');
 		}
@@ -129,8 +140,7 @@ public class XsltWriter extends WriterWithOptions {
 	public void writeMetadata(Metadata meta) {
 		doc.setMetadata(meta);
 
-		Transformer transformer = newTransformer();
-		transformAndOutput(meta, new StreamResult(output), transformer);
+		transformAndOutput(meta, new StreamResult(output));
 	}
 
 	@Override
@@ -146,46 +156,31 @@ public class XsltWriter extends WriterWithOptions {
 			}
 			firstPage = false;
 		}
-		Transformer transformer = newTransformer();
-		transformAndOutput(page, new StreamResult(output), transformer);
+
+		transformAndOutput(page, new StreamResult(output));
 	}
 
 	private String transformToString(Object fragment) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		Transformer transformer = newTransformer();
-		//transformer.setOutputProperty(OutputKeys.INDENT, "no");
-		transformAndOutput(fragment, new StreamResult(baos), transformer);
+		transformAndOutput(fragment, new StreamResult(baos));
 		return baos.toString();
 	}
 		
-	private void transformAndOutput(Object fragment, Result result, Transformer transformer) {
+	private void transformAndOutput(Object fragment, Result result) {
 		try {
 			
 			org.w3c.dom.Document document = newDom();
 			
 			JAXBContext context = JAXBContext.newInstance(fragment.getClass());
 			Marshaller m = context.createMarshaller();
-			//m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
-			//m.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
 			m.marshal( fragment, document );
 			
 			Source src = new DOMSource(document);
 
-			//OutputStream os = new ByteArrayOutputStream();
-			//Result target = new StreamResult(output);
-
-			
+			Transformer transformer = newTransformer();
 			
 			transformer.transform(src, result);
 			
-			//System.out.println(os.toString());
-			
-		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TransformerFactoryConfigurationError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -214,15 +209,16 @@ public class XsltWriter extends WriterWithOptions {
 	private Transformer newTransformer() {
 		Transformer transformer = null;
 		File xslt = new File(setOptions.get("xslt"));
+		if (!xslt.exists()) {
+			throw new IllegalArgumentException("File does nor exist: " + xslt.getAbsolutePath());
+		}
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer(
 					new StreamSource(xslt) );
 		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not process xslt file " + xslt.getAbsolutePath(), e);
 		} catch (TransformerFactoryConfigurationError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not process xslt file " + xslt.getAbsolutePath(), e);
 		}
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
@@ -237,7 +233,7 @@ public class XsltWriter extends WriterWithOptions {
 		Marshaller m = context.createMarshaller();
 		m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
 //		m.marshal( doc, new FileOutputStream("target/intern.xml"));
-		m.marshal( doc, System.out);
+		//m.marshal( doc, System.out);
 	} catch (JAXBException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

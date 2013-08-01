@@ -1,10 +1,14 @@
 package de.unigoettingen.sub.convert.impl;
 
+import static de.unigoettingen.sub.convert.model.builders.ImageBuilder.image;
 import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.language;
 import static de.unigoettingen.sub.convert.model.builders.LineBuilder.line;
 import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.metadata;
+import static de.unigoettingen.sub.convert.model.builders.NonWordBuilder.nonWord;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.page;
 import static de.unigoettingen.sub.convert.model.builders.ParagraphBuilder.paragraph;
+import static de.unigoettingen.sub.convert.model.builders.TableBuilder.table;
+import static de.unigoettingen.sub.convert.model.builders.WordBuilder.word;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -197,6 +201,85 @@ public class XsltWriterTest {
 		String output = process(page);
 
 		assertThat(output, containsString("<lb/>"));
+	}
+
+	@Test
+	public void shouldWrapWordInTags() {
+		Page page = page().with(word("test")).build();
+		String output = process(page);
+
+		assertThat(output, containsString("<w>test</w>"));
+	}
+
+	@Test
+	public void shouldNotWrapNonWordInTags() {
+		Page page = page().with(nonWord("...")).build();
+		String output = process(page);
+		
+		assertThat(output, not(containsString("<w>...</w>")));
+		assertThat(output, containsString("<pc>...</pc>"));
+	}
+
+	@Test
+	public void shouldAddWordCoordinates() {
+		Page page = page().with(word("test").withCoordinatesLTRB(1, 2, 3, 4)).build();
+		String output = process(page);
+
+		assertThat(output, containsString("<w function=\"1,2,3,4\">test</w>"));
+	}
+
+	@Test
+	public void shouldWriteFigure() {
+		Page page = page().with(image().withCoordinatesLTRB(1,2,3,4)).build();
+		String output = process(page);
+
+		assertThat(output, containsString("<figure"));
+		assertThat(output, containsString("id=\"ID1_1\""));
+		assertThat(output, containsString("function=\"1,2,3,4\""));
+	}
+
+	@Test
+	public void shouldCreateTableWithCoordinates() {
+		Page page = page().with(table().withCoordinatesLTRB(1, 2, 3, 4).with(word("a"))).build();
+		String output = process(page);
+		
+		assertThat(output, containsString("<table"));
+		assertThat(output, containsString("function=\"1,2,3,4\""));
+		assertThat(output, containsString("rows=\"1\""));
+		assertThat(output, containsString("cols=\"1\""));
+		assertThat(output, containsString("<row>"));
+		assertThat(output, containsString("<cell>"));
+		assertThat(output, containsString("<w>a</w>"));
+	}
+	
+	@Test
+	public void stylsheetWithoutMetadataAndWithRegex() {
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toExampleXml.xsl");
+		writer.setTarget(baos);
+		writer.writeStart();
+		writer.writePage(new Page());
+		writer.writeEnd();
+		String output = baos.toString();
+		
+		assertThat(output, containsString("<root>"));
+		assertThat(output, containsString("<child>"));
+		assertThat(output, containsString("regex characters"));
+		assertThat(output, containsString("</child>"));
+		assertThat(output, containsString("</root>"));
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void noStylesheet() {
+		writer.addImplementationSpecificOption("xslt", null);
+		writer.setTarget(baos);
+		writer.writeStart();
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void wrongStylesheetPath() {
+		writer.addImplementationSpecificOption("xslt", "/doesnotexist");
+		writer.setTarget(baos);
+		writer.writeStart();
 	}
 
 }
