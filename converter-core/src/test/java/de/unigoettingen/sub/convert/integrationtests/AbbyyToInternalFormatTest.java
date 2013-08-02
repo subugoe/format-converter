@@ -1,40 +1,35 @@
 package de.unigoettingen.sub.convert.integrationtests;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
-import de.unigoettingen.sub.convert.impl.XsltWriter;
 import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader;
 
-public class AbbyyWithXsltTest {
-
-	@Before
-	public void setUp() throws Exception {
-	}
+public class AbbyyToInternalFormatTest {
 
 	@Test
 	public void test() throws IOException {
-		InputStream is = new FileInputStream("src/test/resources/abbyy10_coverAndText.xml");
+		File abbyy = new File(
+				System.getProperty("user.dir") + "/src/test/resources/abbyy10_coverAndText.xml");
+		InputStream is = new FileInputStream(abbyy);
 		ConvertReader reader = new AbbyyXMLReader();
-		ConvertWriter writer = new XsltWriter();
-		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toTei.xsl");
-
-		OutputStream s = new FileOutputStream("target/xsltResult.xml");
+		ConvertWriter writer = new InternalFormatWriter();
+		
+		OutputStream s = new FileOutputStream("target/internalFormat.xml");
 		//OutputStream s = System.out;
 		writer.setTarget(s);
 		
 		reader.setWriter(writer);
 		reader.read(is);
 		s.close();
-
 	}
 
 }

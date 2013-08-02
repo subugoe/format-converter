@@ -190,4 +190,25 @@ public class MainTest {
 		assertThat(sysout, containsString("Finished conversion"));
 	}
 
+	@Test
+	public void convertsAbbyyToTeiUsingXslt() throws IOException {
+		Main.main(new String[]{"-infile", "src/test/resources/abbyy10_coverPage.xml", 
+				"-outfile", "target/teiConvertedWithXslt.xml", 
+				"-informat", "abbyyxml", 
+				"-outformat", "xsltoutput",
+				"-outoptions", "xslt=src/test/resources/toTei.xsl"});
+
+		String sysout = new String(baos.toByteArray());
+		assertThat(sysout, containsString("Starting conversion"));
+		assertThat(sysout, containsString("Finished conversion"));
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void convertsAbbyyToTeiUsingXsltNoScript() throws IOException {
+		Main.main(new String[]{"-infile", "src/test/resources/abbyy10_coverPage.xml", 
+				"-outfile", "target/teiConvertedWithXslt.xml", 
+				"-informat", "abbyyxml", 
+				"-outformat", "xsltoutput"});
+	}
+
 }

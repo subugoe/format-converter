@@ -1,13 +1,9 @@
-package de.unigoettingen.sub.convert.impl.xslt;
+package de.unigoettingen.sub.convert.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Pattern;
+import java.io.OutputStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -16,7 +12,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -44,7 +39,6 @@ public class XsltWriter extends WriterWithOptions {
 	private final static Logger LOGGER = LoggerFactory.getLogger(XsltWriter.class);
 	private static final String XSLT_DESCRIPTION = "[path] to XSLT script file";
 
-	private Document doc = new Document();
 	private boolean firstPage = true;
 	private String beforeMeta = "";
 	private String betweenMetaAndPages = "";
@@ -54,12 +48,22 @@ public class XsltWriter extends WriterWithOptions {
 		supportedOptions.put("xslt", XSLT_DESCRIPTION);
 	}
 	
-	
 	@Override
 	public void writeStart() {
 		checkOutputStream();
 		checkXsltSheet();
 		
+		findOutOutputDocStructure();
+		writeBeginningOfDoc();
+	}
+
+	private void checkXsltSheet() {
+		if (setOptions.get("xslt") == null) {
+			throw new IllegalArgumentException("Path to XSLT file is not set");
+		}
+	}
+
+	private void findOutOutputDocStructure() {
 		Document sampleDoc = new Document();
 		Metadata sampleMeta = new Metadata();
 		sampleMeta.setOcrSoftwareName("sampleSoftwareName");
@@ -67,58 +71,32 @@ public class XsltWriter extends WriterWithOptions {
 		Page samplePage = newPageWithText();
 		sampleDoc.getPage().add(samplePage);
 		
-		String docXml = transformToString(sampleDoc);
+		String completeDocWithMetaAndPage = transformToString(sampleDoc);
 
-		String metaXml = transformToString(sampleMeta);
-		metaXml = makeToRegex(metaXml);
-		String pageXml = transformToString(samplePage);
-		pageXml = makeToRegex(pageXml);
+		String metaPartOnly = transformToString(sampleMeta);
+		metaPartOnly = makeToRegex(metaPartOnly);
+		String pagePartOnly = transformToString(samplePage);
+		pagePartOnly = makeToRegex(pagePartOnly);
 
-		String patternForSplit = pageXml;
-		if (!metaXml.trim().isEmpty()) {
-			patternForSplit += "|" + metaXml;
-		}
-
-		String[] xmlParts = docXml.split(patternForSplit);
-		
-		if (xmlParts.length == 2) {
-			beforeMeta = xmlParts[0];
-			afterPages = xmlParts[1];
-		} else if (xmlParts.length == 3) {
-			beforeMeta = xmlParts[0];
-			betweenMetaAndPages = xmlParts[1];
-			afterPages = xmlParts[2];
+		String patternForSplit = null;
+		if (metaPartOnly.trim().isEmpty()) {
+			patternForSplit = pagePartOnly;
 		} else {
-			throw new IllegalStateException("Could not determine XML structure");
+			patternForSplit = metaPartOnly + "|" + pagePartOnly;
 		}
-		
-		try {
-			output.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".getBytes());
-			output.write((beforeMeta).getBytes());
-		} catch (IOException e) {
-			LOGGER.error("Could not write to xml output", e);
+
+		String[] docParts = completeDocWithMetaAndPage.split(patternForSplit);
+		if (docParts.length == 2) {
+			beforeMeta = docParts[0];
+			afterPages = docParts[1];
+		} else if (docParts.length == 3) {
+			beforeMeta = docParts[0];
+			betweenMetaAndPages = docParts[1];
+			afterPages = docParts[2];
+		} else {
+			throw new IllegalStateException("Could not determine structure for output document");
 		}
 	}
-
-	private void checkXsltSheet() {
-		if (setOptions.get("xslt") == null) {
-			throw new IllegalArgumentException("Path to XSLT file is not set");
-		}
-		
-	}
-
-
-	private String makeToRegex(String xmlFragment) {
-		Character[] regexSymbols = {'|', '&', '?', '+', '*', '\\', '['};
-		for (char symbol : regexSymbols) {
-			xmlFragment = xmlFragment.replace(symbol, '.');
-		}
-		xmlFragment = xmlFragment.replaceAll("\\s+", "\\\\s*");
-		xmlFragment = xmlFragment.replaceAll("><", ">\\\\s*<");
-
-		return xmlFragment;
-	}
-
 
 	private Page newPageWithText() {
 		Page page = new Page();
@@ -135,73 +113,64 @@ public class XsltWriter extends WriterWithOptions {
 		page.getPageItems().add(block);
 		return page;
 	}
-
-	@Override
-	public void writeMetadata(Metadata meta) {
-		doc.setMetadata(meta);
-
-		transformAndOutput(meta, new StreamResult(output));
-	}
-
-	@Override
-	public void writePage(Page page) {
-		doc.getPage().add(page);
-		
-		if (firstPage) {
-			try {
-				output.write((betweenMetaAndPages).getBytes());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			firstPage = false;
-		}
-
-		transformAndOutput(page, new StreamResult(output));
-	}
-
+	
 	private String transformToString(Object fragment) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		transformAndOutput(fragment, new StreamResult(baos));
+		transformAndOutput(fragment, baos);
 		return baos.toString();
 	}
 		
-	private void transformAndOutput(Object fragment, Result result) {
+	private String makeToRegex(String docFragment) {
+		Character[] regexSymbolsToRemove = {'|', '&', '?', '+', '*', '\\', '['};
+		for (char symbol : regexSymbolsToRemove) {
+			docFragment = docFragment.replace(symbol, '.');
+		}
+		docFragment = docFragment.replaceAll("\\s+", "\\\\s*");
+		docFragment = docFragment.replaceAll("><", ">\\\\s*<");
+
+		return docFragment;
+	}
+
+	private void writeBeginningOfDoc() {
 		try {
-			
+			output.write(beforeMeta.getBytes());
+		} catch (IOException e) {
+			LOGGER.error("Could not write to output", e);
+		}
+	}
+
+	@Override
+	public void writeMetadata(Metadata meta) {
+		transformAndOutput(meta, output);
+	}
+
+	private void transformAndOutput(Object fragment, OutputStream target) {
+		try {
 			org.w3c.dom.Document document = newDom();
 			
 			JAXBContext context = JAXBContext.newInstance(fragment.getClass());
 			Marshaller m = context.createMarshaller();
-			m.marshal( fragment, document );
+			m.marshal(fragment, document);
 			
 			Source src = new DOMSource(document);
-
 			Transformer transformer = newTransformer();
-			
-			transformer.transform(src, result);
-			
+			transformer.transform(src, new StreamResult(target));
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not convert to internal XML format: " + fragment.getClass(), e);
 		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not transform XML fragment to output: " + fragment.getClass(), e);
 		}
 	}
-
 
 	private org.w3c.dom.Document newDom() {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(true);
-		DocumentBuilder builder;
 		org.w3c.dom.Document document = null;
 		try {
-			builder = factory.newDocumentBuilder();
+			DocumentBuilder builder = factory.newDocumentBuilder();
 			document = builder.newDocument();
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException("Could not create empty DOM tree", e);
 		}
 		return document;
 	}
@@ -210,7 +179,7 @@ public class XsltWriter extends WriterWithOptions {
 		Transformer transformer = null;
 		File xslt = new File(setOptions.get("xslt"));
 		if (!xslt.exists()) {
-			throw new IllegalArgumentException("File does nor exist: " + xslt.getAbsolutePath());
+			throw new IllegalArgumentException("File does not exist: " + xslt.getAbsolutePath());
 		}
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer(
@@ -227,30 +196,26 @@ public class XsltWriter extends WriterWithOptions {
 	}
 	
 	@Override
-	public void writeEnd() {
-		try {
-		JAXBContext context = JAXBContext.newInstance(Document.class);
-		Marshaller m = context.createMarshaller();
-		m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
-//		m.marshal( doc, new FileOutputStream("target/intern.xml"));
-		//m.marshal( doc, System.out);
-	} catch (JAXBException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-//	} catch (FileNotFoundException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
+	public void writePage(Page page) {
+		if (firstPage) {
+			try {
+				output.write(betweenMetaAndPages.getBytes());
+			} catch (IOException e) {
+				LOGGER.error("Could not write to output", e);
+			}
+			firstPage = false;
+		}
+		transformAndOutput(page, output);
 	}
 
-
+	@Override
+	public void writeEnd() {
 		try {
 			output.write(afterPages.getBytes());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error("Could not write to output", e);
 		}
 		
 	}
-
 
 }

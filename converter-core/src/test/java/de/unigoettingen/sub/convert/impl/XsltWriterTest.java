@@ -20,7 +20,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
-import de.unigoettingen.sub.convert.impl.xslt.XsltWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 
@@ -70,7 +69,6 @@ public class XsltWriterTest {
 		
 		String output = baos.toString();
 		
-		assertThat(output, containsString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"));
 		assertThat(output, containsString("<TEI"));
 	}
 
