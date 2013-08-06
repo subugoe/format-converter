@@ -47,7 +47,19 @@ public interface ConvertWriter {
 	 */
 	public void setTarget(OutputStream stream);
 	
+	/**
+	 * Implementing classes can use this method for specific configurations.
+	 * @param key
+	 * @param value
+	 */
 	public void addImplementationSpecificOption(String key, String value);
+	
+	/**
+	 * If the concrete class needs special configuration, then it must expose 
+	 * the possible options.
+	 * @return Map containing supported configuration option keys and short 
+	 * descriptions of the respective options.
+	 */
 	public Map<String, String> getSupportedOptions();
 
 }

@@ -36,6 +36,18 @@ import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Word;
 
+/**
+ * Uses an XSLT script to transform the internal model to an XML or a text document.
+ * Writes to the output progressively as the input model elements are coming in. 
+ * This is realized with some tricks which require some restrictions to the XSLT script.
+ * The script must be able to transform a metadata element and a page element.
+ * Xpath expressions used inside those elements can only point to locations inside 
+ * the respective metadata or page, since they each are processed as a root element.
+ * Some examples are located in the test resources of the project.
+ * 
+ * @author dennis
+ *
+ */
 public class XsltWriter extends WriterWithOptions {
 	private final static Logger LOGGER = LoggerFactory.getLogger(XsltWriter.class);
 	private static final String XSLT_DESCRIPTION = "[path] to XSLT script file";

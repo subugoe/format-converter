@@ -38,3 +38,15 @@ Writers
   You can provide the folder containing the original scanned images in TIFF format. In this case, the scan of each page 
   will be placed before the text of that page. Recognized subimages will be put inside the text on the right position.
   You also have the option to leave out the scans and have only the text and the subimages in the document.
+
+* Output using XSLT
+
+** Implementation specific options
+
+  You must provide the path to the XSLT script file. Since the implementation processes the input document 
+  progressively page-by-page, there are some restrictions for the XSLT script. The script must be able to 
+  transform a metadata element and a page element.
+  Xpath expressions used inside those elements can only point to locations inside 
+  the respective metadata or page, since they each are processed as a root element.
+  Some examples are located in the test resources of the project.
+  
