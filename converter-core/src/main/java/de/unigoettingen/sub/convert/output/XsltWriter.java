@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -117,7 +118,13 @@ public class XsltWriter extends WriterWithOptions {
 	private String transformToString(Object fragment) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		transformAndOutput(fragment, baos);
-		return baos.toString();
+		String transformed = "";
+		try {
+			transformed = baos.toString("utf8");
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException("Could not use UTF-8", e);
+		}
+		return transformed;
 	}
 		
 	private String makeToRegex(String docFragment) {
@@ -133,7 +140,7 @@ public class XsltWriter extends WriterWithOptions {
 
 	private void writeBeginningOfDoc() {
 		try {
-			output.write(beforeMeta.getBytes());
+			output.write(beforeMeta.getBytes("utf8"));
 		} catch (IOException e) {
 			LOGGER.error("Could not write to output", e);
 		}
@@ -199,7 +206,7 @@ public class XsltWriter extends WriterWithOptions {
 	public void writePage(Page page) {
 		if (firstPage) {
 			try {
-				output.write(betweenMetaAndPages.getBytes());
+				output.write(betweenMetaAndPages.getBytes("utf8"));
 			} catch (IOException e) {
 				LOGGER.error("Could not write to output", e);
 			}
@@ -211,7 +218,7 @@ public class XsltWriter extends WriterWithOptions {
 	@Override
 	public void writeEnd() {
 		try {
-			output.write(afterPages.getBytes());
+			output.write(afterPages.getBytes("utf8"));
 		} catch (IOException e) {
 			LOGGER.error("Could not write to output", e);
 		}
