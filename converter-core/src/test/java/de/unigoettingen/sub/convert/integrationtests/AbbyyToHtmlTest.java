@@ -12,8 +12,8 @@ import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
-import de.unigoettingen.sub.convert.impl.HTMLWriter;
-import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader;
+import de.unigoettingen.sub.convert.input.abbyyxml.AbbyyXMLReader;
+import de.unigoettingen.sub.convert.output.HTMLWriter;
 
 public class AbbyyToHtmlTest {
 

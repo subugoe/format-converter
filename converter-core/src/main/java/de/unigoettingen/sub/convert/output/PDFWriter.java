@@ -1,4 +1,4 @@
-package de.unigoettingen.sub.convert.impl;
+package de.unigoettingen.sub.convert.output;
 
 import java.io.File;
 import java.io.FileInputStream;

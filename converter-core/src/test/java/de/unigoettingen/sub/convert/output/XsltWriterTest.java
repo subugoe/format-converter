@@ -1,46 +1,38 @@
-package de.unigoettingen.sub.convert.impl;
+package de.unigoettingen.sub.convert.output;
 
-import static org.junit.Assert.*;
+import static de.unigoettingen.sub.convert.model.builders.ImageBuilder.image;
+import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.language;
+import static de.unigoettingen.sub.convert.model.builders.LineBuilder.line;
+import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.metadata;
+import static de.unigoettingen.sub.convert.model.builders.NonWordBuilder.nonWord;
+import static de.unigoettingen.sub.convert.model.builders.PageBuilder.page;
+import static de.unigoettingen.sub.convert.model.builders.ParagraphBuilder.paragraph;
+import static de.unigoettingen.sub.convert.model.builders.TableBuilder.table;
+import static de.unigoettingen.sub.convert.model.builders.WordBuilder.word;
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
-import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.*;
-import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.*;
-import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
-import static de.unigoettingen.sub.convert.model.builders.ParagraphBuilder.*;
-import static de.unigoettingen.sub.convert.model.builders.LineBuilder.*;
-import static de.unigoettingen.sub.convert.model.builders.WordBuilder.*;
-import static de.unigoettingen.sub.convert.model.builders.NonWordBuilder.*;
-import static de.unigoettingen.sub.convert.model.builders.TableBuilder.*;
-import static de.unigoettingen.sub.convert.model.builders.ImageBuilder.*;
+import de.unigoettingen.sub.convert.output.XsltWriter;
 
-public class CustomTeiP5WriterTest {
+public class XsltWriterTest {
 
 	private ConvertWriter writer;
 	private OutputStream baos;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
 
 	@Before
 	public void setUp() throws Exception {
-		writer = new CustomTeiP5Writer();
+		writer = new XsltWriter();
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toTei.xsl");
 		baos = new ByteArrayOutputStream();
 	}
 
@@ -70,28 +62,26 @@ public class CustomTeiP5WriterTest {
 			assertEquals("The output target is not set", e.getMessage());
 		}
 	}
-	
+
 	@Test
-	public void shouldWriteXmlHeaderAndTEIStartElement() {
+	public void shouldWriteXmlHeaderAndTeiStartElement() {
 		writer.setTarget(baos);
 		writer.writeStart();
 		
 		String output = baos.toString();
-
-		assertThat(output, containsString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"));
+		
 		assertThat(output, containsString("<TEI"));
 	}
-	
+
 	@Test
-	public void emptyMetadataShouldLeadToEmptyTEIHeaderPlusSomeStartTags() {
+	public void emptyMetadataShouldLeadToEmptyTeiHeader() {
 		Metadata meta = metadata().build();
 		String output = process(meta);
 
-		assertThat(output, containsString("<teiHeader></teiHeader>"));
-		assertThat(output, containsString("<text>"));
-		assertThat(output, containsString("<body"));
+		assertThat(output, containsString("<teiHeader>"));
+		assertThat(output, containsString("</teiHeader>"));
 	}
-	
+
 	@Test
 	public void outputShouldContainLanguageAndItsValidId() {
 		Metadata meta = metadata().with(language("GermanStandard").withLangId("de")).build();
@@ -99,7 +89,7 @@ public class CustomTeiP5WriterTest {
 		
 		assertThat(output, containsString("<language ident=\"de\">GermanStandard</language>"));
 	}
-		
+	
 	@Test
 	public void outputShouldContainInvalidLanguageWithoutId() {
 		Metadata meta = metadata().with(language("SomeUnknownLanguage")).build();
@@ -107,7 +97,7 @@ public class CustomTeiP5WriterTest {
 		
 		assertThat(output, containsString("<language>SomeUnknownLanguage</language>"));
 	}
-	
+
 	@Test
 	public void outputShouldContainCreatorInfos() {
 		Metadata meta = metadata().withSoftwareName("Finereader").withSoftwareVersion("8.0").build();
@@ -120,7 +110,8 @@ public class CustomTeiP5WriterTest {
 	public void outputShouldContainTwoLanguages() {
 		Metadata meta = metadata().with(language("lang1")).with(language("lang2")).build();
 		String output = process(meta);
-		
+
+		writer.writeEnd();
 		assertThat(output, containsString("<language>lang1</language>"));
 		assertThat(output, containsString("<language>lang2</language>"));
 	}
@@ -129,20 +120,62 @@ public class CustomTeiP5WriterTest {
 	public void emptyPageShouldResultInAPageBreak() {
 		Page page = new Page();
 		String output = process(page);
-		
-		assertTrue(output.contains("<milestone n=\"1\" type=\"page\"/>"));
+
+		assertThat(output, containsString("<milestone n=\"\" type=\"page\"/>"));
 		assertThat(output, containsString("<pb"));
 	}
-	
+
+	@Test
+	public void pageWithPhysicalNumber() {
+		Page page = new Page();
+		page.setPhysicalNumber(1);
+		String output = process(page);
+
+		assertThat(output, containsString("<milestone n=\"1\" type=\"page\"/>"));
+		assertThat(output, containsString("<pb"));
+	}
+
 	@Test
 	public void secondPageShouldCreateSecondMilestone() {
 		writer.setTarget(baos);
 		Page page = new Page();
+		page.setPhysicalNumber(1);
 		writer.writePage(page);
+		page.setPhysicalNumber(2);
 		writer.writePage(page);
 		
 		String output = baos.toString();
 		assertThat(output, containsString("<milestone n=\"2\""));
+	}
+
+	@Test
+	public void documentWithOnePage() {
+		writer.setTarget(baos);
+		writer.writeStart();
+		writer.writePage(new Page());
+		writer.writeEnd();
+		String output = baos.toString();
+
+		assertThat(output, containsString("<TEI"));
+		output = output.replaceAll("\\n", " ");
+		assertTrue("text and body are in the wrong place", output.matches(".*<text>\\s*<body>\\s*<milestone.*"));
+		assertTrue("text and body must close just before tei", output.matches(".*</body>\\s*</text>\\s*</TEI>.*"));
+	}
+	
+	@Test
+	public void completeDocumentWithMetaAndPage() {
+		writer.setTarget(baos);
+		writer.writeStart();
+		writer.writeMetadata(new Metadata());
+		writer.writePage(new Page());
+		writer.writeEnd();
+		String output = baos.toString();
+//		System.out.println(output);
+
+		assertThat(output, containsString("<TEI"));
+		output = output.replaceAll("\\n", " ");
+		assertTrue("header should be before text and body", output.matches(".*</teiHeader>\\s*<text>\\s*<body>.*"));
+		assertTrue("text and body must close just before tei", output.matches(".*</body>\\s*</text>\\s*</TEI>.*"));
 	}
 	
 	@Test
@@ -150,17 +183,17 @@ public class CustomTeiP5WriterTest {
 		Page page = page().with(paragraph()).build();
 		String output = process(page);
 
-		assertThat(output, containsString("<p id=\"ID1\"></p>"));
+		assertThat(output, containsString("<p id=\"ID1_1\""));
 	}
-	
+
 	@Test
 	public void paragraphIDShouldBeIncremented() {
 		Page page = page().with(paragraph()).with(paragraph()).build();
 		String output = process(page);
 
-		assertThat(output, containsString("<p id=\"ID2\"></p>"));
+		assertThat(output, containsString("<p id=\"ID1_2\""));
 	}
-	
+
 	@Test
 	public void addLineBreakAfterALine() {
 		Page page = page().with(line()).build();
@@ -168,7 +201,7 @@ public class CustomTeiP5WriterTest {
 
 		assertThat(output, containsString("<lb/>"));
 	}
-	
+
 	@Test
 	public void shouldWrapWordInTags() {
 		Page page = page().with(word("test")).build();
@@ -176,25 +209,34 @@ public class CustomTeiP5WriterTest {
 
 		assertThat(output, containsString("<w>test</w>"));
 	}
-	
+
 	@Test
 	public void shouldNotWrapNonWordInTags() {
 		Page page = page().with(nonWord("...")).build();
 		String output = process(page);
 		
 		assertThat(output, not(containsString("<w>...</w>")));
-		assertThat(output, containsString("..."));
+		assertThat(output, containsString("<pc>...</pc>"));
 	}
-	
+
 	@Test
 	public void shouldAddWordCoordinates() {
 		Page page = page().with(word("test").withCoordinatesLTRB(1, 2, 3, 4)).build();
 		String output = process(page);
 
 		assertThat(output, containsString("<w function=\"1,2,3,4\">test</w>"));
-
 	}
-	
+
+	@Test
+	public void shouldWriteFigure() {
+		Page page = page().with(image().withCoordinatesLTRB(1,2,3,4)).build();
+		String output = process(page);
+
+		assertThat(output, containsString("<figure"));
+		assertThat(output, containsString("id=\"ID1_1\""));
+		assertThat(output, containsString("function=\"1,2,3,4\""));
+	}
+
 	@Test
 	public void shouldCreateTableWithCoordinates() {
 		Page page = page().with(table().withCoordinatesLTRB(1, 2, 3, 4).with(word("a"))).build();
@@ -210,12 +252,33 @@ public class CustomTeiP5WriterTest {
 	}
 	
 	@Test
-	public void shouldWriteFigure() {
-		Page page = page().with(image().withCoordinatesLTRB(1,2,3,4)).build();
-		String output = process(page);
-
-		assertThat(output, containsString("<figure"));
-		assertThat(output, containsString("id=\"ID1\""));
-		assertThat(output, containsString("function=\"1,2,3,4\""));
+	public void stylsheetWithoutMetadataAndWithRegex() {
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toExampleXml.xsl");
+		writer.setTarget(baos);
+		writer.writeStart();
+		writer.writePage(new Page());
+		writer.writeEnd();
+		String output = baos.toString();
+		
+		assertThat(output, containsString("<root>"));
+		assertThat(output, containsString("<child>"));
+		assertThat(output, containsString("regex characters"));
+		assertThat(output, containsString("</child>"));
+		assertThat(output, containsString("</root>"));
 	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void noStylesheet() {
+		writer.addImplementationSpecificOption("xslt", null);
+		writer.setTarget(baos);
+		writer.writeStart();
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void wrongStylesheetPath() {
+		writer.addImplementationSpecificOption("xslt", "/doesnotexist");
+		writer.setTarget(baos);
+		writer.writeStart();
+	}
+
 }

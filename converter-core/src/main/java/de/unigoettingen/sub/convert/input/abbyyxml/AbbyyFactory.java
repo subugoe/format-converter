@@ -1,4 +1,4 @@
-package de.unigoettingen.sub.convert.impl.abbyyxml;
+package de.unigoettingen.sub.convert.input.abbyyxml;
 
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;

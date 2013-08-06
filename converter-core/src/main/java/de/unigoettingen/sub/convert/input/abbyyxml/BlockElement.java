@@ -1,9 +1,9 @@
-package de.unigoettingen.sub.convert.impl.abbyyxml;
+package de.unigoettingen.sub.convert.input.abbyyxml;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.events.StartElement;
 
-import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader.CurrentPageState;
+import de.unigoettingen.sub.convert.input.abbyyxml.AbbyyXMLReader.CurrentPageState;
 import de.unigoettingen.sub.convert.model.Image;
 import de.unigoettingen.sub.convert.model.PageItem;
 import de.unigoettingen.sub.convert.model.Table;

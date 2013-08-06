@@ -3,13 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
-	<bean id="abbyyReader" class="de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader"/>
+	<bean id="abbyyReader" class="de.unigoettingen.sub.convert.input.abbyyxml.AbbyyXMLReader"/>
 	<!-- add more beans of type ConvertReader -->
 	
-	<bean id="teiWriter" class="de.unigoettingen.sub.convert.impl.CustomTeiP5Writer"/>
-	<bean id="pdfWriter" class="de.unigoettingen.sub.convert.impl.PDFWriter"/>
-	<bean id="epubWriter" class="de.unigoettingen.sub.convert.impl.EPUBWriter"/>
-	<bean id="xsltWriter" class="de.unigoettingen.sub.convert.impl.XsltWriter"/>
+	<bean id="teiWriter" class="de.unigoettingen.sub.convert.output.CustomTeiP5Writer"/>
+	<bean id="pdfWriter" class="de.unigoettingen.sub.convert.output.PDFWriter"/>
+	<bean id="epubWriter" class="de.unigoettingen.sub.convert.output.EPUBWriter"/>
+	<bean id="xsltWriter" class="de.unigoettingen.sub.convert.output.XsltWriter"/>
 	<!-- add more beans of type ConvertWriter -->
 
 	<bean id="converter" class="de.unigoettingen.sub.convert.cli.Converter">

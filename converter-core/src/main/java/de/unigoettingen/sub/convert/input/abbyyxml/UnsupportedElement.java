@@ -1,8 +1,8 @@
-package de.unigoettingen.sub.convert.impl.abbyyxml;
+package de.unigoettingen.sub.convert.input.abbyyxml;
 
 import javax.xml.stream.events.StartElement;
 
-import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader.CurrentPageState;
+import de.unigoettingen.sub.convert.input.abbyyxml.AbbyyXMLReader.CurrentPageState;
 
 class UnsupportedElement implements AbbyyElement {
 

@@ -1,10 +1,10 @@
-package de.unigoettingen.sub.convert.impl.abbyyxml;
+package de.unigoettingen.sub.convert.input.abbyyxml;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader.CurrentPageState;
+import de.unigoettingen.sub.convert.input.abbyyxml.AbbyyXMLReader.CurrentPageState;
 import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.FontStyleEnum;
 import de.unigoettingen.sub.convert.model.Word;

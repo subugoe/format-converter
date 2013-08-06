@@ -1,4 +1,4 @@
-package de.unigoettingen.sub.convert.impl;
+package de.unigoettingen.sub.convert.output;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Page;
+import de.unigoettingen.sub.convert.output.HTMLWriter;
 import static org.hamcrest.CoreMatchers.*;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.WordBuilder.*;

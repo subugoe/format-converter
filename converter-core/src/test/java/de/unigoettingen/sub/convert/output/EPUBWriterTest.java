@@ -1,4 +1,4 @@
-package de.unigoettingen.sub.convert.impl;
+package de.unigoettingen.sub.convert.output;
 
 import static de.unigoettingen.sub.convert.model.builders.ImageBuilder.image;
 import static de.unigoettingen.sub.convert.model.builders.LanguageBuilder.language;
@@ -26,6 +26,7 @@ import org.junit.Test;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
+import de.unigoettingen.sub.convert.output.EPUBWriter;
 
 public class EPUBWriterTest {
 

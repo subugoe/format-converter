@@ -1,6 +1,6 @@
-package de.unigoettingen.sub.convert.impl.abbyyxml;
+package de.unigoettingen.sub.convert.input.abbyyxml;
 
-import de.unigoettingen.sub.convert.impl.abbyyxml.AbbyyXMLReader.CurrentPageState;
+import de.unigoettingen.sub.convert.input.abbyyxml.AbbyyXMLReader.CurrentPageState;
 import de.unigoettingen.sub.convert.model.FontStyleEnum;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.NonWord;

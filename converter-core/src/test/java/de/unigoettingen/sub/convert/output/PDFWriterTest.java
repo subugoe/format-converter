@@ -1,4 +1,4 @@
-package de.unigoettingen.sub.convert.impl;
+package de.unigoettingen.sub.convert.output;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -18,6 +18,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
+import de.unigoettingen.sub.convert.output.PDFWriter;
 import static de.unigoettingen.sub.convert.model.builders.PageBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.MetadataBuilder.*;
 import static de.unigoettingen.sub.convert.model.builders.ImageBuilder.image;

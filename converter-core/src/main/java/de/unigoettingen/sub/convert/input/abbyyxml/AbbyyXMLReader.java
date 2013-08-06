@@ -1,4 +1,4 @@
-package de.unigoettingen.sub.convert.impl.abbyyxml;
+package de.unigoettingen.sub.convert.input.abbyyxml;
 
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
