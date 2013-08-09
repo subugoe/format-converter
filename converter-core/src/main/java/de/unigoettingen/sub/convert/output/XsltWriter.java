@@ -1,27 +1,7 @@
 package de.unigoettingen.sub.convert.output;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +15,7 @@ import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.Paragraph;
 import de.unigoettingen.sub.convert.model.TextBlock;
 import de.unigoettingen.sub.convert.model.Word;
+import de.unigoettingen.sub.convert.util.JaxbTransformer;
 
 /**
  * Uses an XSLT script to transform the internal model to an XML or a text document.
@@ -57,6 +38,8 @@ public class XsltWriter extends WriterWithOptions {
 	private String betweenMetaAndPages = "";
 	private String afterPages = "";
 	
+	private JaxbTransformer transformer;
+	
 	public XsltWriter() {
 		supportedOptions.put("xslt", XSLT_DESCRIPTION);
 	}
@@ -64,16 +47,9 @@ public class XsltWriter extends WriterWithOptions {
 	@Override
 	public void writeStart() {
 		checkOutputStream();
-		checkXsltSheet();
 		
 		findOutOutputDocStructure();
 		writeBeginningOfDoc();
-	}
-
-	private void checkXsltSheet() {
-		if (setOptions.get("xslt") == null) {
-			throw new IllegalArgumentException("Path to XSLT file is not set");
-		}
 	}
 
 	private void findOutOutputDocStructure() {
@@ -128,17 +104,21 @@ public class XsltWriter extends WriterWithOptions {
 	}
 	
 	private String transformToString(Object fragment) {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		transformAndOutput(fragment, baos);
-		String transformed = "";
-		try {
-			transformed = baos.toString("utf8");
-		} catch (UnsupportedEncodingException e) {
-			throw new IllegalStateException("Could not use UTF-8", e);
-		}
-		return transformed;
+		initTransformer();
+		return transformer.transformToString(fragment);
 	}
 		
+	private void initTransformer() {
+		if (transformer != null) {
+			return;
+		}
+		if (setOptions.get("xslt") == null) {
+			throw new IllegalArgumentException("Path to XSLT file is not set");
+		}
+		File xslt = new File(setOptions.get("xslt"));
+		transformer = new JaxbTransformer(xslt, output);
+	}
+
 	private String makeToRegex(String docFragment) {
 		Character[] regexSymbolsToRemove = {'|', '&', '?', '+', '*', '\\', '['};
 		for (char symbol : regexSymbolsToRemove) {
@@ -160,60 +140,14 @@ public class XsltWriter extends WriterWithOptions {
 
 	@Override
 	public void writeMetadata(Metadata meta) {
-		transformAndOutput(meta, output);
+		transformToOutput(meta);
 	}
 
-	private void transformAndOutput(Object fragment, OutputStream target) {
-		try {
-			org.w3c.dom.Document document = newDom();
-			
-			JAXBContext context = JAXBContext.newInstance(fragment.getClass());
-			Marshaller m = context.createMarshaller();
-			m.marshal(fragment, document);
-			
-			Source src = new DOMSource(document);
-			Transformer transformer = newTransformer();
-			transformer.transform(src, new StreamResult(target));
-		} catch (JAXBException e) {
-			throw new IllegalStateException("Could not convert to internal XML format: " + fragment.getClass(), e);
-		} catch (TransformerException e) {
-			throw new IllegalStateException("Could not transform XML fragment to output: " + fragment.getClass(), e);
-		}
+	private void transformToOutput(Object fragment) {
+		initTransformer();
+		transformer.transformToTarget(fragment);
 	}
 
-	private org.w3c.dom.Document newDom() {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setNamespaceAware(true);
-		org.w3c.dom.Document document = null;
-		try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			document = builder.newDocument();
-		} catch (ParserConfigurationException e) {
-			throw new IllegalStateException("Could not create empty DOM tree", e);
-		}
-		return document;
-	}
-
-	private Transformer newTransformer() {
-		Transformer transformer = null;
-		File xslt = new File(setOptions.get("xslt"));
-		if (!xslt.exists()) {
-			throw new IllegalArgumentException("File does not exist: " + xslt.getAbsolutePath());
-		}
-		try {
-			transformer = TransformerFactory.newInstance().newTransformer(
-					new StreamSource(xslt) );
-		} catch (TransformerConfigurationException e) {
-			throw new IllegalStateException("Could not process xslt file " + xslt.getAbsolutePath(), e);
-		} catch (TransformerFactoryConfigurationError e) {
-			throw new IllegalStateException("Could not process xslt file " + xslt.getAbsolutePath(), e);
-		}
-		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-
-		return transformer;
-	}
-	
 	@Override
 	public void writePage(Page page) {
 		if (firstPage) {
@@ -224,7 +158,7 @@ public class XsltWriter extends WriterWithOptions {
 			}
 			firstPage = false;
 		}
-		transformAndOutput(page, output);
+		transformToOutput(page);
 	}
 
 	@Override
