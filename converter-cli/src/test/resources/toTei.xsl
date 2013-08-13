@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 xmlns:ocr="http://www.sub.uni-goettingen.de/ent/OCR" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-exclude-result-prefixes="ocr xsi">
+xmlns="http://www.tei-c.org/ns/1.0"
+exclude-result-prefixes="#default ocr xsi">
 
 <xsl:output method="xml" indent="yes"/>
 
@@ -12,7 +13,7 @@ exclude-result-prefixes="ocr xsi">
    
    
       <xsl:template match="ocr:document">
-		<TEI xmlns="http://www.tei-c.org/ns/1.0">
+		<TEI>
 			<xsl:apply-templates select="ocr:metadata"/>
 			<text>
 				<body>

@@ -78,7 +78,7 @@ public class XsltWriterTest {
 		Metadata meta = metadata().build();
 		String output = process(meta);
 
-		assertThat(output, containsString("<teiHeader>"));
+		assertThat(output, containsString("<teiHeader"));
 		assertThat(output, containsString("</teiHeader>"));
 	}
 
@@ -121,7 +121,8 @@ public class XsltWriterTest {
 		Page page = new Page();
 		String output = process(page);
 
-		assertThat(output, containsString("<milestone n=\"\" type=\"page\"/>"));
+		assertThat(output, containsString("<milestone"));
+		assertThat(output, containsString("n=\"\" type=\"page\"/>"));
 		assertThat(output, containsString("<pb"));
 	}
 
@@ -131,7 +132,8 @@ public class XsltWriterTest {
 		page.setPhysicalNumber(1);
 		String output = process(page);
 
-		assertThat(output, containsString("<milestone n=\"1\" type=\"page\"/>"));
+		assertThat(output, containsString("<milestone "));
+		assertThat(output, containsString("n=\"1\" type=\"page\"/>"));
 		assertThat(output, containsString("<pb"));
 	}
 
@@ -145,7 +147,8 @@ public class XsltWriterTest {
 		writer.writePage(page);
 		
 		String output = baos.toString();
-		assertThat(output, containsString("<milestone n=\"2\""));
+		assertThat(output, containsString("<milestone "));
+		assertThat(output, containsString("n=\"2\""));
 	}
 
 	@Test
@@ -183,7 +186,8 @@ public class XsltWriterTest {
 		Page page = page().with(paragraph()).build();
 		String output = process(page);
 
-		assertThat(output, containsString("<p id=\"ID1_1\""));
+		assertThat(output, containsString("<p "));
+		assertThat(output, containsString("id=\"ID1_1\""));
 	}
 
 	@Test
@@ -191,7 +195,8 @@ public class XsltWriterTest {
 		Page page = page().with(paragraph()).with(paragraph()).build();
 		String output = process(page);
 
-		assertThat(output, containsString("<p id=\"ID1_2\""));
+		assertThat(output, containsString("<p "));
+		assertThat(output, containsString("id=\"ID1_2\""));
 	}
 
 	@Test
@@ -279,6 +284,15 @@ public class XsltWriterTest {
 		writer.addImplementationSpecificOption("xslt", "/doesnotexist");
 		writer.setTarget(baos);
 		writer.writeStart();
+	}
+	
+	@Test
+	public void xslt2shouldAlsoWork() {
+		Page page = page().with(word("test")).build();
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toExampleXmlXslt20.xsl");
+		String output = process(page);
+
+		assertThat(output, containsString("SOME TEXT"));
 	}
 
 }

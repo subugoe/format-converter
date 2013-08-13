@@ -126,6 +126,7 @@ public class XsltWriter extends WriterWithOptions {
 		}
 		docFragment = docFragment.replaceAll("\\s+", "\\\\s*");
 		docFragment = docFragment.replaceAll("><", ">\\\\s*<");
+		docFragment = docFragment.replaceAll("xmlns=\".*?\"", "\\\\s*");
 
 		return docFragment;
 	}
