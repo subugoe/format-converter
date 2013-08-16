@@ -122,7 +122,7 @@ public class XsltWriterTest {
 		String output = process(page);
 
 		assertThat(output, containsString("<milestone"));
-		assertThat(output, containsString("n=\"\" type=\"page\"/>"));
+		assertThat(output, containsString("n=\"\" type=\"page\""));
 		assertThat(output, containsString("<pb"));
 	}
 
@@ -133,7 +133,7 @@ public class XsltWriterTest {
 		String output = process(page);
 
 		assertThat(output, containsString("<milestone "));
-		assertThat(output, containsString("n=\"1\" type=\"page\"/>"));
+		assertThat(output, containsString("n=\"1\" type=\"page\""));
 		assertThat(output, containsString("<pb"));
 	}
 
