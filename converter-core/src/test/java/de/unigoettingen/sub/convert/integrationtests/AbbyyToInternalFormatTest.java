@@ -32,4 +32,21 @@ public class AbbyyToInternalFormatTest {
 		s.close();
 	}
 
+	@Test
+	public void hyphen() throws IOException {
+		File abbyy = new File(
+				System.getProperty("user.dir") + "/src/test/resources/abbyy10_withHyphenation.xml");
+		InputStream is = new FileInputStream(abbyy);
+		ConvertReader reader = new AbbyyXMLReader();
+		ConvertWriter writer = new InternalFormatWriter();
+		
+		OutputStream s = new FileOutputStream("target/internalFormat_withHyphenation.xml");
+		//OutputStream s = System.out;
+		writer.setTarget(s);
+		
+		reader.setWriter(writer);
+		reader.read(is);
+		s.close();
+	}
+
 }

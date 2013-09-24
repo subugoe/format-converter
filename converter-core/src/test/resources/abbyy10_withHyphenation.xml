@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document xmlns="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" version="1.0" producer="" languages="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml">
+<documentData>
+<sections>
+<section><stream role="text" beginPage="0"><mainText columnCount="1"/><elemId id="{CB914FE4-BF2C-4E43-AF00-3D2F48DC7E58}"/><elemId id="{79829A6E-DF64-490D-89AA-42C002EFF405}"/><elemId id="{3F8EF60F-FCD6-49B8-AADA-D461C2D20447}"/><elemId id="{6C927334-38F6-45FF-B121-BCCCC68DA3DC}"/><elemId id="{37C739B5-0FBC-4B4A-8385-995CBCFC6698}"/><elemId id="{337E734D-0017-4CE0-A300-F8241BF2AD78}"/><elemId id="{1C34BBFA-FED1-43AC-909B-98E28DEE51AA}"/></stream><stream role="incut" beginPage="0"><elemId id="{D40C77BA-ABCD-4080-B4FC-8DE94BAA8A45}"/></stream>
+</section>
+</sections>
+</documentData>
+<page width="3958" height="6088" resolution="600">
+<block blockType="Text" pageElemId="{CB914FE4-BF2C-4E43-AF00-3D2F48DC7E58}" l="380" t="756" r="3560" b="1756"><region><rect l="380" t="756" r="3560" b="1756"/></region>
+<text id="{CB914FE4-BF2C-4E43-AF00-3D2F48DC7E58}">
+<par leftIndent="100" lineSpacing="1644">
+<line baseline="1083" l="419" t="999" r="3525" b="1121"><formatting lang="FrenchStandard" ff="Times New Roman" fs="12.">
+<charParams l="3223" t="999" r="3251" b="1077" suspicious="1">l</charParams>
+<charParams l="3253" t="1027" r="3297" b="1077">e</charParams>
+<charParams l="3298" t="1025" r="3324" b="1107"> </charParams>
+<charParams l="3325" t="1025" r="3377" b="1107">q</charParams>
+<charParams l="3377" t="1027" r="3431" b="1077">u</charParams>
+<charParams l="3435" t="1027" r="3477" b="1079">o</charParams>
+<charParams l="3485" t="1045" r="3525" b="1059">¬</charParams></formatting></line>
+<line baseline="1220" l="417" t="1135" r="2795" b="1255"><formatting lang="FrenchStandard" ff="Times New Roman" fs="12.">
+<charParams l="417" t="1163" r="453" b="1229">t</charParams>
+<charParams l="455" t="1153" r="479" b="1231">i</charParams>
+<charParams l="483" t="1179" r="529" b="1231">e</charParams>
+<charParams l="531" t="1179" r="585" b="1229">n</charParams>
+<charParams l="589" t="1159" r="625" b="1227">t</charParams>
+<charParams l="626" t="1149" r="670" b="1229"> </charParams>
+<charParams l="671" t="1149" r="723" b="1229">d</charParams>
+<charParams l="729" t="1177" r="781" b="1225">u</charParams>
+<charParams l="782" t="1175" r="824" b="1255"> </charParams>
+<charParams l="825" t="1175" r="877" b="1255">p</charParams>
+<charParams l="883" t="1173" r="929" b="1225">o</charParams>
+<charParams l="933" t="1147" r="963" b="1225">i</charParams>
+<charParams l="967" t="1147" r="1015" b="1227">d</charParams>
+<charParams l="1021" t="1175" r="1057" b="1225">s</charParams>
+<charParams l="2777" t="1197" r="2795" b="1213">.</charParams></formatting></line></par>
+</text>
+</block>
+</page>
+</document>

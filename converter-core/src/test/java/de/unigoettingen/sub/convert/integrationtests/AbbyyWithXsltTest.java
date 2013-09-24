@@ -37,4 +37,21 @@ public class AbbyyWithXsltTest {
 
 	}
 
+	@Test
+	public void hyphenation() throws IOException {
+		InputStream is = new FileInputStream("src/test/resources/abbyy10_withHyphenation.xml");
+		ConvertReader reader = new AbbyyXMLReader();
+		ConvertWriter writer = new XsltWriter();
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toTei.xsl");
+
+		//OutputStream s = new FileOutputStream("target/xsltResult_hyphenation.xml");
+		OutputStream s = System.out;
+		writer.setTarget(s);
+		
+		reader.setWriter(writer);
+		reader.read(is);
+		s.close();
+
+	}
+
 }
