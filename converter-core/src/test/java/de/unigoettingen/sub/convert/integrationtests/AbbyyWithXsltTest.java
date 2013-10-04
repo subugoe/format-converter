@@ -44,8 +44,8 @@ public class AbbyyWithXsltTest {
 		ConvertWriter writer = new XsltWriter();
 		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toTei.xsl");
 
-		//OutputStream s = new FileOutputStream("target/xsltResult_hyphenation.xml");
-		OutputStream s = System.out;
+		OutputStream s = new FileOutputStream("target/xsltResult_hyphenation.xml");
+		//OutputStream s = System.out;
 		writer.setTarget(s);
 		
 		reader.setWriter(writer);

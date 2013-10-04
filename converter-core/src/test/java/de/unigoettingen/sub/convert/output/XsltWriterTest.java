@@ -22,6 +22,7 @@ import org.junit.Test;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
+import de.unigoettingen.sub.convert.model.builders.LineBuilder;
 import de.unigoettingen.sub.convert.output.XsltWriter;
 
 public class XsltWriterTest {
@@ -293,6 +294,22 @@ public class XsltWriterTest {
 		String output = process(page);
 
 		assertThat(output, containsString("SOME TEXT"));
+	}
+	
+	@Test
+	public void hyphenatedWordShouldBeSegmented() {
+		LineBuilder line1 = line().with(word("hyphe").withCoordinatesLTRB(1, 2, 3, 4)).with(nonWord("¬").withCoordinatesLTRB(5, 6, 7, 8));
+		LineBuilder line2 = line().with(word("nation").withCoordinatesLTRB(9, 10, 11, 12));
+		Page page = page().with(line1).with(line2).build();
+		
+		String output = process(page);
+		
+		assertThat(output, containsString("<w>"));
+		assertThat(output, containsString("<seg function=\"1,2,3,4\">hyphe</seg>"));
+		assertThat(output, containsString("<pc function=\"5,6,7,8\">\u2010</pc>"));
+		assertThat(output, containsString("<lb/>"));
+		assertThat(output, containsString("<seg function=\"9,10,11,12\">nation</seg>"));
+		assertThat(output, containsString("</w>"));
 	}
 
 }
