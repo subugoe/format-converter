@@ -97,17 +97,45 @@ exclude-result-prefixes="#default ocr xsi">
       	</p>
       </xsl:template>
       
-      <xsl:template match="ocr:lines">
-      	<xsl:apply-templates/>
+      <xsl:template match="ocr:lines[ocr:lineItems[last()] = '¬']">
+      	<xsl:apply-templates select="ocr:lineItems[not(preceding::ocr:lineItems) or preceding::ocr:lineItems[1] != '¬' and . != '¬']"/>
+      </xsl:template>
+      
+      <xsl:template match="ocr:lines[not(ocr:lineItems) or ocr:lineItems[last()]!='¬']">
+      	<xsl:apply-templates select="ocr:lineItems[not(preceding::ocr:lineItems) or preceding::ocr:lineItems[1] != '¬']"/>
       	<lb/>
       </xsl:template>
       
-      <xsl:template match="ocr:lineItems[@xsi:type='Word']">
+      <xsl:template match="ocr:lineItems[@xsi:type='Word' and following::ocr:lineItems[1]='¬']">
+      <w>
+      	<xsl:call-template name="wordSegment">
+      		<xsl:with-param name="contextNode" select="."/>
+      	</xsl:call-template>
+      	<xsl:apply-templates select="following::ocr:lineItems[1]"/>
+      	<lb/>
+      	<xsl:call-template name="wordSegment">
+      		<xsl:with-param name="contextNode" select="following::ocr:lineItems[2]"/>
+      	</xsl:call-template>
+      </w>
+      </xsl:template>
+      
+      <xsl:template match="ocr:lineItems[@xsi:type='Word' and (following::ocr:lineItems[1]!='¬' or not(following::ocr:lineItems))]">
       	<w>
       	<xsl:call-template name="printCoordinates">
       		<xsl:with-param name="contextNode" select="."/>
       	</xsl:call-template>
       	<xsl:apply-templates/></w>
+      </xsl:template>
+      
+      <xsl:template name="wordSegment">
+      	<xsl:param name="contextNode"/>
+      	<seg>
+      	<xsl:call-template name="printCoordinates">
+      		<xsl:with-param name="contextNode" select="$contextNode"/>
+      	</xsl:call-template>
+      	<xsl:apply-templates select="$contextNode/*"/>
+      	</seg>
+      	
       </xsl:template>
       
       <xsl:template name="printCoordinates">
@@ -130,8 +158,12 @@ exclude-result-prefixes="#default ocr xsi">
       	<xsl:apply-templates/></pc>
       </xsl:template>
       
+      <xsl:template match="ocr:characters[text()='¬']">
+       	<xsl:text>&#x2010;</xsl:text>
+      </xsl:template>
+   
       <xsl:template match="ocr:characters">
-      	<xsl:value-of select="text()"/>      	
+       	<xsl:value-of select="text()"/>
       </xsl:template>
    
 </xsl:stylesheet>

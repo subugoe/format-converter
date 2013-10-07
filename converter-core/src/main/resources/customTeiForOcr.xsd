@@ -2,6 +2,16 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sub.uni-goettingen.de/ent/TEI-for-OCR"
 	xmlns:tns="http://www.sub.uni-goettingen.de/ent/TEI-for-OCR" elementFormDefault="qualified">
 
+	<annotation>
+		<documentation>
+			This Schema defines the TEI output format as produced by the SUB format-converter tool.
+			The format is used for storing OCR documents which were recognized by an OCR engine like
+			for example the Abbyy Recognition Server. The main structure (pages, paragraphs, lines, 
+			words, tables, figures) is preserved, as well as the page coordinates for each word and 
+			punctuation characters.
+		</documentation>
+	</annotation>
+	
 	<element name="TEI">
 		<complexType>
 			<sequence>
@@ -63,27 +73,42 @@
 		<attribute name="id" type="string" use="required" />
 	</complexType>
 	
+	<annotation>
+		<documentation>
+			This is used to mark the end of a page. Also, the physical or logical number is given.
+		</documentation>
+	</annotation>
 	<complexType name="Milestone">
 		<attribute name="n" type="int" use="required" />
 		<attribute name="type" type="string" use="required" fixed="page" />
 	</complexType>
-  
+
+	<annotation>
+		<documentation>
+			This should be present at the end of each page.
+		</documentation>
+	</annotation>
   	<complexType name="Pb">
 	</complexType>	
   
+	<annotation>
+		<documentation>
+			This should be present at the end of each line.
+		</documentation>
+	</annotation>
   	<complexType name="Lb">
 	</complexType>	
   
   	<complexType name="Figure">
 		<attribute name="id" type="string" use="required" />
-		<attribute name="function" type="tns:Coordinates" />
+		<attribute name="function" type="tns:CoordinatesLTRB" />
 	</complexType>
 	
 	<complexType name="Table">
 		<sequence>
 			<element name="row" type="tns:Row" maxOccurs="unbounded" />
 		</sequence>
-		<attribute name="function" type="tns:Coordinates" />
+		<attribute name="function" type="tns:CoordinatesLTRB" />
 		<attribute name="rows" type="int" />
 		<attribute name="cols" type="int" />
 	</complexType>
@@ -101,23 +126,57 @@
 		</choice>
 	</complexType>
   
+	<annotation>
+		<documentation>
+			This encloses one or more characters which don't belong to a word. Those can be
+			punctuation characters as well as whitespace characters.
+		</documentation>
+	</annotation>
   	<complexType name="Pc">
 		<simpleContent>
 			<extension base="string">
-				<attribute name="function" type="tns:Coordinates" />
+				<attribute name="function" type="tns:CoordinatesLTRB" />
 			</extension>
 		</simpleContent>
 	</complexType>
  	
-  	<complexType name="W">
+ 	<annotation>
+ 		<documentation>
+ 			This always encloses one word. If the word is hyphenated, i. e., if it starts on one
+ 			line and continues on the next line, it consists of two segments and one hypenation
+ 			character. In this case, the word itself doesn't have any coordinates, but the
+ 			individual segments do.
+ 		</documentation>
+ 	</annotation>
+  	<complexType name="W" mixed="true">
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<element name="seg" type="tns:Seg" />
+			<element name="pc" type="tns:Pc" />
+		</choice>
+		<attribute name="function" type="tns:CoordinatesLTRB" />
+	</complexType>
+	
+	<annotation>
+		<documentation>
+			This represents a segment of a word if the word is hyphenated between two lines.
+		</documentation>
+	</annotation>
+  	<complexType name="Seg">
 		<simpleContent>
 			<extension base="string">
-				<attribute name="function" type="tns:Coordinates" />
+				<attribute name="function" type="tns:CoordinatesLTRB" />
 			</extension>
 		</simpleContent>
 	</complexType>
 	
-	<simpleType name="Coordinates">
+	<annotation>
+		<documentation>
+			The coordinates are pixel distances from the upper left corner of the page.
+			The first two ones mark the left top corner of a block enclosing for example
+			a word. The last two mark the right bottom corner.
+		</documentation>
+	</annotation>
+	<simpleType name="CoordinatesLTRB">
 		<restriction base="string">
 			<pattern value="\d+,\d+,\d+,\d+" />
 		</restriction>
