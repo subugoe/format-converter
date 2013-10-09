@@ -145,13 +145,14 @@
  			This always encloses one word. If the word is hyphenated, i. e., if it starts on one
  			line and continues on the next line, it consists of two segments and one hypenation
  			character. In this case, the word itself doesn't have any coordinates, but the
- 			individual segments do.
+ 			individual segments do. Also, there may be a linebreak inside the hyphenated word.
  		</documentation>
  	</annotation>
   	<complexType name="W" mixed="true">
 		<choice minOccurs="0" maxOccurs="unbounded">
 			<element name="seg" type="tns:Seg" />
 			<element name="pc" type="tns:Pc" />
+			<element name="lb" type="tns:Lb" />
 		</choice>
 		<attribute name="function" type="tns:CoordinatesLTRB" />
 	</complexType>
