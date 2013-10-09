@@ -34,6 +34,7 @@ class CharParamsElement extends AbstractWordConstructingElement implements Abbyy
 		copyAttributesTo(modelChar);
 		modelChar.setValue("" + ch);
 		boolean isLetterOrDigit = Character.isLetterOrDigit(ch);
+		boolean isDash = ch == '-' || ch == '\u2014';
 		if (startOfLine() && isLetterOrDigit) {
 			switchToWord();
 			setTopLeft(current.word, modelChar);
@@ -42,6 +43,9 @@ class CharParamsElement extends AbstractWordConstructingElement implements Abbyy
 			switchToNonWord();
 			setTopLeft(current.nonWord, modelChar);
 			setBottom(current.nonWord, modelChar);
+		} else if (inWord() && isDash) {
+			// just add the dash to the word
+			// dash inside a word is OK
 		} else if (inWord() && !isLetterOrDigit) {
 			switchToNonWord();
 			setTopLeft(current.nonWord, modelChar);

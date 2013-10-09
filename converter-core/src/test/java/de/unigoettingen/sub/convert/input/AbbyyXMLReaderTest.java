@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -190,7 +191,7 @@ public class AbbyyXMLReaderTest {
 	public void linesWordsAndCharsShouldHaveCoordinates() throws FileNotFoundException {
 		Page page = firstPageFromFile("abbyy6.xml");
 		
-		Line line = firstLineOnPage(page);
+		Line line = firstLineFromPage(page);
 		assertCoordinatesArePresent(line);
 		
 		LineItem firstWord = line.getLineItems().get(0);
@@ -204,18 +205,12 @@ public class AbbyyXMLReaderTest {
 	public void digitsShouldBecomeWords() throws FileNotFoundException {
 		Page page = firstPageFromFile("abbyy6_withDigits.xml");
 		
-		Line line = firstLineOnPage(page);
+		Line line = firstLineFromPage(page);
 		LineItem item = line.getLineItems().get(0);
 		assertThat(item, instanceOf(Word.class));
 		assertEquals("# of digits", 4, item.getCharacters().size());
 	}
 
-	private Line firstLineOnPage(Page page) {
-		TextBlock block = (TextBlock) page.getPageItems().get(0);
-		Line line = block.getParagraphs().get(0).getLines().get(0);
-		return line;
-	}
-	
 	@Test
 	public void emptyFormattingElementShouldBeIgnored() throws FileNotFoundException {
 		reader.setWriter(writerMock);
@@ -251,7 +246,7 @@ public class AbbyyXMLReaderTest {
 	@Test
 	public void wordShouldContainLanguageAndFontInfos() throws FileNotFoundException {
 		Page page = firstPageFromFile("abbyy6.xml");
-		Line line = firstLineOnPage(page);
+		Line line = firstLineFromPage(page);
 		LineItem item = line.getLineItems().get(0);
 		
 		Word word = (Word) item;
@@ -267,7 +262,7 @@ public class AbbyyXMLReaderTest {
 	@Test
 	public void nonWordShouldContainFontInfos() throws FileNotFoundException {
 		Page page = firstPageFromFile("abbyy6.xml");
-		Line line = firstLineOnPage(page);
+		Line line = firstLineFromPage(page);
 		LineItem item = line.getLineItems().get(1);
 		
 		NonWord word = (NonWord) item;
@@ -292,6 +287,34 @@ public class AbbyyXMLReaderTest {
 		Line line = firstLineFromPage(page);
 		
 		assertEquals("Baseline", new Integer(1248), line.getBaseline());
+	}
+	
+	@Test
+	public void minusSeparatedWord() throws FileNotFoundException {
+		Page page = firstPageFromFile("abbyy10_wordsWithDash.xml");
+		Line line = firstLineFromPage(page);
+		List<Char> chars = line.getLineItems().get(0).getCharacters();
+		
+		String firstWord = "";
+		for (Char ch : chars) {
+			firstWord += ch.getValue();
+		}
+		
+		assertEquals("Anna-Lena", firstWord);
+	}
+
+	@Test
+	public void emDashSeparatedWord() throws FileNotFoundException {
+		Page page = firstPageFromFile("abbyy10_wordsWithDash.xml");
+		Line line = firstLineFromPage(page);
+		List<Char> chars = line.getLineItems().get(2).getCharacters();
+		
+		String secondWord = "";
+		for (Char ch : chars) {
+			secondWord += ch.getValue();
+		}
+		char emDash = '\u2014';
+		assertEquals("Anna" + emDash + "Lena", secondWord);
 	}
 
 	private void assertCoordinatesArePresent(WithCoordinates modelItem) {
