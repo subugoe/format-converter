@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="TEI.2">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="teiHeader" type="TeiHeader" />
+				<xs:element name="text" type="Text" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:complexType name="TeiHeader">
+	</xs:complexType>
+	
+ 	<xs:complexType name="Text">
+		<xs:sequence>
+			<xs:element name="body" type="Body" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Body">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="p" type="P" />
+			<xs:element name="milestone" type="Milestone" />
+			<xs:element name="figure" type="Figure" />
+			<xs:element name="pb" type="Pb" />
+		</xs:choice>
+	</xs:complexType>
+  
+	<xs:complexType name="P">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="seq" type="Seq"/>
+			<xs:element name="w" type="W"/>
+			<xs:element name="lb" type="Lb"/>
+		</xs:choice>
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+  	<xs:complexType name="W">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="function" type="CoordinatesLTRB" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+ 	<xs:complexType name="Seq">
+		<xs:sequence>
+			<xs:element name="w" type="W" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Milestone">
+		<xs:attribute name="n" type="xs:int" use="required" />
+		<xs:attribute name="type" type="xs:string" use="required" fixed="page" />
+	</xs:complexType>
+
+  	<xs:complexType name="Figure">
+		<xs:attribute name="id" type="xs:string" use="required" />
+		<xs:attribute name="function" type="CoordinatesLTRB" />
+	</xs:complexType>
+
+  	<xs:complexType name="Pb">
+	</xs:complexType>	
+  
+  	<xs:complexType name="Lb">
+	</xs:complexType>	
+
+	<xs:simpleType name="CoordinatesLTRB">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d+,\d+,\d+,\d+" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>
