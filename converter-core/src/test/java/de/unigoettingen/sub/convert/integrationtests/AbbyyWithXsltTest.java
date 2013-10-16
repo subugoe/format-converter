@@ -54,4 +54,21 @@ public class AbbyyWithXsltTest {
 
 	}
 
+	@Test
+	public void oldTei() throws IOException {
+		InputStream is = new FileInputStream("src/test/resources/abbyy10_withHyphenation.xml");
+		ConvertReader reader = new AbbyyXMLReader();
+		ConvertWriter writer = new XsltWriter();
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toOldTei.xsl");
+
+		//OutputStream s = new FileOutputStream("target/xsltResult_oldTei.xml");
+		OutputStream s = System.out;
+		writer.setTarget(s);
+		
+		reader.setWriter(writer);
+		reader.read(is);
+		s.close();
+
+	}
+
 }
