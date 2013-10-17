@@ -20,9 +20,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
+import de.unigoettingen.sub.convert.model.Image;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
+import de.unigoettingen.sub.convert.model.builders.ImageBuilder;
 import de.unigoettingen.sub.convert.model.builders.LineBuilder;
+import de.unigoettingen.sub.convert.model.builders.TableBuilder;
 import de.unigoettingen.sub.convert.output.XsltWriter;
 
 public class XsltWriterTest {
@@ -312,4 +315,50 @@ public class XsltWriterTest {
 		assertThat(output, containsString("</w>"));
 	}
 
+	@Test
+	public void oldTeiFormatWords() {
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toOldTei.xsl");
+		
+		Page page = page().with(word("test").withCoordinatesLTRB(1, 2, 3, 4)).with(nonWord("!?")).build();
+		
+		String output = process(page);
+		
+		assertThat(output, containsString("<p id=\"ID1_1\">"));
+		assertThat(output, containsString("<w function=\"1,2,3,4\">test</w>"));
+		assertThat(output, containsString("<w>!?</w>"));
+		assertThat(output, containsString("<pb/>"));
+		assertThat(output, containsString("<milestone n=\"1\" type=\"page\"/>"));
+	}
+	
+	@Test
+	public void oldTeiFormatWithHyphen() {
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toOldTei.xsl");
+		
+		LineBuilder line1 = line().with(word("hyphe").withCoordinatesLTRB(1, 2, 3, 4)).with(nonWord("¬").withCoordinatesLTRB(5, 6, 7, 8));
+		LineBuilder line2 = line().with(word("nation"));
+		Page page = page().with(line1).with(line2).build();
+		
+		String output = process(page);
+		
+		assertThat(output, containsString("<seq>"));
+		assertThat(output, containsString("<w function=\"1,2,3,4\">hyphe</w>"));
+		assertThat(output, containsString("<w>nation</w>"));
+		assertThat(output, containsString("</seq>"));
+
+	}
+	
+	@Test
+	public void oldTeiFormatWithImageAndTable() {
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toOldTei.xsl");
+		
+		ImageBuilder image = image().withCoordinatesLTRB(1, 2, 3, 4);
+		TableBuilder table = table().withCoordinatesLTRB(5, 6, 7, 8);
+		Page page = page().with(image).with(table).build();
+		
+		String output = process(page);
+		
+		assertThat(output, containsString("<figure id=\"ID1_1\" function=\"1,2,3,4\"/>"));
+		assertThat(output, containsString("<figure id=\"ID1_2\" function=\"5,6,7,8\"/>"));
+	}
+	
 }

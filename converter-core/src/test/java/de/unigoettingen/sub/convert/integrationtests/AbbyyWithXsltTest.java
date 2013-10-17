@@ -61,8 +61,8 @@ public class AbbyyWithXsltTest {
 		ConvertWriter writer = new XsltWriter();
 		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toOldTei.xsl");
 
-		//OutputStream s = new FileOutputStream("target/xsltResult_oldTei.xml");
-		OutputStream s = System.out;
+		OutputStream s = new FileOutputStream("target/xsltResult_oldTei.xml");
+		//OutputStream s = System.out;
 		writer.setTarget(s);
 		
 		reader.setWriter(writer);
