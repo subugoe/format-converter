@@ -4,4 +4,3 @@ file.exists testen? zB für png Dateien oder für outputs bei MainTest -> ein ou
 
 - orientation in pdf: landscape, portrait, grad?
 
-test
