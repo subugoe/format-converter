@@ -1,6 +1,7 @@
 package de.unigoettingen.sub.convert.input.abbyyxml;
 
 import de.unigoettingen.sub.convert.input.abbyyxml.AbbyyXMLReader.CurrentPageState;
+import de.unigoettingen.sub.convert.model.Char;
 import de.unigoettingen.sub.convert.model.FontStyleEnum;
 import de.unigoettingen.sub.convert.model.LineItem;
 import de.unigoettingen.sub.convert.model.NonWord;
@@ -21,14 +22,23 @@ abstract class AbstractWordConstructingElement implements AbbyyElement {
 	protected boolean inNonWord() {
 		return current.lineItem instanceof NonWord;
 	}
+	
+	protected boolean inWhiteSpace() {
+		for (Char currentChar : current.lineItem.getCharacters()) {
+			if (currentChar.getValue().trim() != "") {
+				return false;
+			}
+		}
+		return true;
+	}
 
-	protected void switchToWord() {
+	protected void beginNewWord() {
 		current.word = constructUsingWordContainer(new Word());
 		current.line.getLineItems().add(current.word);
 		current.lineItem = current.word;
 	}
 
-	protected void switchToNonWord() {
+	protected void beginNewNonWord() {
 		current.nonWord = constructUsingWordContainer(new NonWord());
 		current.line.getLineItems().add(current.nonWord);
 		current.lineItem = current.nonWord;

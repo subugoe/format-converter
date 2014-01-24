@@ -36,25 +36,39 @@ class CharParamsElement extends AbstractWordConstructingElement implements Abbyy
 		char ch = chars.charAt(0);
 		boolean isLetterOrDigit = Character.isLetterOrDigit(ch);
 		boolean isDash = ch == '-' || ch == '\u2014';
+		boolean isWhiteSpace = chars.trim().equals("");
 		if (startOfLine() && isLetterOrDigit) {
-			switchToWord();
+			beginNewWord();
 			setTopLeft(current.word, modelChar);
 			setBottom(current.word, modelChar);
 		} else if (startOfLine() && !isLetterOrDigit) {
-			switchToNonWord();
+			beginNewNonWord();
 			setTopLeft(current.nonWord, modelChar);
 			setBottom(current.nonWord, modelChar);
 		} else if (inWord() && isDash) {
 			// just add the dash to the word
 			// dash inside a word is OK
 		} else if (inWord() && !isLetterOrDigit) {
-			switchToNonWord();
+			beginNewNonWord();
 			setTopLeft(current.nonWord, modelChar);
 			setBottom(current.nonWord, modelChar);
 		} else if (inNonWord() && isLetterOrDigit) {
-			switchToWord();
+			beginNewWord();
 			setTopLeft(current.word, modelChar);
 			setBottom(current.word, modelChar);
+		} else if (inWhiteSpace() && isWhiteSpace) {
+			// just add the whitespace
+		} else if (!inWhiteSpace() && isWhiteSpace) {
+			// it is safer to have whitespaces in a separate
+			// nonword, because Abbyy gives us whitespaces
+			// with different widths
+			beginNewNonWord();
+			setTopLeft(current.nonWord, modelChar);
+			setBottom(current.nonWord, modelChar);
+		} else if (inWhiteSpace() && !isLetterOrDigit) {
+			beginNewNonWord();
+			setTopLeft(current.nonWord, modelChar);
+			setBottom(current.nonWord, modelChar);
 		}
 		// must be updated after each character as the word/nonword grows
 		setRight(current.lineItem, modelChar);

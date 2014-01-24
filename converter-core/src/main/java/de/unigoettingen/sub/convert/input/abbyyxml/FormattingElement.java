@@ -64,13 +64,13 @@ class FormattingElement extends AbstractWordConstructingElement implements Abbyy
 			modelChar.setValue("" + ch);
 			boolean isLetterOrDigit = Character.isLetterOrDigit(ch);
 			if (startOfLine() && isLetterOrDigit) {
-				switchToWord();
+				beginNewWord();
 			} else if (startOfLine() && !isLetterOrDigit) {
-				switchToNonWord();
+				beginNewNonWord();
 			} else if (inWord() && !isLetterOrDigit) {
-				switchToNonWord();
+				beginNewNonWord();
 			} else if (inNonWord() && isLetterOrDigit) {
-				switchToWord();
+				beginNewWord();
 			}
 			current.lineItem.getCharacters().add(modelChar);
 		}
