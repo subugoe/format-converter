@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document xmlns="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" version="1.0" producer="" pagesCount="708" languages="">
+ 
+ <page width="3508" height="4961" resolution="600">
+<block blockType="Text" pageElemId="{113818E4-A62D-4645-91D0-69B5E188B5E2}" l="440" t="344" r="3100" b="3592"><region><rect l="440" t="344" r="3100" b="3592"></rect></region>
+<text id="{113818E4-A62D-4645-91D0-69B5E188B5E2}">
+
+<par align="Justified" leftIndent="1800" lineSpacing="1008">
+<line baseline="681" l="621" t="624" r="3066" b="685"><formatting lang="GermanStandard" ff="Times New Roman" fs="7." bold="1">
+<charParams l="1155" t="669" r="2709" b="685">...</charParams>
+</formatting></line></par>
+
+</text>
+</block>
+
+</page>
+</document>

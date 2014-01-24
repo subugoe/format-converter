@@ -24,15 +24,16 @@ class CharParamsElement extends AbstractWordConstructingElement implements Abbyy
 			throws XMLStreamException {
 		this.current = current;
 		if (nextEvent.isCharacters()) {
-			char ch = nextEvent.asCharacters().getData().charAt(0);
-			attachCharToLineItem(ch);
+			String chars = nextEvent.asCharacters().getData();
+			attachCharToLineItem(chars);
 		}
 	}
 
-	private void attachCharToLineItem(char ch) {
+	private void attachCharToLineItem(String chars) {
 		Char modelChar = new Char();
 		copyAttributesTo(modelChar);
-		modelChar.setValue("" + ch);
+		modelChar.setValue(chars);
+		char ch = chars.charAt(0);
 		boolean isLetterOrDigit = Character.isLetterOrDigit(ch);
 		boolean isDash = ch == '-' || ch == '\u2014';
 		if (startOfLine() && isLetterOrDigit) {

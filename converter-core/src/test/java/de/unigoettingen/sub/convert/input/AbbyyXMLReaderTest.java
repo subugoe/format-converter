@@ -317,6 +317,16 @@ public class AbbyyXMLReaderTest {
 		assertEquals("Anna" + emDash + "Lena", secondWord);
 	}
 
+	@Test
+	public void severalCharactersInOneElement() throws FileNotFoundException {
+		Page page = firstPageFromFile("abbyy10_severalCharsInOne.xml");
+		Line line = firstLineFromPage(page);
+		Char chars = line.getLineItems().get(0).getCharacters().get(0);
+		
+		String severalChars = chars.getValue();
+		assertEquals("...", severalChars);
+	}
+
 	private void assertCoordinatesArePresent(WithCoordinates modelItem) {
 		assertThat("left coordinate", modelItem.getLeft(), instanceOf(Integer.class));
 		assertThat("top coordinate", modelItem.getTop(), instanceOf(Integer.class));
