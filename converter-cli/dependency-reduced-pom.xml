@@ -34,6 +34,12 @@
               <transformers>
                 <transformer>
                   <mainClass>de.unigoettingen.sub.convert.cli.Main</mainClass>
+                  <manifestEntries>
+                    <Specification-Vendor>MyCompany</Specification-Vendor>
+                    <Implementation-Vendor>MyCompany</Implementation-Vendor>
+                    <Specification-Version>1</Specification-Version>
+                    <Implementation-Version>1</Implementation-Version>
+                  </manifestEntries>
                 </transformer>
               </transformers>
             </configuration>
