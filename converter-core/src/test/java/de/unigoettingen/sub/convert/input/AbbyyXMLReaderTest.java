@@ -327,6 +327,17 @@ public class AbbyyXMLReaderTest {
 		assertEquals("...", severalChars);
 	}
 
+	@Test
+	public void whitespaceShouldBeIsolated() throws FileNotFoundException {
+		Page page = firstPageFromFile("abbyy10_isolatedWhitespaces.xml");
+		Line line = firstLineFromPage(page);
+		List<LineItem> items = line.getLineItems();
+		assertEquals("# of line items", 3, items.size());
+		assertThat("first non-word", items.get(0), instanceOf(NonWord.class));
+		assertThat("second non-word", items.get(1), instanceOf(NonWord.class));
+		assertThat("third non-word", items.get(2), instanceOf(NonWord.class));
+	}
+
 	private void assertCoordinatesArePresent(WithCoordinates modelItem) {
 		assertThat("left coordinate", modelItem.getLeft(), instanceOf(Integer.class));
 		assertThat("top coordinate", modelItem.getTop(), instanceOf(Integer.class));

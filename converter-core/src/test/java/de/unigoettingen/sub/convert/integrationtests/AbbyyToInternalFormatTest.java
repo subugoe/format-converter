@@ -32,7 +32,7 @@ public class AbbyyToInternalFormatTest {
 		s.close();
 	}
 
-	@Test
+	//@Test
 	public void hyphen() throws IOException {
 		File abbyy = new File(
 				System.getProperty("user.dir") + "/src/test/resources/abbyy10_withHyphenation.xml");

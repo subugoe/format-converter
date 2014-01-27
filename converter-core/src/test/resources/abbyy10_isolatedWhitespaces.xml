@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document xmlns="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" version="1.0" producer="" pagesCount="708" languages="">
+    <documentData>
+        <sections>
+            <section><stream role="text" beginPage="0"><mainText columnCount="1"/><elemId id="{AF538F79-EB4D-4666-97F9-52098AB2DD34}"/></stream>
+            </section>
+            <section><stream role="text" beginPage="0"><mainText columnCount="1"/><elemId id="{6FD2E808-D674-403A-9D25-01032EF1B70D}"/></stream><stream role="incut" beginPage="0"><elemId id="{3F172776-7972-4DC1-846B-5897B88F38DD}"/></stream><stream role="incut" beginPage="0"><elemId id="{E565EE6B-21EB-41AD-A796-9D4E3B65EEED}"/></stream>
+            </section>
+        </sections>
+    </documentData>
+<page width="3508" height="4961" resolution="600">
+<block blockType="Text" pageElemId="{113818E4-A62D-4645-91D0-69B5E188B5E2}" l="440" t="344" r="3100" b="3592"><region><rect l="440" t="344" r="3100" b="3592"></rect></region>
+<text id="{113818E4-A62D-4645-91D0-69B5E188B5E2}">
+
+<par align="Justified" leftIndent="1800" lineSpacing="1008">
+<line baseline="681" l="621" t="624" r="3066" b="685"><formatting lang="GermanStandard" ff="Times New Roman" fs="7." bold="1">
+<charParams l="2313" t="1311" r="2325" b="1331">’</charParams>
+<charParams l="2326" t="1311" r="2964" b="1363">    </charParams>
+<charParams l="2965" t="1312" r="2992" b="1363">.</charParams>
+</formatting></line></par>
+
+</text>
+</block>
+
+</page>
+</document>

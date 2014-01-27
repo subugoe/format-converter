@@ -25,7 +25,7 @@ abstract class AbstractWordConstructingElement implements AbbyyElement {
 	
 	protected boolean inWhiteSpace() {
 		for (Char currentChar : current.lineItem.getCharacters()) {
-			if (currentChar.getValue().trim() != "") {
+			if (!currentChar.getValue().trim().equals("")) {
 				return false;
 			}
 		}
