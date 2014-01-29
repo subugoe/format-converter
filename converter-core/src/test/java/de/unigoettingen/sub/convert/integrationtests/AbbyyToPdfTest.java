@@ -25,7 +25,7 @@ public class AbbyyToPdfTest {
 	public void setUp() throws Exception {
 	}
 
-	@Test
+	//@Test
 	public void test() throws IOException {
 		File abbyy = new File(
 				System.getProperty("user.dir") + "/src/test/resources/abbyy10_coverAndText.xml");
@@ -38,6 +38,26 @@ public class AbbyyToPdfTest {
 
 		
 		OutputStream s = new FileOutputStream("target/sohnrey.pdf");
+		//OutputStream s = System.out;
+		writer.setTarget(s);
+		
+		reader.setWriter(writer);
+		reader.read(is);
+		s.close();
+	}
+	@Test // this test used to cause an Exception
+	public void tifPortraitButXmlLandscape() throws IOException {
+		File abbyy = new File("src/test/resources/portrait_to_landscape.xml");
+		InputStream is = new FileInputStream(abbyy);
+		ConvertReader reader = new AbbyyXMLReader();
+		ConvertWriter writer = new PDFWriter();
+		
+		writer.addImplementationSpecificOption("scans", "src/test/resources/portrait_to_landscape");
+		//writer.addImplementationSpecificOption("includescans", "false");
+		writer.addImplementationSpecificOption("pagesize", "original");
+
+		
+		OutputStream s = new FileOutputStream("target/portrait_to_landscape.pdf");
 		//OutputStream s = System.out;
 		writer.setTarget(s);
 		

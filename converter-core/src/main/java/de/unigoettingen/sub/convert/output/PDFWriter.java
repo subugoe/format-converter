@@ -168,39 +168,60 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		File imagesFolder = new File(setOptions.get("scans"));
 		File imageFile = resourceHandler.getTifImageForPage(pageNumber, imagesFolder);
 		
+		Image image = readTiffImage(imageFile);
+		float imageWidthOrHeight = 0;
+		if (mustRotateImage(image)) {
+			image.setRotationDegrees(270f);
+			imageWidthOrHeight = image.getHeight();
+		} else {
+			imageWidthOrHeight = image.getWidth();
+		}
+		float pdfWidth = pdfDocument.getPageSize().getWidth();
+		image.scalePercent(pdfWidth / imageWidthOrHeight * 100f);
+		image.setAlignment(Image.LEFT);
+		pdfDocument.add(image);
+	}
+
+	private Image readTiffImage(File imageFile) throws IOException {
 		FileInputStream imageStream = new FileInputStream(imageFile);
 		try {
 			RandomAccessSource source = new RandomAccessSourceFactory().createSource(imageStream);
 			RandomAccessFileOrArray ra = new RandomAccessFileOrArray(source);
 			Image image = TiffImage.getTiffImage(ra, 1);
-			
-			float pdfWidth = pdfDocument.getPageSize().getWidth();
-			image.scalePercent(pdfWidth / image.getWidth() * 100f);
-			image.setAlignment(Image.LEFT);
-			pdfDocument.add(image);
+			return image;
 		} finally {
 			if (imageStream != null)
 				imageStream.close();
 		}
 	}
-
+	
+	private boolean mustRotateImage(Image image) {
+		float imageRelation = image.getHeight() / image.getWidth();
+		float pdfWidth = pdfDocument.getPageSize().getWidth();
+		float pdfHeight = pdfDocument.getPageSize().getHeight();
+		float pdfRelation = pdfHeight / pdfWidth;
+		return imageRelation > 1 && pdfRelation < 1;
+	}
+	
 	private void putAllSubimagesOnPage(PdfContentByte pdfPage) throws IOException, DocumentException {
-		for (PageItem image : currentPage.getPageItems()) {
-			if (image instanceof de.unigoettingen.sub.convert.model.Image) {
-				File imagesFolder = new File(setOptions.get("scans"));
-				File tifFile = resourceHandler.getTifImageForPage(pageNumber, imagesFolder);
-				ImageArea area = ImageArea.createLTRB(image.getLeft(), image.getTop(), image.getRight(), image.getBottom());
-				byte[] imageBytes = resourceHandler.tifToPngAndCut(tifFile, area);
-				
-				int imageWidth = resourceHandler.getWidthOfImage(pageNumber, imagesFolder);
-				Image pngImage = PngImage.getImage(imageBytes);
-				float pdfWidth = pdfDocument.getPageSize().getWidth();
-				float pdfHeight = pdfDocument.getPageSize().getHeight();
-				pngImage.scalePercent(pdfWidth / imageWidth * 100f);
-				float absoluteX = pdfWidth / imageWidth * image.getLeft();
-				float absoluteY = pdfHeight - pdfWidth / imageWidth * image.getBottom();
-				pngImage.setAbsolutePosition(absoluteX, absoluteY);
-				pdfPage.addImage(pngImage);
+		File imagesFolder = new File(setOptions.get("scans"));
+		File tifFile = resourceHandler.getTifImageForPage(pageNumber, imagesFolder);
+		if (!mustRotateImage(readTiffImage(tifFile))) {
+			for (PageItem image : currentPage.getPageItems()) {
+				if (image instanceof de.unigoettingen.sub.convert.model.Image) {
+					ImageArea area = ImageArea.createLTRB(image.getLeft(), image.getTop(), image.getRight(), image.getBottom());
+					byte[] imageBytes = resourceHandler.tifToPngAndCut(tifFile, area);
+					
+					int imageWidth = resourceHandler.getWidthOfImage(pageNumber, imagesFolder);
+					Image pngImage = PngImage.getImage(imageBytes);
+					float pdfWidth = pdfDocument.getPageSize().getWidth();
+					float pdfHeight = pdfDocument.getPageSize().getHeight();
+					pngImage.scalePercent(pdfWidth / imageWidth * 100f);
+					float absoluteX = pdfWidth / imageWidth * image.getLeft();
+					float absoluteY = pdfHeight - pdfWidth / imageWidth * image.getBottom();
+					pngImage.setAbsolutePosition(absoluteX, absoluteY);
+					pdfPage.addImage(pngImage);
+				}
 			}
 		}
 	}

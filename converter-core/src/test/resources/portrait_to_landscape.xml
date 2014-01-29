@@ -1,0 +1,2076 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document xmlns="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml" version="1.0" producer="" languages="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml http://www.abbyy.com/FineReader_xml/FineReader10-schema-v1.xml">
+<documentData>
+<sections>
+<section><stream role="text" beginPage="0"><mainText columnCount="1"/><elemId id="{586D03FE-D80C-47A8-939B-D30B5417F2F2}"/></stream>
+</section>
+<section><stream role="text" beginPage="0"><mainText columnCount="1"/><elemId id="{88E00A12-A24A-4537-93BE-F6F0C9CF97A6}"/></stream><stream role="incut" beginPage="0"><elemId id="{B24A2360-BF7A-4497-B76B-DB246D330A60}"/></stream>
+</section>
+</sections>
+</documentData>
+<page width="5896" height="4018" resolution="600">
+<block blockType="Text" pageElemId="{586D03FE-D80C-47A8-939B-D30B5417F2F2}" l="1524" t="208" r="4112" b="496"><region><rect l="1524" t="208" r="4112" b="496"/></region>
+<text id="{586D03FE-D80C-47A8-939B-D30B5417F2F2}">
+<par align="Center">
+<line baseline="297" l="2228" t="229" r="3442" b="308"><formatting lang="FrenchStandard" ff="Times New Roman" fs="8.5" bold="1" italic="1">
+<charParams l="2228" t="244" r="2276" b="303">V</charParams>
+<charParams l="2276" t="245" r="2296" b="301">i</charParams>
+<charParams l="2304" t="251" r="2322" b="301">t</charParams>
+<charParams l="2328" t="260" r="2354" b="301">e</charParams>
+<charParams l="2357" t="260" r="2384" b="301">s</charParams>
+<charParams l="2388" t="258" r="2415" b="301">s</charParams>
+<charParams l="2420" t="259" r="2446" b="300">e</charParams>
+<charParams l="2447" t="243" r="2477" b="300"> </charParams>
+<charParams l="2478" t="243" r="2516" b="299">d</charParams>
+<charParams l="2521" t="260" r="2563" b="301">u</charParams>
+<charParams l="2564" t="259" r="2593" b="301"> </charParams>
+<charParams l="2594" t="259" r="2631" b="300">v</charParams>
+<charParams l="2635" t="258" r="2661" b="300">e</charParams>
+<charParams l="2668" t="257" r="2707" b="299">n</charParams>
+<charParams l="2714" t="248" r="2734" b="299">t</charParams>
+<charParams l="2735" t="238" r="2763" b="299"> </charParams>
+<charParams l="2764" t="238" r="2805" b="298">à</charParams>
+<charParams l="2806" t="238" r="2836" b="298"> </charParams>
+<charParams l="2837" t="240" r="2899" b="298">N</charParams>
+<charParams l="2898" t="256" r="2937" b="298">a</charParams>
+<charParams l="2945" t="253" r="3000" b="296" suspicious="1">m</charParams>
+<charParams l="3005" t="253" r="3048" b="296">u</charParams>
+<charParams l="3052" t="253" r="3085" b="295">r</charParams>
+<charParams l="3088" t="286" r="3106" b="308" suspicious="1">^</charParams>
+<charParams l="3107" t="251" r="3142" b="308"> </charParams>
+<charParams l="3143" t="251" r="3169" b="294">e</charParams>
+<charParams l="3174" t="252" r="3214" b="294">n</charParams>
+<charParams l="3215" t="231" r="3257" b="294"> </charParams>
+<charParams l="3258" t="231" r="3280" b="292" suspicious="1">1</charParams>
+<charParams l="3290" t="231" r="3330" b="292" suspicious="1">8</charParams>
+<charParams l="3337" t="230" r="3375" b="291" suspicious="1">5</charParams>
+<charParams l="3378" t="229" r="3419" b="291">9</charParams>
+<charParams l="3429" t="278" r="3442" b="291">,</charParams></formatting></line></par>
+<par align="Center">
+<line baseline="460" l="1555" t="405" r="4078" b="486"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1555" t="431" r="1567" b="484">(</charParams>
+<charParams l="1579" t="430" r="1615" b="472">D</charParams>
+<charParams l="1618" t="428" r="1627" b="443">’</charParams>
+<charParams l="1635" t="443" r="1657" b="471">a</charParams>
+<charParams l="1662" t="441" r="1689" b="486">p</charParams>
+<charParams l="1694" t="442" r="1714" b="470" suspicious="1">r</charParams>
+<charParams l="1718" t="426" r="1741" b="470">è</charParams>
+<charParams l="1745" t="440" r="1764" b="470">s</charParams>
+<charParams l="1765" t="425" r="1784" b="470"> </charParams>
+<charParams l="1785" t="425" r="1797" b="468">l</charParams>
+<charParams l="1803" t="441" r="1826" b="469">e</charParams>
+<charParams l="1830" t="440" r="1849" b="469">s</charParams>
+<charParams l="1850" t="440" r="1870" b="469"> </charParams>
+<charParams l="1871" t="440" r="1884" b="468">l</charParams>
+<charParams l="1895" t="424" r="1917" b="468" suspicious="1">é</charParams>
+<charParams l="1920" t="441" r="1940" b="467">s</charParams>
+<charParams l="1944" t="439" r="1970" b="467">u</charParams>
+<charParams l="1975" t="424" r="2010" b="467" suspicious="1">U</charParams>
+<charParams l="2014" t="438" r="2038" b="467">a</charParams>
+<charParams l="2042" t="428" r="2059" b="467">l</charParams>
+<charParams l="2062" t="437" r="2081" b="467">s</charParams>
+<charParams l="2082" t="419" r="2103" b="467"> </charParams>
+<charParams l="2104" t="419" r="2121" b="465">f</charParams>
+<charParams l="2120" t="439" r="2145" b="465">o</charParams>
+<charParams l="2148" t="437" r="2174" b="466">u</charParams>
+<charParams l="2178" t="437" r="2200" b="466">r</charParams>
+<charParams l="2204" t="436" r="2231" b="465">n</charParams>
+<charParams l="2234" t="421" r="2247" b="464">i</charParams>
+<charParams l="2252" t="436" r="2273" b="465">s</charParams>
+<charParams l="2287" t="458" r="2300" b="480">,</charParams>
+<charParams l="2301" t="421" r="2321" b="480"> </charParams>
+<charParams l="2322" t="421" r="2349" b="465">d</charParams>
+<charParams l="2355" t="438" r="2379" b="466" suspicious="1">e</charParams>
+<charParams l="2380" t="428" r="2398" b="466"> </charParams>
+<charParams l="2399" t="428" r="2428" b="465" suspicious="1">2</charParams>
+<charParams l="2429" t="428" r="2448" b="465"> </charParams>
+<charParams l="2449" t="437" r="2472" b="465">e</charParams>
+<charParams l="2476" t="435" r="2504" b="463">n</charParams>
+<charParams l="2505" t="426" r="2523" b="464"> </charParams>
+<charParams l="2524" t="426" r="2551" b="464" suspicious="1">2</charParams>
+<charParams l="2552" t="419" r="2569" b="464"> </charParams>
+<charParams l="2570" t="419" r="2599" b="463">h</charParams>
+<charParams l="2604" t="435" r="2628" b="464">e</charParams>
+<charParams l="2633" t="435" r="2658" b="464">u</charParams>
+<charParams l="2664" t="434" r="2685" b="462">r</charParams>
+<charParams l="2690" t="435" r="2712" b="463">e</charParams>
+<charParams l="2715" t="435" r="2735" b="464">s</charParams>
+<charParams l="2749" t="455" r="2762" b="479">,</charParams>
+<charParams l="2763" t="434" r="2783" b="480"> </charParams>
+<charParams l="2784" t="434" r="2814" b="480">p</charParams>
+<charParams l="2817" t="433" r="2841" b="463">a</charParams>
+<charParams l="2843" t="434" r="2866" b="463">r</charParams>
+<charParams l="2867" t="417" r="2884" b="463"> </charParams>
+<charParams l="2885" t="417" r="2901" b="461">l</charParams>
+<charParams l="2903" t="417" r="2911" b="434">’</charParams>
+<charParams l="2920" t="434" r="2943" b="461">a</charParams>
+<charParams l="2948" t="432" r="2975" b="477">p</charParams>
+<charParams l="2977" t="431" r="3007" b="477">p</charParams>
+<charParams l="3011" t="431" r="3036" b="460">a</charParams>
+<charParams l="3041" t="431" r="3059" b="459">r</charParams>
+<charParams l="3064" t="430" r="3088" b="459">e</charParams>
+<charParams l="3090" t="414" r="3104" b="458">i</charParams>
+<charParams l="3108" t="415" r="3122" b="459">l</charParams>
+<charParams l="3123" t="413" r="3141" b="459"> </charParams>
+<charParams l="3142" t="413" r="3165" b="458">à</charParams>
+<charParams l="3166" t="413" r="3187" b="458"> </charParams>
+<charParams l="3188" t="429" r="3208" b="458">c</charParams>
+<charParams l="3214" t="427" r="3239" b="457">a</charParams>
+<charParams l="3241" t="428" r="3269" b="474">p</charParams>
+<charParams l="3273" t="428" r="3293" b="457">s</charParams>
+<charParams l="3295" t="428" r="3325" b="457">u</charParams>
+<charParams l="3329" t="412" r="3341" b="455">l</charParams>
+<charParams l="3346" t="427" r="3369" b="455">e</charParams>
+<charParams l="3373" t="427" r="3393" b="455">s</charParams>
+<charParams l="3406" t="447" r="3419" b="469">,</charParams>
+<charParams l="3420" t="428" r="3439" b="469"> </charParams>
+<charParams l="3440" t="428" r="3464" b="454">e</charParams>
+<charParams l="3469" t="427" r="3497" b="453">u</charParams>
+<charParams l="3498" t="409" r="3517" b="453"> </charParams>
+<charParams l="3518" t="409" r="3548" b="453" suspicious="1">k</charParams>
+<charParams l="3551" t="425" r="3565" b="452" suspicious="1">i</charParams>
+<charParams l="3571" t="409" r="3582" b="452">l</charParams>
+<charParams l="3585" t="423" r="3610" b="452">o</charParams>
+<charParams l="3613" t="422" r="3655" b="451" suspicious="1">m</charParams>
+<charParams l="3659" t="407" r="3683" b="452">è</charParams>
+<charParams l="3688" t="413" r="3701" b="451" suspicious="1">l</charParams>
+<charParams l="3706" t="422" r="3728" b="450" suspicious="1">v</charParams>
+<charParams l="3731" t="423" r="3753" b="450">e</charParams>
+<charParams l="3757" t="422" r="3778" b="450">s</charParams>
+<charParams l="3779" t="420" r="3797" b="467"> </charParams>
+<charParams l="3798" t="420" r="3825" b="467">p</charParams>
+<charParams l="3832" t="421" r="3855" b="449">a</charParams>
+<charParams l="3860" t="420" r="3879" b="448">r</charParams>
+<charParams l="3880" t="405" r="3901" b="448"> </charParams>
+<charParams l="3902" t="405" r="3929" b="448">h</charParams>
+<charParams l="3935" t="419" r="3959" b="448">e</charParams>
+<charParams l="3963" t="419" r="3987" b="448">u</charParams>
+<charParams l="3997" t="420" r="4015" b="447">r</charParams>
+<charParams l="4022" t="421" r="4045" b="449">e</charParams>
+<charParams l="4046" t="406" r="4064" b="459"> </charParams>
+<charParams l="4065" t="406" r="4078" b="459">)</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Picture" pageElemId="{B24A2360-BF7A-4497-B76B-DB246D330A60}" l="580" t="566" r="5116" b="3648"><region><rect l="580" t="566" r="5116" b="3648"/></region>
+</block>
+<block blockType="Text" pageElemId="{EAE2B045-EBDF-4CFD-8A9A-EC882F69EEBF}" l="4312" t="734" r="4492" b="790"><region><rect l="4312" t="734" r="4492" b="790"/></region>
+<text id="{EAE2B045-EBDF-4CFD-8A9A-EC882F69EEBF}">
+<par>
+<line baseline="777" l="4324" t="746" r="4480" b="777"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5." bold="1">
+<charParams l="4324" t="746" r="4360" b="777">D</charParams>
+<charParams l="4364" t="748" r="4399" b="777">A</charParams>
+<charParams l="4404" t="746" r="4441" b="777">T</charParams>
+<charParams l="4447" t="746" r="4480" b="777">E</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{5761FF50-3F1E-499C-8E5D-20A92DEF6A95}" l="4360" t="854" r="4436" b="910"><region><rect l="4360" t="854" r="4436" b="910"/></region>
+<text id="{5761FF50-3F1E-499C-8E5D-20A92DEF6A95}">
+<par>
+<line baseline="897" l="4373" t="866" r="4424" b="897"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.">
+<charParams l="4373" t="866" r="4393" b="897">d</charParams>
+<charParams l="4402" t="875" r="4424" b="897">u</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{BF1B9293-8C1D-46EE-AF97-9819253AC7DC}" l="998" t="872" r="1188" b="946"><region><rect l="998" t="872" r="1188" b="946"/></region>
+<text id="{BF1B9293-8C1D-46EE-AF97-9819253AC7DC}">
+<par>
+<line baseline="932" l="1009" t="885" r="1177" b="934"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="1009" t="886" r="1056" b="932">M</charParams>
+<charParams l="1058" t="886" r="1095" b="934">O</charParams>
+<charParams l="1103" t="886" r="1121" b="933">I</charParams>
+<charParams l="1126" t="885" r="1158" b="932">S</charParams>
+<charParams l="1166" t="921" r="1177" b="933">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{EBD29883-3C87-48F1-AD63-DB03A104EDBA}" l="1594" t="878" r="1768" b="938"><region><rect l="1594" t="878" r="1768" b="938"/></region>
+<text id="{EBD29883-3C87-48F1-AD63-DB03A104EDBA}">
+<par>
+<line baseline="924" l="1607" t="890" r="1755" b="925"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.">
+<charParams l="1607" t="894" r="1641" b="925">M</charParams>
+<charParams l="1644" t="890" r="1656" b="923">i</charParams>
+<charParams l="1658" t="901" r="1681" b="923">n</charParams>
+<charParams l="1684" t="901" r="1708" b="924">u</charParams>
+<charParams l="1712" t="890" r="1723" b="923">i</charParams>
+<charParams l="1728" t="894" r="1742" b="924">t</charParams>
+<charParams l="1747" t="913" r="1755" b="922">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{49F9579B-3905-4D44-A44F-320B61633BB8}" l="4256" t="980" r="4540" b="1036"><region><rect l="4256" t="980" r="4540" b="1036"/></region>
+<text id="{49F9579B-3905-4D44-A44F-320B61633BB8}">
+<par>
+<line baseline="1021" l="4267" t="993" r="4528" b="1025"><formatting lang="FrenchStandard" ff="Times New Roman" fs="4." spacing="10">
+<charParams l="4267" t="996" r="4276" b="1024">J</charParams>
+<charParams l="4276" t="997" r="4298" b="1025" suspicious="1">H</charParams>
+<charParams l="4307" t="995" r="4331" b="1023">A</charParams>
+<charParams l="4343" t="996" r="4365" b="1022">X</charParams>
+<charParams l="4377" t="996" r="4388" b="1021" suspicious="1">I</charParams>
+<charParams l="4400" t="994" r="4429" b="1023">M</charParams>
+<charParams l="4439" t="993" r="4465" b="1021" suspicious="1">U</charParams>
+<charParams l="4475" t="994" r="4484" b="1020" suspicious="1">I</charParams>
+<charParams l="4484" t="993" r="4505" b="1022" suspicious="1">H</charParams>
+<charParams l="4519" t="1009" r="4528" b="1021">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{D37C0971-6064-47F7-9A9F-2FAE0B6ACF40}" l="3494" t="1288" r="3650" b="1396"><region><rect l="3494" t="1288" r="3650" b="1396"/></region>
+<text id="{D37C0971-6064-47F7-9A9F-2FAE0B6ACF40}">
+<par leftIndent="500">
+<line baseline="1331" l="3545" t="1300" r="3618" b="1331"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.">
+<charParams l="3545" t="1300" r="3563" b="1331">k</charParams>
+<charParams l="3570" t="1309" r="3605" b="1331">m</charParams>
+<charParams l="3611" t="1323" r="3618" b="1331">.</charParams></formatting></line></par>
+<par>
+<line baseline="1381" l="3506" t="1347" r="3638" b="1396"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3506" t="1348" r="3525" b="1382">1</charParams>
+<charParams l="3533" t="1347" r="3560" b="1381">4</charParams>
+<charParams l="3565" t="1374" r="3577" b="1396">,</charParams>
+<charParams l="3581" t="1347" r="3607" b="1383">9</charParams>
+<charParams l="3613" t="1348" r="3638" b="1381">4</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{89FBDA26-92F9-4A2A-A0A6-C735FD3CEA15}" l="2738" t="1294" r="3082" b="1412"><region><rect l="2738" t="1294" r="3082" b="1412"/></region>
+<text id="{89FBDA26-92F9-4A2A-A0A6-C735FD3CEA15}">
+<par startIndent="400" lineSpacing="624">
+<line baseline="1336" l="2786" t="1306" r="3049" b="1337"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.">
+<charParams l="2786" t="1307" r="2805" b="1337">k</charParams>
+<charParams l="2810" t="1316" r="2845" b="1337">m</charParams>
+<charParams l="2852" t="1329" r="2859" b="1336">.</charParams>
+<charParams l="2860" t="1306" r="2977" b="1336"> </charParams>
+<charParams l="2978" t="1306" r="2995" b="1335">k</charParams>
+<charParams l="3002" t="1314" r="3036" b="1334">m</charParams>
+<charParams l="3041" t="1326" r="3049" b="1334">.</charParams></formatting></line>
+<line baseline="1387" l="2750" t="1349" r="3069" b="1400"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2750" t="1353" r="2767" b="1389">1</charParams>
+<charParams l="2776" t="1354" r="2803" b="1389">4</charParams>
+<charParams l="2809" t="1379" r="2820" b="1400">,</charParams>
+<charParams l="2824" t="1354" r="2851" b="1390">9</charParams>
+<charParams l="2854" t="1352" r="2880" b="1388">5</charParams>
+<charParams l="2881" t="1352" r="2939" b="1388">    </charParams>
+<charParams l="2940" t="1352" r="2955" b="1386">1</charParams>
+<charParams l="2964" t="1352" r="2990" b="1387">5</charParams>
+<charParams l="2995" t="1379" r="3009" b="1397">,</charParams>
+<charParams l="3013" t="1352" r="3039" b="1388">9</charParams>
+<charParams l="3044" t="1349" r="3069" b="1386">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{AE145A8A-6CF7-4CE5-91D7-33DC69CA8A9A}" l="2550" t="1296" r="2704" b="1404"><region><rect l="2550" t="1296" r="2704" b="1404"/></region>
+<text id="{AE145A8A-6CF7-4CE5-91D7-33DC69CA8A9A}">
+<par leftIndent="400">
+<line baseline="1339" l="2598" t="1309" r="2674" b="1340"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.">
+<charParams l="2598" t="1309" r="2617" b="1340">k</charParams>
+<charParams l="2624" t="1318" r="2659" b="1339">m</charParams>
+<charParams l="2667" t="1331" r="2674" b="1339">.</charParams></formatting></line></par>
+<par>
+<line baseline="1391" l="2562" t="1355" r="2692" b="1404"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2562" t="1359" r="2579" b="1391" suspicious="1">1</charParams>
+<charParams l="2587" t="1355" r="2614" b="1390">4</charParams>
+<charParams l="2619" t="1384" r="2632" b="1404">,</charParams>
+<charParams l="2643" t="1359" r="2654" b="1391" suspicious="1">1</charParams>
+<charParams l="2665" t="1356" r="2692" b="1391">5</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{DDA2E897-07D6-467E-80BF-292C917A52FD}" l="3684" t="1332" r="3842" b="1394"><region><rect l="3684" t="1332" r="3842" b="1394"/></region>
+<text id="{DDA2E897-07D6-467E-80BF-292C917A52FD}">
+<par>
+<line baseline="1382" l="3696" t="1345" r="3829" b="1394"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.5" bold="1" scaling="1200">
+<charParams l="3696" t="1352" r="3715" b="1382">1</charParams>
+<charParams l="3723" t="1347" r="3749" b="1381">4</charParams>
+<charParams l="3755" t="1372" r="3767" b="1394">,</charParams>
+<charParams l="3772" t="1345" r="3796" b="1381">8</charParams>
+<charParams l="3801" t="1345" r="3829" b="1382" suspicious="1">0</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{C9A0B1BE-D80E-4CC6-BD5C-AAB633A32D32}" l="1982" t="1346" r="2138" b="1408"><region><rect l="1982" t="1346" r="2138" b="1408"/></region>
+<text id="{C9A0B1BE-D80E-4CC6-BD5C-AAB633A32D32}">
+<par>
+<line baseline="1394" l="1994" t="1358" r="2125" b="1407"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1994" t="1361" r="2012" b="1396">1</charParams>
+<charParams l="2019" t="1360" r="2047" b="1395">5</charParams>
+<charParams l="2052" t="1385" r="2064" b="1407">,</charParams>
+<charParams l="2069" t="1359" r="2094" b="1396">0</charParams>
+<charParams l="2099" t="1358" r="2125" b="1394">4</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{F73A3E86-57EF-4FDE-85BE-A7C4BC46D0EE}" l="640" t="1352" r="876" b="1422"><region><rect l="640" t="1352" r="876" b="1422"/></region>
+<text id="{F73A3E86-57EF-4FDE-85BE-A7C4BC46D0EE}">
+<par>
+<line baseline="1407" l="652" t="1365" r="863" b="1409"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.">
+<charParams l="652" t="1366" r="675" b="1409">J</charParams>
+<charParams l="683" t="1382" r="706" b="1407">a</charParams>
+<charParams l="712" t="1382" r="738" b="1407">n</charParams>
+<charParams l="743" t="1382" r="766" b="1407">v</charParams>
+<charParams l="773" t="1365" r="786" b="1406">i</charParams>
+<charParams l="790" t="1383" r="814" b="1407">e</charParams>
+<charParams l="818" t="1379" r="838" b="1407" suspicious="1">r</charParams>
+<charParams l="853" t="1396" r="863" b="1406">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{127E29E0-D119-41CA-BC34-23F66B263A69}" l="4410" t="1460" r="4650" b="1530"><region><rect l="4410" t="1460" r="4650" b="1530"/></region>
+<text id="{127E29E0-D119-41CA-BC34-23F66B263A69}">
+<par>
+<line baseline="1516" l="4423" t="1472" r="4639" b="1518"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="4423" t="1479" r="4470" b="1518">H</charParams>
+<charParams l="4471" t="1472" r="4508" b="1518"> </charParams>
+<charParams l="4509" t="1472" r="4537" b="1517">h</charParams>
+<charParams l="4545" t="1505" r="4554" b="1515">.</charParams>
+<charParams l="4555" t="1485" r="4578" b="1515"> </charParams>
+<charParams l="4579" t="1485" r="4607" b="1514">n</charParams>
+<charParams l="4608" t="1484" r="4620" b="1513" suspicious="1">i</charParams>
+<charParams l="4629" t="1504" r="4639" b="1514">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{95DFBDBF-2CDE-413A-955B-ABCB778518E5}" l="3688" t="1466" r="3840" b="1544"><region><rect l="3688" t="1466" r="3840" b="1544"/></region>
+<text id="{95DFBDBF-2CDE-413A-955B-ABCB778518E5}">
+<par>
+<line baseline="1521" l="3700" t="1479" r="3828" b="1532"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3700" t="1482" r="3716" b="1519">1</charParams>
+<charParams l="3725" t="1483" r="3748" b="1520">7</charParams>
+<charParams l="3755" t="1509" r="3767" b="1532">,</charParams>
+<charParams l="3772" t="1479" r="3797" b="1519">0</charParams>
+<charParams l="3801" t="1482" r="3828" b="1521">5</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{579ECDA8-37E1-4FB4-B333-BCCF444205C1}" l="1986" t="1474" r="3084" b="1558"><region><rect l="1986" t="1474" r="3084" b="1558"/></region>
+<text id="{579ECDA8-37E1-4FB4-B333-BCCF444205C1}">
+<par align="Justified">
+<line baseline="1529" l="1998" t="1486" r="3072" b="1545"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1998" t="1497" r="2016" b="1534">1</charParams>
+<charParams l="2024" t="1494" r="2049" b="1534">5</charParams>
+<charParams l="2055" t="1520" r="2067" b="1545">,</charParams>
+<charParams l="2071" t="1494" r="2099" b="1531">2</charParams>
+<charParams l="2102" t="1493" r="2128" b="1533">6</charParams>
+<charParams l="2129" t="1492" r="2186" b="1533"> </charParams>
+<charParams l="2187" t="1492" r="2203" b="1529">1</charParams>
+<charParams l="2213" t="1492" r="2237" b="1530">5</charParams>
+<charParams l="2243" t="1519" r="2255" b="1543">,</charParams>
+<charParams l="2260" t="1492" r="2287" b="1530">9</charParams>
+<charParams l="2297" t="1493" r="2311" b="1529" suspicious="1">1</charParams>
+<charParams l="2312" t="1493" r="2375" b="1533">    </charParams>
+<charParams l="2376" t="1496" r="2392" b="1533">1</charParams>
+<charParams l="2401" t="1495" r="2426" b="1532">7</charParams>
+<charParams l="2432" t="1519" r="2444" b="1543">,</charParams>
+<charParams l="2449" t="1494" r="2473" b="1533">8</charParams>
+<charParams l="2478" t="1493" r="2504" b="1533">0</charParams>
+<charParams l="2505" t="1492" r="2562" b="1533">    </charParams>
+<charParams l="2563" t="1492" r="2582" b="1531">1</charParams>
+<charParams l="2590" t="1491" r="2613" b="1530">7</charParams>
+<charParams l="2621" t="1518" r="2633" b="1542">,</charParams>
+<charParams l="2637" t="1492" r="2662" b="1532">9</charParams>
+<charParams l="2666" t="1492" r="2693" b="1531">3</charParams>
+<charParams l="2694" t="1489" r="2753" b="1531">    </charParams>
+<charParams l="2754" t="1489" r="2768" b="1527">1</charParams>
+<charParams l="2777" t="1488" r="2802" b="1526">8</charParams>
+<charParams l="2809" t="1516" r="2820" b="1540">,</charParams>
+<charParams l="2830" t="1489" r="2849" b="1526">1</charParams>
+<charParams l="2860" t="1489" r="2877" b="1526" suspicious="1">1</charParams>
+<charParams l="2878" t="1488" r="2940" b="1526">    </charParams>
+<charParams l="2941" t="1488" r="2956" b="1526">1</charParams>
+<charParams l="2967" t="1487" r="2991" b="1526">8</charParams>
+<charParams l="2998" t="1515" r="3010" b="1538">,</charParams>
+<charParams l="3015" t="1486" r="3042" b="1524">4</charParams>
+<charParams l="3046" t="1486" r="3072" b="1522">2</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{1C23453D-9088-4DBF-A4B7-C73C7AD6EDF6}" l="1610" t="1486" r="1948" b="1564"><region><rect l="1610" t="1486" r="1948" b="1564"/></region>
+<text id="{1C23453D-9088-4DBF-A4B7-C73C7AD6EDF6}">
+<par>
+<line baseline="1539" l="1622" t="1498" r="1935" b="1552"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1622" t="1503" r="1638" b="1541">1</charParams>
+<charParams l="1645" t="1502" r="1671" b="1540">7</charParams>
+<charParams l="1676" t="1529" r="1689" b="1552">,</charParams>
+<charParams l="1698" t="1501" r="1715" b="1538" suspicious="1">1</charParams>
+<charParams l="1723" t="1501" r="1749" b="1540">5</charParams>
+<charParams l="1750" t="1501" r="1808" b="1540"> </charParams>
+<charParams l="1809" t="1501" r="1825" b="1538">1</charParams>
+<charParams l="1835" t="1498" r="1860" b="1537">6</charParams>
+<charParams l="1866" t="1526" r="1878" b="1550">,</charParams>
+<charParams l="1884" t="1498" r="1908" b="1537">5</charParams>
+<charParams l="1917" t="1498" r="1935" b="1536" suspicious="1">1</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{2897E8CB-D7B6-4554-89E5-FFA01B5FFC52}" l="648" t="1488" r="882" b="1558"><region><rect l="648" t="1488" r="882" b="1558"/></region>
+<text id="{2897E8CB-D7B6-4554-89E5-FFA01B5FFC52}">
+<par>
+<line baseline="1544" l="659" t="1500" r="870" b="1545"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="659" t="1503" r="693" b="1542">F</charParams>
+<charParams l="696" t="1502" r="720" b="1544">é</charParams>
+<charParams l="723" t="1514" r="748" b="1541">v</charParams>
+<charParams l="752" t="1515" r="772" b="1544">r</charParams>
+<charParams l="776" t="1500" r="788" b="1543">i</charParams>
+<charParams l="793" t="1517" r="816" b="1545">e</charParams>
+<charParams l="821" t="1515" r="841" b="1544">r</charParams>
+<charParams l="842" t="1515" r="860" b="1544"> </charParams>
+<charParams l="861" t="1531" r="870" b="1544">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{44FA78B4-2C1E-4D5B-BC4F-0077FF03346F}" l="4738" t="1586" r="4992" b="1658"><region><rect l="4738" t="1586" r="4992" b="1658"/></region>
+<text id="{44FA78B4-2C1E-4D5B-BC4F-0077FF03346F}">
+<par>
+<line baseline="1644" l="4751" t="1599" r="4981" b="1645"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.">
+<charParams l="4751" t="1602" r="4788" b="1645">0</charParams>
+<charParams l="4789" t="1602" r="4814" b="1645"> </charParams></formatting><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.5" bold="1" italic="1">
+<charParams l="4815" t="1602" r="4827" b="1630" suspicious="1">^</charParams>
+<charParams l="4834" t="1600" r="4846" b="1642" suspicious="1">l</charParams>
+<charParams l="4846" t="1612" r="4869" b="1641" suspicious="1">i</charParams></formatting><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.">
+<charParams l="4870" t="1599" r="4890" b="1641"> </charParams>
+<charParams l="4891" t="1599" r="4920" b="1641" suspicious="1">S</charParams>
+<charParams l="4925" t="1599" r="4962" b="1641">O</charParams>
+<charParams l="4970" t="1631" r="4981" b="1640">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{41B003F5-31D6-4675-9FD5-A8FA3C54D6DB}" l="3926" t="1600" r="4086" b="1664"><region><rect l="3926" t="1600" r="4086" b="1664"/></region>
+<text id="{41B003F5-31D6-4675-9FD5-A8FA3C54D6DB}">
+<par>
+<line baseline="1649" l="3939" t="1613" r="4074" b="1664"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3939" t="1614" r="3964" b="1652">4</charParams>
+<charParams l="3968" t="1614" r="3996" b="1650" suspicious="1">3</charParams>
+<charParams l="4000" t="1643" r="4013" b="1664">,</charParams>
+<charParams l="4017" t="1614" r="4043" b="1651">0</charParams>
+<charParams l="4047" t="1613" r="4074" b="1649">4</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{12AB0000-6D53-40ED-A49B-3A42DDA724FE}" l="3496" t="1604" r="3836" b="1666"><region><rect l="3496" t="1604" r="3836" b="1666"/></region>
+<text id="{12AB0000-6D53-40ED-A49B-3A42DDA724FE}">
+<par align="Justified">
+<line baseline="1652" l="3507" t="1616" r="3823" b="1666"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3507" t="1616" r="3526" b="1651">1</charParams>
+<charParams l="3533" t="1616" r="3561" b="1652" suspicious="1">3</charParams>
+<charParams l="3566" t="1644" r="3578" b="1665">,</charParams>
+<charParams l="3582" t="1617" r="3607" b="1652">7</charParams>
+<charParams l="3612" t="1616" r="3639" b="1651">4</charParams>
+<charParams l="3640" t="1616" r="3697" b="1652">    </charParams>
+<charParams l="3698" t="1617" r="3715" b="1652" suspicious="1">1</charParams>
+<charParams l="3724" t="1617" r="3751" b="1652">4</charParams>
+<charParams l="3757" t="1644" r="3769" b="1666">,</charParams>
+<charParams l="3772" t="1617" r="3798" b="1654">6</charParams>
+<charParams l="3804" t="1618" r="3823" b="1653">1</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{79ACC015-31C9-48B6-9229-4DE9E35C89F5}" l="3118" t="1606" r="3462" b="1670"><region><rect l="3118" t="1606" r="3462" b="1670"/></region>
+<text id="{79ACC015-31C9-48B6-9229-4DE9E35C89F5}">
+<par align="Justified">
+<line baseline="1657" l="3131" t="1618" r="3451" b="1670"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3131" t="1620" r="3149" b="1656">1</charParams>
+<charParams l="3156" t="1621" r="3182" b="1657">9</charParams>
+<charParams l="3188" t="1648" r="3201" b="1670">,</charParams>
+<charParams l="3204" t="1621" r="3230" b="1658">9</charParams>
+<charParams l="3236" t="1622" r="3256" b="1658">1</charParams>
+<charParams l="3257" t="1619" r="3316" b="1658">    </charParams>
+<charParams l="3317" t="1619" r="3339" b="1655">1</charParams>
+<charParams l="3345" t="1619" r="3372" b="1656">6</charParams>
+<charParams l="3377" t="1646" r="3390" b="1669">,</charParams>
+<charParams l="3395" t="1620" r="3416" b="1656">1</charParams>
+<charParams l="3423" t="1618" r="3451" b="1655">4</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{59F39197-A2D1-4565-9772-B1E55E85C32D}" l="1992" t="1608" r="3084" b="1680"><region><rect l="1992" t="1608" r="3084" b="1680"/></region>
+<text id="{59F39197-A2D1-4565-9772-B1E55E85C32D}">
+<par align="Justified">
+<line baseline="1663" l="2005" t="1621" r="3072" b="1679"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2005" t="1630" r="2019" b="1666">1</charParams>
+<charParams l="2026" t="1629" r="2053" b="1666">6</charParams>
+<charParams l="2062" t="1656" r="2075" b="1678">,</charParams>
+<charParams l="2081" t="1631" r="2099" b="1666">1</charParams>
+<charParams l="2105" t="1628" r="2133" b="1665">2</charParams>
+<charParams l="2134" t="1628" r="2189" b="1665"> </charParams>
+<charParams l="2190" t="1628" r="2207" b="1664">1</charParams>
+<charParams l="2216" t="1626" r="2242" b="1664">5</charParams>
+<charParams l="2247" t="1656" r="2260" b="1678">,</charParams>
+<charParams l="2262" t="1627" r="2289" b="1664">6</charParams>
+<charParams l="2294" t="1627" r="2320" b="1664">5</charParams>
+<charParams l="2321" t="1627" r="2378" b="1666">    </charParams>
+<charParams l="2379" t="1630" r="2396" b="1666" suspicious="1">1</charParams>
+<charParams l="2404" t="1628" r="2429" b="1667">8</charParams>
+<charParams l="2434" t="1657" r="2447" b="1679">,</charParams>
+<charParams l="2451" t="1630" r="2478" b="1668">6</charParams>
+<charParams l="2481" t="1629" r="2508" b="1667">0</charParams>
+<charParams l="2509" t="1628" r="2560" b="1667">    </charParams>
+<charParams l="2561" t="1628" r="2589" b="1663">2</charParams>
+<charParams l="2591" t="1626" r="2617" b="1663">0</charParams>
+<charParams l="2625" t="1654" r="2637" b="1676">,</charParams>
+<charParams l="2641" t="1628" r="2667" b="1663">4</charParams>
+<charParams l="2671" t="1627" r="2692" b="1662">1</charParams>
+<charParams l="2693" t="1626" r="2749" b="1662">    </charParams>
+<charParams l="2750" t="1626" r="2778" b="1661">2</charParams>
+<charParams l="2782" t="1624" r="2808" b="1659">2</charParams>
+<charParams l="2813" t="1653" r="2826" b="1674">,</charParams>
+<charParams l="2830" t="1623" r="2855" b="1660">5</charParams>
+<charParams l="2861" t="1623" r="2880" b="1659">1</charParams>
+<charParams l="2881" t="1623" r="2938" b="1660">    </charParams>
+<charParams l="2939" t="1624" r="2965" b="1660">2</charParams>
+<charParams l="2976" t="1623" r="2990" b="1658">1</charParams>
+<charParams l="3001" t="1652" r="3013" b="1673">,</charParams>
+<charParams l="3017" t="1621" r="3042" b="1657">0</charParams>
+<charParams l="3045" t="1621" r="3072" b="1658">9</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{C2A819AB-D258-4F68-83A1-45F6F0C46B5B}" l="1614" t="1620" r="1956" b="1686"><region><rect l="1614" t="1620" r="1956" b="1686"/></region>
+<text id="{C2A819AB-D258-4F68-83A1-45F6F0C46B5B}">
+<par align="Justified">
+<line baseline="1670" l="1627" t="1632" r="1945" b="1686"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1627" t="1638" r="1644" b="1673">1</charParams>
+<charParams l="1651" t="1636" r="1676" b="1672">5</charParams>
+<charParams l="1682" t="1664" r="1695" b="1686">,</charParams>
+<charParams l="1696" t="1636" r="1723" b="1672">9</charParams>
+<charParams l="1727" t="1636" r="1754" b="1672">9</charParams>
+<charParams l="1755" t="1635" r="1812" b="1672">    </charParams>
+<charParams l="1813" t="1635" r="1828" b="1671" suspicious="1">1</charParams>
+<charParams l="1838" t="1633" r="1864" b="1671">6</charParams>
+<charParams l="1872" t="1662" r="1885" b="1683">,</charParams>
+<charParams l="1886" t="1633" r="1912" b="1670">6</charParams>
+<charParams l="1916" t="1632" r="1945" b="1668">2</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{38CCC943-9240-4A6B-A982-4FD8B0B00A2E}" l="646" t="1626" r="792" b="1692"><region><rect l="646" t="1626" r="792" b="1692"/></region>
+<text id="{38CCC943-9240-4A6B-A982-4FD8B0B00A2E}">
+<par>
+<line baseline="1678" l="658" t="1638" r="792" b="1679"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="658" t="1638" r="703" b="1679">M</charParams>
+<charParams l="709" t="1652" r="732" b="1679">a</charParams>
+<charParams l="735" t="1651" r="755" b="1678">r</charParams>
+<charParams l="760" t="1650" r="779" b="1678">s</charParams>
+<charParams l="786" t="1669" r="792" b="1679">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{FD160264-47DB-4713-9914-7FD1E7991B9B}" l="4412" t="1730" r="4562" b="1796"><region><rect l="4412" t="1730" r="4562" b="1796"/></region>
+<text id="{FD160264-47DB-4713-9914-7FD1E7991B9B}">
+<par>
+<line baseline="1784" l="4423" t="1742" r="4549" b="1784"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="4423" t="1757" r="4466" b="1784">m</charParams>
+<charParams l="4471" t="1743" r="4482" b="1783">i</charParams>
+<charParams l="4488" t="1744" r="4513" b="1784">d</charParams>
+<charParams l="4522" t="1742" r="4533" b="1782">i</charParams>
+<charParams l="4543" t="1774" r="4549" b="1781">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{B0A69152-49D2-4278-A349-2A6E0FFC5A65}" l="3928" t="1734" r="4084" b="1796"><region><rect l="3928" t="1734" r="4084" b="1796"/></region>
+<text id="{B0A69152-49D2-4278-A349-2A6E0FFC5A65}">
+<par>
+<line baseline="1784" l="3940" t="1747" r="4071" b="1796"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3940" t="1749" r="3965" b="1784" suspicious="1">8</charParams>
+<charParams l="3971" t="1747" r="3997" b="1783">0</charParams>
+<charParams l="4002" t="1775" r="4015" b="1796">,</charParams>
+<charParams l="4018" t="1748" r="4044" b="1784">0</charParams>
+<charParams l="4052" t="1749" r="4071" b="1784">1</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{14191DA9-6059-4D55-8201-571B6448E1CF}" l="3498" t="1738" r="3652" b="1812"><region><rect l="3498" t="1738" r="3652" b="1812"/></region>
+<text id="{14191DA9-6059-4D55-8201-571B6448E1CF}">
+<par>
+<line baseline="1789" l="3509" t="1750" r="3640" b="1800"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3509" t="1750" r="3527" b="1785">1</charParams>
+<charParams l="3541" t="1751" r="3555" b="1785">1</charParams>
+<charParams l="3566" t="1777" r="3578" b="1800">,</charParams>
+<charParams l="3584" t="1751" r="3609" b="1787">0</charParams>
+<charParams l="3614" t="1753" r="3640" b="1789">3</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{701DCD7E-8536-48F9-BE3C-CA7B14C81803}" l="3712" t="1738" r="3840" b="1800"><region><rect l="3712" t="1738" r="3840" b="1800"/></region>
+<text id="{701DCD7E-8536-48F9-BE3C-CA7B14C81803}">
+<par>
+<line baseline="1788" l="3724" t="1751" r="3828" b="1800"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3724" t="1751" r="3751" b="1788">9</charParams>
+<charParams l="3756" t="1779" r="3767" b="1800">,</charParams>
+<charParams l="3772" t="1752" r="3797" b="1788">9</charParams>
+<charParams l="3802" t="1752" r="3828" b="1788" suspicious="1">6</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{A547F28C-9A9B-42F9-A820-FBA47FBB7926}" l="3312" t="1742" r="3464" b="1814"><region><rect l="3312" t="1742" r="3464" b="1814"/></region>
+<text id="{A547F28C-9A9B-42F9-A820-FBA47FBB7926}">
+<par>
+<line baseline="1792" l="3323" t="1754" r="3451" b="1802"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3323" t="1755" r="3338" b="1789">1</charParams>
+<charParams l="3347" t="1754" r="3373" b="1789">4</charParams>
+<charParams l="3379" t="1779" r="3391" b="1802">,</charParams>
+<charParams l="3397" t="1755" r="3424" b="1790">2</charParams>
+<charParams l="3426" t="1755" r="3451" b="1792">6</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{3366DCCB-09E3-44CB-A6F6-54FA928DDAF4}" l="2556" t="1744" r="2898" b="1812"><region><rect l="2556" t="1744" r="2898" b="1812"/></region>
+<text id="{3366DCCB-09E3-44CB-A6F6-54FA928DDAF4}">
+<par align="Justified">
+<line baseline="1797" l="2568" t="1757" r="2885" b="1812"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2568" t="1764" r="2587" b="1799">1</charParams>
+<charParams l="2595" t="1764" r="2619" b="1798">7</charParams>
+<charParams l="2626" t="1791" r="2638" b="1812">,</charParams>
+<charParams l="2644" t="1762" r="2668" b="1798">0</charParams>
+<charParams l="2672" t="1763" r="2697" b="1799">7</charParams>
+<charParams l="2698" t="1760" r="2755" b="1799">    </charParams>
+<charParams l="2756" t="1760" r="2772" b="1794">1</charParams>
+<charParams l="2783" t="1760" r="2807" b="1796">8</charParams>
+<charParams l="2813" t="1786" r="2825" b="1807">,</charParams>
+<charParams l="2830" t="1760" r="2856" b="1796">9</charParams>
+<charParams l="2860" t="1757" r="2885" b="1794">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{CA5CAB2B-CA6A-4DD7-8942-082FB18BC590}" l="3120" t="1744" r="3272" b="1804"><region><rect l="3120" t="1744" r="3272" b="1804"/></region>
+<text id="{CA5CAB2B-CA6A-4DD7-8942-082FB18BC590}">
+<par>
+<line baseline="1792" l="3131" t="1756" r="3261" b="1804"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3131" t="1757" r="3150" b="1791">1</charParams>
+<charParams l="3158" t="1756" r="3184" b="1792">9</charParams>
+<charParams l="3190" t="1784" r="3202" b="1804">,</charParams>
+<charParams l="3210" t="1757" r="3230" b="1791">1</charParams>
+<charParams l="3237" t="1758" r="3261" b="1792">7</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{2582F404-6A5B-4464-822B-EDEE5713AA06}" l="1830" t="1746" r="2522" b="1828"><region><rect l="1830" t="1746" r="2522" b="1828"/></region>
+<text id="{2582F404-6A5B-4464-822B-EDEE5713AA06}">
+<par>
+<line baseline="1801" l="1842" t="1758" r="2510" b="1816"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1842" t="1766" r="1868" b="1803">8</charParams>
+<charParams l="1874" t="1793" r="1886" b="1816">,</charParams>
+<charParams l="1890" t="1767" r="1916" b="1804">6</charParams>
+<charParams l="1919" t="1768" r="1946" b="1805">9</charParams>
+<charParams l="1947" t="1766" r="2003" b="1805"> </charParams>
+<charParams l="2004" t="1766" r="2023" b="1801">1</charParams>
+<charParams l="2031" t="1763" r="2056" b="1799">0</charParams>
+<charParams l="2063" t="1792" r="2074" b="1814">,</charParams>
+<charParams l="2079" t="1766" r="2107" b="1801">3</charParams>
+<charParams l="2110" t="1764" r="2136" b="1799">2</charParams>
+<charParams l="2137" t="1763" r="2193" b="1799"> </charParams>
+<charParams l="2194" t="1763" r="2210" b="1798">1</charParams>
+<charParams l="2219" t="1758" r="2244" b="1797">0</charParams>
+<charParams l="2251" t="1789" r="2263" b="1811">,</charParams>
+<charParams l="2270" t="1764" r="2288" b="1798">1</charParams>
+<charParams l="2296" t="1761" r="2323" b="1797">4</charParams>
+<charParams l="2324" t="1761" r="2379" b="1801"> </charParams>
+<charParams l="2380" t="1767" r="2396" b="1801" suspicious="1">1</charParams>
+<charParams l="2404" t="1766" r="2431" b="1802">3</charParams>
+<charParams l="2438" t="1794" r="2450" b="1816">,</charParams>
+<charParams l="2455" t="1766" r="2479" b="1802">9</charParams>
+<charParams l="2484" t="1766" r="2510" b="1803">6</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{4D731275-3D41-4E52-A40D-5897CEC3D4B8}" l="652" t="1758" r="800" b="1828"><region><rect l="652" t="1758" r="800" b="1828"/></region>
+<text id="{4D731275-3D41-4E52-A40D-5897CEC3D4B8}">
+<par>
+<line baseline="1813" l="664" t="1771" r="800" b="1816"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="664" t="1775" r="701" b="1816">A</charParams>
+<charParams l="705" t="1789" r="727" b="1813">v</charParams>
+<charParams l="734" t="1787" r="753" b="1813">r</charParams>
+<charParams l="759" t="1772" r="769" b="1814">i</charParams>
+<charParams l="775" t="1771" r="788" b="1813">l</charParams>
+<charParams l="795" t="1805" r="800" b="1813">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{AF357A3E-1B50-4A5E-80D1-ACD9AAC6E51D}" l="1640" t="1758" r="1770" b="1820"><region><rect l="1640" t="1758" r="1770" b="1820"/></region>
+<text id="{AF357A3E-1B50-4A5E-80D1-ACD9AAC6E51D}">
+<par>
+<line baseline="1807" l="1653" t="1770" r="1757" b="1820"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1653" t="1772" r="1679" b="1808">9</charParams>
+<charParams l="1685" t="1797" r="1697" b="1820">,</charParams>
+<charParams l="1701" t="1770" r="1726" b="1807">6</charParams>
+<charParams l="1730" t="1770" r="1757" b="1807">9</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{57C1E8DF-89C6-4F6F-B799-022A1851E22C}" l="4806" t="1856" r="4910" b="1926"><region><rect l="4806" t="1856" r="4910" b="1926"/></region>
+<text id="{57C1E8DF-89C6-4F6F-B799-022A1851E22C}">
+<par>
+<line baseline="1912" l="4817" t="1869" r="4910" b="1914"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.">
+<charParams l="4817" t="1869" r="4858" b="1914">N</charParams>
+<charParams l="4860" t="1869" r="4897" b="1912">E</charParams>
+<charParams l="4904" t="1899" r="4910" b="1911">,</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{F4BE03A0-753E-4B71-A805-0FEAD9AA4C65}" l="3928" t="1868" r="4080" b="1940"><region><rect l="3928" t="1868" r="4080" b="1940"/></region>
+<text id="{F4BE03A0-753E-4B71-A805-0FEAD9AA4C65}">
+<par>
+<line baseline="1920" l="3940" t="1880" r="4069" b="1928"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3940" t="1882" r="3966" b="1920" suspicious="1">5</charParams>
+<charParams l="3970" t="1881" r="3997" b="1920">3</charParams>
+<charParams l="4002" t="1907" r="4013" b="1928">,</charParams>
+<charParams l="4019" t="1883" r="4044" b="1920">7</charParams>
+<charParams l="4051" t="1880" r="4069" b="1919" suspicious="1">1</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{6B9966BD-F455-40CF-89ED-3B610D2DBCCB}" l="3310" t="1874" r="3464" b="1952"><region><rect l="3310" t="1874" r="3464" b="1952"/></region>
+<text id="{6B9966BD-F455-40CF-89ED-3B610D2DBCCB}">
+<par>
+<line baseline="1927" l="3322" t="1886" r="3451" b="1939"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3322" t="1888" r="3341" b="1924">1</charParams>
+<charParams l="3347" t="1888" r="3374" b="1924">2</charParams>
+<charParams l="3380" t="1915" r="3393" b="1939">,</charParams>
+<charParams l="3396" t="1886" r="3421" b="1925">0</charParams>
+<charParams l="3425" t="1888" r="3451" b="1927">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{8CD080E8-5DF8-48C6-8A23-9CFA46A1DBF8}" l="2556" t="1878" r="2900" b="1956"><region><rect l="2556" t="1878" r="2900" b="1956"/></region>
+<text id="{8CD080E8-5DF8-48C6-8A23-9CFA46A1DBF8}">
+<par align="Justified">
+<line baseline="1932" l="2568" t="1891" r="2888" b="1945"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2568" t="1896" r="2589" b="1933">1</charParams>
+<charParams l="2595" t="1895" r="2623" b="1932">2</charParams>
+<charParams l="2629" t="1922" r="2641" b="1945">,</charParams>
+<charParams l="2644" t="1896" r="2670" b="1933">4</charParams>
+<charParams l="2678" t="1897" r="2693" b="1933">1</charParams>
+<charParams l="2694" t="1893" r="2757" b="1933">    </charParams>
+<charParams l="2758" t="1893" r="2777" b="1930">1</charParams>
+<charParams l="2784" t="1891" r="2810" b="1929">4</charParams>
+<charParams l="2817" t="1920" r="2829" b="1944">,</charParams>
+<charParams l="2833" t="1892" r="2858" b="1930">9</charParams>
+<charParams l="2863" t="1892" r="2888" b="1931">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{71C25240-853B-4455-8DBE-A4025E7809AA}" l="2208" t="1882" r="2526" b="1962"><region><rect l="2208" t="1882" r="2526" b="1962"/></region>
+<text id="{71C25240-853B-4455-8DBE-A4025E7809AA}">
+<par align="Justified">
+<line baseline="1934" l="2221" t="1894" r="2514" b="1950"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2221" t="1894" r="2248" b="1933">6</charParams>
+<charParams l="2255" t="1921" r="2267" b="1945">,</charParams>
+<charParams l="2271" t="1895" r="2295" b="1931">4</charParams>
+<charParams l="2301" t="1894" r="2321" b="1931">1</charParams>
+<charParams l="2322" t="1894" r="2383" b="1936">    </charParams>
+<charParams l="2384" t="1899" r="2402" b="1936">1</charParams>
+<charParams l="2409" t="1897" r="2436" b="1936">0</charParams>
+<charParams l="2441" t="1926" r="2452" b="1950">,</charParams>
+<charParams l="2458" t="1901" r="2479" b="1937">1</charParams>
+<charParams l="2485" t="1900" r="2514" b="1936">2</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{257170DF-EFE4-4660-8BDB-FFF18C783F9E}" l="1832" t="1888" r="1962" b="1952"><region><rect l="1832" t="1888" r="1962" b="1952"/></region>
+<text id="{257170DF-EFE4-4660-8BDB-FFF18C783F9E}">
+<par>
+<line baseline="1937" l="1844" t="1900" r="1949" b="1951"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1844" t="1901" r="1872" b="1940">5</charParams>
+<charParams l="1878" t="1928" r="1889" b="1951">,</charParams>
+<charParams l="1893" t="1901" r="1920" b="1938">3</charParams>
+<charParams l="1922" t="1900" r="1949" b="1937">6</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{1BD6DA22-123F-4B8E-9EBF-105317CEF0F9}" l="654" t="1894" r="812" b="1962"><region><rect l="654" t="1894" r="812" b="1962"/></region>
+<text id="{1BD6DA22-123F-4B8E-9EBF-105317CEF0F9}">
+<par>
+<line baseline="1949" l="666" t="1905" r="800" b="1949"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="666" t="1908" r="710" b="1949">M</charParams>
+<charParams l="716" t="1921" r="739" b="1949">a</charParams>
+<charParams l="743" t="1905" r="759" b="1948">i</charParams>
+<charParams l="760" t="1905" r="790" b="1949"> </charParams>
+<charParams l="791" t="1939" r="800" b="1949">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{35DC40EF-B59F-4E41-ACEA-790EE7E60132}" l="4792" t="1988" r="4948" b="2062"><region><rect l="4792" t="1988" r="4948" b="2062"/></region>
+<text id="{35DC40EF-B59F-4E41-ACEA-790EE7E60132}">
+<par>
+<line baseline="2047" l="4804" t="2001" r="4935" b="2050"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="4804" t="2003" r="4840" b="2050">C</charParams>
+<charParams l="4847" t="2004" r="4873" b="2049">S</charParams>
+<charParams l="4879" t="2001" r="4915" b="2047">C</charParams>
+<charParams l="4924" t="2036" r="4935" b="2046">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{DDEA2F9E-EC69-4D67-9BA3-9852D9795EEF}" l="3336" t="2008" r="3460" b="2086"><region><rect l="3336" t="2008" r="3460" b="2086"/></region>
+<text id="{DDEA2F9E-EC69-4D67-9BA3-9852D9795EEF}">
+<par>
+<line baseline="2062" l="3348" t="2021" r="3448" b="2074"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3348" t="2021" r="3374" b="2061">6</charParams>
+<charParams l="3381" t="2052" r="3392" b="2074">,</charParams>
+<charParams l="3397" t="2021" r="3423" b="2062">4</charParams>
+<charParams l="3429" t="2022" r="3448" b="2062">1</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{4E704195-9F91-4205-BB66-8FCE62015AE2}" l="2212" t="2014" r="2340" b="2092"><region><rect l="2212" t="2014" r="2340" b="2092"/></region>
+<text id="{4E704195-9F91-4205-BB66-8FCE62015AE2}">
+<par>
+<line baseline="2067" l="2225" t="2026" r="2329" b="2080"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2225" t="2027" r="2251" b="2068">6</charParams>
+<charParams l="2257" t="2059" r="2270" b="2080">,</charParams>
+<charParams l="2274" t="2026" r="2299" b="2068">0</charParams>
+<charParams l="2302" t="2026" r="2329" b="2067">9</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{899B41AF-D2AF-4712-825B-A642D2FC5A05}" l="2024" t="2016" r="2154" b="2082"><region><rect l="2024" t="2016" r="2154" b="2082"/></region>
+<text id="{899B41AF-D2AF-4712-825B-A642D2FC5A05}">
+<par>
+<line baseline="2069" l="2036" t="2029" r="2141" b="2082"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2036" t="2030" r="2064" b="2070">4</charParams>
+<charParams l="2069" t="2061" r="2081" b="2082">,</charParams>
+<charParams l="2086" t="2031" r="2110" b="2070">7</charParams>
+<charParams l="2114" t="2029" r="2141" b="2069">6</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{C3DD08C0-D945-412E-BE90-0E611D1E5BFA}" l="2398" t="2020" r="2528" b="2098"><region><rect l="2398" t="2020" r="2528" b="2098"/></region>
+<text id="{C3DD08C0-D945-412E-BE90-0E611D1E5BFA}">
+<par>
+<line baseline="2074" l="2411" t="2032" r="2516" b="2085"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2411" t="2032" r="2437" b="2073">8</charParams>
+<charParams l="2443" t="2063" r="2455" b="2085">,</charParams>
+<charParams l="2459" t="2033" r="2486" b="2074">9</charParams>
+<charParams l="2489" t="2033" r="2516" b="2074" suspicious="1">9</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{A2F8ACEA-00EE-45A8-8B4C-90779192F75D}" l="1834" t="2022" r="1964" b="2100"><region><rect l="1834" t="2022" r="1964" b="2100"/></region>
+<text id="{A2F8ACEA-00EE-45A8-8B4C-90779192F75D}">
+<par>
+<line baseline="2075" l="1847" t="2034" r="1951" b="2088"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="1847" t="2038" r="1874" b="2078">3</charParams>
+<charParams l="1880" t="2067" r="1892" b="2088">,</charParams>
+<charParams l="1898" t="2035" r="1922" b="2076">8</charParams>
+<charParams l="1925" t="2034" r="1951" b="2075" suspicious="1">6</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{7C9BE06D-D059-4EF9-8E2D-639FA579E465}" l="660" t="2028" r="790" b="2098"><region><rect l="660" t="2028" r="790" b="2098"/></region>
+<text id="{7C9BE06D-D059-4EF9-8E2D-639FA579E465}">
+<par>
+<line baseline="2084" l="672" t="2039" r="777" b="2087"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="672" t="2041" r="697" b="2087">J</charParams>
+<charParams l="703" t="2056" r="728" b="2086">u</charParams>
+<charParams l="734" t="2039" r="746" b="2084">i</charParams>
+<charParams l="752" t="2055" r="777" b="2084">n</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{0E37A339-F7A3-4060-BCBC-1AE931FEFBA0}" l="4176" t="2136" r="4404" b="2216"><region><rect l="4176" t="2136" r="4404" b="2216"/></region>
+<text id="{0E37A339-F7A3-4060-BCBC-1AE931FEFBA0}">
+<par>
+<line baseline="2191" l="4188" t="2149" r="4391" b="2204"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="4188" t="2150" r="4202" b="2190">l</charParams>
+<charParams l="4208" t="2164" r="4231" b="2191">e</charParams>
+<charParams l="4232" t="2157" r="4264" b="2191"> </charParams>
+<charParams l="4265" t="2157" r="4278" b="2191" suspicious="1">1</charParams>
+<charParams l="4289" t="2156" r="4316" b="2192">9</charParams>
+<charParams l="4322" t="2180" r="4335" b="2204">,</charParams>
+<charParams l="4336" t="2149" r="4368" b="2204"> </charParams>
+<charParams l="4369" t="2149" r="4391" b="2190">à</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{582BD94C-130F-4074-BBF8-7BBCB7D067EF}" l="3928" t="2138" r="4088" b="2200"><region><rect l="3928" t="2138" r="4088" b="2200"/></region>
+<text id="{582BD94C-130F-4074-BBF8-7BBCB7D067EF}">
+<par>
+<line baseline="2185" l="3941" t="2151" r="4076" b="2200"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.5" bold="1" scaling="1200">
+<charParams l="3941" t="2152" r="3969" b="2188">3</charParams>
+<charParams l="3973" t="2152" r="3999" b="2184">2</charParams>
+<charParams l="4004" t="2178" r="4015" b="2200">,</charParams>
+<charParams l="4020" t="2152" r="4047" b="2185">2</charParams>
+<charParams l="4049" t="2151" r="4076" b="2186">9</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{CCDE7393-3146-472A-BECB-4702E0F0621E}" l="3524" t="2144" r="3654" b="2206"><region><rect l="3524" t="2144" r="3654" b="2206"/></region>
+<text id="{CCDE7393-3146-472A-BECB-4702E0F0621E}">
+<par>
+<line baseline="2194" l="3537" t="2156" r="3641" b="2206"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3537" t="2157" r="3564" b="2191">5</charParams>
+<charParams l="3569" t="2184" r="3582" b="2206">,</charParams>
+<charParams l="3586" t="2156" r="3611" b="2193">8</charParams>
+<charParams l="3615" t="2158" r="3641" b="2194">9</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{510CA4F3-66B3-4F86-A27D-69F6898887D3}" l="3336" t="2146" r="3466" b="2208"><region><rect l="3336" t="2146" r="3466" b="2208"/></region>
+<text id="{510CA4F3-66B3-4F86-A27D-69F6898887D3}">
+<par>
+<line baseline="2194" l="3348" t="2158" r="3454" b="2208"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3348" t="2159" r="3375" b="2195">9</charParams>
+<charParams l="3381" t="2184" r="3393" b="2208">,</charParams>
+<charParams l="3397" t="2158" r="3422" b="2196">6</charParams>
+<charParams l="3428" t="2158" r="3454" b="2194">0</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{1BCA4813-78DD-465A-88CD-AD11F7697CA6}" l="2936" t="2150" r="3090" b="2208"><region><rect l="2936" t="2150" r="3090" b="2208"/></region>
+<text id="{1BCA4813-78DD-465A-88CD-AD11F7697CA6}">
+<par>
+<line baseline="2194" l="2949" t="2162" r="3078" b="2208"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.5" scaling="1200">
+<charParams l="2949" t="2164" r="2963" b="2196" suspicious="1">1</charParams>
+<charParams l="2975" t="2164" r="3001" b="2196" suspicious="1">2</charParams>
+<charParams l="3007" t="2187" r="3019" b="2208">,</charParams>
+<charParams l="3023" t="2162" r="3048" b="2196">0</charParams>
+<charParams l="3051" t="2162" r="3078" b="2194">2</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{9A95DBB1-A441-4757-A89D-CA27550F3B37}" l="2214" t="2152" r="2336" b="2212"><region><rect l="2214" t="2152" r="2336" b="2212"/></region>
+<text id="{9A95DBB1-A441-4757-A89D-CA27550F3B37}">
+<par>
+<line baseline="2199" l="2227" t="2165" r="2325" b="2212"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.5" bold="1" scaling="1200">
+<charParams l="2227" t="2165" r="2255" b="2199">5</charParams>
+<charParams l="2260" t="2191" r="2271" b="2212">,</charParams>
+<charParams l="2276" t="2165" r="2302" b="2199">4</charParams>
+<charParams l="2310" t="2167" r="2325" b="2200" suspicious="1">1</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{99FFB356-B2DF-43A1-BF07-B67598959242}" l="2562" t="2152" r="2904" b="2216"><region><rect l="2562" t="2152" r="2904" b="2216"/></region>
+<text id="{99FFB356-B2DF-43A1-BF07-B67598959242}">
+<par align="Justified">
+<line baseline="2200" l="2574" t="2164" r="2891" b="2212"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2574" t="2169" r="2593" b="2204">1</charParams>
+<charParams l="2605" t="2170" r="2619" b="2203">1</charParams>
+<charParams l="2620" t="2169" r="2651" b="2203"> </charParams>
+<charParams l="2652" t="2169" r="2670" b="2203">1</charParams>
+<charParams l="2679" t="2168" r="2705" b="2204">6</charParams>
+<charParams l="2706" t="2165" r="2762" b="2204">    </charParams>
+<charParams l="2763" t="2165" r="2781" b="2197" suspicious="1">1</charParams>
+<charParams l="2790" t="2164" r="2816" b="2197">2</charParams>
+<charParams l="2821" t="2188" r="2833" b="2212">,</charParams>
+<charParams l="2837" t="2165" r="2861" b="2199">3</charParams>
+<charParams l="2866" t="2165" r="2891" b="2197">7</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{BDDDFEBC-B626-4DD5-957D-F4FABAC4781C}" l="2024" t="2154" r="2156" b="2214"><region><rect l="2024" t="2154" r="2156" b="2214"/></region>
+<text id="{BDDDFEBC-B626-4DD5-957D-F4FABAC4781C}">
+<par>
+<line baseline="2201" l="2037" t="2167" r="2143" b="2214"><formatting lang="FrenchStandard" ff="Times New Roman" fs="5.5" bold="1" scaling="1200">
+<charParams l="2037" t="2168" r="2064" b="2202">4</charParams>
+<charParams l="2070" t="2195" r="2082" b="2214">,</charParams>
+<charParams l="2087" t="2167" r="2113" b="2201">3</charParams>
+<charParams l="2115" t="2167" r="2143" b="2201">9</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{447BF4FC-9596-4681-852F-1966443D2FEC}" l="2400" t="2158" r="2528" b="2220"><region><rect l="2400" t="2158" r="2528" b="2220"/></region>
+<text id="{447BF4FC-9596-4681-852F-1966443D2FEC}">
+<par>
+<line baseline="2206" l="2412" t="2169" r="2515" b="2220"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6." bold="1">
+<charParams l="2412" t="2171" r="2438" b="2207">8</charParams>
+<charParams l="2444" t="2197" r="2457" b="2220">,</charParams>
+<charParams l="2460" t="2173" r="2486" b="2208">6</charParams>
+<charParams l="2490" t="2169" r="2515" b="2206">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{1B948ABC-484C-40F7-B63F-8D3334958C40}" l="662" t="2166" r="902" b="2234"><region><rect l="662" t="2166" r="902" b="2234"/></region>
+<text id="{1B948ABC-484C-40F7-B63F-8D3334958C40}">
+<par>
+<line baseline="2220" l="675" t="2179" r="891" b="2221"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="675" t="2181" r="698" b="2221">J</charParams>
+<charParams l="705" t="2196" r="732" b="2220">u</charParams>
+<charParams l="738" t="2179" r="749" b="2218">i</charParams>
+<charParams l="754" t="2179" r="767" b="2217">l</charParams>
+<charParams l="770" t="2179" r="782" b="2217">l</charParams>
+<charParams l="787" t="2194" r="811" b="2218">e</charParams>
+<charParams l="814" t="2185" r="832" b="2220">t</charParams>
+<charParams l="833" t="2185" r="878" b="2220"> </charParams>
+<charParams l="879" t="2208" r="891" b="2218">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{03ED9267-BE48-43E3-A74E-8FB7E62BAB65}" l="4794" t="2258" r="4930" b="2332"><region><rect l="4794" t="2258" r="4930" b="2332"/></region>
+<text id="{03ED9267-BE48-43E3-A74E-8FB7E62BAB65}">
+<par>
+<line baseline="2318" l="4807" t="2271" r="4918" b="2319"><formatting lang="FrenchStandard" ff="Times New Roman" fs="10." bold="1">
+<charParams l="4807" t="2274" r="4842" b="2319">o</charParams>
+<charParams l="4848" t="2274" r="4877" b="2318">s</charParams>
+<charParams l="4883" t="2271" r="4918" b="2315" suspicious="1">e</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{AD537FCE-9CF8-4943-9AC1-9314A3D9CF73}" l="4178" t="2266" r="4560" b="2352"><region><rect l="4178" t="2266" r="4560" b="2352"/></region>
+<text id="{AD537FCE-9CF8-4943-9AC1-9314A3D9CF73}">
+<par>
+<line baseline="2327" l="4190" t="2279" r="4548" b="2339"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="4190" t="2282" r="4201" b="2325">l</charParams>
+<charParams l="4209" t="2297" r="4230" b="2325">e</charParams>
+<charParams l="4231" t="2288" r="4260" b="2326"> </charParams>
+<charParams l="4261" t="2288" r="4287" b="2326">2</charParams>
+<charParams l="4290" t="2289" r="4315" b="2329">6</charParams>
+<charParams l="4320" t="2317" r="4333" b="2339">,</charParams>
+<charParams l="4334" t="2282" r="4365" b="2339"> </charParams>
+<charParams l="4366" t="2282" r="4391" b="2327">à</charParams>
+<charParams l="4392" t="2282" r="4419" b="2327"> </charParams>
+<charParams l="4420" t="2295" r="4463" b="2326">m</charParams>
+<charParams l="4470" t="2280" r="4481" b="2323">i</charParams>
+<charParams l="4486" t="2281" r="4514" b="2325">d</charParams>
+<charParams l="4520" t="2279" r="4531" b="2322">i</charParams>
+<charParams l="4538" t="2312" r="4548" b="2324">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{E546F553-DCA3-4E4B-8C33-3150C9F79F31}" l="3930" t="2268" r="4090" b="2348"><region><rect l="3930" t="2268" r="4090" b="2348"/></region>
+<text id="{E546F553-DCA3-4E4B-8C33-3150C9F79F31}">
+<par>
+<line baseline="2322" l="3942" t="2281" r="4078" b="2335"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3942" t="2284" r="3972" b="2323">3</charParams>
+<charParams l="3974" t="2281" r="3999" b="2321">0</charParams>
+<charParams l="4004" t="2312" r="4016" b="2335">,</charParams>
+<charParams l="4022" t="2283" r="4048" b="2320">2</charParams>
+<charParams l="4051" t="2283" r="4078" b="2322" suspicious="1">6</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{23E617EB-ABB4-4F4B-BB6C-C62142A4D189}" l="3314" t="2278" r="3468" b="2356"><region><rect l="3314" t="2278" r="3468" b="2356"/></region>
+<text id="{23E617EB-ABB4-4F4B-BB6C-C62142A4D189}">
+<par>
+<line baseline="2330" l="3326" t="2291" r="3457" b="2344"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="3326" t="2291" r="3345" b="2330">1</charParams>
+<charParams l="3353" t="2291" r="3379" b="2330">0</charParams>
+<charParams l="3384" t="2319" r="3395" b="2344">,</charParams>
+<charParams l="3401" t="2291" r="3426" b="2331">0</charParams>
+<charParams l="3430" t="2293" r="3457" b="2330">2</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{EEBAD9CE-1B6E-4DEF-8CFF-FF6F43E2EA66}" l="3526" t="2278" r="3652" b="2342"><region><rect l="3526" t="2278" r="3652" b="2342"/></region>
+<text id="{EEBAD9CE-1B6E-4DEF-8CFF-FF6F43E2EA66}">
+<par>
+<line baseline="2329" l="3539" t="2290" r="3640" b="2342"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3539" t="2290" r="3565" b="2329">6</charParams>
+<charParams l="3571" t="2317" r="3583" b="2342">,</charParams>
+<charParams l="3588" t="2291" r="3613" b="2331">6</charParams>
+<charParams l="3616" t="2291" r="3640" b="2329">7</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{3273563E-7CD3-41F7-9522-AF020D4B68DE}" l="3716" t="2278" r="3844" b="2356"><region><rect l="3716" t="2278" r="3844" b="2356"/></region>
+<text id="{3273563E-7CD3-41F7-9522-AF020D4B68DE}">
+<par>
+<line baseline="2329" l="3727" t="2290" r="3832" b="2344"><formatting lang="FrenchStandard" ff="Times New Roman" fs="7." bold="1">
+<charParams l="3727" t="2291" r="3754" b="2330">6</charParams>
+<charParams l="3759" t="2321" r="3772" b="2344">,</charParams>
+<charParams l="3776" t="2290" r="3802" b="2332">6</charParams>
+<charParams l="3806" t="2290" r="3832" b="2329">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{0C93440E-279D-44EF-9B02-BA743180A274}" l="2216" t="2284" r="2346" b="2348"><region><rect l="2216" t="2284" r="2346" b="2348"/></region>
+<text id="{0C93440E-279D-44EF-9B02-BA743180A274}">
+<par>
+<line baseline="2336" l="2228" t="2296" r="2334" b="2348"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2228" t="2296" r="2255" b="2335">5</charParams>
+<charParams l="2261" t="2324" r="2272" b="2348">,</charParams>
+<charParams l="2278" t="2298" r="2305" b="2335">2</charParams>
+<charParams l="2308" t="2297" r="2334" b="2336">4</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{999CD920-661F-4A2D-9A39-E6D9D72B91E2}" l="1842" t="2290" r="1972" b="2356"><region><rect l="1842" t="2290" r="1972" b="2356"/></region>
+<text id="{999CD920-661F-4A2D-9A39-E6D9D72B91E2}">
+<par>
+<line baseline="2342" l="1854" t="2303" r="1959" b="2356"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1854" t="2304" r="1881" b="2343">5</charParams>
+<charParams l="1886" t="2331" r="1899" b="2356">,</charParams>
+<charParams l="1904" t="2303" r="1928" b="2343">6</charParams>
+<charParams l="1933" t="2305" r="1959" b="2342">4</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{53788137-5279-47B6-ACE6-E3F394CF0A44}" l="2404" t="2290" r="2530" b="2356"><region><rect l="2404" t="2290" r="2530" b="2356"/></region>
+<text id="{53788137-5279-47B6-ACE6-E3F394CF0A44}">
+<par>
+<line baseline="2343" l="2416" t="2303" r="2518" b="2356"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="2416" t="2304" r="2441" b="2342">8</charParams>
+<charParams l="2447" t="2335" r="2460" b="2356">,</charParams>
+<charParams l="2465" t="2305" r="2489" b="2343">6</charParams>
+<charParams l="2494" t="2303" r="2518" b="2343">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{28182B0E-6C29-42DE-BECF-3CDD2FD6FE68}" l="666" t="2300" r="810" b="2368"><region><rect l="666" t="2300" r="810" b="2368"/></region>
+<text id="{28182B0E-6C29-42DE-BECF-3CDD2FD6FE68}">
+<par>
+<line baseline="2355" l="679" t="2311" r="810" b="2357"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="679" t="2312" r="716" b="2357">A</charParams>
+<charParams l="719" t="2326" r="743" b="2356">o</charParams>
+<charParams l="747" t="2311" r="774" b="2355">û</charParams>
+<charParams l="779" t="2317" r="798" b="2354">t</charParams>
+<charParams l="804" t="2342" r="810" b="2353">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{FDCC7998-9E58-4888-A1BA-7407BFE29C54}" l="3932" t="2404" r="4084" b="2478"><region><rect l="3932" t="2404" r="4084" b="2478"/></region>
+<text id="{FDCC7998-9E58-4888-A1BA-7407BFE29C54}">
+<par>
+<line baseline="2457" l="3945" t="2416" r="4073" b="2466"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3945" t="2417" r="3972" b="2457">3</charParams>
+<charParams l="3975" t="2416" r="4000" b="2455" suspicious="1">6</charParams>
+<charParams l="4005" t="2445" r="4018" b="2466">,</charParams>
+<charParams l="4023" t="2418" r="4047" b="2457">7</charParams>
+<charParams l="4055" t="2417" r="4073" b="2457">1</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{055E4944-6257-458B-A043-E96F28B6FAF6}" l="4416" t="2404" r="4654" b="2474"><region><rect l="4416" t="2404" r="4654" b="2474"/></region>
+<text id="{055E4944-6257-458B-A043-E96F28B6FAF6}">
+<par>
+<line baseline="2458" l="4428" t="2415" r="4642" b="2461"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="4428" t="2426" r="4446" b="2461" suspicious="1">1</charParams>
+<charParams l="4459" t="2425" r="4475" b="2460" suspicious="1">1</charParams>
+<charParams l="4476" t="2415" r="4512" b="2460"> </charParams>
+<charParams l="4513" t="2415" r="4540" b="2458">h</charParams>
+<charParams l="4548" t="2448" r="4558" b="2457">.</charParams>
+<charParams l="4559" t="2430" r="4581" b="2457"> </charParams>
+<charParams l="4582" t="2430" r="4624" b="2457">m</charParams>
+<charParams l="4632" t="2447" r="4642" b="2456">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{792DCBBC-F90F-4BEF-8408-8851253BD4C3}" l="3340" t="2412" r="3468" b="2490"><region><rect l="3340" t="2412" r="3468" b="2490"/></region>
+<text id="{792DCBBC-F90F-4BEF-8408-8851253BD4C3}">
+<par>
+<line baseline="2467" l="3353" t="2425" r="3456" b="2478"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3353" t="2425" r="3378" b="2466">8</charParams>
+<charParams l="3384" t="2456" r="3396" b="2478">,</charParams>
+<charParams l="3400" t="2427" r="3426" b="2467">3</charParams>
+<charParams l="3431" t="2426" r="3456" b="2467">0</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{C884429D-4BE6-4254-979D-5321A7B78D40}" l="3528" t="2412" r="3656" b="2490"><region><rect l="3528" t="2412" r="3656" b="2490"/></region>
+<text id="{C884429D-4BE6-4254-979D-5321A7B78D40}">
+<par>
+<line baseline="2462" l="3540" t="2424" r="3644" b="2478"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="3540" t="2427" r="3569" b="2466">6</charParams>
+<charParams l="3573" t="2456" r="3585" b="2478">,</charParams>
+<charParams l="3589" t="2425" r="3615" b="2462">2</charParams>
+<charParams l="3619" t="2424" r="3644" b="2462">0</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{9A7E8B24-762B-42BB-8357-26591E6334B2}" l="2220" t="2418" r="2908" b="2496"><region><rect l="2220" t="2418" r="2908" b="2496"/></region>
+<text id="{9A7E8B24-762B-42BB-8357-26591E6334B2}">
+<par>
+<line baseline="2474" l="2232" t="2430" r="2896" b="2491"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2232" t="2430" r="2257" b="2470">8</charParams>
+<charParams l="2264" t="2462" r="2276" b="2484">,</charParams>
+<charParams l="2280" t="2430" r="2304" b="2471">0</charParams>
+<charParams l="2309" t="2431" r="2336" b="2471">4</charParams>
+<charParams l="2337" t="2431" r="2391" b="2478"> </charParams>
+<charParams l="2392" t="2441" r="2411" b="2478">1</charParams>
+<charParams l="2418" t="2439" r="2445" b="2477">2</charParams>
+<charParams l="2450" t="2470" r="2463" b="2491">,</charParams>
+<charParams l="2466" t="2439" r="2490" b="2478">4</charParams>
+<charParams l="2494" t="2438" r="2521" b="2477" suspicious="1">5</charParams>
+<charParams l="2522" t="2435" r="2579" b="2477"> </charParams>
+<charParams l="2580" t="2435" r="2597" b="2474">1</charParams>
+<charParams l="2604" t="2435" r="2631" b="2473">4</charParams>
+<charParams l="2637" t="2465" r="2646" b="2483">,</charParams>
+<charParams l="2653" t="2438" r="2679" b="2476">4</charParams>
+<charParams l="2689" t="2437" r="2704" b="2475" suspicious="1">1</charParams>
+<charParams l="2705" t="2433" r="2767" b="2475"> </charParams>
+<charParams l="2768" t="2433" r="2786" b="2471">1</charParams>
+<charParams l="2793" t="2433" r="2818" b="2473">6</charParams>
+<charParams l="2823" t="2461" r="2836" b="2482">,</charParams>
+<charParams l="2839" t="2432" r="2864" b="2470">3</charParams>
+<charParams l="2868" t="2431" r="2896" b="2470">3</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{3C647B79-DA08-4587-9928-BE19E1EA2D30}" l="2030" t="2420" r="2160" b="2498"><region><rect l="2030" t="2420" r="2160" b="2498"/></region>
+<text id="{3C647B79-DA08-4587-9928-BE19E1EA2D30}">
+<par>
+<line baseline="2475" l="2042" t="2433" r="2148" b="2486"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2042" t="2434" r="2068" b="2474">7</charParams>
+<charParams l="2076" t="2464" r="2088" b="2486">,</charParams>
+<charParams l="2093" t="2433" r="2118" b="2473">0</charParams>
+<charParams l="2121" t="2434" r="2148" b="2475">9</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{8B7600BA-2CE1-43E6-9887-EDBE7070C78A}" l="1658" t="2424" r="1786" b="2500"><region><rect l="1658" t="2424" r="1786" b="2500"/></region>
+<text id="{8B7600BA-2CE1-43E6-9887-EDBE7070C78A}">
+<par>
+<line baseline="2477" l="1671" t="2436" r="1773" b="2488"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1671" t="2439" r="1695" b="2477">7</charParams>
+<charParams l="1701" t="2465" r="1714" b="2488">,</charParams>
+<charParams l="1719" t="2436" r="1743" b="2477">0</charParams>
+<charParams l="1746" t="2437" r="1773" b="2477">9</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{D4D1F7AA-970A-4F26-99A8-03D96A3E6E95}" l="1844" t="2424" r="1972" b="2498"><region><rect l="1844" t="2424" r="1972" b="2498"/></region>
+<text id="{D4D1F7AA-970A-4F26-99A8-03D96A3E6E95}">
+<par>
+<line baseline="2476" l="1855" t="2437" r="1960" b="2486"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1855" t="2439" r="1881" b="2477">7</charParams>
+<charParams l="1886" t="2467" r="1898" b="2486">,</charParams>
+<charParams l="1906" t="2439" r="1924" b="2478" suspicious="1">1</charParams>
+<charParams l="1933" t="2437" r="1960" b="2476">4</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{67E1AF07-D363-41C6-BE3B-31C00C626616}" l="670" t="2430" r="960" b="2636"><region><rect l="670" t="2430" r="960" b="2636"/></region>
+<text id="{67E1AF07-D363-41C6-BE3B-31C00C626616}">
+<par>
+<line baseline="2486" l="682" t="2442" r="947" b="2504"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="682" t="2446" r="713" b="2492">S</charParams>
+<charParams l="717" t="2463" r="738" b="2491">e</charParams>
+<charParams l="743" t="2461" r="772" b="2504">p</charParams>
+<charParams l="776" t="2451" r="792" b="2490">t</charParams>
+<charParams l="796" t="2461" r="819" b="2489">e</charParams>
+<charParams l="823" t="2460" r="863" b="2488">m</charParams>
+<charParams l="867" t="2442" r="896" b="2487">b</charParams>
+<charParams l="901" t="2458" r="920" b="2487">r</charParams>
+<charParams l="923" t="2458" r="947" b="2486">e</charParams></formatting></line></par>
+<par>
+<line baseline="2619" l="684" t="2580" r="896" b="2624"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="684" t="2582" r="722" b="2624">O</charParams>
+<charParams l="726" t="2595" r="749" b="2620">c</charParams>
+<charParams l="753" t="2586" r="767" b="2620">t</charParams>
+<charParams l="772" t="2595" r="796" b="2621">o</charParams>
+<charParams l="798" t="2580" r="828" b="2621">b</charParams>
+<charParams l="833" t="2592" r="851" b="2618">r</charParams>
+<charParams l="856" t="2593" r="878" b="2619">e</charParams>
+<charParams l="885" t="2609" r="896" b="2619">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{3AC10603-2446-4863-9986-F1939A294040}" l="4816" t="2530" r="4912" b="2598"><region><rect l="4816" t="2530" r="4912" b="2598"/></region>
+<text id="{3AC10603-2446-4863-9986-F1939A294040}">
+<par>
+<line baseline="2584" l="4828" t="2542" r="4912" b="2586"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.">
+<charParams l="4828" t="2543" r="4857" b="2586">S</charParams>
+<charParams l="4862" t="2542" r="4899" b="2584">E</charParams>
+<charParams l="4908" t="2573" r="4912" b="2583">,</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{2DE0B153-5B0E-4A9A-A786-EB783C7BC41C}" l="3934" t="2540" r="4090" b="2600"><region><rect l="3934" t="2540" r="4090" b="2600"/></region>
+<text id="{2DE0B153-5B0E-4A9A-A786-EB783C7BC41C}">
+<par>
+<line baseline="2587" l="3947" t="2552" r="4078" b="2600"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3947" t="2552" r="3974" b="2587">4</charParams>
+<charParams l="3980" t="2552" r="3998" b="2587" suspicious="1">1</charParams>
+<charParams l="4007" t="2578" r="4020" b="2600">,</charParams>
+<charParams l="4025" t="2552" r="4051" b="2587">4</charParams>
+<charParams l="4054" t="2552" r="4078" b="2587">7</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{F2476CBF-A7EB-4B69-9696-9321D1D3199F}" l="3530" t="2548" r="3660" b="2612"><region><rect l="3530" t="2548" r="3660" b="2612"/></region>
+<text id="{F2476CBF-A7EB-4B69-9696-9321D1D3199F}">
+<par>
+<line baseline="2597" l="3542" t="2561" r="3648" b="2612"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3542" t="2563" r="3568" b="2600">9</charParams>
+<charParams l="3574" t="2589" r="3586" b="2612">,</charParams>
+<charParams l="3593" t="2561" r="3617" b="2597">5</charParams>
+<charParams l="3621" t="2561" r="3648" b="2597">3</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{5C53BE3D-5B4F-4874-8655-04F54248613E}" l="3718" t="2548" r="3848" b="2612"><region><rect l="3718" t="2548" r="3848" b="2612"/></region>
+<text id="{5C53BE3D-5B4F-4874-8655-04F54248613E}">
+<par>
+<line baseline="2598" l="3731" t="2560" r="3835" b="2612"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3731" t="2562" r="3757" b="2599">9</charParams>
+<charParams l="3764" t="2589" r="3775" b="2612">,</charParams>
+<charParams l="3779" t="2560" r="3803" b="2598">8</charParams>
+<charParams l="3809" t="2560" r="3835" b="2597">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{DCBD34B7-05F5-4CBD-820C-AF17C1396A63}" l="3130" t="2550" r="3278" b="2612"><region><rect l="3130" t="2550" r="3278" b="2612"/></region>
+<text id="{DCBD34B7-05F5-4CBD-820C-AF17C1396A63}">
+<par>
+<line baseline="2599" l="3143" t="2562" r="3267" b="2612"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3143" t="2563" r="3160" b="2597" suspicious="1">1</charParams>
+<charParams l="3168" t="2562" r="3193" b="2597">0</charParams>
+<charParams l="3199" t="2589" r="3211" b="2612">,</charParams>
+<charParams l="3214" t="2563" r="3240" b="2599">3</charParams>
+<charParams l="3248" t="2563" r="3267" b="2600" suspicious="1">1</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{31E2CB12-15B0-4F88-8898-8D645C9E877C}" l="1822" t="2554" r="2910" b="2626"><region><rect l="1822" t="2554" r="2910" b="2626"/></region>
+<text id="{31E2CB12-15B0-4F88-8898-8D645C9E877C}">
+<par align="Justified">
+<line baseline="2605" l="1835" t="2567" r="2897" b="2623"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1835" t="2573" r="1852" b="2607" suspicious="1">1</charParams>
+<charParams l="1860" t="2572" r="1885" b="2607">0</charParams>
+<charParams l="1891" t="2598" r="1903" b="2621">,</charParams>
+<charParams l="1908" t="2572" r="1934" b="2608">5</charParams>
+<charParams l="1943" t="2573" r="1959" b="2607">1</charParams>
+<charParams l="1960" t="2569" r="2020" b="2607">    </charParams>
+<charParams l="2021" t="2569" r="2039" b="2604" suspicious="1">1</charParams>
+<charParams l="2047" t="2569" r="2072" b="2604">0</charParams>
+<charParams l="2079" t="2595" r="2092" b="2618">,</charParams>
+<charParams l="2098" t="2567" r="2120" b="2604">8</charParams>
+<charParams l="2125" t="2569" r="2152" b="2605">5</charParams>
+<charParams l="2153" t="2567" r="2208" b="2605">    </charParams>
+<charParams l="2209" t="2567" r="2223" b="2601" suspicious="1">1</charParams>
+<charParams l="2239" t="2568" r="2256" b="2602">1</charParams>
+<charParams l="2266" t="2593" r="2278" b="2618">,</charParams>
+<charParams l="2284" t="2569" r="2301" b="2604" suspicious="1">1</charParams>
+<charParams l="2311" t="2568" r="2338" b="2603">5</charParams>
+<charParams l="2339" t="2568" r="2397" b="2611">    </charParams>
+<charParams l="2398" t="2575" r="2413" b="2611" suspicious="1">1</charParams>
+<charParams l="2421" t="2576" r="2447" b="2613" suspicious="1">3</charParams>
+<charParams l="2448" t="2574" r="2470" b="2613">    </charParams>
+<charParams l="2471" t="2574" r="2490" b="2611" suspicious="1">1</charParams>
+<charParams l="2497" t="2575" r="2525" b="2613" suspicious="1">5</charParams>
+<charParams l="2526" t="2571" r="2580" b="2613">    </charParams>
+<charParams l="2581" t="2571" r="2599" b="2606" suspicious="1">1</charParams>
+<charParams l="2607" t="2570" r="2633" b="2606">4</charParams>
+<charParams l="2639" t="2598" r="2651" b="2623">,</charParams>
+<charParams l="2656" t="2572" r="2681" b="2608">7</charParams>
+<charParams l="2686" t="2572" r="2712" b="2607">4</charParams>
+<charParams l="2713" t="2567" r="2768" b="2607">    </charParams>
+<charParams l="2769" t="2567" r="2788" b="2602">1</charParams>
+<charParams l="2795" t="2568" r="2820" b="2602">7</charParams>
+<charParams l="2826" t="2593" r="2839" b="2618">,</charParams>
+<charParams l="2842" t="2567" r="2867" b="2603">7</charParams>
+<charParams l="2872" t="2567" r="2897" b="2603">5</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{926C57FB-4756-4234-8695-003CE5560024}" l="1638" t="2558" r="1786" b="2620"><region><rect l="1638" t="2558" r="1786" b="2620"/></region>
+<text id="{926C57FB-4756-4234-8695-003CE5560024}">
+<par>
+<line baseline="2606" l="1649" t="2571" r="1775" b="2620"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1649" t="2573" r="1666" b="2607">1</charParams>
+<charParams l="1674" t="2571" r="1700" b="2607">0</charParams>
+<charParams l="1705" t="2597" r="1717" b="2620">,</charParams>
+<charParams l="1723" t="2571" r="1748" b="2607">4</charParams>
+<charParams l="1750" t="2571" r="1775" b="2606">7</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{784D80F0-35D9-4820-A2CA-29915CD8A27B}" l="4798" t="2662" r="4934" b="2732"><region><rect l="4798" t="2662" r="4934" b="2732"/></region>
+<text id="{784D80F0-35D9-4820-A2CA-29915CD8A27B}">
+<par>
+<line baseline="2719" l="4811" t="2675" r="4922" b="2719"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.">
+<charParams l="4811" t="2676" r="4846" b="2719">C</charParams>
+<charParams l="4853" t="2677" r="4881" b="2719">S</charParams>
+<charParams l="4887" t="2675" r="4922" b="2719" suspicious="1">C</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{C1C98531-A303-4BAF-8383-7EDA15865B77}" l="3132" t="2682" r="3284" b="2746"><region><rect l="3132" t="2682" r="3284" b="2746"/></region>
+<text id="{C1C98531-A303-4BAF-8383-7EDA15865B77}">
+<par>
+<line baseline="2733" l="3144" t="2695" r="3272" b="2746"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3144" t="2698" r="3161" b="2733">1</charParams>
+<charParams l="3169" t="2696" r="3195" b="2732">2</charParams>
+<charParams l="3200" t="2724" r="3212" b="2746">,</charParams>
+<charParams l="3217" t="2696" r="3243" b="2732">4</charParams>
+<charParams l="3246" t="2695" r="3272" b="2733">0</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{175559D1-B8F2-4C7A-831C-11D5F93CDB1E}" l="3318" t="2682" r="3472" b="2746"><region><rect l="3318" t="2682" r="3472" b="2746"/></region>
+<text id="{175559D1-B8F2-4C7A-831C-11D5F93CDB1E}">
+<par>
+<line baseline="2734" l="3330" t="2695" r="3460" b="2746"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="3330" t="2695" r="3349" b="2732">1</charParams>
+<charParams l="3359" t="2696" r="3378" b="2732">1</charParams>
+<charParams l="3387" t="2723" r="3399" b="2746">,</charParams>
+<charParams l="3404" t="2696" r="3429" b="2733">6</charParams>
+<charParams l="3434" t="2696" r="3460" b="2734">6</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{193E7C80-4747-43F5-8829-5BE67860D255}" l="3696" t="2682" r="3848" b="2744"><region><rect l="3696" t="2682" r="3848" b="2744"/></region>
+<text id="{193E7C80-4747-43F5-8829-5BE67860D255}">
+<par>
+<line baseline="2730" l="3708" t="2694" r="3836" b="2744"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3708" t="2696" r="3725" b="2732" suspicious="1">1</charParams>
+<charParams l="3737" t="2696" r="3754" b="2732" suspicious="1">1</charParams>
+<charParams l="3765" t="2723" r="3776" b="2744">,</charParams>
+<charParams l="3781" t="2695" r="3808" b="2731">3</charParams>
+<charParams l="3810" t="2694" r="3836" b="2730">2</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{E90FFCFC-AFE7-429C-80E7-0CF47BADAE83}" l="2946" t="2684" r="3098" b="2746"><region><rect l="2946" t="2684" r="3098" b="2746"/></region>
+<text id="{E90FFCFC-AFE7-429C-80E7-0CF47BADAE83}">
+<par>
+<line baseline="2734" l="2958" t="2696" r="3085" b="2746"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2958" t="2699" r="2975" b="2734" suspicious="1">1</charParams>
+<charParams l="2984" t="2698" r="3009" b="2734">5</charParams>
+<charParams l="3015" t="2724" r="3026" b="2746">,</charParams>
+<charParams l="3031" t="2696" r="3057" b="2732">2</charParams>
+<charParams l="3061" t="2697" r="3085" b="2734">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{B6046B3F-616D-4AD9-B36C-0EBE1483351B}" l="1824" t="2686" r="2912" b="2768"><region><rect l="1824" t="2686" r="2912" b="2768"/></region>
+<text id="{B6046B3F-616D-4AD9-B36C-0EBE1483351B}">
+<par>
+<line baseline="2741" l="1836" t="2699" r="2899" b="2756"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1836" t="2705" r="1853" b="2742" suspicious="1">1</charParams>
+<charParams l="1862" t="2705" r="1887" b="2741">2</charParams>
+<charParams l="1894" t="2732" r="1905" b="2756">,</charParams>
+<charParams l="1910" t="2704" r="1935" b="2743">0</charParams>
+<charParams l="1939" t="2704" r="1965" b="2742">0</charParams>
+<charParams l="1966" t="2702" r="2022" b="2742"> </charParams>
+<charParams l="2023" t="2702" r="2042" b="2740">1</charParams>
+<charParams l="2052" t="2704" r="2071" b="2740">1</charParams>
+<charParams l="2081" t="2729" r="2094" b="2754">,</charParams>
+<charParams l="2098" t="2703" r="2123" b="2740">5</charParams>
+<charParams l="2127" t="2702" r="2153" b="2740">5</charParams>
+<charParams l="2154" t="2701" r="2211" b="2740"> </charParams>
+<charParams l="2212" t="2701" r="2227" b="2737" suspicious="1">1</charParams>
+<charParams l="2241" t="2700" r="2257" b="2738" suspicious="1">1</charParams>
+<charParams l="2268" t="2728" r="2280" b="2752">,</charParams>
+<charParams l="2285" t="2700" r="2309" b="2739">8</charParams>
+<charParams l="2314" t="2700" r="2339" b="2739">8</charParams>
+<charParams l="2340" t="2700" r="2397" b="2743"> </charParams>
+<charParams l="2398" t="2707" r="2416" b="2743" suspicious="1">1</charParams>
+<charParams l="2422" t="2706" r="2450" b="2743">4</charParams>
+<charParams l="2454" t="2731" r="2466" b="2756">,</charParams>
+<charParams l="2471" t="2707" r="2495" b="2745">8</charParams>
+<charParams l="2500" t="2707" r="2525" b="2745">8</charParams>
+<charParams l="2526" t="2706" r="2583" b="2745"> </charParams>
+<charParams l="2584" t="2706" r="2601" b="2740">1</charParams>
+<charParams l="2609" t="2705" r="2636" b="2741">3</charParams>
+<charParams l="2641" t="2730" r="2652" b="2753">,</charParams>
+<charParams l="2657" t="2705" r="2681" b="2741">7</charParams>
+<charParams l="2687" t="2704" r="2712" b="2741">8</charParams>
+<charParams l="2713" t="2702" r="2771" b="2741"> </charParams>
+<charParams l="2772" t="2702" r="2787" b="2737" suspicious="1">1</charParams>
+<charParams l="2798" t="2701" r="2822" b="2738">5</charParams>
+<charParams l="2829" t="2728" r="2840" b="2752">,</charParams>
+<charParams l="2845" t="2700" r="2870" b="2737" suspicious="1">5</charParams>
+<charParams l="2874" t="2699" r="2899" b="2737">9</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{1695E1CB-41C7-4621-B4C4-2B26B66ADBB4}" l="672" t="2700" r="948" b="2770"><region><rect l="672" t="2700" r="948" b="2770"/></region>
+<text id="{1695E1CB-41C7-4621-B4C4-2B26B66ADBB4}">
+<par>
+<line baseline="2753" l="684" t="2712" r="936" b="2758"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="684" t="2713" r="722" b="2758">N</charParams>
+<charParams l="726" t="2727" r="750" b="2755">o</charParams>
+<charParams l="754" t="2728" r="780" b="2755">v</charParams>
+<charParams l="784" t="2728" r="807" b="2755">e</charParams>
+<charParams l="810" t="2727" r="851" b="2754">m</charParams>
+<charParams l="855" t="2712" r="883" b="2754">b</charParams>
+<charParams l="890" t="2727" r="909" b="2753">r</charParams>
+<charParams l="912" t="2725" r="936" b="2753">e</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{0BDA06E6-9EBF-4A9D-A8AB-E104C6CB48C8}" l="4748" t="2796" r="4980" b="2866"><region><rect l="4748" t="2796" r="4980" b="2866"/></region>
+<text id="{0BDA06E6-9EBF-4A9D-A8AB-E104C6CB48C8}">
+<par>
+<line baseline="2853" l="4761" t="2807" r="4980" b="2854"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="4761" t="2809" r="4797" b="2853">0</charParams>
+<charParams l="4798" t="2808" r="4822" b="2853"> </charParams>
+<charParams l="4823" t="2808" r="4835" b="2838" suspicious="1">»</charParams>
+<charParams l="4841" t="2808" r="4854" b="2852">/</charParams>
+<charParams l="4855" t="2821" r="4876" b="2853" suspicious="1">4</charParams>
+<charParams l="4877" t="2807" r="4896" b="2853"> </charParams>
+<charParams l="4897" t="2807" r="4926" b="2853">S</charParams>
+<charParams l="4931" t="2808" r="4967" b="2854">O</charParams>
+<charParams l="4975" t="2842" r="4980" b="2854">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{DF635B8B-6D14-4184-BE75-B71E601FD221}" l="3938" t="2802" r="4096" b="2880"><region><rect l="3938" t="2802" r="4096" b="2880"/></region>
+<text id="{DF635B8B-6D14-4184-BE75-B71E601FD221}">
+<par>
+<line baseline="2856" l="3951" t="2815" r="4084" b="2869"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3951" t="2817" r="3975" b="2856">7</charParams>
+<charParams l="3981" t="2815" r="4006" b="2854">0</charParams>
+<charParams l="4012" t="2847" r="4025" b="2869">,</charParams>
+<charParams l="4030" t="2817" r="4054" b="2857">8</charParams>
+<charParams l="4058" t="2816" r="4084" b="2856">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{AA108D3D-11B6-4FB1-8552-DEA30D5985A2}" l="4186" t="2804" r="4656" b="2888"><region><rect l="4186" t="2804" r="4656" b="2888"/></region>
+<text id="{AA108D3D-11B6-4FB1-8552-DEA30D5985A2}">
+<par>
+<line baseline="2860" l="4198" t="2817" r="4644" b="2875"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="4198" t="2818" r="4211" b="2861">l</charParams>
+<charParams l="4216" t="2836" r="4239" b="2862">e</charParams>
+<charParams l="4240" t="2825" r="4267" b="2862"> </charParams>
+<charParams l="4268" t="2825" r="4296" b="2861">2</charParams>
+<charParams l="4306" t="2827" r="4318" b="2863" suspicious="1">1</charParams>
+<charParams l="4330" t="2853" r="4343" b="2875">,</charParams>
+<charParams l="4344" t="2818" r="4374" b="2875"> </charParams>
+<charParams l="4375" t="2818" r="4399" b="2862">à</charParams>
+<charParams l="4400" t="2818" r="4437" b="2862"> </charParams>
+<charParams l="4438" t="2823" r="4454" b="2859">1</charParams>
+<charParams l="4462" t="2822" r="4489" b="2860">0</charParams>
+<charParams l="4490" t="2817" r="4518" b="2860"> </charParams>
+<charParams l="4519" t="2817" r="4547" b="2860">h</charParams>
+<charParams l="4556" t="2849" r="4566" b="2859">.</charParams>
+<charParams l="4567" t="2830" r="4584" b="2859"> </charParams>
+<charParams l="4585" t="2830" r="4626" b="2857">m</charParams>
+<charParams l="4635" t="2847" r="4644" b="2857">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{A2258C16-926B-4805-A7E2-134643899024}" l="2948" t="2814" r="3102" b="2890"><region><rect l="2948" t="2814" r="3102" b="2890"/></region>
+<text id="{A2258C16-926B-4805-A7E2-134643899024}">
+<par>
+<line baseline="2864" l="2961" t="2826" r="3089" b="2877"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2961" t="2829" r="2978" b="2867">1</charParams>
+<charParams l="2986" t="2829" r="3011" b="2867">5</charParams>
+<charParams l="3017" t="2858" r="3029" b="2877">,</charParams>
+<charParams l="3033" t="2827" r="3058" b="2867">9</charParams>
+<charParams l="3063" t="2826" r="3089" b="2864">4</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{E9425C06-B776-4996-A148-0184DD41FD4B}" l="3134" t="2814" r="3286" b="2878"><region><rect l="3134" t="2814" r="3286" b="2878"/></region>
+<text id="{E9425C06-B776-4996-A148-0184DD41FD4B}">
+<par>
+<line baseline="2866" l="3146" t="2827" r="3273" b="2878"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3146" t="2828" r="3165" b="2866">1</charParams>
+<charParams l="3172" t="2829" r="3198" b="2867">4</charParams>
+<charParams l="3203" t="2857" r="3215" b="2878">,</charParams>
+<charParams l="3219" t="2827" r="3245" b="2865">2</charParams>
+<charParams l="3249" t="2827" r="3273" b="2866">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{436D74C6-016C-4B1C-BF0B-2F3B8B4F8D51}" l="2016" t="2822" r="2542" b="2898"><region><rect l="2016" t="2822" r="2542" b="2898"/></region>
+<text id="{436D74C6-016C-4B1C-BF0B-2F3B8B4F8D51}">
+<par>
+<line baseline="2876" l="2027" t="2834" r="2530" b="2886"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2027" t="2835" r="2045" b="2873" suspicious="1">1</charParams>
+<charParams l="2052" t="2835" r="2080" b="2874">4</charParams>
+<charParams l="2086" t="2862" r="2099" b="2885">,</charParams>
+<charParams l="2106" t="2836" r="2123" b="2875">1</charParams>
+<charParams l="2131" t="2835" r="2156" b="2874">5</charParams>
+<charParams l="2157" t="2835" r="2212" b="2874"> </charParams>
+<charParams l="2213" t="2835" r="2232" b="2873">1</charParams>
+<charParams l="2239" t="2835" r="2266" b="2873">4</charParams>
+<charParams l="2270" t="2859" r="2283" b="2883">,</charParams>
+<charParams l="2286" t="2834" r="2311" b="2873">0</charParams>
+<charParams l="2315" t="2835" r="2342" b="2875">3</charParams>
+<charParams l="2343" t="2835" r="2401" b="2875"> </charParams>
+<charParams l="2402" t="2837" r="2417" b="2874" suspicious="1">1</charParams>
+<charParams l="2426" t="2837" r="2453" b="2875">4</charParams>
+<charParams l="2457" t="2864" r="2470" b="2886">,</charParams>
+<charParams l="2474" t="2839" r="2499" b="2879">5</charParams>
+<charParams l="2503" t="2840" r="2530" b="2880">3</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{B17A6265-3B18-4006-8843-F87AA24A417E}" l="1640" t="2824" r="1790" b="2900"><region><rect l="1640" t="2824" r="1790" b="2900"/></region>
+<text id="{B17A6265-3B18-4006-8843-F87AA24A417E}">
+<par>
+<line baseline="2876" l="1653" t="2837" r="1778" b="2887"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1653" t="2837" r="1670" b="2875">1</charParams>
+<charParams l="1675" t="2837" r="1703" b="2875">3</charParams>
+<charParams l="1709" t="2864" r="1721" b="2887">,</charParams>
+<charParams l="1725" t="2838" r="1750" b="2879">8</charParams>
+<charParams l="1753" t="2837" r="1778" b="2876">7</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{9D062E00-ACE2-4CEC-B8C1-DEED7102BF90}" l="1826" t="2824" r="1980" b="2888"><region><rect l="1826" t="2824" r="1980" b="2888"/></region>
+<text id="{9D062E00-ACE2-4CEC-B8C1-DEED7102BF90}">
+<par>
+<line baseline="2876" l="1839" t="2836" r="1967" b="2888"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1839" t="2838" r="1857" b="2876">1</charParams>
+<charParams l="1864" t="2837" r="1890" b="2876">4</charParams>
+<charParams l="1897" t="2867" r="1908" b="2888">,</charParams>
+<charParams l="1920" t="2839" r="1935" b="2876">1</charParams>
+<charParams l="1942" t="2836" r="1967" b="2876">8</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{8566A20B-C542-4115-BA60-F3C390310EDF}" l="676" t="2832" r="946" b="2902"><region><rect l="676" t="2832" r="946" b="2902"/></region>
+<text id="{8566A20B-C542-4115-BA60-F3C390310EDF}">
+<par>
+<line baseline="2888" l="688" t="2845" r="935" b="2890"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5" bold="1">
+<charParams l="688" t="2847" r="726" b="2890">D</charParams>
+<charParams l="731" t="2846" r="753" b="2890">é</charParams>
+<charParams l="757" t="2860" r="778" b="2890">c</charParams>
+<charParams l="782" t="2860" r="805" b="2889">e</charParams>
+<charParams l="809" t="2859" r="850" b="2889">m</charParams>
+<charParams l="854" t="2845" r="883" b="2889">b</charParams>
+<charParams l="887" t="2858" r="908" b="2888">r</charParams>
+<charParams l="911" t="2857" r="935" b="2887">e</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{7F5673FD-E9C9-4B07-887B-24153C4EF5F4}" l="4190" t="3120" r="4620" b="3190"><region><rect l="4190" t="3120" r="4620" b="3190"/></region>
+<text id="{7F5673FD-E9C9-4B07-887B-24153C4EF5F4}">
+<par>
+<line baseline="3176" l="4202" t="3133" r="4608" b="3178"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="4202" t="3134" r="4213" b="3177">l</charParams>
+<charParams l="4219" t="3149" r="4241" b="3177">e</charParams>
+<charParams l="4242" t="3142" r="4271" b="3178"> </charParams>
+<charParams l="4272" t="3142" r="4298" b="3178">2</charParams>
+<charParams l="4305" t="3141" r="4321" b="3177" suspicious="1">1</charParams>
+<charParams l="4322" t="3133" r="4356" b="3177"> </charParams>
+<charParams l="4357" t="3133" r="4384" b="3175">d</charParams>
+<charParams l="4390" t="3135" r="4411" b="3175">é</charParams>
+<charParams l="4417" t="3149" r="4437" b="3176">c</charParams>
+<charParams l="4442" t="3148" r="4464" b="3176">e</charParams>
+<charParams l="4469" t="3148" r="4508" b="3175">m</charParams>
+<charParams l="4515" t="3134" r="4540" b="3176">b</charParams>
+<charParams l="4548" t="3148" r="4565" b="3174">r</charParams>
+<charParams l="4569" t="3147" r="4593" b="3175">e</charParams>
+<charParams l="4598" t="3165" r="4608" b="3176">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{5A222DF6-32B1-4FD9-9E8F-692124E21071}" l="3700" t="3126" r="3848" b="3190"><region><rect l="3700" t="3126" r="3848" b="3190"/></region>
+<text id="{5A222DF6-32B1-4FD9-9E8F-692124E21071}">
+<par>
+<line baseline="3177" l="3711" t="3138" r="3836" b="3190"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3711" t="3139" r="3729" b="3176" suspicious="1">1</charParams>
+<charParams l="3738" t="3138" r="3763" b="3176">0</charParams>
+<charParams l="3769" t="3168" r="3779" b="3190">,</charParams>
+<charParams l="3785" t="3139" r="3812" b="3177">3</charParams>
+<charParams l="3819" t="3140" r="3836" b="3176">1</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{0CA9088F-F238-4C4C-83BC-153640E98ECC}" l="3140" t="3130" r="3292" b="3192"><region><rect l="3140" t="3130" r="3292" b="3192"/></region>
+<text id="{0CA9088F-F238-4C4C-83BC-153640E98ECC}">
+<par>
+<line baseline="3180" l="3152" t="3142" r="3279" b="3192"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3152" t="3143" r="3168" b="3179" suspicious="1">1</charParams>
+<charParams l="3176" t="3142" r="3202" b="3179" suspicious="1">5</charParams>
+<charParams l="3208" t="3168" r="3220" b="3192">,</charParams>
+<charParams l="3224" t="3142" r="3249" b="3180">3</charParams>
+<charParams l="3253" t="3143" r="3279" b="3180">5</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{E0E06E0A-3841-4503-AC8D-BD9F9030C6F3}" l="3324" t="3130" r="3478" b="3194"><region><rect l="3324" t="3130" r="3478" b="3194"/></region>
+<text id="{E0E06E0A-3841-4503-AC8D-BD9F9030C6F3}">
+<par>
+<line baseline="3181" l="3335" t="3142" r="3465" b="3194"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3335" t="3143" r="3353" b="3180">1</charParams>
+<charParams l="3362" t="3142" r="3388" b="3181">0</charParams>
+<charParams l="3394" t="3172" r="3406" b="3194">,</charParams>
+<charParams l="3410" t="3144" r="3433" b="3181">8</charParams>
+<charParams l="3439" t="3145" r="3465" b="3181">0</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{A3DBD71D-FB2B-4317-B8A1-B7CEE72240C4}" l="2046" t="3134" r="2546" b="3202"><region><rect l="2046" t="3134" r="2546" b="3202"/></region>
+<text id="{A3DBD71D-FB2B-4317-B8A1-B7CEE72240C4}">
+<par>
+<line baseline="3187" l="2058" t="3147" r="2534" b="3202"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2058" t="3149" r="2085" b="3187">9</charParams>
+<charParams l="2091" t="3177" r="2103" b="3200">,</charParams>
+<charParams l="2107" t="3148" r="2132" b="3186" suspicious="1">5</charParams>
+<charParams l="2138" t="3149" r="2164" b="3187">2</charParams>
+<charParams l="2165" t="3149" r="2223" b="3187"> </charParams>
+<charParams l="2224" t="3149" r="2237" b="3186" suspicious="1">1</charParams>
+<charParams l="2246" t="3147" r="2272" b="3185">0</charParams>
+<charParams l="2277" t="3177" r="2289" b="3201">,</charParams>
+<charParams l="2293" t="3148" r="2320" b="3185">2</charParams>
+<charParams l="2328" t="3148" r="2345" b="3187">1</charParams>
+<charParams l="2346" t="3148" r="2404" b="3189"> </charParams>
+<charParams l="2405" t="3152" r="2423" b="3189" suspicious="1">1</charParams>
+<charParams l="2432" t="3152" r="2458" b="3187">2</charParams>
+<charParams l="2463" t="3181" r="2474" b="3202">,</charParams>
+<charParams l="2480" t="3151" r="2503" b="3189">8</charParams>
+<charParams l="2508" t="3152" r="2534" b="3189">6</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{14A40946-38F0-4CFF-B314-F2885D7C265C}" l="1668" t="3138" r="1984" b="3214"><region><rect l="1668" t="3138" r="1984" b="3214"/></region>
+<text id="{14A40946-38F0-4CFF-B314-F2885D7C265C}">
+<par align="Justified">
+<line baseline="3189" l="1679" t="3149" r="1971" b="3202"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1679" t="3152" r="1706" b="3190">9</charParams>
+<charParams l="1712" t="3179" r="1724" b="3202">,</charParams>
+<charParams l="1728" t="3153" r="1754" b="3192">9</charParams>
+<charParams l="1759" t="3152" r="1784" b="3190">0</charParams>
+<charParams l="1785" t="3151" r="1865" b="3190">    </charParams>
+<charParams l="1866" t="3151" r="1892" b="3189">9</charParams>
+<charParams l="1899" t="3179" r="1910" b="3201">,</charParams>
+<charParams l="1916" t="3149" r="1940" b="3187">7</charParams>
+<charParams l="1944" t="3150" r="1971" b="3187">3</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{936E015E-CAF8-4000-BD66-874E186EDB0C}" l="1054" t="3142" r="1286" b="3208"><region><rect l="1054" t="3142" r="1286" b="3208"/></region>
+<text id="{936E015E-CAF8-4000-BD66-874E186EDB0C}">
+<par>
+<line baseline="3193" l="1066" t="3155" r="1286" b="3196"><formatting lang="FrenchStandard" ff="Times New Roman" fs="4." smallcaps="1" spacing="10">
+<charParams l="1066" t="3155" r="1107" b="3195">M</charParams>
+<charParams l="1113" t="3169" r="1136" b="3195">o</charParams>
+<charParams l="1140" t="3170" r="1163" b="3194">y</charParams>
+<charParams l="1168" t="3170" r="1191" b="3196">e</charParams>
+<charParams l="1194" t="3168" r="1217" b="3195">n</charParams>
+<charParams l="1220" t="3169" r="1245" b="3194">n</charParams>
+<charParams l="1250" t="3169" r="1273" b="3193">e</charParams>
+<charParams l="1280" t="3185" r="1286" b="3194">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{73EC5EEA-5085-424D-BB53-00306CA8A1D9}" l="3724" t="3258" r="3854" b="3334"><region><rect l="3724" t="3258" r="3854" b="3334"/></region>
+<text id="{73EC5EEA-5085-424D-BB53-00306CA8A1D9}">
+<par>
+<line baseline="3309" l="3737" t="3271" r="3842" b="3322"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3737" t="3273" r="3764" b="3311">0</charParams>
+<charParams l="3771" t="3300" r="3783" b="3322">,</charParams>
+<charParams l="3786" t="3272" r="3812" b="3310">6</charParams>
+<charParams l="3816" t="3271" r="3842" b="3309">4</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{E3ABA03D-C1DC-44D7-B288-9201BFA69FC7}" l="2978" t="3262" r="3106" b="3326"><region><rect l="2978" t="3262" r="3106" b="3326"/></region>
+<text id="{E3ABA03D-C1DC-44D7-B288-9201BFA69FC7}">
+<par>
+<line baseline="3312" l="2991" t="3275" r="3094" b="3314"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2991" t="3276" r="3017" b="3313" suspicious="1">0</charParams>
+<charParams l="3024" t="3304" r="3035" b="3314">.</charParams>
+<charParams l="3040" t="3275" r="3065" b="3313">9</charParams>
+<charParams l="3068" t="3275" r="3094" b="3312">5</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{F63DAD0E-E6B4-4519-9140-D53F4862ACED}" l="3166" t="3262" r="3294" b="3340"><region><rect l="3166" t="3262" r="3294" b="3340"/></region>
+<text id="{F63DAD0E-E6B4-4519-9140-D53F4862ACED}">
+<par>
+<line baseline="3315" l="3178" t="3274" r="3281" b="3327"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3178" t="3274" r="3204" b="3313">0</charParams>
+<charParams l="3210" t="3305" r="3222" b="3327">,</charParams>
+<charParams l="3225" t="3276" r="3251" b="3315">9</charParams>
+<charParams l="3255" t="3276" r="3281" b="3315">5</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{9ABCF97D-EC66-42F0-A16B-E29A4A648CBE}" l="3352" t="3264" r="3480" b="3342"><region><rect l="3352" t="3264" r="3480" b="3342"/></region>
+<text id="{9ABCF97D-EC66-42F0-A16B-E29A4A648CBE}">
+<par>
+<line baseline="3317" l="3364" t="3277" r="3467" b="3330"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3364" t="3277" r="3390" b="3316">0</charParams>
+<charParams l="3396" t="3307" r="3409" b="3330">,</charParams>
+<charParams l="3413" t="3278" r="3441" b="3317" suspicious="1">6</charParams>
+<charParams l="3442" t="3280" r="3467" b="3317">7</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{8E10645A-C10C-4038-B410-1BF73D639A70}" l="3540" t="3264" r="3666" b="3326"><region><rect l="3540" t="3264" r="3666" b="3326"/></region>
+<text id="{8E10645A-C10C-4038-B410-1BF73D639A70}">
+<par>
+<line baseline="3313" l="3552" t="3276" r="3654" b="3326"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="3552" t="3276" r="3576" b="3314">0</charParams>
+<charParams l="3585" t="3304" r="3597" b="3326">,</charParams>
+<charParams l="3599" t="3276" r="3625" b="3314" suspicious="1">6</charParams>
+<charParams l="3629" t="3276" r="3654" b="3313">4</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{2F11A47D-090C-42B5-8BCC-8781B1B851CA}" l="2050" t="3268" r="2548" b="3346"><region><rect l="2050" t="3268" r="2548" b="3346"/></region>
+<text id="{2F11A47D-090C-42B5-8BCC-8781B1B851CA}">
+<par align="Justified">
+<line baseline="3321" l="2062" t="3281" r="2536" b="3335"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2062" t="3281" r="2087" b="3318">0</charParams>
+<charParams l="2094" t="3309" r="2107" b="3332">,</charParams>
+<charParams l="2110" t="3281" r="2135" b="3320">6</charParams>
+<charParams l="2143" t="3283" r="2162" b="3318">1</charParams>
+<charParams l="2163" t="3283" r="2246" b="3321">    </charParams>
+<charParams l="2247" t="3283" r="2273" b="3321">0</charParams>
+<charParams l="2279" t="3309" r="2292" b="3333">,</charParams>
+<charParams l="2295" t="3283" r="2321" b="3322">6</charParams>
+<charParams l="2325" t="3285" r="2351" b="3323">3</charParams>
+<charParams l="2352" t="3285" r="2432" b="3323">    </charParams>
+<charParams l="2433" t="3285" r="2458" b="3323">0</charParams>
+<charParams l="2466" t="3314" r="2478" b="3335">,</charParams>
+<charParams l="2481" t="3284" r="2506" b="3323">8</charParams>
+<charParams l="2511" t="3284" r="2536" b="3321">0</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{B91AA1C0-0C51-437F-BB07-0BB9E6469D38}" l="2608" t="3268" r="2922" b="3342"><region><rect l="2608" t="3268" r="2922" b="3342"/></region>
+<text id="{B91AA1C0-0C51-437F-BB07-0BB9E6469D38}">
+<par align="Justified">
+<line baseline="3319" l="2620" t="3280" r="2909" b="3331"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="2620" t="3283" r="2645" b="3320">0</charParams>
+<charParams l="2653" t="3311" r="2664" b="3331">,</charParams>
+<charParams l="2668" t="3282" r="2693" b="3320">8</charParams>
+<charParams l="2697" t="3283" r="2725" b="3320">3</charParams>
+<charParams l="2726" t="3283" r="2809" b="3320">    </charParams>
+<charParams l="2810" t="3284" r="2827" b="3320">1</charParams>
+<charParams l="2838" t="3309" r="2851" b="3331">,</charParams>
+<charParams l="2853" t="3280" r="2877" b="3318">0</charParams>
+<charParams l="2883" t="3280" r="2909" b="3317">0</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{E03CBE7C-E650-4E4B-9B44-4B22B80C822A}" l="1670" t="3270" r="1988" b="3344"><region><rect l="1670" t="3270" r="1988" b="3344"/></region>
+<text id="{E03CBE7C-E650-4E4B-9B44-4B22B80C822A}">
+<par>
+<line baseline="3321" l="1683" t="3282" r="1975" b="3337"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="1683" t="3287" r="1708" b="3324">0</charParams>
+<charParams l="1715" t="3315" r="1727" b="3337">,</charParams>
+<charParams l="1731" t="3287" r="1755" b="3324" suspicious="1">0</charParams>
+<charParams l="1761" t="3287" r="1787" b="3322">2</charParams>
+<charParams l="1788" t="3284" r="1871" b="3322"> </charParams>
+<charParams l="1872" t="3284" r="1896" b="3322">0</charParams>
+<charParams l="1903" t="3310" r="1915" b="3331">,</charParams>
+<charParams l="1921" t="3284" r="1946" b="3321" suspicious="1">6</charParams>
+<charParams l="1951" t="3282" r="1975" b="3319">0</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{70E0B6AE-30E8-4FB1-BA7A-DC35065397C0}" l="686" t="3272" r="1298" b="3356"><region><rect l="686" t="3272" r="1298" b="3356"/></region>
+<text id="{70E0B6AE-30E8-4FB1-BA7A-DC35065397C0}">
+<par>
+<line baseline="3327" l="697" t="3285" r="1298" b="3344"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="697" t="3288" r="738" b="3330">N</charParams>
+<charParams l="741" t="3300" r="765" b="3328">o</charParams>
+<charParams l="769" t="3301" r="810" b="3328">m</charParams>
+<charParams l="812" t="3286" r="841" b="3329">b</charParams>
+<charParams l="845" t="3301" r="865" b="3327">r</charParams>
+<charParams l="868" t="3302" r="891" b="3329">e</charParams>
+<charParams l="895" t="3302" r="913" b="3330">s</charParams>
+<charParams l="914" t="3301" r="932" b="3344"> </charParams>
+<charParams l="933" t="3301" r="960" b="3344">p</charParams>
+<charParams l="963" t="3302" r="984" b="3329">r</charParams>
+<charParams l="987" t="3302" r="1010" b="3330">o</charParams>
+<charParams l="1015" t="3301" r="1042" b="3344">p</charParams>
+<charParams l="1045" t="3301" r="1069" b="3329">o</charParams>
+<charParams l="1074" t="3302" r="1093" b="3329">r</charParams>
+<charParams l="1097" t="3294" r="1111" b="3329">t</charParams>
+<charParams l="1117" t="3286" r="1128" b="3327">i</charParams>
+<charParams l="1133" t="3300" r="1156" b="3327">o</charParams>
+<charParams l="1161" t="3301" r="1187" b="3327">n</charParams>
+<charParams l="1193" t="3299" r="1218" b="3326">n</charParams>
+<charParams l="1223" t="3299" r="1246" b="3327">e</charParams>
+<charParams l="1250" t="3285" r="1261" b="3325">l</charParams>
+<charParams l="1267" t="3301" r="1285" b="3326">s</charParams>
+<charParams l="1292" t="3314" r="1298" b="3324">.</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{F0BCECF1-F2F1-4AFA-9CDE-800091FF1522}" l="880" t="3442" r="2186" b="3534"><region><rect l="880" t="3442" r="2186" b="3534"/></region>
+<text id="{F0BCECF1-F2F1-4AFA-9CDE-800091FF1522}">
+<par>
+<line baseline="3503" l="893" t="3454" r="2186" b="3521"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="893" t="3467" r="927" b="3507">L</charParams>
+<charParams l="930" t="3465" r="939" b="3478">’</charParams>
+<charParams l="948" t="3466" r="974" b="3507">h</charParams>
+<charParams l="978" t="3478" r="1000" b="3506">e</charParams>
+<charParams l="1005" t="3479" r="1033" b="3508">u</charParams>
+<charParams l="1038" t="3478" r="1056" b="3506">r</charParams>
+<charParams l="1059" t="3479" r="1083" b="3508">e</charParams>
+<charParams l="1084" t="3478" r="1103" b="3508"> </charParams>
+<charParams l="1104" t="3478" r="1123" b="3508">s</charParams>
+<charParams l="1127" t="3478" r="1150" b="3507">e</charParams>
+<charParams l="1151" t="3478" r="1171" b="3507"> </charParams>
+<charParams l="1172" t="3478" r="1193" b="3506">c</charParams>
+<charParams l="1197" t="3476" r="1221" b="3505">o</charParams>
+<charParams l="1226" t="3475" r="1264" b="3504">m</charParams>
+<charParams l="1273" t="3476" r="1297" b="3521">p</charParams>
+<charParams l="1303" t="3467" r="1313" b="3503">t</charParams>
+<charParams l="1322" t="3474" r="1344" b="3503">e</charParams>
+<charParams l="1345" t="3460" r="1366" b="3503"> </charParams>
+<charParams l="1367" t="3460" r="1389" b="3503">à</charParams>
+<charParams l="1390" t="3460" r="1412" b="3520"> </charParams>
+<charParams l="1413" t="3475" r="1439" b="3520">p</charParams>
+<charParams l="1445" t="3476" r="1465" b="3503">a</charParams>
+<charParams l="1471" t="3474" r="1491" b="3502">r</charParams>
+<charParams l="1497" t="3467" r="1507" b="3504">t</charParams>
+<charParams l="1517" t="3462" r="1527" b="3504">i</charParams>
+<charParams l="1533" t="3475" r="1553" b="3503">r</charParams>
+<charParams l="1554" t="3461" r="1573" b="3504"> </charParams>
+<charParams l="1574" t="3461" r="1600" b="3504">d</charParams>
+<charParams l="1605" t="3476" r="1628" b="3504">e</charParams>
+<charParams l="1629" t="3475" r="1649" b="3504"> </charParams>
+<charParams l="1650" t="3475" r="1670" b="3504">c</charParams>
+<charParams l="1676" t="3475" r="1698" b="3504">e</charParams>
+<charParams l="1702" t="3461" r="1714" b="3504">l</charParams>
+<charParams l="1718" t="3461" r="1729" b="3503">l</charParams>
+<charParams l="1735" t="3474" r="1758" b="3503">e</charParams>
+<charParams l="1759" t="3474" r="1778" b="3518"> </charParams>
+<charParams l="1779" t="3474" r="1807" b="3518">q</charParams>
+<charParams l="1812" t="3472" r="1835" b="3501">u</charParams>
+<charParams l="1844" t="3457" r="1854" b="3499">i</charParams>
+<charParams l="1855" t="3457" r="1876" b="3499"> </charParams>
+<charParams l="1877" t="3470" r="1898" b="3499">e</charParams>
+<charParams l="1903" t="3470" r="1922" b="3498">s</charParams>
+<charParams l="1927" t="3463" r="1939" b="3498">t</charParams>
+<charParams l="1940" t="3455" r="1964" b="3498"> </charParams>
+<charParams l="1965" t="3455" r="1974" b="3497">i</charParams>
+<charParams l="1982" t="3470" r="2006" b="3498">n</charParams>
+<charParams l="2013" t="3454" r="2037" b="3498">d</charParams>
+<charParams l="2046" t="3454" r="2054" b="3498">i</charParams>
+<charParams l="2062" t="3469" r="2088" b="3515">q</charParams>
+<charParams l="2094" t="3470" r="2120" b="3499">u</charParams>
+<charParams l="2126" t="3456" r="2146" b="3499">é</charParams>
+<charParams l="2152" t="3470" r="2174" b="3498">e</charParams>
+<charParams l="2180" t="3487" r="2186" b="3501">,</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" pageElemId="{88E00A12-A24A-4537-93BE-F6F0C9CF97A6}" l="5208" t="1132" r="5372" b="2700"><region><rect l="5208" t="1132" r="5372" b="2700"/></region>
+<text id="{88E00A12-A24A-4537-93BE-F6F0C9CF97A6}">
+<par align="Justified" leftIndent="200">
+<line baseline="1210" l="5262" t="1143" r="5337" b="1209"><formatting lang="FrenchStandard" ff="Times New Roman" fs="8.5">
+<charParams l="5262" t="1143" r="5337" b="1209" suspicious="1">o</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200">
+<line baseline="1272" l="5262" t="1216" r="5335" b="1272"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="5262" t="1216" r="5335" b="1272" suspicious="1">H</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200">
+<line baseline="1326" l="5259" t="1281" r="5335" b="1328"><formatting lang="FrenchStandard" ff="Times New Roman" fs="11.5" bold="1" spacing="-10">
+<charParams l="5259" t="1281" r="5289" b="1328" suspicious="1">e</charParams>
+<charParams l="5289" t="1282" r="5335" b="1326" suspicious="1">n</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200" lineSpacing="792">
+<line baseline="1693" l="5256" t="1634" r="5332" b="1693"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="5256" t="1634" r="5332" b="1693" suspicious="1">O</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200" lineSpacing="792">
+<line baseline="1762" l="5259" t="1698" r="5333" b="1762"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="5259" t="1698" r="5333" b="1762" suspicious="1">g</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200" lineSpacing="792">
+<line baseline="1825" l="5259" t="1768" r="5356" b="1825"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="5259" t="1768" r="5356" b="1825" suspicious="1">»</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200">
+<line baseline="1951" l="5259" t="1893" r="5334" b="1951"><formatting lang="FrenchStandard" ff="Times New Roman" fs="8.5" bold="1" italic="1">
+<charParams l="5259" t="1893" r="5334" b="1951" suspicious="1">a</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200">
+<line baseline="2003" l="5258" t="1960" r="5334" b="2003"><formatting lang="FrenchStandard" ff="Times New Roman" fs="10.5" bold="1" spacing="-10">
+<charParams l="5258" t="1960" r="5289" b="2003" suspicious="1">e</charParams>
+<charParams l="5289" t="1960" r="5334" b="2001" suspicious="1">n</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200">
+<line baseline="2231" l="5260" t="2177" r="5336" b="2241"><formatting lang="FrenchStandard" ff="Times New Roman" fs="6.5">
+<charParams l="5260" t="2177" r="5294" b="2241" suspicious="1">S</charParams>
+<charParams l="5294" t="2183" r="5336" b="2231" suspicious="1">O</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200" rightIndent="900">
+<line baseline="2340" l="5259" t="2281" r="5337" b="2341"><formatting lang="FrenchStandard" ff="Times New Roman" fs="14." scaling="1500">
+<charParams l="5259" t="2281" r="5337" b="2341">o</charParams></formatting></line>
+<line baseline="2408" l="5261" t="2347" r="5337" b="2409"><formatting lang="FrenchStandard" ff="Times New Roman" fs="8.5">
+<charParams l="5261" t="2347" r="5337" b="2409" suspicious="1">o</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200">
+<line baseline="2511" l="5241" t="2453" r="5337" b="2514"><formatting lang="FrenchStandard" ff="Times New Roman" fs="7.5" bold="1" scaling="1500" spacing="-10">
+<charParams l="5241" t="2483" r="5253" b="2514">(</charParams>
+<charParams l="5253" t="2453" r="5337" b="2511">O</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200" lineSpacing="672">
+<line baseline="2573" l="5259" t="2519" r="5337" b="2579"><formatting lang="FrenchStandard" ff="Times New Roman" fs="8.5">
+<charParams l="5259" t="2519" r="5337" b="2579" suspicious="1">a</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200" lineSpacing="672">
+<line baseline="2637" l="5262" t="2582" r="5336" b="2637"><formatting lang="FrenchStandard" ff="Times New Roman" fs="11." bold="1" spacing="-10">
+<charParams l="5262" t="2582" r="5291" b="2637" suspicious="1">t</charParams>
+<charParams l="5291" t="2590" r="5336" b="2636" suspicious="1">q</charParams></formatting></line></par>
+<par align="Justified" leftIndent="200" lineSpacing="672">
+<line baseline="2690" l="5261" t="2644" r="5337" b="2692"><formatting lang="FrenchStandard" ff="Times New Roman" fs="10." bold="1" spacing="-10">
+<charParams l="5261" t="2644" r="5293" b="2692">e</charParams>
+<charParams l="5293" t="2646" r="5337" b="2690">n</charParams></formatting></line></par>
+</text>
+</block>
+<block blockType="Text" l="5244" t="3536" r="5384" b="3644"><region><rect l="5244" t="3536" r="5384" b="3644"/></region>
+</block>
+<block blockType="SeparatorsBox" l="580" t="566" r="5116" b="3648"><region><rect l="5074" t="566" r="5116" b="570"/><rect l="580" t="570" r="5116" b="626"/><rect l="580" t="626" r="5116" b="630"/><rect l="580" t="630" r="5116" b="636"/><rect l="580" t="636" r="5116" b="930"/><rect l="580" t="930" r="5116" b="2304"/><rect l="580" t="2304" r="5116" b="3314"/><rect l="580" t="3314" r="5116" b="3600"/><rect l="580" t="3600" r="5116" b="3608"/><rect l="580" t="3608" r="5116" b="3648"/></region>
+<separatorsBox>
+<separator type="Black" thickness="8"><start x="580" y="598"/><end x="5070" y="598"/>
+</separator>
+<separator type="Black" thickness="3"><start x="1804" y="615"/><end x="4520" y="615"/>
+</separator>
+<separator type="Black" thickness="3"><start x="580" y="630"/><end x="1778" y="630"/>
+</separator>
+<separator type="Black" thickness="3"><start x="932" y="3610"/><end x="5116" y="3610"/>
+</separator>
+<separator type="Black" thickness="9"><start x="648" y="3628"/><end x="5116" y="3628"/>
+</separator>
+<separator type="Black" thickness="7"><start x="623" y="606"/><end x="623" y="3648"/>
+</separator>
+<separator type="Black" thickness="4"><start x="660" y="2304"/><end x="660" y="3624"/>
+</separator>
+<separator type="Black" thickness="4"><start x="5077" y="930"/><end x="5077" y="3314"/>
+</separator>
+<separator type="Black" thickness="9"><start x="5095" y="566"/><end x="5095" y="3636"/>
+</separator>
+</separatorsBox>
+</block>
+<block blockType="Separator" l="2344" t="840" r="2676" b="866"><region><rect l="2478" t="840" r="2604" b="842"/><rect l="2444" t="842" r="2604" b="844"/><rect l="2422" t="844" r="2622" b="846"/><rect l="2388" t="846" r="2670" b="848"/><rect l="2388" t="848" r="2670" b="850"/><rect l="2378" t="850" r="2676" b="852"/><rect l="2360" t="852" r="2676" b="854"/><rect l="2344" t="854" r="2478" b="856"/><rect l="2344" t="856" r="2444" b="860"/><rect l="2344" t="860" r="2422" b="862"/><rect l="2344" t="862" r="2388" b="864"/><rect l="2344" t="864" r="2378" b="866"/></region>
+<separator type="Black" thickness="5"><start x="2344" y="853"/><end x="2676" y="853"/>
+</separator>
+</block>
+<block blockType="Separator" l="592" t="1152" r="5056" b="1200"><region><rect l="4700" t="1152" r="5056" b="1156"/><rect l="4520" t="1156" r="5056" b="1158"/><rect l="3914" t="1158" r="5056" b="1160"/><rect l="3502" t="1160" r="5056" b="1162"/><rect l="3036" t="1162" r="5056" b="1166"/><rect l="2858" t="1166" r="4700" b="1168"/><rect l="2804" t="1168" r="4520" b="1170"/><rect l="2576" t="1170" r="4520" b="1172"/><rect l="1948" t="1172" r="3914" b="1174"/><rect l="1948" t="1174" r="3914" b="1176"/><rect l="1740" t="1176" r="3502" b="1178"/><rect l="1606" t="1178" r="3036" b="1180"/><rect l="1548" t="1180" r="3036" b="1182"/><rect l="1400" t="1182" r="2816" b="1184"/><rect l="592" t="1184" r="2576" b="1188"/><rect l="592" t="1188" r="1948" b="1192"/><rect l="592" t="1192" r="1740" b="1194"/><rect l="592" t="1194" r="1548" b="1198"/><rect l="592" t="1198" r="1400" b="1200"/></region>
+<separator type="Black" thickness="7"><start x="592" y="1176"/><end x="5056" y="1176"/>
+</separator>
+</block>
+<block blockType="Separator" l="1630" t="3040" r="3886" b="3060"><region><rect l="1630" t="3040" r="3886" b="3060"/></region>
+<separator type="Black" thickness="3"><start x="1630" y="3050"/><end x="3886" y="3050"/>
+</separator>
+</block>
+<block blockType="Separator" l="1576" t="606" r="1598" b="1174"><region><rect l="1576" t="606" r="1590" b="728"/><rect l="1578" t="728" r="1592" b="932"/><rect l="1584" t="932" r="1594" b="990"/><rect l="1584" t="990" r="1596" b="1030"/><rect l="1586" t="1030" r="1598" b="1174"/></region>
+<separator type="Black" thickness="6"><start x="1587" y="606"/><end x="1587" y="1174"/>
+</separator>
+</block>
+<block blockType="Separator" l="1586" t="1182" r="1650" b="3428"><region><rect l="1588" t="1182" r="1596" b="1196"/><rect l="1586" t="1196" r="1598" b="1198"/><rect l="1586" t="1198" r="1600" b="1292"/><rect l="1588" t="1292" r="1602" b="1380"/><rect l="1592" t="1380" r="1604" b="1432"/><rect l="1592" t="1432" r="1608" b="1552"/><rect l="1596" t="1552" r="1610" b="1580"/><rect l="1598" t="1580" r="1614" b="1702"/><rect l="1602" t="1702" r="1616" b="1744"/><rect l="1604" t="1744" r="1620" b="1856"/><rect l="1608" t="1856" r="1620" b="1864"/><rect l="1608" t="1864" r="1624" b="2022"/><rect l="1612" t="2022" r="1628" b="2192"/><rect l="1616" t="2192" r="1630" b="2232"/><rect l="1618" t="2232" r="1634" b="2392"/><rect l="1622" t="2392" r="1636" b="2576"/><rect l="1624" t="2576" r="1638" b="2668"/><rect l="1626" t="2668" r="1640" b="2904"/><rect l="1628" t="2904" r="1642" b="3064"/><rect l="1630" t="3064" r="1646" b="3160"/><rect l="1634" t="3160" r="1648" b="3330"/><rect l="1636" t="3330" r="1650" b="3428"/></region>
+<separator type="Black" thickness="7"><start x="1618" y="1182"/><end x="1618" y="3428"/>
+</separator>
+</block>
+<block blockType="Separator" l="1766" t="604" r="1782" b="1164"><region><rect l="1766" t="604" r="1774" b="728"/><rect l="1768" t="728" r="1776" b="912"/><rect l="1772" t="912" r="1780" b="1096"/><rect l="1776" t="1096" r="1782" b="1164"/></region>
+<separator type="Black" thickness="4"><start x="1774" y="604"/><end x="1774" y="1164"/>
+</separator>
+</block>
+<block blockType="Separator" l="1780" t="1196" r="1830" b="3314"><region><rect l="1780" t="1196" r="1790" b="1374"/><rect l="1784" t="1374" r="1792" b="1436"/><rect l="1786" t="1436" r="1794" b="1544"/><rect l="1790" t="1544" r="1796" b="1558"/><rect l="1790" t="1558" r="1798" b="1652"/><rect l="1792" t="1652" r="1800" b="1696"/><rect l="1794" t="1696" r="1804" b="1852"/><rect l="1798" t="1852" r="1806" b="1928"/><rect l="1802" t="1928" r="1808" b="2020"/><rect l="1802" t="2020" r="1810" b="2104"/><rect l="1804" t="2104" r="1812" b="2190"/><rect l="1806" t="2190" r="1814" b="2268"/><rect l="1808" t="2268" r="1816" b="2342"/><rect l="1810" t="2342" r="1818" b="2482"/><rect l="1814" t="2482" r="1820" b="2576"/><rect l="1814" t="2576" r="1822" b="2640"/><rect l="1816" t="2640" r="1824" b="2946"/><rect l="1818" t="2946" r="1826" b="3134"/><rect l="1820" t="3134" r="1828" b="3222"/><rect l="1822" t="3222" r="1830" b="3314"/></region>
+<separator type="Black" thickness="4"><start x="1805" y="1196"/><end x="1805" y="3314"/>
+</separator>
+</block>
+<block blockType="Separator" l="1960" t="860" r="1972" b="1052"><region><rect l="1960" t="860" r="1968" b="960"/><rect l="1964" t="960" r="1970" b="1004"/><rect l="1964" t="1004" r="1972" b="1052"/></region>
+<separator type="Black" thickness="4"><start x="1966" y="860"/><end x="1966" y="1052"/>
+</separator>
+</block>
+<block blockType="Separator" l="1968" t="1200" r="1988" b="1772"><region><rect l="1968" t="1200" r="1976" b="1290"/><rect l="1970" t="1290" r="1978" b="1386"/><rect l="1974" t="1386" r="1980" b="1424"/><rect l="1974" t="1424" r="1982" b="1538"/><rect l="1978" t="1538" r="1984" b="1574"/><rect l="1978" t="1574" r="1986" b="1698"/><rect l="1982" t="1698" r="1988" b="1772"/></region>
+<separator type="Black" thickness="4"><start x="1978" y="1200"/><end x="1978" y="1772"/>
+</separator>
+</block>
+<block blockType="Separator" l="1984" t="1780" r="2022" b="3414"><region><rect l="1984" t="1780" r="1992" b="1892"/><rect l="1986" t="1892" r="1994" b="2002"/><rect l="1988" t="2002" r="1996" b="2062"/><rect l="1990" t="2062" r="1998" b="2200"/><rect l="1992" t="2200" r="2000" b="2298"/><rect l="1994" t="2298" r="2002" b="2390"/><rect l="1996" t="2390" r="2004" b="2484"/><rect l="1998" t="2484" r="2008" b="2720"/><rect l="2002" t="2720" r="2010" b="2768"/><rect l="2004" t="2768" r="2012" b="2870"/><rect l="2006" t="2870" r="2016" b="3072"/><rect l="2010" t="3072" r="2018" b="3130"/><rect l="2012" t="3130" r="2020" b="3288"/><rect l="2014" t="3288" r="2022" b="3414"/></region>
+<separator type="Black" thickness="4"><start x="2003" y="1780"/><end x="2003" y="3414"/>
+</separator>
+</block>
+<block blockType="Separator" l="2152" t="876" r="2162" b="1160"><region><rect l="2152" t="876" r="2162" b="1160"/></region>
+<separator type="Black" thickness="4"><start x="2157" y="876"/><end x="2157" y="1160"/>
+</separator>
+</block>
+<block blockType="Separator" l="2158" t="1190" r="2212" b="3418"><region><rect l="2158" t="1190" r="2168" b="1372"/><rect l="2162" t="1372" r="2172" b="1508"/><rect l="2166" t="1508" r="2176" b="1656"/><rect l="2170" t="1656" r="2180" b="1826"/><rect l="2174" t="1826" r="2184" b="1980"/><rect l="2176" t="1980" r="2186" b="2092"/><rect l="2180" t="2092" r="2188" b="2170"/><rect l="2182" t="2170" r="2190" b="2296"/><rect l="2184" t="2296" r="2194" b="2546"/><rect l="2188" t="2546" r="2196" b="2668"/><rect l="2190" t="2668" r="2198" b="2758"/><rect l="2192" t="2758" r="2200" b="2876"/><rect l="2194" t="2876" r="2204" b="3036"/><rect l="2198" t="3036" r="2206" b="3104"/><rect l="2200" t="3104" r="2208" b="3216"/><rect l="2202" t="3216" r="2210" b="3314"/><rect l="2204" t="3314" r="2212" b="3418"/></region>
+<separator type="Black" thickness="4"><start x="2185" y="1190"/><end x="2185" y="3418"/>
+</separator>
+</block>
+<block blockType="Separator" l="2340" t="856" r="2398" b="3420"><region><rect l="2340" t="856" r="2348" b="1002"/><rect l="2342" t="1002" r="2350" b="1172"/><rect l="2344" t="1172" r="2354" b="1192"/><rect l="2348" t="1192" r="2354" b="1214"/><rect l="2348" t="1214" r="2356" b="1370"/><rect l="2352" t="1370" r="2358" b="1390"/><rect l="2352" t="1390" r="2360" b="1538"/><rect l="2356" t="1538" r="2362" b="1556"/><rect l="2356" t="1556" r="2366" b="1822"/><rect l="2362" t="1822" r="2368" b="1842"/><rect l="2362" t="1842" r="2372" b="2034"/><rect l="2366" t="2034" r="2376" b="2270"/><rect l="2370" t="2270" r="2376" b="2296"/><rect l="2370" t="2296" r="2378" b="2480"/><rect l="2372" t="2480" r="2382" b="2752"/><rect l="2376" t="2752" r="2384" b="2792"/><rect l="2378" t="2792" r="2386" b="2942"/><rect l="2380" t="2942" r="2388" b="3074"/><rect l="2382" t="3074" r="2390" b="3126"/><rect l="2384" t="3126" r="2394" b="3294"/><rect l="2388" t="3294" r="2394" b="3332"/><rect l="2388" t="3332" r="2398" b="3420"/></region>
+<separator type="Black" thickness="4"><start x="2369" y="856"/><end x="2369" y="3420"/>
+</separator>
+</block>
+<block blockType="Separator" l="2526" t="840" r="2540" b="1172"><region><rect l="2526" t="840" r="2534" b="908"/><rect l="2528" t="908" r="2536" b="1000"/><rect l="2530" t="1000" r="2538" b="1096"/><rect l="2532" t="1096" r="2540" b="1172"/></region>
+<separator type="Black" thickness="4"><start x="2533" y="840"/><end x="2533" y="1172"/>
+</separator>
+</block>
+<block blockType="Separator" l="2536" t="1172" r="2564" b="2376"><region><rect l="2536" t="1172" r="2546" b="1370"/><rect l="2540" t="1370" r="2550" b="1558"/><rect l="2542" t="1558" r="2552" b="1690"/><rect l="2546" t="1690" r="2556" b="1858"/><rect l="2550" t="1858" r="2556" b="1924"/><rect l="2550" t="1924" r="2560" b="2122"/><rect l="2554" t="2122" r="2564" b="2376"/></region>
+<separator type="Black" thickness="4"><start x="2550" y="1172"/><end x="2550" y="2376"/>
+</separator>
+</block>
+<block blockType="Separator" l="2560" t="2376" r="2584" b="3414"><region><rect l="2560" t="2376" r="2568" b="2572"/><rect l="2562" t="2572" r="2570" b="2756"/><rect l="2564" t="2756" r="2572" b="2864"/><rect l="2566" t="2864" r="2574" b="2934"/><rect l="2566" t="2934" r="2576" b="2942"/><rect l="2568" t="2942" r="2576" b="3044"/><rect l="2570" t="3044" r="2576" b="3064"/><rect l="2570" t="3064" r="2578" b="3192"/><rect l="2572" t="3192" r="2580" b="3280"/><rect l="2574" t="3280" r="2582" b="3392"/><rect l="2578" t="3392" r="2584" b="3414"/></region>
+<separator type="Black" thickness="4"><start x="2572" y="2376"/><end x="2572" y="3414"/>
+</separator>
+</block>
+<block blockType="Separator" l="2714" t="626" r="2774" b="3414"><region><rect l="2714" t="626" r="2726" b="718"/><rect l="2716" t="718" r="2730" b="912"/><rect l="2720" t="912" r="2732" b="1024"/><rect l="2720" t="1024" r="2734" b="1174"/><rect l="2724" t="1174" r="2736" b="1192"/><rect l="2724" t="1192" r="2738" b="1390"/><rect l="2728" t="1390" r="2742" b="1678"/><rect l="2732" t="1678" r="2744" b="1806"/><rect l="2734" t="1806" r="2748" b="1956"/><rect l="2736" t="1956" r="2750" b="2104"/><rect l="2738" t="2104" r="2752" b="2216"/><rect l="2740" t="2216" r="2754" b="2372"/><rect l="2742" t="2372" r="2756" b="2476"/><rect l="2746" t="2476" r="2760" b="2756"/><rect l="2750" t="2756" r="2764" b="2910"/><rect l="2752" t="2910" r="2766" b="2974"/><rect l="2754" t="2974" r="2768" b="3120"/><rect l="2756" t="3120" r="2770" b="3226"/><rect l="2760" t="3226" r="2772" b="3372"/><rect l="2760" t="3372" r="2774" b="3414"/></region>
+<separator type="Black" thickness="6"><start x="2744" y="626"/><end x="2744" y="3414"/>
+</separator>
+</block>
+<block blockType="Separator" l="2910" t="594" r="2922" b="1154"><region><rect l="2910" t="594" r="2916" b="628"/><rect l="2912" t="628" r="2920" b="906"/><rect l="2914" t="906" r="2922" b="1154"/></region>
+<separator type="Black" thickness="4"><start x="2916" y="594"/><end x="2916" y="1154"/>
+</separator>
+</block>
+<block blockType="Separator" l="2916" t="1166" r="2942" b="2664"><region><rect l="2916" t="1166" r="2922" b="1196"/><rect l="2916" t="1196" r="2924" b="1368"/><rect l="2918" t="1368" r="2926" b="1460"/><rect l="2920" t="1460" r="2930" b="1664"/><rect l="2924" t="1664" r="2930" b="1802"/><rect l="2924" t="1802" r="2932" b="1922"/><rect l="2926" t="1922" r="2934" b="2058"/><rect l="2928" t="2058" r="2936" b="2212"/><rect l="2930" t="2212" r="2938" b="2364"/><rect l="2932" t="2364" r="2940" b="2476"/><rect l="2934" t="2476" r="2942" b="2664"/></region>
+<separator type="Black" thickness="4"><start x="2929" y="1166"/><end x="2929" y="2664"/>
+</separator>
+</block>
+<block blockType="Separator" l="2938" t="2664" r="2956" b="3408"><region><rect l="2938" t="2664" r="2946" b="2866"/><rect l="2940" t="2866" r="2948" b="3020"/><rect l="2942" t="3020" r="2950" b="3042"/><rect l="2944" t="3042" r="2950" b="3056"/><rect l="2944" t="3056" r="2952" b="3272"/><rect l="2948" t="3272" r="2954" b="3378"/><rect l="2948" t="3378" r="2956" b="3408"/></region>
+<separator type="Black" thickness="4"><start x="2947" y="2664"/><end x="2947" y="3408"/>
+</separator>
+</block>
+<block blockType="Separator" l="3102" t="840" r="3124" b="2308"><region><rect l="3102" t="840" r="3110" b="1084"/><rect l="3106" t="1084" r="3112" b="1162"/><rect l="3106" t="1162" r="3112" b="1184"/><rect l="3106" t="1184" r="3114" b="1366"/><rect l="3108" t="1366" r="3116" b="1552"/><rect l="3110" t="1552" r="3118" b="1736"/><rect l="3112" t="1736" r="3120" b="1960"/><rect l="3114" t="1960" r="3122" b="2106"/><rect l="3116" t="2106" r="3124" b="2308"/></region>
+<separator type="Black" thickness="4"><start x="3113" y="840"/><end x="3113" y="2308"/>
+</separator>
+</block>
+<block blockType="Separator" l="3120" t="2308" r="3138" b="3214"><region><rect l="3120" t="2308" r="3130" b="2744"/><rect l="3124" t="2744" r="3132" b="2846"/><rect l="3126" t="2846" r="3134" b="2938"/><rect l="3128" t="2938" r="3136" b="3096"/><rect l="3130" t="3096" r="3138" b="3214"/></region>
+<separator type="Black" thickness="4"><start x="3129" y="2308"/><end x="3129" y="3214"/>
+</separator>
+</block>
+<block blockType="Separator" l="3134" t="3214" r="3142" b="3400"><region><rect l="3134" t="3214" r="3142" b="3400"/></region>
+<separator type="Black" thickness="4"><start x="3138" y="3214"/><end x="3138" y="3400"/>
+</separator>
+</block>
+<block blockType="Separator" l="3292" t="852" r="3302" b="1534"><region><rect l="3292" t="852" r="3300" b="1088"/><rect l="3294" t="1088" r="3302" b="1160"/><rect l="3294" t="1160" r="3302" b="1182"/><rect l="3292" t="1182" r="3302" b="1330"/><rect l="3294" t="1330" r="3302" b="1534"/></region>
+<separator type="Black" thickness="4"><start x="3297" y="852"/><end x="3297" y="1534"/>
+</separator>
+</block>
+<block blockType="Separator" l="3298" t="1534" r="3320" b="3036"><region><rect l="3298" t="1534" r="3306" b="1736"/><rect l="3300" t="1736" r="3308" b="1920"/><rect l="3302" t="1920" r="3310" b="2198"/><rect l="3304" t="2198" r="3312" b="2382"/><rect l="3306" t="2382" r="3316" b="2570"/><rect l="3308" t="2570" r="3316" b="2728"/><rect l="3310" t="2728" r="3318" b="2922"/><rect l="3314" t="2922" r="3320" b="3036"/></region>
+<separator type="Black" thickness="4"><start x="3309" y="1534"/><end x="3309" y="3036"/>
+</separator>
+</block>
+<block blockType="Separator" l="3314" t="3056" r="3328" b="3406"><region><rect l="3314" t="3056" r="3322" b="3214"/><rect l="3318" t="3214" r="3324" b="3306"/><rect l="3320" t="3306" r="3328" b="3406"/></region>
+<separator type="Black" thickness="4"><start x="3321" y="3056"/><end x="3321" y="3406"/>
+</separator>
+</block>
+<block blockType="Separator" l="3480" t="850" r="3504" b="2844"><region><rect l="3480" t="850" r="3488" b="962"/><rect l="3482" t="962" r="3490" b="1084"/><rect l="3484" t="1084" r="3492" b="1158"/><rect l="3484" t="1158" r="3492" b="1180"/><rect l="3484" t="1180" r="3492" b="1308"/><rect l="3482" t="1308" r="3492" b="1312"/><rect l="3482" t="1312" r="3490" b="1456"/><rect l="3484" t="1456" r="3492" b="1734"/><rect l="3486" t="1734" r="3494" b="1956"/><rect l="3488" t="1956" r="3498" b="2162"/><rect l="3490" t="2162" r="3498" b="2288"/><rect l="3492" t="2288" r="3500" b="2474"/><rect l="3494" t="2474" r="3502" b="2656"/><rect l="3496" t="2656" r="3504" b="2844"/></region>
+<separator type="Black" thickness="4"><start x="3492" y="850"/><end x="3492" y="2844"/>
+</separator>
+</block>
+<block blockType="Separator" l="3500" t="2844" r="3514" b="3404"><region><rect l="3500" t="2844" r="3508" b="3050"/><rect l="3502" t="3050" r="3510" b="3210"/><rect l="3504" t="3210" r="3512" b="3362"/><rect l="3508" t="3362" r="3514" b="3404"/></region>
+<separator type="Black" thickness="3"><start x="3507" y="2844"/><end x="3507" y="3404"/>
+</separator>
+</block>
+<block blockType="Separator" l="3670" t="844" r="3698" b="3410"><region><rect l="3670" t="844" r="3678" b="1076"/><rect l="3672" t="1076" r="3680" b="1158"/><rect l="3674" t="1158" r="3680" b="1202"/><rect l="3672" t="1202" r="3680" b="1384"/><rect l="3674" t="1384" r="3682" b="1734"/><rect l="3676" t="1734" r="3684" b="2136"/><rect l="3678" t="2136" r="3686" b="2328"/><rect l="3680" t="2328" r="3688" b="2468"/><rect l="3682" t="2468" r="3690" b="2740"/><rect l="3684" t="2740" r="3692" b="2928"/><rect l="3684" t="2928" r="3694" b="2934"/><rect l="3686" t="2934" r="3694" b="3172"/><rect l="3688" t="3172" r="3696" b="3264"/><rect l="3690" t="3264" r="3698" b="3410"/></region>
+<separator type="Black" thickness="4"><start x="3684" y="844"/><end x="3684" y="3410"/>
+</separator>
+</block>
+<block blockType="Separator" l="3858" t="582" r="3892" b="3408"><region><rect l="3858" t="582" r="3870" b="642"/><rect l="3860" t="642" r="3872" b="644"/><rect l="3858" t="644" r="3872" b="806"/><rect l="3860" t="806" r="3874" b="992"/><rect l="3862" t="992" r="3876" b="2192"/><rect l="3864" t="2192" r="3878" b="2316"/><rect l="3866" t="2316" r="3880" b="2564"/><rect l="3870" t="2564" r="3884" b="2890"/><rect l="3872" t="2890" r="3886" b="2978"/><rect l="3874" t="2978" r="3888" b="3138"/><rect l="3876" t="3138" r="3890" b="3308"/><rect l="3878" t="3308" r="3892" b="3408"/></region>
+<separator type="Black" thickness="6"><start x="3875" y="582"/><end x="3875" y="3408"/>
+</separator>
+</block>
+<block blockType="Separator" l="4136" t="604" r="4162" b="3410"><region><rect l="4138" t="604" r="4146" b="738"/><rect l="4140" t="738" r="4148" b="846"/><rect l="4142" t="846" r="4150" b="1160"/><rect l="4140" t="1160" r="4148" b="1190"/><rect l="4138" t="1190" r="4146" b="1250"/><rect l="4136" t="1250" r="4144" b="1546"/><rect l="4138" t="1546" r="4146" b="1824"/><rect l="4140" t="1824" r="4150" b="2470"/><rect l="4144" t="2470" r="4152" b="2648"/><rect l="4146" t="2648" r="4154" b="2742"/><rect l="4148" t="2742" r="4156" b="2860"/><rect l="4150" t="2860" r="4160" b="3294"/><rect l="4154" t="3294" r="4162" b="3410"/></region>
+<separator type="Black" thickness="4"><start x="4149" y="604"/><end x="4149" y="3410"/>
+</separator>
+</block>
+<block blockType="Separator" l="4646" t="578" r="4666" b="3254"><region><rect l="4646" t="578" r="4654" b="804"/><rect l="4648" t="804" r="4656" b="990"/><rect l="4650" t="990" r="4658" b="1146"/><rect l="4650" t="1146" r="4658" b="1158"/><rect l="4650" t="1158" r="4658" b="1422"/><rect l="4648" t="1422" r="4656" b="1862"/><rect l="4650" t="1862" r="4658" b="2288"/><rect l="4652" t="2288" r="4660" b="2652"/><rect l="4654" t="2652" r="4662" b="2930"/><rect l="4656" t="2930" r="4666" b="3082"/><rect l="4658" t="3082" r="4666" b="3254"/></region>
+<separator type="Black" thickness="4"><start x="4656" y="578"/><end x="4656" y="3254"/>
+</separator>
+</block>
+<block blockType="Separator" l="4662" t="3254" r="4668" b="3406"><region><rect l="4662" t="3254" r="4668" b="3406"/></region>
+<separator type="Black" thickness="3"><start x="4665" y="3254"/><end x="4665" y="3406"/>
+</separator>
+</block>
+<block blockType="Separator" l="786" t="1662" r="1564" b="1680"><region><rect l="786" t="1662" r="1564" b="1680"/></region>
+<separator type="Dotted" thickness="5"><start x="786" y="1671"/><end x="1564" y="1671"/>
+</separator>
+</block>
+<block blockType="Separator" l="794" t="1796" r="1568" b="1814"><region><rect l="794" t="1796" r="1568" b="1814"/></region>
+<separator type="Dotted" thickness="6"><start x="794" y="1805"/><end x="1568" y="1805"/>
+</separator>
+</block>
+<block blockType="Separator" l="866" t="1928" r="1496" b="1950"><region><rect l="866" t="1928" r="1496" b="1950"/></region>
+<separator type="Dotted" thickness="6"><start x="866" y="1939"/><end x="1496" y="1939"/>
+</separator>
+</block>
+<block blockType="Separator" l="796" t="2064" r="1498" b="2088"><region><rect l="796" t="2064" r="1498" b="2088"/></region>
+<separator type="Dotted" thickness="6"><start x="796" y="2076"/><end x="1498" y="2076"/>
+</separator>
+</block>
+<block blockType="Separator" l="956" t="2196" r="1502" b="2218"><region><rect l="956" t="2196" r="1502" b="2218"/></region>
+<separator type="Dotted" thickness="6"><start x="956" y="2207"/><end x="1502" y="2207"/>
+</separator>
+</block>
+<block blockType="Separator" l="804" t="2328" r="1584" b="2354"><region><rect l="804" t="2328" r="1584" b="2354"/></region>
+<separator type="Dotted" thickness="7"><start x="804" y="2341"/><end x="1584" y="2341"/>
+</separator>
+</block>
+<block blockType="Separator" l="1040" t="2464" r="1584" b="2486"><region><rect l="1040" t="2464" r="1584" b="2486"/></region>
+<separator type="Dotted" thickness="6"><start x="1040" y="2475"/><end x="1584" y="2475"/>
+</separator>
+</block>
+<block blockType="Separator" l="884" t="2598" r="1586" b="2620"><region><rect l="884" t="2598" r="1586" b="2620"/></region>
+<separator type="Dotted" thickness="6"><start x="884" y="2609"/><end x="1586" y="2609"/>
+</separator>
+</block>
+<block blockType="Separator" l="1046" t="2732" r="1514" b="2752"><region><rect l="1046" t="2732" r="1514" b="2752"/></region>
+<separator type="Dotted" thickness="7"><start x="1046" y="2742"/><end x="1514" y="2742"/>
+</separator>
+</block>
+<block blockType="Separator" l="974" t="2866" r="1516" b="2888"><region><rect l="974" t="2866" r="1516" b="2888"/></region>
+<separator type="Dotted" thickness="7"><start x="974" y="2877"/><end x="1516" y="2877"/>
+</separator>
+</block>
+<block blockType="Separator" l="1280" t="3178" r="1598" b="3194"><region><rect l="1280" t="3178" r="1598" b="3194"/></region>
+<separator type="Dotted" thickness="6"><start x="1280" y="3186"/><end x="1598" y="3186"/>
+</separator>
+</block>
+<block blockType="Separator" l="1292" t="3314" r="1598" b="3326"><region><rect l="1292" t="3314" r="1598" b="3326"/></region>
+<separator type="Dotted" thickness="5"><start x="1292" y="3320"/><end x="1598" y="3320"/>
+</separator>
+</block>
+<block blockType="Separator" l="1542" t="1180" r="1592" b="2878"><region><rect l="1542" t="1180" r="1592" b="2878"/></region>
+<separator type="Dotted" thickness="7"><start x="1567" y="1180"/><end x="1567" y="2878"/>
+</separator>
+</block>
+</page>
+</document>
