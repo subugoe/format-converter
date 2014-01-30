@@ -168,7 +168,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		File imagesFolder = new File(setOptions.get("scans"));
 		File imageFile = resourceHandler.getTifImageForPage(pageNumber, imagesFolder);
 		
-		Image image = readTiffImage(imageFile);
+		Image image = readTifImage(imageFile);
 		float imageWidthOrHeight = 0;
 		if (mustRotateImage(image)) {
 			image.setRotationDegrees(270f);
@@ -182,7 +182,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		pdfDocument.add(image);
 	}
 
-	private Image readTiffImage(File imageFile) throws IOException {
+	private Image readTifImage(File imageFile) throws IOException {
 		FileInputStream imageStream = new FileInputStream(imageFile);
 		try {
 			RandomAccessSource source = new RandomAccessSourceFactory().createSource(imageStream);
@@ -206,19 +206,26 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 	private void putAllSubimagesOnPage(PdfContentByte pdfPage) throws IOException, DocumentException {
 		File imagesFolder = new File(setOptions.get("scans"));
 		File tifFile = resourceHandler.getTifImageForPage(pageNumber, imagesFolder);
-		if (!mustRotateImage(readTiffImage(tifFile))) {
+		Image tifImage = readTifImage(tifFile);
+		if (!mustRotateImage(tifImage)) {
 			for (PageItem image : currentPage.getPageItems()) {
 				if (image instanceof de.unigoettingen.sub.convert.model.Image) {
 					ImageArea area = ImageArea.createLTRB(image.getLeft(), image.getTop(), image.getRight(), image.getBottom());
+					int tifWidth = (int)tifImage.getWidth();
+					int tifHeight = (int)tifImage.getHeight();
+					if (tifWidth < image.getRight() || tifHeight < image.getBottom()) {
+						LOGGER.warn("Could not put image on page. Page(w/h): " + tifWidth + "x" + tifHeight + "."
+								+ " Image(l/t/r/b): " + image.getLeft() + " " + image.getTop() + " " + image.getRight() + " " + image.getBottom());
+						continue;
+					}
 					byte[] imageBytes = resourceHandler.tifToPngAndCut(tifFile, area);
-					
-					int imageWidth = resourceHandler.getWidthOfImage(pageNumber, imagesFolder);
+
 					Image pngImage = PngImage.getImage(imageBytes);
 					float pdfWidth = pdfDocument.getPageSize().getWidth();
 					float pdfHeight = pdfDocument.getPageSize().getHeight();
-					pngImage.scalePercent(pdfWidth / imageWidth * 100f);
-					float absoluteX = pdfWidth / imageWidth * image.getLeft();
-					float absoluteY = pdfHeight - pdfWidth / imageWidth * image.getBottom();
+					pngImage.scalePercent(pdfWidth / tifWidth * 100f);
+					float absoluteX = pdfWidth / tifWidth * image.getLeft();
+					float absoluteY = pdfHeight - pdfWidth / tifWidth * image.getBottom();
 					pngImage.setAbsolutePosition(absoluteX, absoluteY);
 					pdfPage.addImage(pngImage);
 				}

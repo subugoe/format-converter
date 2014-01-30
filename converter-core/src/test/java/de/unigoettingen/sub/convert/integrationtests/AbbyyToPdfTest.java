@@ -66,4 +66,25 @@ public class AbbyyToPdfTest {
 		s.close();
 	}
 
+	@Test // this test used to cause an Exception
+	public void test2() throws IOException {
+		File abbyy = new File("src/test/resources/RasterFormatException.xml");
+		InputStream is = new FileInputStream(abbyy);
+		ConvertReader reader = new AbbyyXMLReader();
+		ConvertWriter writer = new PDFWriter();
+		
+		writer.addImplementationSpecificOption("scans", "src/test/resources/RasterFormatException");
+		//writer.addImplementationSpecificOption("includescans", "false");
+		writer.addImplementationSpecificOption("pagesize", "original");
+
+		
+		OutputStream s = new FileOutputStream("target/RasterFormatException.pdf");
+		//OutputStream s = System.out;
+		writer.setTarget(s);
+		
+		reader.setWriter(writer);
+		reader.read(is);
+		s.close();
+	}
+
 }

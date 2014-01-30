@@ -192,15 +192,4 @@ public class ResourceHandler {
 		return imageBytes;
 	}
 	
-	public int getWidthOfImage(int pageNumber, File folder) {
-		int width = 0;
-		File tifFile = getTifImageForPage(pageNumber, folder);
-		try {
-			BufferedImage bufImage = ImageIO.read(tifFile);
-			width = bufImage.getWidth();
-		} catch (IOException e) {
-			throw new IllegalStateException("Error while processing image: " + tifFile.getAbsolutePath(), e);
-		}
-		return width;
-	}
 }
