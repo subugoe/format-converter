@@ -200,7 +200,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		float pdfWidth = pdfDocument.getPageSize().getWidth();
 		float pdfHeight = pdfDocument.getPageSize().getHeight();
 		float pdfRelation = pdfHeight / pdfWidth;
-		return imageRelation > 1 && pdfRelation < 1;
+		return (imageRelation > 1 && pdfRelation < 1) || (imageRelation < 1 && pdfRelation > 1);
 	}
 	
 	private void putAllSubimagesOnPage(PdfContentByte pdfPage) throws IOException, DocumentException {
