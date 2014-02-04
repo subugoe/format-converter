@@ -1,5 +1,8 @@
 package de.unigoettingen.sub.convert.output;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,11 +11,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.ExceptionConverter;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Rectangle;
@@ -187,12 +193,34 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		try {
 			RandomAccessSource source = new RandomAccessSourceFactory().createSource(imageStream);
 			RandomAccessFileOrArray ra = new RandomAccessFileOrArray(source);
+			
 			Image image = TiffImage.getTiffImage(ra, 1);
 			return image;
+		} catch (ExceptionConverter e) {
+			if (e.getMessage().contains("Compression JPEG is only supported with a single strip.")) {
+				return makeTifWithOneStrip(imageFile);
+			} else {
+				throw e;
+			}
 		} finally {
 			if (imageStream != null)
 				imageStream.close();
 		}
+	}
+	
+	// iText cannot handle Tiffs with several strips. 
+	// This causes a recompression of the image and merges all strips into one.
+	private Image makeTifWithOneStrip(File imageFile) throws IOException {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		BufferedImage originalImage = ImageIO.read(imageFile);
+		ImageIO.write(originalImage, "tif", os);
+		byte[] imageBytes = os.toByteArray();
+		ByteArrayInputStream is = new ByteArrayInputStream(imageBytes);
+		
+		RandomAccessSource source = new RandomAccessSourceFactory().createSource(is);
+		RandomAccessFileOrArray ra = new RandomAccessFileOrArray(source);
+		os.close();
+		return TiffImage.getTiffImage(ra, 1);
 	}
 	
 	private boolean mustRotateImage(Image image) {

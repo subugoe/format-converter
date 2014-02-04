@@ -2,6 +2,9 @@ package de.unigoettingen.sub.convert.integrationtests;
 
 import static org.junit.Assert.*;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,8 +14,19 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.io.RandomAccessSource;
+import com.itextpdf.text.io.RandomAccessSourceFactory;
+import com.itextpdf.text.pdf.RandomAccessFileOrArray;
+import com.itextpdf.text.pdf.codec.TIFFConstants;
+import com.itextpdf.text.pdf.codec.TIFFDirectory;
+import com.itextpdf.text.pdf.codec.TiffImage;
 
 import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
@@ -67,7 +81,7 @@ public class AbbyyToPdfTest {
 	}
 
 	@Test // this test used to cause an Exception
-	public void test2() throws IOException {
+	public void rasterFormat() throws IOException {
 		File abbyy = new File("src/test/resources/RasterFormatException.xml");
 		InputStream is = new FileInputStream(abbyy);
 		ConvertReader reader = new AbbyyXMLReader();
@@ -87,4 +101,25 @@ public class AbbyyToPdfTest {
 		s.close();
 	}
 
+	@Test // this test used to cause an Exception
+	public void severalStripsInTiff() throws IOException {
+		File abbyy = new File("src/test/resources/severalStripsInTiff.xml");
+		InputStream is = new FileInputStream(abbyy);
+		ConvertReader reader = new AbbyyXMLReader();
+		ConvertWriter writer = new PDFWriter();
+		
+		writer.addImplementationSpecificOption("scans", "src/test/resources/severalStripsInTiff");
+		//writer.addImplementationSpecificOption("includescans", "false");
+		writer.addImplementationSpecificOption("pagesize", "original");
+
+		
+		OutputStream s = new FileOutputStream("target/severalStripsInTiff.pdf");
+		//OutputStream s = System.out;
+		writer.setTarget(s);
+		
+		reader.setWriter(writer);
+		reader.read(is);
+		s.close();
+	}
+	
 }
