@@ -122,4 +122,25 @@ public class AbbyyToPdfTest {
 		s.close();
 	}
 	
+	@Test // this test used to cause an Exception
+	public void errorInMetadata() throws IOException {
+		File abbyy = new File("src/test/resources/errorInMetadata.xml");
+		InputStream is = new FileInputStream(abbyy);
+		ConvertReader reader = new AbbyyXMLReader();
+		ConvertWriter writer = new PDFWriter();
+		
+		writer.addImplementationSpecificOption("scans", "src/test/resources/errorInMetadata");
+		//writer.addImplementationSpecificOption("includescans", "false");
+		writer.addImplementationSpecificOption("pagesize", "original");
+
+		
+		OutputStream s = new FileOutputStream("target/errorInMetadata.pdf");
+		//OutputStream s = System.out;
+		writer.setTarget(s);
+		
+		reader.setWriter(writer);
+		reader.read(is);
+		s.close();
+	}
+	
 }

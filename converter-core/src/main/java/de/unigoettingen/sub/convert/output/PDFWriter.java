@@ -246,7 +246,14 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 								+ " Image(l/t/r/b): " + image.getLeft() + " " + image.getTop() + " " + image.getRight() + " " + image.getBottom());
 						continue;
 					}
-					byte[] imageBytes = resourceHandler.tifToPngAndCut(tifFile, area);
+					byte[] imageBytes = null;
+					try {
+						imageBytes = resourceHandler.tifToPngAndCut(tifFile, area);
+					} catch (IllegalStateException e) {
+						// this is a compromise, very few sub-images produce an exception
+						LOGGER.warn("Could not put image on page.", e);
+						continue;
+					}
 
 					Image pngImage = PngImage.getImage(imageBytes);
 					float pdfWidth = pdfDocument.getPageSize().getWidth();
