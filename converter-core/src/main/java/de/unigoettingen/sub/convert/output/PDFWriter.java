@@ -166,7 +166,19 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		}
 		boolean keepOririnalPageSize = "original".equals(setOptions.get("pagesize"));
 		if (keepOririnalPageSize) {
-			pdfDocument.setPageSize(new Rectangle(currentPage.getWidth().floatValue(), currentPage.getHeight().floatValue()));
+			float widthInXml = currentPage.getWidth().floatValue();
+			float heightInXml = currentPage.getHeight().floatValue();
+			if (widthInXml > 14400) {
+				LOGGER.warn("Width too high: " + widthInXml + ". Setting to 14400.");
+				heightInXml = heightInXml * (14400 / widthInXml);
+				widthInXml = 14400;
+			}
+			if (heightInXml > 14400) {
+				LOGGER.warn("Height too high: " + heightInXml + ". Setting to 14400.");
+				widthInXml = widthInXml * (14400 / heightInXml);
+				heightInXml = 14400;
+			}
+			pdfDocument.setPageSize(new Rectangle(widthInXml, heightInXml));
 		}
 	}
 	

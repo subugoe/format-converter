@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,9 +21,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.io.RandomAccessSource;
 import com.itextpdf.text.io.RandomAccessSourceFactory;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.RandomAccessFileOrArray;
 import com.itextpdf.text.pdf.codec.TIFFConstants;
 import com.itextpdf.text.pdf.codec.TIFFDirectory;
@@ -138,6 +144,27 @@ public class AbbyyToPdfTest {
 		//OutputStream s = System.out;
 		writer.setTarget(s);
 		
+		reader.setWriter(writer);
+		reader.read(is);
+		s.close();
+	}
+	
+	@Test // this test used to cause an Exception
+	public void tooBigPageSize() throws IOException {
+		File abbyy = new File("src/test/resources/tooBigPageSize.xml");
+		InputStream is = new FileInputStream(abbyy);
+		ConvertReader reader = new AbbyyXMLReader();
+		ConvertWriter writer = new PDFWriter();
+		
+		writer.addImplementationSpecificOption("scans", "src/test/resources/tooBigPageSize");
+		//writer.addImplementationSpecificOption("includescans", "false");
+		writer.addImplementationSpecificOption("pagesize", "original");
+
+		
+		OutputStream s = new FileOutputStream("target/tooBigPageSize.pdf");
+		//OutputStream s = System.out;
+		writer.setTarget(s);
+		//reader.setSystemOutput(System.out);
 		reader.setWriter(writer);
 		reader.read(is);
 		s.close();
