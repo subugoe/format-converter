@@ -189,6 +189,7 @@ public class PDFWriter extends WriterWithOptions implements ConvertWriter {
 		Image image = readTifImage(imageFile);
 		float imageWidthOrHeight = 0;
 		if (mustRotateImage(image)) {
+			LOGGER.warn("Rotating image " + imageFile.getAbsolutePath());
 			image.setRotationDegrees(270f);
 			imageWidthOrHeight = image.getHeight();
 		} else {
