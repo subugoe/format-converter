@@ -1,6 +1,7 @@
 package de.unigoettingen.sub.convert.util;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.RasterFormatException;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -176,7 +177,15 @@ public class ResourceHandler {
 		int y = area.getTop();
 		int width = area.getRight() - area.getLeft();
 		int height = area.getBottom() - area.getTop();
-		ImageIO.write(originalImage.getSubimage(x, y, width, height), "png", os);
+		try {
+			ImageIO.write(originalImage.getSubimage(x, y, width, height), "png", os);
+		} catch (RasterFormatException e) {
+			LOGGER.warn("Image (h/w): " + originalImage.getHeight() + "/" + originalImage.getWidth() +
+					". left: " + area.getLeft() + 
+					", top: " + area.getTop() + 
+					", right: " + area.getRight() + 
+					", bottom: " + area.getBottom(), e);
+		}
 	}
 	
 	public byte[] tifToPngAndCut(File tifFile, ImageArea area) {
@@ -190,6 +199,29 @@ public class ResourceHandler {
 			throw new IllegalStateException("Error while processing image: " + tifFile.getAbsolutePath(), e);
 		}
 		return imageBytes;
+	}
+	
+	public int nextPage() {
+		pageNumber++;
+		subimageCounter = 0;
+		return pageNumber;
+	}
+	
+	public void saveSubimage(String scansFolder, String outputFolder, ImageArea area) {
+		saveFile("image", scansFolder, outputFolder, area);
+	}
+	
+	public void saveSubtable(String scansFolder, String outputFolder, ImageArea area) {
+		saveFile("table", scansFolder, outputFolder, area);
+	}
+	
+	private void saveFile(String type, String scansFolder, String outputFolder, ImageArea area) {
+		subimageCounter++;
+		File scans = new File(scansFolder);
+		File tifFile = getTifImageForPage(pageNumber, scans);
+		File output = new File(outputFolder);
+		File pngFile = new File(output, tifFile.getName() + "." + subimageCounter + "." + type + ".png");
+		tifToPngAndCut(tifFile, pngFile, area);
 	}
 	
 }

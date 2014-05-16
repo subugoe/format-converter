@@ -10,6 +10,7 @@
 	<bean id="pdfWriter" class="de.unigoettingen.sub.convert.output.PDFWriter"/>
 	<bean id="epubWriter" class="de.unigoettingen.sub.convert.output.EPUBWriter"/>
 	<bean id="xsltWriter" class="de.unigoettingen.sub.convert.output.XsltWriter"/>
+	<bean id="imageExtractor" class="de.unigoettingen.sub.convert.output.ImageAndTableExtractor"/>
 	<!-- add more beans of type ConvertWriter -->
 
 	<bean id="converter" class="de.unigoettingen.sub.convert.cli.Converter">
@@ -34,6 +35,9 @@
 				</entry>
 				<entry key="xsltoutput">
 					<ref local="xsltWriter"/>
+				</entry>
+				<entry key="extract">
+					<ref local="imageExtractor"/>
 				</entry>
 				<!-- add more writer entries -->
 			</map>
