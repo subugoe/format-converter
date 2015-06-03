@@ -29,7 +29,6 @@ import de.unigoettingen.sub.convert.util.ResourceHandler;
 
 public class ImageAndTableExtractor extends WriterWithOptions {
 
-	private int pageNumber = 0;
 	private static final String FOLDER_WITH_IMAGES_DESCRIPTION = "[folder] (containing original Tiff images)";
 	private static final String OUTPUT_FOLDER_FOR_IMAGES = "[folder] for the converted PNG images";
 	private ResourceHandler resourceHandler = new ResourceHandler();
@@ -49,7 +48,7 @@ public class ImageAndTableExtractor extends WriterWithOptions {
 
 	@Override
 	public void writePage(Page page) {
-		pageNumber = resourceHandler.nextPage();
+		resourceHandler.nextPage();
 		String scansFolder = setOptions.get("scans");
 		String outputFolder = setOptions.get("imagesoutdir");
 

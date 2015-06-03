@@ -20,7 +20,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.unigoettingen.sub.convert.api.ConvertWriter;
-import de.unigoettingen.sub.convert.model.Image;
 import de.unigoettingen.sub.convert.model.Metadata;
 import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.builders.ImageBuilder;
