@@ -53,6 +53,7 @@ exclude-result-prefixes="ocr xsi">
       <xsl:template match="ocr:lines[not(ocr:lineItems) or ocr:lineItems[last()]!='¬']">
       	<xsl:apply-templates select="ocr:lineItems[not(preceding::ocr:lineItems) or preceding::ocr:lineItems[1] != '¬']"/>
       	<xsl:text> </xsl:text>
+      	<lb/>
       </xsl:template>
       
       <xsl:template match="ocr:lineItems[@xsi:type='Word' and following::ocr:lineItems[1]='¬']">
@@ -61,6 +62,7 @@ exclude-result-prefixes="ocr xsi">
       		<xsl:with-param name="contextNode" select="."/>
       	</xsl:call-template>
       	<xsl:text> </xsl:text>
+      	<lb/>
       	<xsl:call-template name="wordSegment">
       		<xsl:with-param name="contextNode" select="following::ocr:lineItems[2]"/>
       	</xsl:call-template>
