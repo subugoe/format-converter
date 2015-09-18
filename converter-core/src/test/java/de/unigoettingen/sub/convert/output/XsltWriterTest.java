@@ -325,6 +325,7 @@ public class XsltWriterTest {
 		assertThat(output, containsString("<p id=\"ID1_1\">"));
 		assertThat(output, containsString("<w function=\"1,2,3,4\">test</w>"));
 		assertThat(output, containsString("<w>!?</w>"));
+		assertThat(output, containsString("<lb/>"));
 		assertThat(output, containsString("<pb/>"));
 		assertThat(output, containsString("<milestone n=\"1\" type=\"page\"/>"));
 	}
