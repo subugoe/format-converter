@@ -25,6 +25,7 @@ import de.unigoettingen.sub.convert.model.Page;
 import de.unigoettingen.sub.convert.model.builders.ImageBuilder;
 import de.unigoettingen.sub.convert.model.builders.LineBuilder;
 import de.unigoettingen.sub.convert.model.builders.TableBuilder;
+import de.unigoettingen.sub.convert.model.builders.WordBuilder;
 import de.unigoettingen.sub.convert.output.XsltWriter;
 
 public class XsltWriterTest {
@@ -359,6 +360,19 @@ public class XsltWriterTest {
 		
 		assertThat(output, containsString("<figure id=\"ID1_1\" function=\"1,2,3,4\"/>"));
 		assertThat(output, containsString("<figure id=\"ID1_2\" function=\"5,6,7,8\"/>"));
+	}
+
+	@Test
+	public void nlHostingTeiFormatWithCssCoordinates() {
+		writer.addImplementationSpecificOption("xslt", "src/test/resources/xslt/toTei_nl-hosting.xsl");
+
+		WordBuilder w = word("test").withCoordinatesLTRB(1, 2, 3, 4);
+		Page page = page().withHeight(200).withWidth(100).with(w).build();
+		String output = process(page);
+
+		assertThat(output, containsString("<w style=\"left:1px; top:2px; right:3px; bottom:4px\">test</w>"));
+		assertThat(output, containsString("style=\"height:200px; width:100px\""));
+
 	}
 	
 }
