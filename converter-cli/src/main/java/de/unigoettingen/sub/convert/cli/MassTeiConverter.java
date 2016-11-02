@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 
 import de.unigoettingen.sub.convert.api.ConvertReader;
 import de.unigoettingen.sub.convert.api.ConvertWriter;
@@ -16,17 +17,19 @@ public class MassTeiConverter {
 	private static String xsltPath;
 	private static File inputDir;
 	private static File outputDir;
+	private static File logFile;
 	private static int count = 0;
 
 	public static void main(String[] args) throws Exception {
-		if (args.length != 3) {
-			System.out.println("Syntax: java -cp converter.jar de.unigoettingen.sub.convert.cli.MassTeiConverter <xslt> <input-dir> <output-dir>");
+		if (args.length != 4) {
+			System.out.println("Syntax: java -cp converter.jar de.unigoettingen.sub.convert.cli.MassTeiConverter <xslt> <input-dir> <output-dir> <log-file>");
 			System.exit(1);
 		}
 		
 		xsltPath = args[0];
 		inputDir = new File(args[1]);
 		outputDir = new File(args[2]);
+		logFile = new File(args[3]);
 
 		processFiles(inputDir);
 
@@ -49,12 +52,18 @@ public class MassTeiConverter {
 					continue;
 				}
 
-				ConvertReader reader = new AbbyyXMLReader();
-				ConvertWriter writer = new XsltWriter();
-				writer.setTarget(new FileOutputStream(currentOutputFile));
-				writer.addImplementationSpecificOption("xslt", xsltPath);
-				reader.setWriter(writer);
-				reader.read(new FileInputStream(abbyyFile));
+				try {
+					ConvertReader reader = new AbbyyXMLReader();
+					ConvertWriter writer = new XsltWriter();
+					writer.setTarget(new FileOutputStream(currentOutputFile));
+					writer.addImplementationSpecificOption("xslt", xsltPath);
+					reader.setWriter(writer);
+					reader.read(new FileInputStream(abbyyFile));
+				} catch(IllegalArgumentException e) {
+					String error = "Error while reading file: " + abbyyFile.getAbsolutePath() + "\n";
+					FileUtils.write(logFile, error + e.getMessage() + "\n", true);
+					continue;
+				}
 
 			} else if (child.isDirectory()) {
 				processFiles(child);
